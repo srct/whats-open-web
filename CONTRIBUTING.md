@@ -1,6 +1,6 @@
-# Contributing to Angular
+# Contributing to What's Open Web
 
-We would love for you to contribute to Angular and help make it even better than it is
+We would love for you to contribute to What's Open and help make it even better than it is
 today! As a contributor, here are the guidelines we would like you to follow:
 
  - [Code of Conduct](#coc)
@@ -10,32 +10,21 @@ today! As a contributor, here are the guidelines we would like you to follow:
  - [Submission Guidelines](#submit)
  - [Coding Rules](#rules)
  - [Commit Message Guidelines](#commit)
- - [Signing the CLA](#cla)
 
 ## <a name="coc"></a> Code of Conduct
-Help us keep Angular open and inclusive. Please read and follow our [Code of Conduct][coc].
+Help us keep What's Open open and inclusive. Please read and follow our [Code of Conduct][coc].
 
 ## <a name="question"></a> Got a Question or Problem?
 
-Please, do not open issues for the general support questions as we want to keep GitHub issues for bug reports and feature requests. You've got much better chances of getting your question answered on [StackOverflow](https://stackoverflow.com/questions/tagged/angular) where the questions should be tagged with tag `angular`.
-
-StackOverflow is a much better place to ask questions since:
-
-- there are thousands of people willing to help on StackOverflow
-- questions and answers stay available for public viewing so your question / answer might help someone else
-- StackOverflow's voting system assures that the best answers are prominently visible.
-
-To save your and our time we will be systematically closing all the issues that are requests for general support and redirecting people to StackOverflow.
-
-If you would like to chat about the question in real-time, you can reach out via [our gitter channel][gitter].
+Please, do not open issues for the general support questions as we want to keep GitLab issues for bug reports and feature requests. You've got much better chances of getting your question answered on [Slack Group][slack] where questions should be asked in their respective channels.
 
 ## <a name="issue"></a> Found a Bug?
 If you find a bug in the source code, you can help us by
-[submitting an issue](#submit-issue) to our [GitHub Repository][github]. Even better, you can
+[submitting an issue](#submit-issue) to our [GitLab Repository][gitlab]. Even better, you can
 [submit a Pull Request](#submit-pr) with a fix.
 
 ## <a name="feature"></a> Missing a Feature?
-You can *request* a new feature by [submitting an issue](#submit-issue) to our GitHub
+You can *request* a new feature by [submitting an issue](#submit-issue) to our GitLab
 Repository. If you would like to *implement* a new feature, please submit an issue with
 a proposal for your work first, to be sure that we can use it.
 Please consider what kind of change it is:
@@ -43,7 +32,7 @@ Please consider what kind of change it is:
 * For a **Major Feature**, first open an issue and outline your proposal so that it can be
 discussed. This will also allow us to better coordinate our efforts, prevent duplication of work,
 and help you to craft the change so that it is successfully accepted into the project.
-* **Small Features** can be crafted and directly [submitted as a Pull Request](#submit-pr).
+* **Small Features** can be crafted and directly [submitted as a Merge Request](#submit-pr).
 
 ## <a name="submit"></a> Submission Guidelines
 
@@ -63,16 +52,15 @@ We will be insisting on a minimal reproduce scenario in order to save maintainer
 
 Unfortunately we are not able to investigate / fix bugs without a minimal reproduction, so if we don't hear back from you we are going to close an issue that don't have enough info to be reproduced.
 
-You can file new issues by filling out our [new issue form](https://github.com/angular/angular/issues/new).
+You can file new issues by filling out our [new issue form][new-issue].
 
 
-### <a name="submit-pr"></a> Submitting a Pull Request (PR)
-Before you submit your Pull Request (PR) consider the following guidelines:
+### <a name="submit-pr"></a> Submitting a Merge Request (PR)
+Before you submit your Merge Request (MR) consider the following guidelines:
 
-* Search [GitHub](https://github.com/angular/angular/pulls) for an open or closed PR
+* Search [GitLab][merge-request] for an open or closed PR
   that relates to your submission. You don't want to duplicate effort.
-* Please sign our [Contributor License Agreement (CLA)](#cla) before sending PRs.
-  We cannot accept code without this.
+
 * Make your changes in a new git branch:
 
      ```shell
@@ -92,17 +80,17 @@ Before you submit your Pull Request (PR) consider the following guidelines:
      ```
   Note: the optional commit `-a` command line option will automatically "add" and "rm" edited files.
 
-* Push your branch to GitHub:
+* Push your branch to GitLab:
 
     ```shell
     git push origin my-fix-branch
     ```
 
-* In GitHub, send a pull request to `angular:master`.
+* In GitLab, send a merge request to `master`.
 * If we suggest changes then:
   * Make the required updates.
   * Re-run the Angular test suites to ensure tests are still passing.
-  * Rebase your branch and force push to your GitHub repository (this will update your Pull Request):
+  * Rebase your branch and force push to your GitLab repository (this will update your Merge Request):
 
     ```shell
     git rebase master -i
@@ -111,12 +99,12 @@ Before you submit your Pull Request (PR) consider the following guidelines:
 
 That's it! Thank you for your contribution!
 
-#### After your pull request is merged
+#### After your merge request is merged
 
-After your pull request is merged, you can safely delete your branch and pull the changes
+After your merge request is merged, you can safely delete your branch and merge the changes
 from the main (upstream) repository:
 
-* Delete the remote branch on GitHub either through the GitHub web UI or your local shell as follows:
+* Delete the remote branch on GitLab either through the GitLab web UI or your local shell as follows:
 
     ```shell
     git push origin --delete my-fix-branch
@@ -145,7 +133,7 @@ To ensure consistency throughout the source code, keep these rules in mind as yo
 
 * All features or bug fixes **must be tested** by one or more specs (unit-tests).
 * All public API methods **must be documented**. (Details TBC).
-* We follow [Google's JavaScript Style Guide][js-style-guide], but wrap all code at
+* We follow [Angular's Style Guide][style-guide], but wrap all code at
   **100 characters**. An automated formatter is available, see
   [DEVELOPER.md](DEVELOPER.md#clang-format).
 
@@ -170,7 +158,7 @@ format that includes a **type**, a **scope** and a **subject**:
 The **header** is mandatory and the **scope** of the header is optional.
 
 Any line of the commit message cannot be longer 100 characters! This allows the message to be easier
-to read on GitHub as well as in various git tools.
+to read on GitLab as well as in various git tools.
 
 Footer should contain a [closing reference to an issue](https://help.github.com/articles/closing-issues-via-commit-messages/) if any.
 
@@ -227,7 +215,6 @@ There is currently few exception to the "use package name" rule:
 
 * **packaging**: used for changes that change the npm package layout in all of our packages, e.g. public path changes, package.json changes done to all packages, d.ts file/format changes, changes to bundles, etc.
 * **changelog**: used for updating the release notes in CHANGELOG.md
-* **aio**: used for angular.io changes within the /angular.io directory of the repo
 * none/empty string: useful for `style`, `test` and `refactor` changes that are done across all packages (e.g. `style: add missing semicolons`)
 
 ### Subject
@@ -243,32 +230,20 @@ The body should include the motivation for the change and contrast this with pre
 
 ### Footer
 The footer should contain any information about **Breaking Changes** and is also the place to
-reference GitHub issues that this commit **Closes**.
+reference GitLab issues that this commit **Closes**.
 
 **Breaking Changes** should start with the word `BREAKING CHANGE:` with a space or two newlines. The rest of the commit message is then used for this.
 
 A detailed explanation can be found in this [document][commit-message-format].
 
-## <a name="cla"></a> Signing the CLA
 
-Please sign our Contributor License Agreement (CLA) before sending pull requests. For any code
-changes to be accepted, the CLA must be signed. It's a quick process, we promise!
-
-* For individuals we have a [simple click-through form][individual-cla].
-* For corporations we'll need you to
-  [print, sign and one of scan+email, fax or mail the form][corporate-cla].
-
-
-[angular-group]: https://groups.google.com/forum/#!forum/angular
 [coc]: https://github.com/angular/code-of-conduct/blob/master/CODE_OF_CONDUCT.md
 [commit-message-format]: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
-[corporate-cla]: http://code.google.com/legal/corporate-cla-v1.0.html
 [dev-doc]: https://github.com/angular/angular/blob/master/DEVELOPER.md
-[github]: https://github.com/angular/angular
-[gitter]: https://gitter.im/angular/angular
-[individual-cla]: http://code.google.com/legal/individual-cla-v1.0.html
-[js-style-guide]: https://google.github.io/styleguide/jsguide.html
+[gitlab]: https://git.gmu.edu/srct/whats-open-web
+[style-guide]: https://angular.io/styleguide
 [jsfiddle]: http://jsfiddle.net
 [plunker]: http://plnkr.co/edit
-[runnable]: http://runnable.com
-[stackoverflow]: http://stackoverflow.com/questions/tagged/angular
+[slack]:https://srct.slack.com/
+[new-issue]:https://git.gmu.edu/srct/whats-open-web/issues/new
+[merge-request]:https://git.gmu.edu/srct/whats-open-web/merge_requests
