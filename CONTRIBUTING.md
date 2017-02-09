@@ -80,7 +80,7 @@ Before you submit your Merge Request (MR) consider the following guidelines:
      ```
   Note: the optional commit `-a` command line option will automatically "add" and "rm" edited files.
 
-* Push your branch to GitLab:
+* h your branch to GitLab:
 
     ```shell
     git push origin my-fix-branch
@@ -125,14 +125,14 @@ from the main (upstream) repository:
 * Update your master with the latest upstream version:
 
     ```shell
-    git pull --ff upstream master
+    git l --ff upstream master
     ```
 
 ## <a name="rules"></a> Coding Rules
 To ensure consistency throughout the source code, keep these rules in mind as you are working:
 
 * All features or bug fixes **must be tested** by one or more specs (unit-tests).
-* All public API methods **must be documented**. (Details TBC).
+* All lic API methods **must be documented**. (Details TBC).
 * We follow [Angular's Style Guide][style-guide], but wrap all code at
   **100 characters**. An automated formatter is available, see
   [DEVELOPER.md](DEVELOPER.md#clang-format).
@@ -170,7 +170,7 @@ docs(changelog): update change log to beta.5
 ```
 fix(release): need to depend on latest rxjs and zone.js
 
-The version in our package.json gets copied to the one we publish, and users need the latest of these.
+The version in our package.json gets copied to the one we lish, and users need the latest of these.
 ```
 
 ### Revert
@@ -191,29 +191,17 @@ Must be one of the following:
 * **test**: Adding missing tests or correcting existing tests
 
 ### Scope
-The scope should be the name of the npm package affected (as perceived by person reading changelog generated from commit messages.
+The scope should be the name of the compont/pipe/service affected (as perceived by person reading changelog generated from commit messages.
 
-The following is the list of supported scopes:
+Examples are:
 
-* **common**
-* **compiler**
-* **compiler-cli**
-* **core**
-* **forms**
-* **http**
-* **language-service**
-* **platform-browser**
-* **platform-browser-dynamic**
-* **platform-server**
-* **platform-webworker**
-* **platform-webworker-dynamic**
-* **router**
-* **upgrade**
-* **tsc-wrapped**
+* **filter-bar**
+* **component-bar**
+* **safe-url**
 
 There is currently few exception to the "use package name" rule:
 
-* **packaging**: used for changes that change the npm package layout in all of our packages, e.g. public path changes, package.json changes done to all packages, d.ts file/format changes, changes to bundles, etc.
+* **packaging**: used for changes that change the npm package layout in all of our packages, e.g. lic path changes, package.json changes done to all packages, d.ts file/format changes, changes to bundles, etc.
 * **changelog**: used for updating the release notes in CHANGELOG.md
 * none/empty string: useful for `style`, `test` and `refactor` changes that are done across all packages (e.g. `style: add missing semicolons`)
 
