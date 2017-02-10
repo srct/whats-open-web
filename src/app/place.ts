@@ -1,21 +1,21 @@
-
+import { Day } from './day';
 export class Place {
-    name: string;
-    picture: string;
-
-    openTimes: number[][];
-    closeTimes: number[][];
-    location: string;
-    constructor(name: string, openTimes: number[][],
-        closeTimes: number[][], picture: string, location: string) {
-
+    main_schedule_times: Day[] = [];
+    special_schedule_times = [];
+    id:number;
+    last_modified:string;
+    name:string;
+    category:number;
+    location:string;
+    constructor(main_schedule_times:Day[],special_schedule_times,id:number,last_modified:string,name:string,category:number,location:string) {
+        this.main_schedule_times = main_schedule_times;
+        this.special_schedule_times = special_schedule_times;
+        this.id = id;
+        this.last_modified = last_modified;
         this.name = name;
-        this.openTimes = openTimes;
-        this.closeTimes = closeTimes;
-        this.picture = picture;
+        this.category = category;
         this.location = location;
-
-        }
+    }
 
 }
 

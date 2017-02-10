@@ -13,33 +13,31 @@ export class PlaceCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    let weekOpenTimes: number[][] = [];
-    let weekCloseTimes: number[][] = [];
+  //   let weekOpenTimes: number[][] = [];
+  //   let weekCloseTimes: number[][] = [];
 
-    for (let i = 0; i < 7; i++) {
-      const hour1 = Math.floor(Math.random() * 24);
-      const minute1 = Math.floor(Math.random() * 60);
-      const hour2 = Math.floor(Math.random() * 24);
-      const minute2 = Math.floor(Math.random() * 60);
-      weekOpenTimes.push([hour1, minute1]);
-      weekCloseTimes.push([hour2, minute2]);
-    }
-    this.place = new Place('Burger King', weekOpenTimes,
-      weekCloseTimes, 'picture: string', 'The Johnson Center');
+  //   for (let i = 0; i < 7; i++) {
+  //     const hour1 = Math.floor(Math.random() * 24);
+  //     const minute1 = Math.floor(Math.random() * 60);
+  //     const hour2 = Math.floor(Math.random() * 24);
+  //     const minute2 = Math.floor(Math.random() * 60);
+  //     weekOpenTimes.push([hour1, minute1]);
+  //     weekCloseTimes.push([hour2, minute2]);
+  //   }
 
-      this.status = 'OPEN';
-  
-}
-  //if t1 is bigger than t2 it returns true ;
-  private time_between = function (t1: number[], t2: number[]): boolean {
-    // multiplying hours by 60 and adding minutes
-    const t1_minutes = t1[0] * 60 + t1[1];
-    const t2_minutes = t2[0] * 60 + t2[1];
+  //   this.status = 'OPEN';
+
+  // }
+  // //if t1 is bigger than t2 it returns true ;
+  // private time_between = function (t1: number[], t2: number[]): boolean {
+  //   // multiplying hours by 60 and adding minutes
+  //   const t1_minutes = t1[0] * 60 + t1[1];
+  //   const t2_minutes = t2[0] * 60 + t2[1];
 
 
-    if (t1_minutes > t2_minutes) {
-      return true;
-    }
-    return false;
+  //   if (t1_minutes > t2_minutes) {
+  //     return true;
+  //   }
+  //   return false;
   }
 }
