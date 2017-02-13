@@ -1,12 +1,13 @@
+import { Time } from './time';
 export class Day {
     id: number;
     last_modified: string;
     schedule:number;
     start_day: number;
-    start_time: string;
+    start_time: Time;
     end_day: number;
-    end_time: string;
-    constructor(id: number, last_modified: string,schedule:number, start_day: number, start_time: string, end_day: number, end_time: string) {
+    end_time: Time;
+    constructor(id: number, last_modified: string,schedule:number, start_day: number, start_time: Time, end_day: number, end_time: Time) {
         this.id = id;
         this.last_modified = last_modified;
         this.schedule = schedule;
