@@ -1,7 +1,8 @@
 {
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "version": "1.0.0-beta.26",
-    "name": "whats-open-a2"
+    "version": "1.0.0-beta.31",
+    "name": "whats-open-web"
   },
   "apps": [
     {
@@ -13,13 +14,11 @@
       ],
       "index": "index.html",
       "main": "main.ts",
+      "polyfills": "polyfills.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.json",
       "prefix": "app",
-      "mobile": false,
       "styles": [
-        "../node_modules/bootstrap/scss/bootstrap.scss",
-        "../node_modules/font-awesome/scss/font-awesome.scss",
         "styles.scss"
       ],
       "scripts": [],
@@ -35,6 +34,16 @@
       "config": "./protractor.conf.js"
     }
   },
+  "lint": [
+    {
+      "files": "src/**/*.ts",
+      "project": "src/tsconfig.json"
+    },
+    {
+      "files": "e2e/**/*.ts",
+      "project": "e2e/tsconfig.json"
+    }
+  ],
   "test": {
     "karma": {
       "config": "./karma.conf.js"
