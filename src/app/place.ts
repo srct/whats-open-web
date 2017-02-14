@@ -68,11 +68,11 @@ export class Place {
 				} else {
 					sumSeconds = day.end_time.inSeconds() - inSeconds;
 				}
-				timeTilClose.fromSeconds(sumSeconds)
-				return timeTilClose.toString();
+				
+				return timeTilClose.fromSeconds(sumSeconds);
 			}
 		}else{
-			return 'closed';
+			return 'Closed';
 		}
 	}
 }
