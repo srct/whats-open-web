@@ -28,32 +28,53 @@ export class Place {
 
 		for (let i = 0; i < this.main_schedule_times.length; i++) {
 			const day = this.main_schedule_times[i];
-			if (day.start_day === dayOfWeek && day.end_day === dayOfWeek) {
-				if (day.end_time.inSeconds() > inSeconds) {
+			// change the order of if statements at some point
+			if (day.start_day !== day.end_day) {
+				if (day.end_day === dayOfWeek) {
+					if (day.end_time.inSeconds() > inSeconds) {
+						return true;
+					}
+				} else if (day.start_day === dayOfWeek) {
 					return true;
 				}
-			}
-			if (day.end_day === dayOfWeek) {
-				if (day.end_time.inSeconds() > inSeconds) {
-					return true;
+			} else {
+				if (day.start_day === dayOfWeek) {
+					if (day.end_time.inSeconds() > inSeconds) {
+						return true;
+					}
 				}
 			}
 		}
 		return false;
 	}
+
 	openFor() {
 		const currTime = new Date();
-		// const today = currTime.getDay() - 1;
-		// const openDays: Day[] = this.onDay(today);
-		// const inSeconds = currTime.getHours() * 60 * 60 + currTime.getMinutes() * 60 + currTime.getSeconds();
-
-		// let sumSeconds = 0;
-		// for (let i = 0; i < openDays.length; i++) {
-		//     let day = openDays[i];
-		//     sumSeconds += day.end_time.inSeconds() - day.end_time.inSeconds();
-		// }
-
-
+		const today = currTime.getDay() - 1;
+		const inSeconds = currTime.getHours() * 60 * 60 + currTime.getMinutes() * 60 + currTime.getSeconds();
+		const dayOfWeek = currTime.getDay() - 1;
+		let timeTilClose = new Time();
+		let sumSeconds = 0;
+		// clean up if statements later
+		if (this.isOpen()) {
+			for (let i = 0; i < this.main_schedule_times.length; i++) {
+				const day = this.main_schedule_times[i];
+				if (day.end_day !== day.start_day) {
+					if (dayOfWeek === day.end_day) {
+						sumSeconds = day.end_time.inSeconds() - inSeconds - 86400;
+					} else if (dayOfWeek === day.start_day) {
+						sumSeconds =  day.end_time.inSeconds() + 86400 - inSeconds ;
+					}
+				} else {
+					sumSeconds = day.end_time.inSeconds() - inSeconds;
+				}
+				timeTilClose.fromSeconds(sumSeconds)
+				return timeTilClose.toString();
+			}
+		}else{
+			return 'closed';
+		}
 	}
 }
+
 

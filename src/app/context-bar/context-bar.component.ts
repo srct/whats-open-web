@@ -21,7 +21,9 @@ export class ContextBarComponent implements OnInit {
  }
    tempf = function(){
       for(let i = 0; i<this.data.length;i++){
-        console.log(this.data[i].name + ' OPEN: '+ this.data[i].isOpen())
+        if(this.data[i].isOpen()){
+        console.log(this.data[i].name + ' OPEN: '+ this.data[i].openFor())
+      }
       }
    } 
 
