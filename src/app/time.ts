@@ -3,12 +3,10 @@ export class Time {
     minute: number;
     second: number;
 
-    constructor(time: string) {
-        
-        const timeArr = time.split(':');
-        this.hour = Number(timeArr[0]);
-        this.minute = Number(timeArr[1]);
-        this.second = Number(timeArr[2]);
+    constructor(hour:number,minute:number,second:number) {
+        this.hour = hour || 0;
+        this.minute = minute || 0;
+        this.second = second || 0;
     }
 
     isGreater(time: Time):boolean {

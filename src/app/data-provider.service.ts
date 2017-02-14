@@ -28,26 +28,31 @@ export class DataProviderService {
       .map(this.extractData)
       .catch(this.handleError);
   }
-// TODO
-// there is a little bit of a hack here that checks if the place is 24Hours
-// will remove later as the api changes 
+  
   private extractData(res: Response): Place[] {
+    let parseTime = function(time: string):Time{
+        const timeArr = time.split(':');
+        const hour = Number(timeArr[0]);
+        const minute = Number(timeArr[1]);
+        const second = Number(timeArr[2]);
+        return new Time(hour,minute,second);
+  }
+
     let places: Place[] = [];
     let data = res.json();
     for (let i = 0; i < data.length; i++) {
       let main_schedule_times: Day[] = [];
       for (let e = 0; e < data[i].main_schedule.open_times.length; e++) {
         let jsonDay = data[i].main_schedule.open_times[e];
-        // hack is here
-        if(jsonDay.end_time === '00:00:00'){ jsonDay.end_time = '23:59:59';};
+
         const day = new Day(
           jsonDay.id,
           jsonDay.last_modified,
           jsonDay.schedule,
           jsonDay.start_day,
-          new Time(jsonDay.start_time),
+          parseTime(jsonDay.start_time),
           jsonDay.end_day,
-          new Time(jsonDay.end_time));
+          parseTime(jsonDay.end_time));
         main_schedule_times.push(Object.freeze(day));
       }
 
@@ -77,5 +82,5 @@ export class DataProviderService {
     console.error(errMsg);
     return Observable.throw(errMsg);
   }
-
+  
 }
