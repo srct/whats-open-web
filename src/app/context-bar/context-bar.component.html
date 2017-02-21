@@ -1,58 +1,58 @@
 <div class="context-bar-button-container">
-<!--<button class="show-hide-button"(click)="show=!show">Click Me</button>-->
-<app-show-hide-arrow class="show-hide-button" [isRight]='true' (change)="show = $event"></app-show-hide-arrow>
-<button (click)="tempf()">Click</button>
-<div [ngClass]="(show)?'light-card context-bar-open' : 'light-card context-bar-closed'">
-    
-    <div class="context-bar-header">
-        <img class="image" src="../../assets/BKing.jpg">
-        <div class="content-bar-title">Burger King</div>
-    </div>
-    <hr>
-    <div>
-        <div class="info">
-            <div class="column">
-                <div class="info-block">
-                    <div class="info-header">Location</div>
-                    <div class="info-text">The Johnson Center</div>
+    <!--<button class="show-hide-button"(click)="show=!show">Click Me</button>-->
+    <app-show-hide-arrow class="show-hide-button" [isRight]='true' (change)="show = $event"></app-show-hide-arrow>
+    <button (click)="tempf()">Click</button>
+    <div [ngClass]="(show)?'light-card context-bar-open' : 'light-card context-bar-closed'">
+
+        <div class="context-bar-header">
+            <img class="image" src="../../assets/BKing.jpg">
+            <div class="content-bar-title">{{place.name}}</div>
+        </div>
+        <hr>
+        <div>
+            <div class="info">
+                <div class="column">
+                    <div class="info-block">
+                        <div class="info-header">Location</div>
+                        <div class="info-text">{{place.location}}</div>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="info-block">
+                        <div class="info-header">Mobile</div>
+                        <div class="info-text">+44 (0) 7887-665-588</div>
+                    </div>
                 </div>
-                <div class="spacer"></div>
-                <div class="info-block">
-                    <div class="info-header">Mobile</div>
-                    <div class="info-text">+44 (0) 7887-665-588</div>
-                </div>
-            </div>
-            <div class="column">
-                <div class="info-block">
-                    <div class="info-header">Menu</div>
-                    <div class="info-text"><a>bk.com</a></div>
-                </div>
-                <div class="spacer"></div>
-                <div class="info-block ">
-                    <div class="info-header">Tags</div>
-                    <div class="tag-container">
-                        <div class="tag">
-                            <div class="tag-text">h</div>
-                        </div>
-                        <div class="tag">
-                            <div class="tag-text">Som</div>
-                        </div>
-                        <div class="tag">
-                            <div class="tag-text">Somethg</div>
-                        </div>
-                        <div class="tag">
-                            <div class="tag-text">ng</div>
-                        </div>
-                        <div class="tag">
-                            <div class="tag-text">Somhing</div>
+                <div class="column">
+                    <div class="info-block">
+                        <div class="info-header">Menu</div>
+                        <div class="info-text"><a>bk.com</a></div>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="info-block ">
+                        <div class="info-header">Tags</div>
+                        <div class="tag-container">
+                            <div class="tag">
+                                <div class="tag-text">h</div>
+                            </div>
+                            <div class="tag">
+                                <div class="tag-text">Som</div>
+                            </div>
+                            <div class="tag">
+                                <div class="tag-text">Somethg</div>
+                            </div>
+                            <div class="tag">
+                                <div class="tag-text">ng</div>
+                            </div>
+                            <div class="tag">
+                                <div class="tag-text">Somhing</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!--<hr>-->
+            <app-time-range [place]="place"></app-time-range>
+            <!--<hr>-->
+            <app-map></app-map>
         </div>
-        <!--<hr>-->
-        <app-time-range></app-time-range>
-        <!--<hr>-->
-        <app-map></app-map>
     </div>
-</div>

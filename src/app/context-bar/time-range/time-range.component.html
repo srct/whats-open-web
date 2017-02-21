@@ -1,9 +1,4 @@
 <div class="time-range-bar-container">
-<app-time-range-bar [startTime]="weekStartTimes[0]" [endTime]="weekEndTimes[0]"></app-time-range-bar>
-<app-time-range-bar [startTime]="weekStartTimes[1]" [endTime]="weekEndTimes[1]"></app-time-range-bar>
-<app-time-range-bar [startTime]="weekStartTimes[2]" [endTime]="weekEndTimes[2]"></app-time-range-bar>
-<app-time-range-bar [startTime]="weekStartTimes[3]" [endTime]="weekEndTimes[3]"></app-time-range-bar>
-<app-time-range-bar [startTime]="weekStartTimes[4]" [endTime]="weekEndTimes[4]"></app-time-range-bar>
-<app-time-range-bar [startTime]="weekStartTimes[5]" [endTime]="weekEndTimes[5]"></app-time-range-bar>
-<app-time-range-bar [startTime]="weekStartTimes[6]" [endTime]="weekEndTimes[6]"></app-time-range-bar>
-</div>
+	<div *ngFor="let day of days; let i = index;">
+		<app-time-range-bar [day]="days[i]"></app-time-range-bar>
+	</div>

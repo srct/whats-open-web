@@ -9,16 +9,16 @@ export class Place {
 	name: string;
 	category: number;
 	location: string;
-	constructor(main_schedule_times: Day[], special_schedule_times, id: number, last_modified: string,
-		name: string, category: number, location: string) {
+	constructor(main_schedule_times?: Day[], special_schedule_times?, id?: number, last_modified?: string,
+		name?: string, category?: number, location?: string) {
 
-		this.main_schedule_times = main_schedule_times;
-		this.special_schedule_times = special_schedule_times;
-		this.id = id;
-		this.last_modified = last_modified;
-		this.name = name;
-		this.category = category;
-		this.location = location;
+		this.main_schedule_times = main_schedule_times || [];
+		this.special_schedule_times = special_schedule_times || [];
+		this.id = id || 0;
+		this.last_modified = last_modified || '';
+		this.name = name || '';
+		this.category = category || 0;
+		this.location = location || '';
 	}
 	// This method does NOT work with Special schedules
 	isOpen(): boolean {
@@ -48,7 +48,7 @@ export class Place {
 		return false;
 	}
 
-	openFor() {
+	openFor(): Time {
 		const currTime = new Date();
 		const today = currTime.getDay() - 1;
 		const inSeconds = currTime.getHours() * 60 * 60 + currTime.getMinutes() * 60 + currTime.getSeconds();
@@ -63,16 +63,16 @@ export class Place {
 					if (dayOfWeek === day.end_day) {
 						sumSeconds = day.end_time.inSeconds() - inSeconds - 86400;
 					} else if (dayOfWeek === day.start_day) {
-						sumSeconds =  day.end_time.inSeconds() + 86400 - inSeconds ;
+						sumSeconds = day.end_time.inSeconds() + 86400 - inSeconds;
 					}
 				} else {
 					sumSeconds = day.end_time.inSeconds() - inSeconds;
 				}
-				
+
 				return timeTilClose.fromSeconds(sumSeconds);
 			}
-		}else{
-			return 'Closed';
+		} else {
+			return timeTilClose;
 		}
 	}
 }

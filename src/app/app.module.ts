@@ -16,27 +16,26 @@ import { AreaComponent } from './place-window/area/area.component';
 import { FilterBarComponent } from './filter-bar/filter-bar.component';
 import { ShowHideArrowComponent } from './context-bar/show-hide-arrow/show-hide-arrow.component';
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavBarComponent,
-    ContextBarComponent,
-    TimeRangeComponent,
-    TimeRangeBarComponent,
-    MapComponent,
-    SafeUrlPipe,
-    PlaceWindowComponent,
-    PlaceCardComponent,
-    AreaComponent,
-    FilterBarComponent,
-    FilterBarComponent,
-    ShowHideArrowComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		NavBarComponent,
+		ContextBarComponent,
+		TimeRangeComponent,
+		TimeRangeBarComponent,
+		MapComponent,
+		SafeUrlPipe,
+		PlaceWindowComponent,
+		PlaceCardComponent,
+		AreaComponent,
+		FilterBarComponent,
+		ShowHideArrowComponent
+	],
+	imports: [
+		BrowserModule,
+		FormsModule,
+		HttpModule
+	],
+	providers: [],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -69,12 +69,12 @@
                     
                     <rect id="ShadowEnd" fill="url(#radialGradient-6)" [attr.x]="endTimeTextX" y="4" width="35" height="13"></rect>
                     <text font-family="HelveticaNeue, Helvetica Neue" font-size="8" font-weight="normal" fill="#FFFFFF">
-                        <tspan [attr.x]="endTimeTextX" y="13">{{endTime | date:'shortTime'}}</tspan>
+                        <tspan [attr.x]="endTimeTextX" y="13">{{day.end_time.toString() }}</tspan>
                     </text>
                    
                     <rect id="ShadowStart" fill="url(#radialGradient-6)" [attr.x]="this.startTimeTextX" y="4" width="35" height="13"></rect>
                     <text font-family="HelveticaNeue, Helvetica Neue" font-size="8" font-weight="normal" fill="#FFFFFF">
-                        <tspan [attr.x]="this.startTimeTextX" y="13">{{startTime | date:'shortTime'}}</tspan>
+                        <tspan [attr.x]="this.startTimeTextX" y="13">{{day.start_time.toString()}}</tspan>
                     </text>
                     
             </g>
