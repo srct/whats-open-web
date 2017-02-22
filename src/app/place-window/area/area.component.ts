@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { DataProviderService } from '../../data-provider.service';
 import { Place } from '../../Place';
 @Component({
