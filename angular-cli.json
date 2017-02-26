@@ -22,7 +22,7 @@
         "styles.scss"
       ],
       "scripts": [
-        "sw-loader.js"
+        "./sw-loader.js"
       ],
       "environments": {
         "source": "environments/environment.ts",

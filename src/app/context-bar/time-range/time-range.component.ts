@@ -27,8 +27,7 @@ export class TimeRangeComponent implements OnInit {
 		// }
 	}
 	ngOnChanges(change: SimpleChange) {
-		console.log('changed');
-		this.days = [];
+	this.days = [];
 		for (let i = 0; i < this.place.main_schedule_times.length; i++) {
 			for (let e = 0; e < this.place.main_schedule_times.length; e++) {
 				if (this.place.main_schedule_times[e].start_day === i) {

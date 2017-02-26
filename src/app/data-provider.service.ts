@@ -30,16 +30,25 @@ export class DataProviderService {
 		} else if (this.placesObs) {
 			return this.placesObs;
 		} else {
-			this.placesObs = this.http.get(this.Url)
-				.map((data) => {
-					this.placesObs = null;
-					this.places = this.extractData(data);
-					this.contextPlace = this.places[0];
-					// console.log(this.contextPlace);
-					return this.places;
-				})
-				.catch(this.handleError).share();
-			return this.placesObs;
+			const facilities = localStorage.getItem('facilities');
+			if (facilities){
+				this.places = this.extractData(JSON.parse(facilities));
+				this.placesObs = Observable.of(this.places);
+				return this.placesObs;
+			} else {
+				this.placesObs = this.http.get(this.Url)
+					.map((data) => {
+						this.placesObs = null;
+						data = data.json();
+						this.places = this.extractData(data);
+						this.contextPlace = this.places[0];
+						localStorage.setItem('facilities',JSON.stringify(data));
+						// console.log(this.contextPlace);
+						return this.places;
+					})
+					.catch(this.handleError).share();
+				return this.placesObs;
+			}
 		}
 	}
 	getContext(): Observable<Place> {
@@ -49,7 +58,7 @@ export class DataProviderService {
 		this.contextPlace = place;
 		this.contextSubj.next(place);
 	}
-	private extractData(res: Response): Place[] {
+	private extractData(data: any): Place[] {
 		const parseTime = function (time: string): Time {
 			const timeArr = time.split(':');
 			const hour = Number(timeArr[0]);
@@ -58,7 +67,7 @@ export class DataProviderService {
 			return new Time(hour, minute, second);
 		}
 		const places: Place[] = [];
-		const data = res.json();
+		// const data = res.json();
 		for (let i = 0; i < data.length; i++) {
 			const main_schedule_times: Day[] = [];
 

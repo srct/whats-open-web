@@ -21,8 +21,10 @@ export class ContextBarComponent implements OnInit {
 		);
 	}
 	tempf() {
-
-
+		if(localStorage.getItem('facilities')){
+			console.log(localStorage.getItem('facilities'))
+		}else{
+			localStorage.setItem('facilities','hi');
+		}
 	}
-
 }
