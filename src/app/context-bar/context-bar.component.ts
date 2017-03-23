@@ -8,7 +8,7 @@ import { Place } from '../place';
 })
 
 export class ContextBarComponent implements OnInit {
-	show = true;
+	show = false;
 	place: Place = new Place();
 	error: any;
 	constructor(private dataProvider: DataProviderService) { }
@@ -21,10 +21,10 @@ export class ContextBarComponent implements OnInit {
 		);
 	}
 	tempf() {
-		if(localStorage.getItem('facilities')){
-			console.log(localStorage.getItem('facilities'))
-		}else{
-			localStorage.setItem('facilities','hi');
-		}
+		// if(localStorage.getItem('facilities')){
+		// 	console.log(localStorage.getItem('facilities'))
+		// }else{
+		// 	localStorage.setItem('facilities','hi');
+		// }
 	}
 }

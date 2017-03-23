@@ -63,7 +63,6 @@ function precache() {
 //     );
 // });
 self.addEventListener('fetch', function (evt) {
-    console.log('The service worker is serving the asset.');
     evt.respondWith(fromCache(evt.request));
 
     evt.waitUntil(update(evt.request));
@@ -73,7 +72,7 @@ function fromCache(request) {
     return caches.open(CACHE).then(function (cache) {
         return cache.match(request).then(function (matching) {
             if(matching){
-            return matching || null;
+            return matching;
             }
              return fetch(request).then(function (response) {
                 return response;
@@ -83,14 +82,11 @@ function fromCache(request) {
 }
 
 function update(request) {
-    if (request.url.search('sockjs-node') === -1) {
         return caches.open(CACHE).then(function (cache) {
             return fetch(request).then(function (response) {
                 return cache.put(request, response);
             });
         });
-    }
-    return Promise.resolve();
 }
 // this probably wont be used but this whitelists caches so if i want to use multiple they are not destroyed
 // when a new service worker takes control

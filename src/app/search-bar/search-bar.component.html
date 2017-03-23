@@ -1,0 +1,11 @@
+<div class="search-bar shadows">
+  <input class="search-input search-bar-text" placeholder="names,locations,anything">
+  <form class="search-bar-text search-select ">
+  <md-select class="search-bar-text" [(ngModel)]="selectedValue" name="food">
+    <md-option *ngFor="let choice of choices" [value]="choice.value">
+      {{choice.viewValue}}
+    </md-option>
+  </md-select>
+</form>
+</div>
+

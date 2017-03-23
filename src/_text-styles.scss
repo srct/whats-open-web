@@ -1,4 +1,5 @@
-// @import "color-palette";
+ // @import "color-palette";
+
 /* Text styles */
 
 .selected-nav {
@@ -10,6 +11,7 @@
 	text-align: center;
 	color: $primary;
 }
+
 .deselected-nav {
 	font-family: HelveticaNeue-Medium;
 	font-size: 14px;
@@ -72,8 +74,9 @@
 	text-align: left;
 	color: $bluegrey;
 }
-.tag-text{
-	width:20px;
+
+.tag-text {
+	width: 20px;
 	font-family: HelveticaNeue-Bold;
 	font-size: 8px;
 	font-weight: normal;
@@ -82,6 +85,7 @@
 	text-align: center;
 	color: $white;
 }
+
 .timeline-text {
 	width: 36px;
 	height: 16px;
@@ -93,7 +97,8 @@
 	text-align: center;
 	color: $primary;
 }
-.campus-location-text{
+
+.campus-location-text {
 	font-family: HelveticaNeue-Light;
 	font-size: 13px;
 	font-weight: normal;
@@ -102,31 +107,31 @@
 	text-align: center;
 	color: $primary;
 }
-.search-box-text{
-    font-family: HelveticaNeue-Medium;
-	font-size: 12px;
-	font-weight: normal;
-	font-style: normal;
-	font-stretch: normal;
-	// text-align: center;
-	color: $primary;
+
+.search-bar-text {
+	font-family: NunitoSans-Regular;
+	font-size: 18px;
+	color: rgba(53, 64, 82, 0.15);
+	letter-spacing: -0.45px;
 }
+
 .area-title {
 	font-family: HelveticaNeue-Medium;
 	font-size: 20px;
 	font-weight: normal;
 	font-style: normal;
 	font-stretch: normal;
-    text-align: center;
-    color:#68768C;
+	text-align: center;
+	color: #68768C;
 }
-.content-bar-title{
-font-family: HelveticaNeue-Medium;
+
+.content-bar-title {
+	font-family: HelveticaNeue-Medium;
 	font-size: 32px;
 	font-weight: 500;
 	font-style: normal;
 	font-stretch: normal;
 	text-align: left;
 	color: $primary;
-    margin-left: 50.5px;
+	margin-left: 50.5px;
 }

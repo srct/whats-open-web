@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-// import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { MaterialModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -13,8 +14,9 @@ import { SafeUrlPipe } from './safe-url.pipe';
 import { PlaceWindowComponent } from './place-window/place-window.component';
 import { PlaceCardComponent } from './place-window/area/place-card/place-card.component';
 import { AreaComponent } from './place-window/area/area.component';
-import { FilterBarComponent } from './filter-bar/filter-bar.component';
 import { ShowHideArrowComponent } from './context-bar/show-hide-arrow/show-hide-arrow.component';
+import { FeedbackDialogComponent } from './place-window/area/place-card/feedback-dialog/feedback-dialog.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -27,15 +29,18 @@ import { ShowHideArrowComponent } from './context-bar/show-hide-arrow/show-hide-
 		PlaceWindowComponent,
 		PlaceCardComponent,
 		AreaComponent,
-		FilterBarComponent,
-		ShowHideArrowComponent
+		ShowHideArrowComponent,
+		FeedbackDialogComponent,
+		SearchBarComponent
 	],
 	imports: [
 		BrowserModule,
-		// FormsModule,
-		HttpModule
+		FormsModule,
+		HttpModule,
+		MaterialModule.forRoot()
 	],
 	providers: [],
-	bootstrap: [AppComponent]
+	bootstrap: [AppComponent],
+	entryComponents:[FeedbackDialogComponent]
 })
 export class AppModule { }

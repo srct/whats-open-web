@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "version": "1.0.0-beta.31",
+    "version": "1.0.0-rc.4",
     "name": "whats-open-web"
   },
   "apps": [
@@ -19,13 +19,13 @@
       "tsconfig": "tsconfig.json",
       "prefix": "app",
       "styles": [
-        "styles.scss"
+        "styles.scss",
+        "../node_modules/@angular/material/core/theming/prebuilt/indigo-pink.css"
       ],
       "scripts": [
-        "./sw-loader.js"
       ],
+      "environmentSource": "environments/environment.ts",
       "environments": {
-        "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }

@@ -1,0 +1,25 @@
+@import '../../global-styles';
+
+
+.search-bar{
+	padding:0px 0px 0px 10px;
+	margin: 30px  auto 30px auto;
+	width:36%;
+	height:45px;
+	background-color:white;
+	border: 1px solid rgba(43,61,73,.15);
+	border-radius: 4px;
+	display: flex;
+	align-items:center;
+}
+.search-input{
+	width:71%;
+	// height:100%;
+	border:transparent;
+	margin: auto 0px auto 0px;
+	outline:none;
+}
+.search-select{
+font-family: NunitoSans-Light;
+font-size: 16px;
+}

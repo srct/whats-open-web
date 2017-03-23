@@ -12,6 +12,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/DefaultIfEmpty';
 
 @Injectable()
 export class DataProviderService {
@@ -31,19 +32,19 @@ export class DataProviderService {
 			return this.placesObs;
 		} else {
 			const facilities = localStorage.getItem('facilities');
-			if (facilities){
+			if (facilities) {
 				this.places = this.extractData(JSON.parse(facilities));
 				this.placesObs = Observable.of(this.places);
 				return this.placesObs;
 			} else {
+
 				this.placesObs = this.http.get(this.Url)
-					.map((data) => {
+				.map((data) => {
 						this.placesObs = null;
 						data = data.json();
 						this.places = this.extractData(data);
 						this.contextPlace = this.places[0];
-						localStorage.setItem('facilities',JSON.stringify(data));
-						// console.log(this.contextPlace);
+						localStorage.setItem('facilities', JSON.stringify(data));
 						return this.places;
 					})
 					.catch(this.handleError).share();
@@ -97,7 +98,6 @@ export class DataProviderService {
 		}
 		return places;
 	}
-
 	private handleError(error: Response | any) {
 		// In a real world app, we might use a remote logging infrastructure
 		let errMsg: string;
