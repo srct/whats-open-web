@@ -17,6 +17,8 @@ import { AreaComponent } from './place-window/area/area.component';
 import { ShowHideArrowComponent } from './context-bar/show-hide-arrow/show-hide-arrow.component';
 import { FeedbackDialogComponent } from './place-window/area/place-card/feedback-dialog/feedback-dialog.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -35,6 +37,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 	],
 	imports: [
 		BrowserModule,
+		BrowserAnimationsModule,
 		FormsModule,
 		HttpModule,
 		MaterialModule.forRoot()

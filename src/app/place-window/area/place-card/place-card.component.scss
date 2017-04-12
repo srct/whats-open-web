@@ -1,112 +1,81 @@
 @import '../../../../global-styles';
 .place-card {
-    width: 199px;
-    height: 111px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    box-sizing: content-box;
+	width: 210px;
+	height: 240px;
+	background-color: white;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	margin-right: auto;
+	margin-left: auto;
+	border-radius: 4px;
+	box-shadow: 12px 15px 20px rgba(46, 61, 73, .15);
+	margin: 20px 15px 20px 15px;
 }
 
 .place-picture {
-    height: 84px;
-    width: 84px;
-    border: 5px solid $border-color;
-    border-radius: 50%;
-    margin-left: 5px;
+	width: 210px;
+	height: 118px;
+	// background-color: grey;
+	// image-rendering: crisp-edges;
+}
+
+.place-title {
+	font-family: Nunito-Medium;
+	font-size: 25px;
+	color: #354052;
+	margin: 18px auto 0px auto;
+}
+
+.place-open-badge {
+	width: 88px;
+	height: 20px;
+	margin: 3px auto 0px auto;
+	background-color: #3ac550;
+	border-radius: 100px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 .place-status {
-    height: 18px;
-    border-radius: 4px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 5px;
+	font-family: NunitoSans-SemiBold;
+	font-size: 11px;
+	color: #FFFFFF;
+	margin: 0px 0px 0px 3px;
 }
-.status-open{
-    @extend .place-status;
-    background-color: $open-green;
-    width: 71px;
-}
-.status-closed{
-    @extend .place-status;
-    background-color: $closed-grey;
-    width: 80px;
-}
-.hr-vertical{
-    height: 18px;
-    background-color: $white;
-    opacity: 0.6;
-    width:1px;
-    margin:0px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-} 
-.status-text {
-    margin-left: 3px;
-    height:11px;
-    font-family: HelveticaNeue-Medium;
-    font-size: 9px;
-    font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    // text-align: center;
-    color: $white;
-    
-}
-.text-open{
-    @extend .status-text;
-    width:27px;
-    margin-right: 3px;
 
+.place-divider {
+	width: 2px;
+	height: 100%;
+	background-color: white;
+	opacity: .75;
+	margin: 0px 4px 0px 4px;
 }
-.text-closed{
-    @extend .status-text;
-    width:37px;
-    margin-right: 3px;
+
+.place-time-remaining {
+	/* Time: */
+	font-family: NunitoSans-Regular;
+	font-size: 11px;
+	color: #FFFFFF;
 }
-.star-icon{
-    color:$primary;
-    align-self: flex-end;
-    margin-right: 4px;
-    margin-top:4px;
-    margin-bottom: 6px;
+
+.place-location {
+	/* Location: */
+	font-family: NunitoSans-Regular;
+	font-size: 11px;
+	color: #7F8FA4;
+	letter-spacing: -0.28px;
+	line-height: 13px;
+	margin: 9px auto 0px auto;
 }
-.place-info-block{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width:100px;
-    height: 111px;
-    // background-color: rosybrown;
-}
-.place-title{
-    width: 99px;
-	height: 17px;
-	font-family: HelveticaNeue-Medium;
-	font-size: 15px;
-	font-weight: 500;
-	font-style: normal;
-	font-stretch: normal;
-	line-height: 1.13;
-	letter-spacing: normal;
-	text-align: center;
-	color: $primary;
-    margin-bottom: 5px;
-}
-.place-location{
-    width: 99px;
-	height: 13px;
-	font-family: HelveticaNeue;
-	font-size: 8px;
-	font-weight: normal;
-	font-style: normal;
-	font-stretch: normal;
-	line-height: 1.62;
-	letter-spacing: -0.2px;
-	text-align: center;
-	color: $bluegrey;
+
+.place-error-feedback {
+	/* error: */
+	font-family: NunitoSans-Regular;
+	font-size: 9px;
+	color: #7F8FA4;
+	letter-spacing: -0.22px;
+	line-height: 13px;
+	margin: 18px 4px 0px auto;
 }

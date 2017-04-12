@@ -1,38 +1,369 @@
-@import "../../color-palette"; 
-@import "../../text-styles"; 
+@import "../../global-styles";
 
-.nav-bar-background{
+$vertical-displacement: 10px;
+
+.nav-bar-background {
 	position: relative;
 	width: 100%;
-	height:55%;
-	top:0px;
-	left:0px;
-	background:#efefef;
-	overflow:hidden;
+	top: 0px;
+	left: 0px;
+	height: 400px;
+	background: #ffffff;
+	box-shadow: 0px 8px 20px 0px $shadow-color;
 }
-
-.phone-background{
+.promo-background{
 	position:absolute;
-	width:1080px;
-	height:1080px;
-	background-color:#006633;
-	top:-248px;
-	left: 700px;
-	border-radius:100%;
-	// opacity:0;
-}
-
-.white-gradient{
-	z-index:5;
-	position:absolute;
-	width: 43%;
+	width:43.35%;
 	height:100%;
 	top:0px;
 	right:0px;
- background: #006633;
-background-image: radial-gradient(48% 50%, rgba(255,255,255,0.54) 51%, rgba(255,255,255,0.00) 100%);
-background-image: radial-gradient(52% 50%, rgba(255,255,255,0.20) 47%, rgba(255,255,255,0.00) 100%);
+	overflow:hidden;
+}
+.circle{
+	position:absolute;
+	bottom:-150%;
+	left:30px;
+	width:400%;
+	height:400%;
+	background-color:#006633;
+	border-radius:100%;
+	box-shadow: -3px 0px 6px 0px rgba(0,0,0,0.26),-10px 0px 20px 0px rgba(0,0,0,0.19);
+	&:before{
+	content: "";
+	background: url("../../assets/pattern.png") repeat;
+	background-size: 100px;
+	opacity: 0.10;
+	position:absolute;
+	top:0;
+	right:0;
+	width:100%;
+	height:100%;
+	border-radius:100%;
+	}
 }
 
+.close-nav-bar-button {
+	width: 30px;
+	height: 30px;
+	background-color: white;
+	margin: 5px auto 0px auto;
+	border-radius: 50%;
+	box-shadow: 0px 0px 0px 0px $shadow-color;
+}
 
+.close-nav-bar-button-container {
+	position: absolute;
+	left: 50%;
+	bottom: 0px;
+	width: 40px;
+	height: 20px;
+	border-top-left-radius: 40px;
+	border-top-right-radius: 40px;
+	background-color: $background-color;
+	margin-left: -20px;
+	box-shadow: inset 0px 0px 20px 0px $shadow-color;
+	z-index: 10001;
+}
 
+.nav-bar-background:before {
+	content: "";
+	background: url("../../assets/pattern.png") repeat;
+	background-size: 100px;
+	opacity: 0.04;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	position: absolute;
+}
+
+.header-background {
+	width: 56.65%;
+	height: 100%;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+.long-container{
+	width:56.65%;
+	height:100%;
+	display:flex;
+}
+
+.links {
+	display: flex;
+	flex-direction: row;
+	width: 340px;
+	justify-content: space-between;
+	margin:auto;
+}
+
+.link-font {
+	font-family: NunitoSans-SemiBold;
+	font-size: 18px;
+	color:white; //#354052;
+}
+
+.check-code-button {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	height: 35px;
+	width: 160px;
+
+	// background-color:green;
+	border-color: #FFCC33;
+	border-style: solid;
+	border-width: 2px;
+	z-index: 1000;
+	border-radius: 50px;
+	opacity: 0.9;
+	font-family: NunitoSans-Regular;
+	font-size: 12px;
+	color: #FFFFFF;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 35px;
+}
+
+.title-and-logo {
+	margin: auto;
+	position:relative;
+}
+
+.logo {
+	display: block;
+	margin: auto;
+	height: 85px;
+}
+
+.title {
+	font-family: Montserrat-Bold;
+	font-size: 56px;
+	color: #354052;
+	text-align:center;
+}
+
+.phone-background {
+	position: absolute;
+	height: 100%;
+
+	// background-color:#006633;
+	top: 0px;
+	right: 0px;
+
+	// border-radius: 84px 0px 0px 84px / 290px 0px 0px 290px;
+}
+
+.white-gradient {
+	z-index: 5;
+	position: absolute;
+	width: 43.35%;
+	height: 100%;
+	top: 0px;
+	right: 0px;
+
+	//  background: #006633;
+	background-image: radial-gradient(48% 50%, rgba(255, 255, 255, 0.54) 51%, rgba(255, 255, 255, 0) 100%);
+	background-image: radial-gradient(52% 50%, rgba(255, 255, 255, 0.2) 47%, rgba(255, 255, 255, 0) 100%);
+}
+
+.phones {
+	width: 360px;
+	height: 340px;
+	right: 45px;
+
+	//	top: 60px;
+	bottom: 0px;
+	overflow: hidden;
+}
+
+.phone-wrap--iphone {
+	width: 0.6 * 292px;
+	height: 0.6 * 610px;
+	left: 126px;
+	top: 62px;
+	z-index: 400;
+}
+
+.phone-wrap--android {
+	width: 0.6 * 290px;
+	height: 0.6 * 574px;
+	left: 0;
+	top: 0;
+	z-index: 500;
+}
+
+.phone,
+.phone-wrap,
+.phones {
+	position: absolute;
+}
+
+.the-iphone {
+	position: relative;
+	width: 0.6 * 292px;
+	height: 0.6 * 610px;
+	background: #FFF;
+	box-shadow: 11px 15px 39px 0 rgba(31, 35, 61, 0.2), 0 2px 4px 0 rgba(88, 100, 177, 0.01), inset 0 0 4px 4px #dfe1ec;
+	border-radius: 0.6 * 40px;
+	z-index: 600;
+}
+
+.the-iphone-button,
+.the-iphone-dot,
+.the-iphone-line {
+	left: 50%;
+	transform: translate3d(-50%, 0, 0);
+	opacity: .5;
+	box-shadow: inset 0 1px 2px 0 #B3B8D0;
+	position: absolute;
+}
+
+.the-iphone-dot {
+	width: 0.6 * 8px;
+	height: 0.6 * 8px;
+	top: 0.6 * 22px;
+	border-radius: 50%;
+	background: #DAE1EA;
+}
+
+.the-iphone-line {
+	width: 0.6 * 44px;
+	height: 0.6 * 6px;
+	top: 0.6 * 36px;
+	border-radius: 0.6 * 5px;
+	background: #DAE1EA;
+}
+
+.the-iphone-screen {
+	width: 0.6 * 270px;
+	height: 0.6 * 479px;
+	border: 1px solid #E7E9F0;
+	background-color: #F3F4F8;
+	position: absolute;
+	left: 50%;
+	top: 0.6 * 60px;
+	border-radius: 0.6 * 4px;
+	transform: translate3d(-50%, 0, 0);
+	background-image: url(../../assets/JC.jpg);
+	background-size: 0.6 * 270px;
+}
+
+.the-iphone-button {
+	width: 0.6 * 40px;
+	height: 0.6 * 40px;
+	bottom: 0.6 * 18px;
+	border-radius: 50%;
+	background: #DAE1EA;
+}
+
+.the-android {
+	position: relative;
+	width: 0.6 * 290px;
+	height: 0.6 * 574px;
+	background: #FFF;
+	box-shadow: 11px 15px 39px 0 rgba(31, 35, 61, 0.2), 0 2px 4px 0 rgba(88, 100, 177, 0.01), inset 0 0 4px 4px #dfe1ec;
+	border-radius: 0.6 * 30px;
+}
+
+.the-android-button,
+.the-android-dot,
+.the-android-line {
+	opacity: .5;
+	box-shadow: inset 0 1px 2px 0 #B3B8D0;
+}
+
+.the-android-dot {
+	width: 0.6 * 7px;
+	height: 0.6 * 7px;
+	position: absolute;
+	left: 0.6 * 76px;
+	top: 0.6 * 25px;
+	border-radius: 50%;
+	background: #DAE1EA;
+}
+
+.the-android-button,
+.the-android-line,
+.the-android-screen {
+	position: absolute;
+	left: 50%;
+	transform: translate3d(-50%, 0, 0);
+}
+
+.the-android-line {
+	width: 0.6 * 94px;
+	height: 0.6 * 6px;
+	top: 0.6 * 25px;
+	border-radius: 0.6 * 5px;
+	background: #DAE1EA;
+}
+
+.the-android-screen {
+	width: 0.6 * 262px;
+	height: 0.6 * 466px;
+	border: 1px solid #E7E9F0;
+	background-color: #F3F4F8;
+	top: 0.6 * 50px;
+	border-radius: 0.6 * 4px;
+	background-image: url(../../assets/JC.jpg);
+	background-size: 0.6 * 262px;
+}
+
+.the-android-button {
+	width: 0.6 * 94px;
+	height: 0.6 * 6px;
+	bottom: 0.6 * 26px;
+	border-radius: 0.6 * 5px;
+	background: #DAE1EA;
+}
+
+.small-nav-background {
+	position:absolute;
+	top:0;
+	width: 100%;
+	height: 70px;
+	background-color: #006633;
+	z-index:-10;
+}
+
+.small-logo {
+	width: 60px;
+	height: 60px;
+}
+
+.small-title-container {
+	width:200px;
+	height:100%;
+	margin:0
+}
+
+.small-title {
+	font-family: Nunito-Bold;
+	font-size: 24px;
+	color: #FFFFFF;
+}
+
+.small-sub-title {
+	opacity: 0.75;
+	font-family: NunitoSans-Regular;
+	font-size: 15px;
+	color: #FFFFFF;
+}
+
+.small-links {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 300px;
+	margin-left: 50px;
+}
+
+.small-link-font {
+	font-family: NunitoSans-Regular;
+	text-align: center;
+	line-height: 70px;
+	font-size: 18px;
+	color: #FFFFFF;
+}
