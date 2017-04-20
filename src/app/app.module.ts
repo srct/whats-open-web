@@ -18,6 +18,7 @@ import { ShowHideArrowComponent } from './context-bar/show-hide-arrow/show-hide-
 import { FeedbackDialogComponent } from './place-window/area/place-card/feedback-dialog/feedback-dialog.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SrctLogoComponent } from './nav-bar/srct-logo/srct-logo.component';
 
 @NgModule({
 	declarations: [
@@ -33,7 +34,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 		AreaComponent,
 		ShowHideArrowComponent,
 		FeedbackDialogComponent,
-		SearchBarComponent
+		SearchBarComponent,
+		SrctLogoComponent
 	],
 	imports: [
 		BrowserModule,
