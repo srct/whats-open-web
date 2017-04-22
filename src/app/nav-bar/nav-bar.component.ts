@@ -14,25 +14,25 @@ import {
 	animations: [
 		trigger('toggle-large-bar', [
 			state('expanded', style({
-				transform: 'translateY(0px)'
-			})),
-			state('collapsed', style({
-				transform: 'translateY(-400px)'
-			})),
-			transition('expanded => collapsed', animate('300ms cubic-bezier(.35,0,.61,1)')),
-			transition('collapsed => expanded', animate('300ms ease-in-out'))
-		]),
-		trigger('toggle-small-bar', [
-			state('expanded', style({
-				backgroundColor: 'transparent',
+				transform: 'translateY(0px)',
 				zIndex: '1'
 			})),
 			state('collapsed', style({
-				backgroundColor: '#006633',
-				zIndex: '0'
+				transform: 'translateY(-400px)',
+				zIndex: '1000'
 			})),
-			transition('expanded => collapsed', animate('250ms 270ms ease-out')),
-			transition('collapsed => expanded', animate('300ms ease-out'))
+			transition('expanded => collapsed', animate('250ms cubic-bezier(.35,0,.61,1)')),
+			transition('collapsed => expanded', animate('250ms ease-in-out'))
+		]),
+		trigger('toggle-small-bar', [
+			state('expanded', style({
+				backgroundColor: 'transparent'
+			})),
+			state('collapsed', style({
+				backgroundColor: '#006633'
+			})),
+			transition('expanded => collapsed', animate('250ms 250ms ease-out')),
+			transition('collapsed => expanded', animate('250ms ease-out'))
 		]),
 		trigger('toggle-links', [
 			state('expanded', style({
@@ -51,9 +51,9 @@ import {
 				opacity: '0'
 			})),
 			state('collapsed', style({
-				opacity: '1'
+				opacity: '100'
 			})),
-			transition('expanded => collapsed', animate('150ms ease-out')),
+			transition('expanded => collapsed', animate('150ms 100ms ease-out')),
 			transition('collapsed => expanded', animate('150ms ease-out'))
 		])
 

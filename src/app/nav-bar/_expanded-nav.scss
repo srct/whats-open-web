@@ -3,10 +3,10 @@
 	width: 100%;
 	top: 0px;
 	left: 0px;
-	height: 400px;
+	height: 55%;
 	background: #ffffff;
 	box-shadow: 0px 8px 20px 0px $shadow-color;
-
+	z-index: 500;
 	&:before {
 		content: "";
 		background: url("../../assets/pattern.png") repeat;
