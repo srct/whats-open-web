@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {
 	trigger,
 	state,
@@ -62,18 +62,22 @@ import {
 	]
 })
 export class NavBarComponent implements OnInit {
-	expanded: string = 'expanded';
+	state = 'collapsed';
+	@Output() navState: EventEmitter<string> = new EventEmitter<string>();
 	constructor() { }
 
 	ngOnInit() {
+		this.navState.emit(this.state);
 	}
 	toggleState(): void {
-		if (this.expanded === 'expanded') {
-			this.expanded = 'collapsed';
+		if (this.state === 'expanded') {
+			this.state = 'collapsed';
+			this.navState.emit(this.state);
+
 		} else {
-			this.expanded = 'expanded';
+			this.state = 'expanded';
+			this.navState.emit(this.state);
 		}
-		console.log('something happened')
 	}
 
 }

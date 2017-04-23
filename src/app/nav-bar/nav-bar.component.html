@@ -1,77 +1,82 @@
-<div class="nav-bars-container" >
-	<div class="exp-nav-background"[@toggle-large-bar]="expanded">
-		<div class="close-nav-bar-button-container">
-			<div class="close-nav-bar-button" (click)="toggleState()"></div>
+<div class="exp-nav-background" [@toggle-large-bar]="state">
+	<div class="close-nav-bar-button-container">
+		<div class="close-nav-bar-button" (click)="toggleState()"></div>
+	</div>
+	<div class="header-background">
+		<div class="links">
+			<div class="link-font">Feedback</div>
+			<div class="link-font">About</div>
+			<div class="link-font">Our Projects</div>
 		</div>
-		<div class="header-background">
-			<div class="title-and-logo">
-				<!--<img class="logo" src="../../assets/SRCT_square.svg">-->
-				<svg class="logo" viewBox="194 -6 127 127" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-					<desc>Created with Sketch.</desc>
-					<defs>
-						<circle id="clock-1" cx="57.5" cy="57.5" r="57.5"></circle>
-						<mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-6" y="-6" width="127" height="127">
-							<rect x="-6" y="-6" width="127" height="127" fill="white"></rect>
-							<use xlink:href="#clock-1" fill="black"></use>
-						</mask>
-					</defs>
-					<g id="Clock" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(200.000000, 0.000000)">
-						<use id="clock-Oval-2" stroke="#354052" mask="url(#mask-2)" stroke-width="12" xlink:href="#clock-1"></use>
-						<rect id="clock-Rectangle-2" fill="#354052" transform="translate(49.500000, 68.500000) rotate(-53.000000) translate(-49.500000, -68.500000) "
-						    x="34" y="66" width="31" height="5" rx="2.5"></rect>
-						<rect id="clock-Rectangle-3" fill="#354052" transform="translate(80.500000, 54.399025) rotate(-7.000000) translate(-80.500000, -54.399025) "
-						    x="57" y="52.3990249" width="47" height="4" rx="2"></rect>
-						<rect id="clock-Rectangle-4" fill="#354052" transform="translate(40.000000, 44.000000) rotate(36.000000) translate(-40.000000, -44.000000) "
-						    x="17" y="43" width="46" height="2" rx="1"></rect>
-						<circle id="clock-Oval-3" fill="#354052" cx="58" cy="57" r="4"></circle>
-					</g>
-				</svg>
-				<div class="title">What's Open</div>
+		<div class="title-and-logo">
+			<!--<img class="logo" src="../../assets/SRCT_square.svg">-->
+			<svg class="logo" viewBox="194 -6 127 127" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+				<desc>Created with Sketch.</desc>
+				<defs>
+					<circle id="clock-1" cx="57.5" cy="57.5" r="57.5"></circle>
+					<mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-6" y="-6" width="127" height="127">
+						<rect x="-6" y="-6" width="127" height="127" fill="white"></rect>
+						<use xlink:href="#clock-1" fill="black"></use>
+					</mask>
+				</defs>
+				<g id="Clock" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(200.000000, 0.000000)">
+					<use id="clock-Oval-2" stroke="#354052" mask="url(#mask-2)" stroke-width="12" xlink:href="#clock-1"></use>
+					<rect id="clock-Rectangle-2" fill="#354052" transform="translate(49.500000, 68.500000) rotate(-53.000000) translate(-49.500000, -68.500000) "
+					    x="34" y="66" width="31" height="5" rx="2.5"></rect>
+					<rect id="clock-Rectangle-3" fill="#354052" transform="translate(80.500000, 54.399025) rotate(-7.000000) translate(-80.500000, -54.399025) "
+					    x="57" y="52.3990249" width="47" height="4" rx="2"></rect>
+					<rect id="clock-Rectangle-4" fill="#354052" transform="translate(40.000000, 44.000000) rotate(36.000000) translate(-40.000000, -44.000000) "
+					    x="17" y="43" width="46" height="2" rx="1"></rect>
+					<circle id="clock-Oval-3" fill="#354052" cx="58" cy="57" r="4"></circle>
+				</g>
+			</svg>
+			<div class="title">What's Open</div>
+		</div>
+	</div>
+
+	<div class="phones">
+		<div class="phone-wrap phone-wrap--iphone" style="transform: translate3d(0px, 14.97px, 0px) scale(1); opacity: 1;">
+			<div class="phone phone--iphone the-iphone">
+				<div class="the-iphone-dot"></div>
+				<div class="the-iphone-line"></div>
+				<div class="the-iphone-screen"></div>
+				<div class="the-iphone-button"></div>
 			</div>
 		</div>
 
-		<div class="phones">
-			<div class="phone-wrap phone-wrap--iphone" style="transform: translate3d(0px, 14.97px, 0px) scale(1); opacity: 1;">
-				<div class="phone phone--iphone the-iphone">
-					<div class="the-iphone-dot"></div>
-					<div class="the-iphone-line"></div>
-					<div class="the-iphone-screen"></div>
-					<div class="the-iphone-button"></div>
-				</div>
-			</div>
-
-			<div class="phone-wrap phone-wrap--android" style="transform: translate3d(0px, 27.45px, 0px) scale(1); opacity: 1;">
-				<div class="phone phone--android the-android">
-					<div class="the-android-dot"></div>
-					<div class="the-android-line"></div>
-					<div class="the-android-screen"></div>
-					<div class="the-android-button"></div>
-				</div>
+		<div class="phone-wrap phone-wrap--android" style="transform: translate3d(0px, 27.45px, 0px) scale(1); opacity: 1;">
+			<div class="phone phone--android the-android">
+				<div class="the-android-dot"></div>
+				<div class="the-android-line"></div>
+				<div class="the-android-screen"></div>
+				<div class="the-android-button"></div>
 			</div>
 		</div>
-		<div class="white-gradient"></div>
-		<div class="promo-background">
-			<div class="circle"></div>
+	</div>
+	<div class="white-gradient"></div>
+	<div class="promo-background">
+		<div class="circle"></div>
+	</div>
+	<div class="check-code-button">
+		Check out the code
+	</div>
+</div>
+<div [@toggle-small-bar]="state" class="small-nav-background">
+	<div class="long-container">
+		<img [@toggle-logo-and-text]="state" class="small-logo" src="../../assets/small-logo.png">
+		<div [@toggle-logo-and-text]="state" class="small-title-container">
+			<div class="small-title">Whats Open</div>
+			<div class="small-sub-title">A Student-Built App</div>
+		</div>
+		<div class="collapsed-links">
+			<div class="collapsed-link-font">Feedback</div>
+			<div class="collapsed-link-font">About</div>
+			<div class="collapsed-link-font">Our Projects</div>
 		</div>
 
 	</div>
-	<div [@toggle-small-bar]="expanded" class="small-nav-background">
-		<div class="long-container">
-			<img [@toggle-logo-and-text]="expanded" class="small-logo" src="../../assets/small-logo.png">
-			<div [@toggle-logo-and-text]="expanded" class="small-title-container">
-				<div class="small-title">Whats Open</div>
-				<div class="small-sub-title">A Student-Built App</div>
-			</div>
-			<div class="links" [@toggle-links]="expanded">
-				<div class="link-font">Feedback</div>
-				<div class="link-font">About</div>
-				<div class="link-font">Our Projects</div>
-			</div>
-
-		</div>
-		<div class="check-code-button">
-			Check out the code
-		</div>
-
+	<div class="collapsed-check-code-button">
+		Check out the code
 	</div>
+
 </div>
