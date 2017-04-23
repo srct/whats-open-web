@@ -26,6 +26,7 @@ export class DataProviderService {
 	constructor(private http: Http) { }
 
 	getFacilities(): Observable<Place[]> {
+		console.log("I was called");
 		if (this.places) {
 			return Observable.of(this.places);
 		} else if (this.placesObs) {
@@ -37,7 +38,6 @@ export class DataProviderService {
 				this.placesObs = Observable.of(this.places);
 				return this.placesObs;
 			} else {
-
 				this.placesObs = this.http.get(this.Url)
 				.map((data) => {
 						this.placesObs = null;
