@@ -1,19 +1,20 @@
 import { Day } from './day';
 import { Time } from './time';
+import { SpecialSchedule } from './special-schedule';
 
 export class Place {
 	main_schedule_times: Day[] = [];
-	special_schedule_times = [];
+	special_schedules: SpecialSchedule[] = [];
 	id: number;
 	last_modified: string;
 	name: string;
 	category: number;
 	location: string;
-	constructor(main_schedule_times?: Day[], special_schedule_times?, id?: number, last_modified?: string,
+	constructor(main_schedule_times?: Day[], special_schedules?:SpecialSchedule[], id?: number, last_modified?: string,
 		name?: string, category?: number, location?: string) {
 
 		this.main_schedule_times = main_schedule_times || [];
-		this.special_schedule_times = special_schedule_times || [];
+		this.special_schedules = special_schedules || [];
 		this.id = id || 0;
 		this.last_modified = last_modified || '';
 		this.name = name || '';
@@ -76,5 +77,5 @@ export class Place {
 		}
 	}
 }
-
+	// useSpecial():
 

@@ -6,6 +6,7 @@ import { Subject } from 'rxjs/Subject';
 import { Place } from './place';
 import { Day } from './day';
 import { Time } from './time';
+import { SpecialSchedule } from './special-schedule';
 // Operators
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
@@ -26,31 +27,31 @@ export class DataProviderService {
 	constructor(private http: Http) { }
 
 	getFacilities(): Observable<Place[]> {
-		console.log("I was called");
-		if (this.places) {
-			return Observable.of(this.places);
-		} else if (this.placesObs) {
-			return this.placesObs;
-		} else {
-			const facilities = localStorage.getItem('facilities');
-			if (facilities) {
-				this.places = this.extractData(JSON.parse(facilities));
-				this.placesObs = Observable.of(this.places);
-				return this.placesObs;
-			} else {
-				this.placesObs = this.http.get(this.Url)
-				.map((data) => {
-						this.placesObs = null;
-						data = data.json();
-						this.places = this.extractData(data);
-						this.contextPlace = this.places[0];
-						localStorage.setItem('facilities', JSON.stringify(data));
-						return this.places;
-					})
-					.catch(this.handleError).share();
-				return this.placesObs;
-			}
-		}
+		// if (this.places) {
+		// 	return Observable.of(this.places);
+		// } else if (this.placesObs) {
+		// 	return this.placesObs;
+		// } else {
+		// 	const facilities = localStorage.getItem('facilities');
+		// 	if (facilities) {
+		// 		this.places = this.extractData(JSON.parse(facilities));
+		// 		this.placesObs = Observable.of(this.places);
+		// 		return this.placesObs;
+		// 	} else {
+
+		this.placesObs = this.http.get(this.Url)
+			.map((data) => {
+				this.placesObs = null;
+				data = data.json();
+				this.places = this.extractData(data);
+				this.contextPlace = this.places[0];
+				localStorage.setItem('facilities', JSON.stringify(data));
+				return this.places;
+			})
+			.catch(this.handleError).share();
+		return this.placesObs;
+		// 	}
+		// }
 	}
 	getContext(): Observable<Place> {
 		return this.contextSubj.asObservable();
@@ -70,8 +71,8 @@ export class DataProviderService {
 		const places: Place[] = [];
 		// const data = res.json();
 		for (let i = 0; i < data.length; i++) {
-			const main_schedule_times: Day[] = [];
-
+			let main_schedule_times: Day[] = [];
+			let special_schedules: SpecialSchedule[] = [];
 			for (let e = 0; e < data[i].main_schedule.open_times.length; e++) {
 				let jsonDay = data[i].main_schedule.open_times[e];
 
@@ -85,7 +86,26 @@ export class DataProviderService {
 					parseTime(jsonDay.end_time));
 				main_schedule_times.push(Object.freeze(day));
 			}
-
+			for (let e = 0; e < data[i].special_schedules.length; e++) {
+				const jsonSchedule = data[i].special_schedules[e];
+				let open_times:Day[] = [];
+				for(let f = 0; f < jsonSchedule.open_times.length;f++){
+					let jsonDay = jsonSchedule.open_times[f];
+					
+					const day = new Day(
+					jsonDay.id,
+					jsonDay.last_modified,
+					jsonDay.schedule,
+					jsonDay.start_day,
+					parseTime(jsonDay.start_time),
+					jsonDay.end_day,
+					parseTime(jsonDay.end_time));
+					open_times.push(Object.freeze(day));
+				}
+				const schedule = new SpecialSchedule(jsonSchedule.valid_start,jsonSchedule.valid_end,open_times);
+				special_schedules.push(Object.freeze(schedule));
+			}
+			console.log(special_schedules);
 			places.push(new Place(
 				main_schedule_times,
 				[],
