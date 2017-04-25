@@ -3,13 +3,13 @@ import { Time } from './time';
 
 export class SpecialSchedule {
 
-	open_times: Day[];
-	valid_start: string;
-	valid_end: string;
+	openTimes: Day[];
+	validStart: string;
+	validEnd: string;
 
 	constructor(valid_start:string,valid_end:string,open_times?: Day[]){
-		this.open_times = open_times || [];
-		this.valid_end = valid_end;
-		this.valid_start = valid_start;
+		this.openTimes = open_times || [];
+		this.validEnd = valid_end;
+		this.validStart = valid_start;
 	}
 }

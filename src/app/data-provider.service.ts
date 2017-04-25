@@ -88,27 +88,27 @@ export class DataProviderService {
 			}
 			for (let e = 0; e < data[i].special_schedules.length; e++) {
 				const jsonSchedule = data[i].special_schedules[e];
-				let open_times:Day[] = [];
-				for(let f = 0; f < jsonSchedule.open_times.length;f++){
+				let open_times: Day[] = [];
+				for (let f = 0; f < jsonSchedule.open_times.length; f++) {
 					let jsonDay = jsonSchedule.open_times[f];
-					
+
 					const day = new Day(
-					jsonDay.id,
-					jsonDay.last_modified,
-					jsonDay.schedule,
-					jsonDay.start_day,
-					parseTime(jsonDay.start_time),
-					jsonDay.end_day,
-					parseTime(jsonDay.end_time));
+						jsonDay.id,
+						jsonDay.last_modified,
+						jsonDay.schedule,
+						jsonDay.start_day,
+						parseTime(jsonDay.start_time),
+						jsonDay.end_day,
+						parseTime(jsonDay.end_time));
 					open_times.push(Object.freeze(day));
 				}
-				const schedule = new SpecialSchedule(jsonSchedule.valid_start,jsonSchedule.valid_end,open_times);
+				const schedule = new SpecialSchedule(jsonSchedule.valid_start, jsonSchedule.valid_end, open_times);
 				special_schedules.push(Object.freeze(schedule));
 			}
 			console.log(special_schedules);
 			places.push(new Place(
 				main_schedule_times,
-				[],
+				special_schedules,
 				data[i].id,
 				data[i].last_modified,
 				data[i].name,
