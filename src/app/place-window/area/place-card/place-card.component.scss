@@ -21,12 +21,13 @@
 	// image-rendering: crisp-edges;
 }
 .title-container{
-	margin:8px 0px 8px 0px;
-	height:32px;
+	// margin:8px 0px 8px 0px;
+	height:48px;
 	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	overflow: hidden;
 }
 
 .place-open-badge {
@@ -91,4 +92,5 @@
 	height: 100%;
 	opacity: .3;
 	background-color: black;
+	pointer-events: none;
 }

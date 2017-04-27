@@ -19,9 +19,12 @@ export class PlaceCardComponent implements OnInit {
 	constructor(private dataProvider: DataProviderService, public dialog: MdDialog,private sanitizer: DomSanitizer) { }
 	ngOnInit() {
 		this.url = this.sanitizer.bypassSecurityTrustUrl('https://unsplash.it/200/300?image='+Math.floor((Math.random()*999+1)));
+			
+		
 	}
 	openInContext() {
 		this.dataProvider.setContext(this.place);
+		console.log(this.place.openFor().hour+ " "+ this.place.openFor().minute+ " "+ this.place.openFor().second)
 	}
 	openDialog() {
 		let dialogRef = this.dialog.open(FeedbackDialogComponent);
