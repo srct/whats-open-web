@@ -1,5 +1,6 @@
 @import '../../../../global-styles';
 .place-card {
+	position: relative;
 	width: 210px;
 	height: 240px;
 	background-color: white;
@@ -19,18 +20,20 @@
 	// background-color: grey;
 	// image-rendering: crisp-edges;
 }
-
-.place-title {
-	font-family: Nunito-Medium;
-	font-size: 25px;
-	color: #354052;
-	margin: 18px auto 0px auto;
+.title-container{
+	margin:8px 0px 8px 0px;
+	height:32px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .place-open-badge {
+	min-height: 20px;
 	width: 88px;
 	height: 20px;
-	margin: 3px auto 0px auto;
+	margin: 0px auto 0px auto;
 	background-color: #3ac550;
 	border-radius: 100px;
 	display: flex;
@@ -72,10 +75,20 @@
 
 .place-error-feedback {
 	/* error: */
+	position:absolute;
+	bottom:0px;
+	right:5px;
+	z-index: 1000;
 	font-family: NunitoSans-Regular;
 	font-size: 9px;
 	color: #7F8FA4;
 	letter-spacing: -0.22px;
 	line-height: 13px;
-	margin: 18px 4px 0px auto;
+}
+.closed-shader{
+	position: absolute;
+	width:100%;
+	height: 100%;
+	opacity: .3;
+	background-color: black;
 }

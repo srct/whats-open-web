@@ -11,13 +11,16 @@
         <div class="place-location">{{place.location}}</div>
     </div>-->
 <div (click)="openInContext()" class="place-card">
+    <div class="closed-shader"></div>
     <img [src]="url" class="place-picture">
-    <div class="place-title">IndAroma</div>
+    <div class="title-container">
+    <div class="place-title">{{place.name | removeBrackets}}</div>
+        </div>    
     <div class="place-open-badge">
         <div class="place-status">OPEN</div>
         <div class="place-divider"></div>
-        <div class="place-time-remaining">~13Hrs</div>
+        <div class="place-time-remaining">~{{place.openFor().hour}}Hrs</div>
     </div>
-    <div class="place-location">The Johnson Center</div>
+    <div class="place-location">{{place.location }}</div>
     <div class="place-error-feedback">See an error?</div>
 </div>

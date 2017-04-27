@@ -15,7 +15,7 @@ export class PlaceCardComponent implements OnInit {
 	@Input() private place: Place;
 	private status: string;
 	private week: string[] = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
-	private url;
+	private url; 
 	constructor(private dataProvider: DataProviderService, public dialog: MdDialog,private sanitizer: DomSanitizer) { }
 	ngOnInit() {
 		this.url = this.sanitizer.bypassSecurityTrustUrl('https://unsplash.it/200/300?image='+Math.floor((Math.random()*999+1)));

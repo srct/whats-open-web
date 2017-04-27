@@ -34,7 +34,7 @@ export class Place {
 			schedule = this.special_schedules[useSpecialSchedule].openTimes;
 		}
 		for (let i = 0; i < schedule.length; i++) {
-			const day = this.main_schedule_times[i];
+			const day = schedule[i];
 			// change the order of if statements at some point
 			if (day.start_day !== day.end_day) {
 				if (day.end_day === dayOfWeek) {
@@ -60,12 +60,21 @@ export class Place {
 		const today = currTime.getDay() - 1;
 		const inSeconds = currTime.getHours() * 60 * 60 + currTime.getMinutes() * 60 + currTime.getSeconds();
 		const dayOfWeek = currTime.getDay() - 1;
+		const useSpecialSchedule = this.useSpecial();
+
 		let timeTilClose = new Time();
 		let sumSeconds = 0;
+
+		let schedule;
+		if(useSpecialSchedule === -1){
+			schedule = this.main_schedule_times;
+		}else{
+			schedule = this.special_schedules[useSpecialSchedule].openTimes;
+		}
 		// clean up if statements later
 		if (this.isOpen()) {
-			for (let i = 0; i < this.main_schedule_times.length; i++) {
-				const day = this.main_schedule_times[i];
+			for (let i = 0; i < schedule.length; i++) {
+				const day = schedule[i];
 				if (day.end_day !== day.start_day) {
 					if (dayOfWeek === day.end_day) {
 						sumSeconds = day.end_time.inSeconds() - inSeconds - 86400;
@@ -82,6 +91,7 @@ export class Place {
 			return timeTilClose;
 		}
 	}
+
 	useSpecial(): number {
 		const todaysDate = new Date();
 		for (let i = 0; i < this.special_schedules.length; i++) {

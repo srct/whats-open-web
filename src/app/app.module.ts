@@ -19,6 +19,7 @@ import { FeedbackDialogComponent } from './place-window/area/place-card/feedback
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SrctLogoComponent } from './nav-bar/srct-logo/srct-logo.component';
+import { RemoveBracketsPipe } from './remove-brackets.pipe';
 
 @NgModule({
 	declarations: [
@@ -35,7 +36,8 @@ import { SrctLogoComponent } from './nav-bar/srct-logo/srct-logo.component';
 		ShowHideArrowComponent,
 		FeedbackDialogComponent,
 		SearchBarComponent,
-		SrctLogoComponent
+		SrctLogoComponent,
+		RemoveBracketsPipe
 	],
 	imports: [
 		BrowserModule,

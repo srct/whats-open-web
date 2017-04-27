@@ -105,7 +105,7 @@ export class DataProviderService {
 				const schedule = new SpecialSchedule(jsonSchedule.valid_start, jsonSchedule.valid_end, open_times);
 				special_schedules.push(Object.freeze(schedule));
 			}
-			console.log(special_schedules);
+			// console.log(special_schedules);
 			places.push(new Place(
 				main_schedule_times,
 				special_schedules,
