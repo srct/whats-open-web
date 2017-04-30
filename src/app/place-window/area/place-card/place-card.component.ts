@@ -24,7 +24,8 @@ export class PlaceCardComponent implements OnInit {
 	}
 	openInContext() {
 		this.dataProvider.setContext(this.place);
-		console.log(this.place.openFor().hour+ " "+ this.place.openFor().minute+ " "+ this.place.openFor().second)
+		// console.log(this.place.openFor().hour+ " "+ this.place.openFor().minute+ " "+ this.place.openFor().second)
+		console.log(this.place);
 	}
 	openDialog() {
 		let dialogRef = this.dialog.open(FeedbackDialogComponent);
