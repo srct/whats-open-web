@@ -79,7 +79,6 @@ export class Place {
 				}
 			}
 		}
-		console.log('false');
 		return false;
 	}
 

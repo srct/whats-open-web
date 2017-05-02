@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { DataProviderService } from '../../data-provider.service';
-import { Place } from '../../Place';
+import { Place } from '../../place';
 @Component({
 	selector: 'app-area',
 	templateUrl: './area.component.html',

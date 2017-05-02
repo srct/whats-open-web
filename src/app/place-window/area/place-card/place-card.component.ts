@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Place } from '../../../place';
+import { Time } from '../../../time';
 import { DataProviderService } from '../../../data-provider.service';
 import { MdDialog } from '@angular/material';
 import { FeedbackDialogComponent } from './feedback-dialog/feedback-dialog.component';
-import {DomSanitizer} from '@angular/platform-browser';
-
+import { DomSanitizer } from '@angular/platform-browser';
+import { Observable } from 'rxjs/Rx';
 @Component({
 	selector: 'app-place-card',
 	templateUrl: './place-card.component.html',
@@ -13,14 +14,17 @@ import {DomSanitizer} from '@angular/platform-browser';
 
 export class PlaceCardComponent implements OnInit {
 	@Input() private place: Place;
-	private status: string;
-	private show;
-	private week: string[] = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
-	private url; 
-	constructor(private dataProvider: DataProviderService, public dialog: MdDialog,private sanitizer: DomSanitizer) { }
+	private openFor = new Time();
+	private isOpen;
+	private url;
+	constructor(private dataProvider: DataProviderService, public dialog: MdDialog, private sanitizer: DomSanitizer) { }
 	ngOnInit() {
-		this.url = this.sanitizer.bypassSecurityTrustUrl('https://unsplash.it/200/300?image='+Math.floor((Math.random()*999+1)));
-		
+		this.url = this.sanitizer.bypassSecurityTrustUrl('https://unsplash.it/200/300?image=' + Math.floor((Math.random() * 999 + 1)));
+		let timer = Observable.timer(0,60000);
+		timer.subscribe(t => {
+			this.openFor = this.place.openFor();
+			this.isOpen = this.place.isOpen()
+		});
 	}
 	openInContext() {
 		this.dataProvider.setContext(this.place);
