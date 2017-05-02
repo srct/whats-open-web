@@ -25,7 +25,7 @@ export class Place {
 	isOpen(): boolean {
 		const currTime = new Date();
 		const inSeconds = currTime.getHours() * 60 * 60 + currTime.getMinutes() * 60 + currTime.getSeconds();
-		const dayOfWeekShift = [6, 5, 4, 3, 2, 1, 0];
+		const dayOfWeekShift = [6, 0, 1, 2, 3, 4, 5];
 		const dayOfWeek = dayOfWeekShift[currTime.getDay()];
 		const useSpecialSchedule = this.useSpecial();
 		let schedule;
@@ -34,36 +34,61 @@ export class Place {
 		} else {
 			schedule = this.special_schedules[useSpecialSchedule].openTimes;
 		}
+		// for (let i = 0; i < schedule.length; i++) {
+		// 	const day = schedule[i];
+		// 	// change the order of if statements at some point
+		// 	if (day.start_day !== day.end_day) {
+		// 		if (day.end_day === dayOfWeek) {
+		// 			if (day.end_time.inSeconds() > inSeconds) {
+		// 				return true;
+		// 			}
+		// 		} else if (day.start_day === dayOfWeek) {
+		// 			return true;
+		// 		}
+		// 	} else {
+		// 		if (day.start_day === dayOfWeek) {
+		// 			if (day.end_time.inSeconds() > inSeconds) {
+		// 				return true;
+		// 			}
+		// 		}
+		// 	}
+		// }
 		for (let i = 0; i < schedule.length; i++) {
 			const day = schedule[i];
-			// change the order of if statements at some point
-			if (day.start_day !== day.end_day) {
-				if (day.end_day === dayOfWeek) {
-					if (day.end_time.inSeconds() > inSeconds) {
+			if ((dayOfWeek === day.start_day || dayOfWeek === day.end_day) && day.start_day === day.end_day) {
+				if (inSeconds >= day.start_time.inSeconds()) {
+					if (inSeconds <= day.end_time.inSeconds()) {
 						return true;
 					}
-				} else if (day.start_day === dayOfWeek) {
-					return true;
+					return false;
 				}
-			} else {
-				if (day.start_day === dayOfWeek) {
-					if (day.end_time.inSeconds() > inSeconds) {
+				return false;
+			} else if (dayOfWeek >= day.start_day && dayOfWeek <= day.end_day) {
+				if (dayOfWeek === day.start_day) {
+					if (inSeconds >= day.start_time.inSeconds()) {
 						return true;
 					}
+					return false;
+				} else if (dayOfWeek === day.end_day) {
+					if (inSeconds >= day.end_time.inSeconds()) {
+						return false;
+					}
+					return true;
+				} else {
+					return true;
 				}
 			}
 		}
+		console.log('false');
 		return false;
 	}
 
-	openFor(): Time {
+	openFor(): any {
 		const currTime = new Date();
-		const today = currTime.getDay() - 1;
 		const inSeconds = currTime.getHours() * 60 * 60 + currTime.getMinutes() * 60 + currTime.getSeconds();
-		const dayOfWeekShift = [6, 5, 4, 3, 2, 1, 0];
+		const dayOfWeekShift = [6, 0, 1, 2, 3, 4, 5];
 		const dayOfWeek = dayOfWeekShift[currTime.getDay()];
 		const useSpecialSchedule = this.useSpecial();
-
 		let timeTilClose = new Time();
 		let sumSeconds = 0;
 
@@ -73,25 +98,59 @@ export class Place {
 		} else {
 			schedule = this.special_schedules[useSpecialSchedule].openTimes;
 		}
-		// clean up if statements later
-		// if (this.isOpen()) {
-			for (let i = 0; i < schedule.length; i++) {
-				const day = schedule[i];
-				if (day.end_day !== day.start_day) {
-					if (dayOfWeek === day.end_day) {
-						sumSeconds = day.end_time.inSeconds() - inSeconds - 86400;
-					} else if (dayOfWeek === day.start_day) {
-						sumSeconds = day.end_time.inSeconds() + 86400 - inSeconds;
+		// for (let i = 0; i < schedule.length; i++) {
+		// 	const day = schedule[i];
+		// 	if (day.end_day !== day.start_day) {
+		// 		if (dayOfWeek === day.end_day) {
+		// 			sumSeconds = day.end_time.inSeconds() - inSeconds - 86400;
+		// 		} else if (dayOfWeek === day.start_day) {
+		// 			sumSeconds = day.end_time.inSeconds() + 86400 - inSeconds;
+		// 		}
+		// 	} else {
+		// 		sumSeconds = day.end_time.inSeconds() - inSeconds;
+		// 	}
+
+		// 	return timeTilClose.fromSeconds(sumSeconds);
+		// }
+		
+		for (let i = 0; i < schedule.length; i++) {
+			const day = schedule[i];
+			if ((dayOfWeek === day.start_day || dayOfWeek === day.end_day) && day.start_day === day.end_day) {
+				if (inSeconds >= day.start_time.inSeconds()) {
+					if (inSeconds <= day.end_time.inSeconds()) {
+						sumSeconds = day.end_time.inSeconds() - inSeconds;
+					} else {
+						//not done
+						sumSeconds = 86400 - inSeconds;
 					}
 				} else {
-					sumSeconds = day.end_time.inSeconds() - inSeconds;
+					sumSeconds = day.start_time.inSeconds() - inSeconds;
 				}
-
+				// console.log(sumSeconds);
+				return timeTilClose.fromSeconds(sumSeconds);
+			} else if (dayOfWeek >= day.start_day && dayOfWeek <= day.end_day) {
+				if (dayOfWeek === day.start_day) {
+					if (inSeconds >= day.start_time.inSeconds()) {
+						sumSeconds = 86400 - inSeconds + (86400 * (day.end_day - day.start_day - 1)) + day.end_time.inSeconds();
+					} else {
+						sumSeconds = day.start_time.inSeconds() - inSeconds;
+					}
+				} else if (dayOfWeek === day.end_day) {
+					if (inSeconds >= day.end_time.inSeconds()) {
+						//not done
+						sumSeconds = 86400 - inSeconds;
+					} else {
+						sumSeconds = day.end_time.inSeconds() - inSeconds;
+					}
+				} else {
+					sumSeconds = 86400 - inSeconds + (86400 * (day.end_day - dayOfWeek - 2)) + day.end_time.inSeconds();
+				}
+				// console.log(sumSeconds);
 				return timeTilClose.fromSeconds(sumSeconds);
 			}
-		// } else {
-			return timeTilClose;
-		// }
+
+		}
+		return { "hour": "closed" };
 	}
 
 	useSpecial(): number {

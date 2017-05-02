@@ -4,7 +4,7 @@ export class Time {
 	second: number;
 
 	constructor(hour?: number, minute?: number, second?: number) {
-		this.hour = hour || 1;
+		this.hour = hour || 0;
 		this.minute = minute || 0;
 		this.second = second || 0;
 	}
