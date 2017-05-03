@@ -16,19 +16,19 @@
     <div class="title-container">
         <div class="place-title">{{place.name | removeBrackets}}</div>
     </div>
-    <div *ngIf="isOpen; else elseBlock">
+    <div *ngIf="isOpen; else showClosed">
         <div class="place-open-badge">
             <div class="place-status">OPEN</div>
             <div class="place-divider"></div>
-            <div class="place-time-remaining">~{{openFor.hour}}Hrs</div>
+            <div class="place-time-remaining">~{{showTime(openFor)}}</div>
         </div>
     </div>
-    <ng-template #elseBlock>
+    <ng-template #showClosed>
          <div class="closed-shader"></div>
-        <div class="place-open-badge" style="width:102px;background-color:#C4B9B9;">
-            <div class="place-status">CLOSED</div>
-            <div class="place-divider"></div>
-            <div class="place-time-remaining">~{{openFor.hour}}Hrs</div>
+        <div class="place-open-badge" style="width:75px;background-color:#C4B9B9;">
+            <div class="place-status-closed">CLOSED</div>
+            <!--<div class="place-divider"></div>-->
+            <!--<div class="place-time-remaining">~{{showTime(openFor)}}</div>-->
         </div>
     </ng-template>
 

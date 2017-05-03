@@ -5,7 +5,7 @@ import { DataProviderService } from '../../../data-provider.service';
 import { MdDialog } from '@angular/material';
 import { FeedbackDialogComponent } from './feedback-dialog/feedback-dialog.component';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/rx';
 @Component({
 	selector: 'app-place-card',
 	templateUrl: './place-card.component.html',
@@ -20,10 +20,10 @@ export class PlaceCardComponent implements OnInit {
 	constructor(private dataProvider: DataProviderService, public dialog: MdDialog, private sanitizer: DomSanitizer) { }
 	ngOnInit() {
 		this.url = this.sanitizer.bypassSecurityTrustUrl('https://unsplash.it/200/300?image=' + Math.floor((Math.random() * 999 + 1)));
-		let timer = Observable.timer(0,60000);
+		let timer = Observable.timer(0, 60000);
 		timer.subscribe(t => {
 			this.openFor = this.place.openFor();
-			this.isOpen = this.place.isOpen()
+			this.isOpen = this.place.isOpen();
 		});
 	}
 	openInContext() {
@@ -35,5 +35,17 @@ export class PlaceCardComponent implements OnInit {
 		let dialogRef = this.dialog.open(FeedbackDialogComponent);
 		dialogRef.afterClosed().subscribe(result => {
 		});
+	}
+	showTime(time: Time) {
+		if (time.hour === 1) {
+			return (time.hour + "Hr");
+		} else if (time.hour > 0) {
+			return (time.hour + "Hrs");
+		} else {
+			if (time.minute === 1) {
+				return (time.minute + "Min");
+			}
+			return (time.minute + "Mins");
+		}
 	}
 }

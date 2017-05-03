@@ -1,13 +1,19 @@
 <!--<div class="area-card-header">-->
-    <!--<div class="hexagon center">
+<!--<div class="hexagon center">
         <div class="hexTop"></div>
         <div class="hexBottom"></div>
     </div>-->
-    <!--<div class="area-title">FAVORITES</div>-->
-    <!--<hr>-->
+<!--<div class="area-title">FAVORITES</div>-->
+<!--<hr>-->
 <!--</div>-->
 <div class="place-card-holder">
-    <div *ngFor="let place of places; let i = index;">
-        <app-place-card [place]="place"></app-place-card>
+
+    <div *ngIf="!show; else showCards">
     </div>
+
+    <ng-template #showCards>
+        <div *ngFor="let place of places; let i = index;">
+            <app-place-card [place]="place"></app-place-card>
+        </div>
+    </ng-template>
 </div>

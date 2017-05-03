@@ -34,25 +34,6 @@ export class Place {
 		} else {
 			schedule = this.special_schedules[useSpecialSchedule].openTimes;
 		}
-		// for (let i = 0; i < schedule.length; i++) {
-		// 	const day = schedule[i];
-		// 	// change the order of if statements at some point
-		// 	if (day.start_day !== day.end_day) {
-		// 		if (day.end_day === dayOfWeek) {
-		// 			if (day.end_time.inSeconds() > inSeconds) {
-		// 				return true;
-		// 			}
-		// 		} else if (day.start_day === dayOfWeek) {
-		// 			return true;
-		// 		}
-		// 	} else {
-		// 		if (day.start_day === dayOfWeek) {
-		// 			if (day.end_time.inSeconds() > inSeconds) {
-		// 				return true;
-		// 			}
-		// 		}
-		// 	}
-		// }
 		for (let i = 0; i < schedule.length; i++) {
 			const day = schedule[i];
 			if ((dayOfWeek === day.start_day || dayOfWeek === day.end_day) && day.start_day === day.end_day) {
@@ -60,20 +41,16 @@ export class Place {
 					if (inSeconds <= day.end_time.inSeconds()) {
 						return true;
 					}
-					return false;
 				}
-				return false;
 			} else if (dayOfWeek >= day.start_day && dayOfWeek <= day.end_day) {
 				if (dayOfWeek === day.start_day) {
 					if (inSeconds >= day.start_time.inSeconds()) {
 						return true;
 					}
-					return false;
 				} else if (dayOfWeek === day.end_day) {
-					if (inSeconds >= day.end_time.inSeconds()) {
-						return false;
+					if (inSeconds <= day.end_time.inSeconds()) {
+						return true;
 					}
-					return true;
 				} else {
 					return true;
 				}
@@ -97,59 +74,50 @@ export class Place {
 		} else {
 			schedule = this.special_schedules[useSpecialSchedule].openTimes;
 		}
-		// for (let i = 0; i < schedule.length; i++) {
-		// 	const day = schedule[i];
-		// 	if (day.end_day !== day.start_day) {
-		// 		if (dayOfWeek === day.end_day) {
-		// 			sumSeconds = day.end_time.inSeconds() - inSeconds - 86400;
-		// 		} else if (dayOfWeek === day.start_day) {
-		// 			sumSeconds = day.end_time.inSeconds() + 86400 - inSeconds;
-		// 		}
-		// 	} else {
-		// 		sumSeconds = day.end_time.inSeconds() - inSeconds;
-		// 	}
-
-		// 	return timeTilClose.fromSeconds(sumSeconds);
-		// }
-		
 		for (let i = 0; i < schedule.length; i++) {
 			const day = schedule[i];
 			if ((dayOfWeek === day.start_day || dayOfWeek === day.end_day) && day.start_day === day.end_day) {
 				if (inSeconds >= day.start_time.inSeconds()) {
 					if (inSeconds <= day.end_time.inSeconds()) {
 						sumSeconds = day.end_time.inSeconds() - inSeconds;
+						return timeTilClose.fromSeconds(sumSeconds);
 					} else {
 						//not done
 						sumSeconds = 86400 - inSeconds;
+						return timeTilClose.fromSeconds(sumSeconds);
 					}
 				} else {
 					sumSeconds = day.start_time.inSeconds() - inSeconds;
+					return timeTilClose.fromSeconds(sumSeconds);
 				}
 				// console.log(sumSeconds);
-				return timeTilClose.fromSeconds(sumSeconds);
 			} else if (dayOfWeek >= day.start_day && dayOfWeek <= day.end_day) {
 				if (dayOfWeek === day.start_day) {
 					if (inSeconds >= day.start_time.inSeconds()) {
 						sumSeconds = 86400 - inSeconds + (86400 * (day.end_day - day.start_day - 1)) + day.end_time.inSeconds();
+						return timeTilClose.fromSeconds(sumSeconds);
 					} else {
 						sumSeconds = day.start_time.inSeconds() - inSeconds;
+						return timeTilClose.fromSeconds(sumSeconds);
 					}
 				} else if (dayOfWeek === day.end_day) {
 					if (inSeconds >= day.end_time.inSeconds()) {
 						//not done
 						sumSeconds = 86400 - inSeconds;
+						return timeTilClose.fromSeconds(sumSeconds);
 					} else {
 						sumSeconds = day.end_time.inSeconds() - inSeconds;
+						return timeTilClose.fromSeconds(sumSeconds);
 					}
 				} else {
 					sumSeconds = 86400 - inSeconds + (86400 * (day.end_day - dayOfWeek - 2)) + day.end_time.inSeconds();
+					return timeTilClose.fromSeconds(sumSeconds);
 				}
 				// console.log(sumSeconds);
-				return timeTilClose.fromSeconds(sumSeconds);
 			}
 
 		}
-		return { "hour": "closed" };
+		return new Time();
 	}
 
 	useSpecial(): number {

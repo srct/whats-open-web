@@ -32,7 +32,7 @@
 
 .place-open-badge {
 	min-height: 20px;
-	width: 88px;
+	width: 92px;
 	height: 20px;
 	margin: 0px auto 0px auto;
 	background-color: #3ac550;
@@ -48,6 +48,12 @@
 	color: #FFFFFF;
 	margin: 0px 0px 0px 3px;
 }
+.place-status-closed {
+	font-family: NunitoSans-SemiBold;
+	font-size: 11px;
+	color: #FFFFFF;
+	margin: auto;
+}
 
 .place-divider {
 	width: 2px;
@@ -62,6 +68,10 @@
 	font-family: NunitoSans-Regular;
 	font-size: 11px;
 	color: #FFFFFF;
+	display: flex;
+	justify-content: center;
+	flex-grow: 2;
+	margin-left: -10px;
 }
 
 .place-location {
