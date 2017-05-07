@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
+import {SearchService} from '../search.service';
 @Component({
 	selector: 'app-search-bar',
 	templateUrl: './search-bar.component.html',
-	styleUrls: ['./search-bar.component.scss']
+	styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent implements OnInit {
 	choices = [
@@ -11,9 +11,12 @@ export class SearchBarComponent implements OnInit {
 		{ value: "arlington", viewValue: "Arlingron Campus" },
 		{ value: "princeWilliam", viewValue: "Prince William Campus" }
 	];
-	constructor() { }
+	constructor(private search:SearchService) { }
 
 	ngOnInit() {
+	}
+	onKey(event){
+		this.search.newTerm(event.target.value);
 	}
 
 }

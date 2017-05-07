@@ -1,11 +1,11 @@
 <div class="search-bar shadows">
-  <input class="search-input search-bar-text" placeholder="names,locations,anything">
-  <form class="search-bar-text search-select ">
-  <md-select class="search-bar-text " [(ngModel)]="selectedValue" name="food">
-    <md-option class="search-bar-text" *ngFor="let choice of choices" [value]="choice.value">
+  <input class="search-input search-bar-text"(keyup)="onKey($event)" placeholder="names, locations, anything">
+  <!--<form class="search-bar-text search-select ">
+  <md-select class="search-select" [(ngModel)]="selectedValue" name="food">
+    <md-option class="search-select" *ngFor="let choice of choices" [value]="choice.value">
       {{choice.viewValue}}
     </md-option>
   </md-select>
-</form>
+</form>-->
 </div>
 

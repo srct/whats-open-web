@@ -12,7 +12,7 @@
     </div>
 
     <ng-template #showCards>
-        <div *ngFor="let place of places; let i = index;">
+        <div *ngFor="let place of places | search:searchTerm; let i = index;">
             <app-place-card [place]="place"></app-place-card>
         </div>
     </ng-template>

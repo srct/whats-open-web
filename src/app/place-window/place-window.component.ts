@@ -8,6 +8,7 @@ import { Place } from '../place';
 export class PlaceWindowComponent implements OnInit {
 	constructor() { }
 	ngOnInit() {
+		// this.search.newTerm('he');
 	}
 
 }

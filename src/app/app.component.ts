@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DataProviderService } from './data-provider.service';
 import { Place } from './place';
+import { SearchService } from './search.service';
 import {
 	trigger,
 	state,
@@ -13,7 +14,7 @@ import {
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
-	providers: [DataProviderService],
+	providers: [DataProviderService, SearchService],
 	animations: [
 		trigger('nav-bar-state', [
 			state('expanded', style({

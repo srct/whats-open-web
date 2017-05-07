@@ -20,6 +20,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SrctLogoComponent } from './nav-bar/srct-logo/srct-logo.component';
 import { RemoveBracketsPipe } from './remove-brackets.pipe';
+import { SearchPipe } from './search.pipe';
 
 @NgModule({
 	declarations: [
@@ -37,7 +38,8 @@ import { RemoveBracketsPipe } from './remove-brackets.pipe';
 		FeedbackDialogComponent,
 		SearchBarComponent,
 		SrctLogoComponent,
-		RemoveBracketsPipe
+		RemoveBracketsPipe,
+		SearchPipe
 	],
 	imports: [
 		BrowserModule,
