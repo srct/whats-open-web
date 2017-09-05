@@ -5,12 +5,22 @@ import Avatar from 'material-ui/Avatar'
 import Typography from 'material-ui/Typography'
 import Divider from 'material-ui/Divider';
 import TextwTitle from '../components/TextwTitle'
-const Sidebar = ({classes}) => {
+const Sidebar = ({classes,facility}) => {
+    const removeBrackets = (name) => {
+       if(typeof(name) === "undefined"){
+           return ""
+       } 
+       const openBracket = name.indexOf('[')
+        if(openBracket !== -1){
+            return name.substring(0,openBracket)
+        }
+        return name
+    } 
     return(<Paper className={classes.root}>
        <div className={classes.row1}>
            <Avatar className={classes.avatar} src={require('../images/chipotleLogo.png')} />
            <div className={classes.title}>
-                <Typography  type='display1'>Chipotle</Typography>
+                <Typography  type='display1'>{removeBrackets(facility.facility_name)}</Typography>
            </div>
         </div> 
            <Divider className={classes.divider}/>   
