@@ -25,7 +25,7 @@ const enhance = compose(
 const store = createStore(reducers,enhance)
 
 const theme = createMuiTheme({
-    palette: createPalette({primary:blue,accent:green,warn:amber,error:red,type:'dark'})
+    palette: {primary:blue,secondary:green,warn:amber,error:red,type:'light'}
 });
 
 ReactDOM.render(

@@ -19,9 +19,9 @@
   "devDependencies": {
     "react-scripts": "1.0.10"
   },
-  "proxy":"http://localhost:3001",
+  "proxy": "http://localhost:3001",
   "scripts": {
-    "start": "react-scripts start & node ./proxyServer/index.js",
+    "start": "react-scripts start ",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",

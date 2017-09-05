@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles} from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
@@ -13,16 +13,16 @@ import classNames from 'classnames';
 
 function customAppBar({ classes, handleMenuClick, isOpen}) {
   return (
-    <div  className={classNames({[classes.drawerClosed]:!isOpen,[classes.drawerOpen]:isOpen})}>
-        <AppBar  position="static" >
+    <div  >
+        <AppBar  position="absolute" >
             <Toolbar>
-                <IconButton onClick={handleMenuClick} color="contrast" aria-label="Menu">
+                {/* <IconButton onClick={handleMenuClick} color="contrast" aria-label="Menu">
                     <MenuIcon />
-                </IconButton>
+                </IconButton> */}
                 <Typography type="title" color="inherit" className={classes.title}>
                     Title
                 </Typography>
-                <Button color="contrast">Login</Button>
+                {/* <Button color="contrast">Login</Button> */}
         </Toolbar>
       </AppBar>
     </div>
@@ -34,7 +34,7 @@ customAppBar.propTypes = {
   handleMenuClick: PropTypes.func.isRequired,
 };
 
-const styleSheet = createStyleSheet('AppBar', {
+const styleSheet =  {
   title: {
     marginRight: 'auto',
   },
@@ -48,6 +48,6 @@ const styleSheet = createStyleSheet('AppBar', {
         transition: 'padding 255ms cubic-bezier(0, 0, 0.2, 1) 0ms',
         height: '100%'
     },
-});
+};
 
 export default compose(withStyles(styleSheet),withTheme)(customAppBar);
