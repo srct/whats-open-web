@@ -1,22 +1,25 @@
 import React from 'react'
 import {withStyles} from 'material-ui/styles';
 import FacilityCard from '../containers/FacilityCard'
+import Grid from 'material-ui/Grid';
 
-const CardContainer = ({classes,facilities}) => {
+const CardContainer = ({classes, facilities}) => {
     return (
-        <div className={classes.root}>
-            {facilities.map((item) =>{
-               return <FacilityCard key={item.slug} facility={item}/>
-            })}
-        </div>
+        <Grid container className={classes.root} spacing={24}>
+            {facilities.map(item =>
+                <Grid key={item.slug} item>
+                    <FacilityCard facility={item}/>
+                </Grid>
+            )}
+        </Grid>
     )
 }
-const styleSheet  = {
-    root:{
-        width:'100%',
-        height:'100%',
-        display:'flex',
-        flexWrap:'wrap',
+const styleSheet = {
+    root: {
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexWrap: 'wrap',
     }
 }
 
