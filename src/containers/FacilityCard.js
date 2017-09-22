@@ -62,10 +62,11 @@ const FacilityCard = ({classes, facility, setSidebar}) => {
         let words = removeBrackets(name).split(/[ -]+/); //TODO: Add case change to the regex (ex. IndAroma should be IA, not I).
 
         /*
-           Words that start with ( must be removed.
+           TODO: Probably want this to be a regex test and remove any useless word / symbol (ex. the, and, &, etc.)
+           Words that are empty or start with ( must be removed.
                 Example: 'Recreation and Athletic Complex (RAC)' will result in the initials 'R(' without the filter.
         */
-        words = words.filter(word => !word.startsWith("("));
+        words = words.filter(word => word && !word.startsWith("("));
 
         if (words.length === 0) {
             return "";
@@ -115,9 +116,9 @@ const FacilityCard = ({classes, facility, setSidebar}) => {
     };
 
     return (
-        <Card onClick={handleClick} className={classes.root}>
+        <Card onClick={handleClick} className={classes.root} raised>
             {/*<CardMedia className={classes.media} image={require('../images/chipotleLogo.png')}/>*/}
-            <CardContent className={classes.cardContent}>
+            <CardContent>
                 <Grid container>
                     <Grid item xs={4} className={classes.avatarContainer}>
                         <Avatar className={classes.avatar}
@@ -125,15 +126,21 @@ const FacilityCard = ({classes, facility, setSidebar}) => {
                     </Grid>
 
                     <Grid item xs={8}>
-                        <Typography type={'title'} align={'center'} className={classes.title} noWrap>
-                            {removeBrackets(facility.facility_name)}
-                        </Typography>
-
-                        <FacilityStatus facility={facility}/>
-
-                        <Typography type={'caption'} align={'center'} className={classes.location} noWrap>
-                            {removeBrackets(facility.facility_location.building)}
-                        </Typography>
+                        <Grid container direction={'column'} spacing={8}>
+                            <Grid item>
+                                <Typography type={'title'} align={'center'} className={classes.title} noWrap>
+                                    {removeBrackets(facility.facility_name)}
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <FacilityStatus facility={facility}/>
+                            </Grid>
+                            <Grid item>
+                                <Typography type={'caption'} align={'center'} className={classes.location} noWrap>
+                                    {removeBrackets(facility.facility_location.building)}
+                                </Typography>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
             </CardContent>
@@ -143,7 +150,7 @@ const FacilityCard = ({classes, facility, setSidebar}) => {
 const styleSheet = {
     root: {
         width: 250,
-        height: 100,
+        borderRadius: '5px'
     },
     /**media: {
         flex: 1,

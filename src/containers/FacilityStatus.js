@@ -5,18 +5,17 @@ import Typography from 'material-ui/Typography';
 import {green, red} from 'material-ui/colors'
 
 const FacilityStatus = ({classes, facility}) => {
-    const isOpen = facility => {
-        //TODO
-        return true;
-    };
-
     return (
         <Chip label={
             <div>
-                <Typography type={'caption'} className={classes.isOpenText}>OPEN</Typography>
-                <Typography type={'caption'} className={classes.timeText}>~18 Hrs</Typography>
+                <Typography type={'caption'} className={classes.isOpenText}>
+                    {facility.isOpen ? "OPEN" : "CLOSED"}
+                    </Typography>
+                <Typography type={'caption'} className={classes.timeText}>
+                    ~18 Hrs
+                </Typography>
             </div>
-        } className={classes.chip} style={{backgroundColor: isOpen(facility) ? green[500] : red[500]}}/>
+        } className={classes.chip} style={{backgroundColor: facility.isOpen ? green[500] : red[500]}}/>
     )
 };
 const styleSheet = {
