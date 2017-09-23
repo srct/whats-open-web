@@ -5,9 +5,48 @@ import {connect} from 'react-redux';
 import {toggleDrawer} from '../actions/ui';
 import AppBar from '../components/AppBar';
 import Sidebar from '../components/Sidebar';
-import {getFacilities, setFacilities} from '../actions/api'
+import {getFacilities, setFacilities} from '../actions/api';
 import Button from 'material-ui/Button';
-import CardContainer from '../components/CardContainer'
+import CardContainer from '../components/CardContainer';
+import SearchBar from './SearchBar';
+
+const suggestions = [
+    { label: 'Afghanistan' },
+    { label: 'Aland Islands' },
+    { label: 'Albania' },
+    { label: 'Algeria' },
+    { label: 'American Samoa' },
+    { label: 'Andorra' },
+    { label: 'Angola' },
+    { label: 'Anguilla' },
+    { label: 'Antarctica' },
+    { label: 'Antigua and Barbuda' },
+    { label: 'Argentina' },
+    { label: 'Armenia' },
+    { label: 'Aruba' },
+    { label: 'Australia' },
+    { label: 'Austria' },
+    { label: 'Azerbaijan' },
+    { label: 'Bahamas' },
+    { label: 'Bahrain' },
+    { label: 'Bangladesh' },
+    { label: 'Barbados' },
+    { label: 'Belarus' },
+    { label: 'Belgium' },
+    { label: 'Belize' },
+    { label: 'Benin' },
+    { label: 'Bermuda' },
+    { label: 'Bhutan' },
+    { label: 'Bolivia, Plurinational State of' },
+    { label: 'Bonaire, Sint Eustatius and Saba' },
+    { label: 'Bosnia and Herzegovina' },
+    { label: 'Botswana' },
+    { label: 'Bouvet Island' },
+    { label: 'Brazil' },
+    { label: 'British Indian Ocean Territory' },
+    { label: 'Brunei Darussalam' },
+  ];
+
 class Layout extends React.Component {
     constructor(props){
         super(props);
@@ -31,6 +70,7 @@ class Layout extends React.Component {
                         {/* <Button raised onClick={getFacilities} className={classes.button}>
                             Default
                         </Button> */}
+                        <SearchBar suggestions={suggestions}/>
                         <CardContainer facilities={this.props.facilities}/>
                     </div> 
                     <Sidebar facility={sidebarFacility}/>
@@ -55,7 +95,7 @@ const styleSheet = {
         boxSizing:'border-box',
         flex:'1 1 100%',
         height:'100%',
-        margin:16,
+        padding:16,
     },
 }
 

@@ -2,3 +2,4 @@ export const TOGGLE_DRAWER = 'TOGGLE_DRAWER';
 export const SET_FACILITIES = 'SET_FACILITIES';
 export const GET_FACILITIES = 'GET_FACILITIES';
 export const SET_SIDEBAR = 'SET_SIDEBAR';
+export const SET_SEARCH_TERM = 'SET_SEARCH_TERM';
