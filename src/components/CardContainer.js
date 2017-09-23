@@ -20,6 +20,7 @@ const styleSheet = {
         height: '100%',
         display: 'flex',
         flexWrap: 'wrap',
+        overflowY:'scroll',
     }
 }
 
