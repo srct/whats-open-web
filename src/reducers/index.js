@@ -6,7 +6,7 @@ import {facilities} from './api'
 const reducers = combineReducers({
     router:routerReducer,
     ui,
-    facilities
+    facilities,
 })
 
 export default reducers;

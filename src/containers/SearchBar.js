@@ -152,15 +152,15 @@ class IntegrationAutosuggest extends React.Component {
   };
 
   handleSuggestionsFetchRequested = ({ value }) => {
-    this.setState({
-      suggestions: getSuggestions(value,this.props.suggestions),
-    });
+    // this.setState({
+    //   suggestions: getSuggestions(value,this.props.suggestions),
+    // });
   };
 
   handleSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: [],
-    });
+    // this.setState({
+    //   suggestions: [],
+    // });
   };
 
   handleChange = (event, { newValue }) => {
@@ -174,7 +174,7 @@ class IntegrationAutosuggest extends React.Component {
     const { classes,setSearchTerm,suggestions } = this.props;
 
     return (
-        <Paper className={classes.paperBackground}>
+        <Paper className={classes.paperBackground} elevation={3}>
 
       <Autosuggest
         theme={{

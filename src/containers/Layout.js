@@ -71,7 +71,7 @@ class Layout extends React.Component {
                             Default
                         </Button> */}
                         <SearchBar suggestions={suggestions}/>
-                        <CardContainer facilities={this.props.facilities}/>
+                        <CardContainer searchTerm={this.props.searchTerm} facilities={this.props.facilities}/>
                     </div> 
                     <Sidebar facility={sidebarFacility}/>
                 </div> 
@@ -102,6 +102,7 @@ const styleSheet = {
 function mapStateToProps(state) {
     return {
         facilities: state.facilities.data,
+        searchTerm:state.ui.search.term,
         isLoading: state.facilities.isLoading,
         sidebarFacility:state.ui.sidebar,
     }

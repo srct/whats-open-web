@@ -1,4 +1,4 @@
-import { TOGGLE_DRAWER,SET_SIDEBAR,SET_SEARCH_TERM,SET_FILTERED_LIST } from './action-types';
+import { TOGGLE_DRAWER,SET_SIDEBAR,SET_SEARCH_TERM } from './action-types';
 
 export const toggleDrawer =  () => ({
     type:TOGGLE_DRAWER,
@@ -9,8 +9,10 @@ export const setSidebar = (facility) => ({
     facility,
 })
 
-export const setSearchTerm = (term) => ({
-    type:SET_SEARCH_TERM,
-    term,
-})
+export const setSearchTerm = (term) => {
+    return {
+        type:SET_SEARCH_TERM,
+        term,
+    }
+}
 

@@ -1,4 +1,4 @@
-import {TOGGLE_DRAWER,SET_SIDEBAR,SET_SEARCH_TERM,SET_FILTERED_LIST } from '../actions/action-types'
+import {TOGGLE_DRAWER,SET_SIDEBAR,SET_SEARCH_TERM } from '../actions/action-types'
 
 function isOpen(state=false,action){
     switch (action.type) {
@@ -24,13 +24,9 @@ const sidebar = (state={},action) => {
 
 const searchbarState = {
     term:'',
-    filteredList:[],
 }
 
-const filterList = (state) =>{
-
-}
-const search = (state=searchbarState,facilities=[],action) =>{
+const search = (state=searchbarState,action) =>{
     switch(action.type){
         case SET_SEARCH_TERM:
             return Object.assign({},state,{
@@ -44,6 +40,6 @@ const search = (state=searchbarState,facilities=[],action) =>{
 const ui = (state={},action) =>({
     drawer:drawer(state.drawer,action),
     sidebar:sidebar(state.sidbar,action),
-    search: search(state.search,state.facilities,action),
+    search: search(state.search,action),
 })
 export default ui;

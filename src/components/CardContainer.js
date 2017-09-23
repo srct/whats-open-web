@@ -3,7 +3,11 @@ import {withStyles} from 'material-ui/styles';
 import FacilityCard from '../containers/FacilityCard'
 import Grid from 'material-ui/Grid';
 
-const CardContainer = ({classes, facilities}) => {
+const CardContainer = ({classes, searchTerm,facilities}) => {
+    const filterCards = (facility) => {
+        return facility.name.includes(searchTerm)
+    }
+    console.log(searchTerm)
     return (
         <Grid container className={classes.root} spacing={24}>
             {facilities.map(item =>
