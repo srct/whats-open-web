@@ -31,6 +31,8 @@ import {
     yellow
 } from 'material-ui/colors';
 
+const materialColors = [red, pink, purple, deepPurple, indigo, blue, lightBlue, cyan, teal, green,
+    lightGreen, lime, yellow, amber, orange, deepOrange, brown, grey, blueGrey];
 
 const FacilityCard = ({classes, facility, setSidebar}) => {
 
@@ -78,8 +80,6 @@ const FacilityCard = ({classes, facility, setSidebar}) => {
         return words[0].substring(0, 1).toUpperCase() + words[words.length - 1].substring(0, 1).toUpperCase();
     };
 
-    const materialColors = [red, pink, purple, deepPurple, indigo, blue, lightBlue, cyan, teal, green,
-        lightGreen, lime, yellow, amber, orange, deepOrange, brown, grey, blueGrey];
 
     /**
      * Gets a material color based off the facility's slug.
@@ -118,7 +118,7 @@ const FacilityCard = ({classes, facility, setSidebar}) => {
     return (
         <Card onClick={handleClick} className={classes.root} raised>
             {/*<CardMedia className={classes.media} image={require('../images/chipotleLogo.png')}/>*/}
-            <CardContent>
+            <CardContent className={classes.cardContent}>
                 <Grid container>
                     <Grid item xs={4} className={classes.avatarContainer}>
                         <Avatar className={classes.avatar}
@@ -126,16 +126,16 @@ const FacilityCard = ({classes, facility, setSidebar}) => {
                     </Grid>
 
                     <Grid item xs={8}>
-                        <Grid container direction={'column'} spacing={8}>
-                            <Grid item>
+                        <Grid container direction={'column'}>
+                            <Grid item className={classes.smallGridItemSpacing}>
                                 <Typography type={'title'} align={'center'} className={classes.title} noWrap>
                                     {removeBrackets(facility.facility_name)}
                                 </Typography>
                             </Grid>
-                            <Grid item>
+                            <Grid item className={classes.smallGridItemSpacing}>
                                 <FacilityStatus facility={facility}/>
                             </Grid>
-                            <Grid item>
+                            <Grid item className={classes.smallGridItemSpacing}>
                                 <Typography type={'caption'} align={'center'} className={classes.location} noWrap>
                                     {removeBrackets(facility.facility_location.building)}
                                 </Typography>
@@ -151,6 +151,12 @@ const styleSheet = {
     root: {
         width: 250,
         borderRadius: '5px'
+    },
+    cardContent: {
+        paddingBottom: '16px !important'
+    },
+    smallGridItemSpacing: {
+        padding: '2px !important'
     },
     /**media: {
         flex: 1,
