@@ -1,4 +1,4 @@
-const removeBrackets = (name) => {
+export const removeBrackets = (name) => {
     if (typeof(name) === "undefined") {
         return ""
     }

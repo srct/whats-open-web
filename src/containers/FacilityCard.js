@@ -8,6 +8,8 @@ import {compose} from 'redux'
 import {connect} from 'react-redux'
 import {setSidebar} from '../actions/ui'
 import FacilityStatus from './FacilityStatus';
+import FavoriteButton from './FavoriteButton';
+import {removeBrackets} from '../utils/nameUtils';
 
 import {
     amber,
@@ -38,17 +40,6 @@ const FacilityCard = ({classes, facility, setSidebar}) => {
 
     const handleClick = () => {
         setSidebar(facility)
-    };
-
-    const removeBrackets = (name) => {
-        if (typeof(name) === "undefined") {
-            return ""
-        }
-        const openBracket = name.indexOf('[');
-        if (openBracket !== -1) {
-            return name.substring(0, openBracket)
-        }
-        return name
     };
 
     /**
@@ -118,6 +109,7 @@ const FacilityCard = ({classes, facility, setSidebar}) => {
     return (
         <Card onClick={handleClick} className={classes.root} raised>
             {/*<CardMedia className={classes.media} image={require('../images/chipotleLogo.png')}/>*/}
+            <FavoriteButton facility={facility}/>
             <CardContent className={classes.cardContent}>
                 <Grid container>
                     <Grid item xs={4} className={classes.avatarContainer}>
@@ -150,7 +142,8 @@ const FacilityCard = ({classes, facility, setSidebar}) => {
 const styleSheet = {
     root: {
         width: 250,
-        borderRadius: '5px'
+        borderRadius: '5px',
+        position: 'relative'
     },
     cardContent: {
         paddingBottom: '16px !important'
@@ -178,7 +171,7 @@ const styleSheet = {
     },
     location: {
         fontFamily: 'Nunito'
-    }
+    },
 };
 
 export default compose(connect(null, {setSidebar}), withStyles(styleSheet))(FacilityCard);

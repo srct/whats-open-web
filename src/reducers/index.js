@@ -7,6 +7,6 @@ const reducers = combineReducers({
     router:routerReducer,
     ui,
     facilities
-})
+});
 
 export default reducers;
