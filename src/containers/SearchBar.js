@@ -142,6 +142,11 @@ const styles = theme => ({
   searchIcon:{
       display:'block',
       opacity:.54,
+  },
+  noSuggestInput:{
+      display:'flex',
+      alignItems:'center',
+      marginLeft:8,
   }
 });
 
@@ -163,11 +168,11 @@ class IntegrationAutosuggest extends React.Component {
     // });
   };
 
-  handleChange = (event, { newValue }) => {
+  handleChange = (e) => {
     this.setState({
-      value: newValue,
+      value: e.target.value,
     });
-    this.props.setSearchTerm(newValue)
+    this.props.setSearchTerm(e.target.value)
   };
 
   render() {
@@ -176,7 +181,7 @@ class IntegrationAutosuggest extends React.Component {
     return (
         <Paper className={classes.paperBackground} elevation={3}>
 
-      <Autosuggest
+      {/* <Autosuggest
         theme={{
           container: classes.container,
           suggestionsContainerOpen: classes.suggestionsContainerOpen,
@@ -197,7 +202,18 @@ class IntegrationAutosuggest extends React.Component {
           value: this.state.value,
           onChange: this.handleChange,
         }}
-      />
+      /> */}
+      <Input
+      placeholder="names, locations, etc"
+      disableUnderline
+      fullWidth
+      autoFocus
+      className={classes.noSuggestInput}
+      onChange={this.handleChange}
+      inputProps={{
+        'aria-label': 'Description',
+      }}
+    />
       <div className={classes.rightSearchContainer}>
       {/* <Select
       native
