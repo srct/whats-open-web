@@ -31,11 +31,6 @@ const sidebar = (state={},action) => {
 
 const searchbarState = {
     term:'',
-<<<<<<< HEAD
-}
-
-const search = (state=searchbarState,action) =>{
-=======
     filteredList:[],
 };
 
@@ -43,7 +38,6 @@ const filterList = (state) =>{
 
 };
 const search = (state=searchbarState,facilities=[],action) =>{
->>>>>>> c3abe9389ebadac8437111d3fa63f4ac278bb160
     switch(action.type){
         case SET_SEARCH_TERM:
             return Object.assign({},state,{
