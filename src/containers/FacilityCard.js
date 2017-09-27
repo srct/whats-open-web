@@ -8,6 +8,8 @@ import {compose} from 'redux'
 import {connect} from 'react-redux'
 import {setSidebar} from '../actions/ui'
 import FacilityStatus from './FacilityStatus';
+import FavoriteButton from './FavoriteButton';
+import {removeBrackets} from '../utils/nameUtils';
 
 import {
     amber,
@@ -31,22 +33,13 @@ import {
     yellow
 } from 'material-ui/colors';
 
+const materialColors = [red, pink, purple, deepPurple, indigo, blue, lightBlue, cyan, teal, green,
+    lightGreen, lime, yellow, amber, orange, deepOrange, brown, grey, blueGrey];
 
 const FacilityCard = ({classes, facility, setSidebar}) => {
 
     const handleClick = () => {
         setSidebar(facility)
-    };
-
-    const removeBrackets = (name) => {
-        if (typeof(name) === "undefined") {
-            return ""
-        }
-        const openBracket = name.indexOf('[');
-        if (openBracket !== -1) {
-            return name.substring(0, openBracket)
-        }
-        return name
     };
 
     /**
@@ -62,10 +55,11 @@ const FacilityCard = ({classes, facility, setSidebar}) => {
         let words = removeBrackets(name).split(/[ -]+/); //TODO: Add case change to the regex (ex. IndAroma should be IA, not I).
 
         /*
-           Words that start with ( must be removed.
+           TODO: Probably want this to be a regex test and remove any useless word / symbol (ex. the, and, &, etc.)
+           Words that are empty or start with ( must be removed.
                 Example: 'Recreation and Athletic Complex (RAC)' will result in the initials 'R(' without the filter.
         */
-        words = words.filter(word => !word.startsWith("("));
+        words = words.filter(word => word && !word.startsWith("("));
 
         if (words.length === 0) {
             return "";
@@ -77,8 +71,6 @@ const FacilityCard = ({classes, facility, setSidebar}) => {
         return words[0].substring(0, 1).toUpperCase() + words[words.length - 1].substring(0, 1).toUpperCase();
     };
 
-    const materialColors = [red, pink, purple, deepPurple, indigo, blue, lightBlue, cyan, teal, green,
-        lightGreen, lime, yellow, amber, orange, deepOrange, brown, grey, blueGrey];
 
     /**
      * Gets a material color based off the facility's slug.
@@ -115,8 +107,9 @@ const FacilityCard = ({classes, facility, setSidebar}) => {
     };
 
     return (
-        <Card onClick={handleClick} className={classes.root}>
+        <Card onClick={handleClick} className={classes.root} raised>
             {/*<CardMedia className={classes.media} image={require('../images/chipotleLogo.png')}/>*/}
+            <FavoriteButton facility={facility}/>
             <CardContent className={classes.cardContent}>
                 <Grid container>
                     <Grid item xs={4} className={classes.avatarContainer}>
@@ -125,15 +118,21 @@ const FacilityCard = ({classes, facility, setSidebar}) => {
                     </Grid>
 
                     <Grid item xs={8}>
-                        <Typography type={'title'} align={'center'} className={classes.title} noWrap>
-                            {removeBrackets(facility.facility_name)}
-                        </Typography>
-
-                        <FacilityStatus facility={facility}/>
-
-                        <Typography type={'caption'} align={'center'} className={classes.location} noWrap>
-                            {removeBrackets(facility.facility_location.building)}
-                        </Typography>
+                        <Grid container direction={'column'}>
+                            <Grid item className={classes.smallGridItemSpacing}>
+                                <Typography type={'title'} align={'center'} className={classes.title} noWrap>
+                                    {removeBrackets(facility.facility_name)}
+                                </Typography>
+                            </Grid>
+                            <Grid item className={classes.smallGridItemSpacing}>
+                                <FacilityStatus facility={facility}/>
+                            </Grid>
+                            <Grid item className={classes.smallGridItemSpacing}>
+                                <Typography type={'caption'} align={'center'} className={classes.location} noWrap>
+                                    {removeBrackets(facility.facility_location.building)}
+                                </Typography>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
             </CardContent>
@@ -143,7 +142,14 @@ const FacilityCard = ({classes, facility, setSidebar}) => {
 const styleSheet = {
     root: {
         width: 250,
-        height: 100,
+        borderRadius: '5px',
+        position: 'relative'
+    },
+    cardContent: {
+        paddingBottom: '16px !important'
+    },
+    smallGridItemSpacing: {
+        padding: '2px !important'
     },
     /**media: {
         flex: 1,
@@ -165,7 +171,7 @@ const styleSheet = {
     },
     location: {
         fontFamily: 'Nunito'
-    }
+    },
 };
 
 export default compose(connect(null, {setSidebar}), withStyles(styleSheet))(FacilityCard);
