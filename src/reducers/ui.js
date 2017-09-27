@@ -59,14 +59,8 @@ const favorites = (state = [], action) => {
 
 const ui = (state={},action) =>({
     drawer:drawer(state.drawer,action),
-<<<<<<< HEAD
-    sidebar:sidebar(state.sidbar,action),
-    search: search(state.search,action),
-})
-=======
     sidebar:sidebar(state.sidebar,action),
     search: search(state.search,state.facilities,action),
     favorites: favorites(state.favorites, action),
 });
->>>>>>> c3abe9389ebadac8437111d3fa63f4ac278bb160
 export default ui;
