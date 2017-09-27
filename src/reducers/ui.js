@@ -1,11 +1,7 @@
-<<<<<<< HEAD
-import {TOGGLE_DRAWER,SET_SIDEBAR,SET_SEARCH_TERM } from '../actions/action-types'
-=======
 import {
     TOGGLE_DRAWER, SET_SIDEBAR, SET_SEARCH_TERM, SET_FILTERED_LIST,
     ADD_FAVORITE_FACILITY, REMOVE_FAVORITE_FACILITY
 } from '../actions/action-types'
->>>>>>> c3abe9389ebadac8437111d3fa63f4ac278bb160
 
 function isOpen(state=false,action){
     switch (action.type) {
