@@ -50,11 +50,11 @@ const favorites = (state = [], action) => {
     switch(action.type) {
         case ADD_FAVORITE_FACILITY:
             newState = [...state,action.slug]
-            localStorage.setItem('favorites',newState)
+            localStorage.setItem('favorites',JSON.stringify(newState))
             return newState;
         case REMOVE_FAVORITE_FACILITY:
             newState = state.filter(slug => slug !== action.slug); 
-            localStorage.setItem('favorites',newState)
+            localStorage.setItem('favorites',JSON.stringify(newState))
             return newState;
         case SET_ALL_FAVORITES:
             return action.favorites;

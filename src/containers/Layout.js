@@ -57,9 +57,9 @@ class Layout extends React.Component {
             const facilities = localStorage.getItem('facilities') 
             this.props.setFacilities(facilities)
         }
-
         if(localStorage.getItem('favorites')){
-            const favorites = localStorage.getItem('favorites')
+            const favorites = JSON.parse(localStorage.getItem('favorites'))
+            console.log(favorites)
             this.props.setAllFavorites(favorites);
         }
 
