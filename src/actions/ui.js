@@ -3,7 +3,8 @@ import {
     REMOVE_FAVORITE_FACILITY,
     SET_SEARCH_TERM,
     SET_SIDEBAR,
-    TOGGLE_DRAWER
+    TOGGLE_DRAWER,
+    SET_ALL_FAVORITES
 } from './action-types';
 
 export const toggleDrawer = () => ({
@@ -29,4 +30,10 @@ export const removeFavoriteFacility = slug => ({
     type: REMOVE_FAVORITE_FACILITY,
     slug
 });
+
+export const setAllFavorites = (favorites) => ({
+    type: SET_ALL_FAVORITES,
+    favorites,
+})
+
 

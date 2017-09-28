@@ -1,6 +1,6 @@
 import {
     TOGGLE_DRAWER, SET_SIDEBAR, SET_SEARCH_TERM, SET_FILTERED_LIST,
-    ADD_FAVORITE_FACILITY, REMOVE_FAVORITE_FACILITY
+    ADD_FAVORITE_FACILITY, REMOVE_FAVORITE_FACILITY,SET_ALL_FAVORITES
 } from '../actions/action-types'
 
 function isOpen(state=false,action){
@@ -46,11 +46,18 @@ const search = (state=searchbarState,facilities=[],action) =>{
 
 //TODO: Favorites should be stored in a cookie, not in the redux store.
 const favorites = (state = [], action) => {
+    let newState;
     switch(action.type) {
         case ADD_FAVORITE_FACILITY:
-            return [...state, action.slug];
+            newState = [...state,action.slug]
+            localStorage.setItem('favorites',newState)
+            return newState;
         case REMOVE_FAVORITE_FACILITY:
-            return state.filter(slug => slug !== action.slug);
+            newState = state.filter(slug => slug !== action.slug); 
+            localStorage.setItem('favorites',newState)
+            return newState;
+        case SET_ALL_FAVORITES:
+            return action.favorites;
         default:
             return state;
     }

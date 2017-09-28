@@ -2,10 +2,10 @@ import React from 'react';
 import {withStyles } from 'material-ui/styles';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {toggleDrawer} from '../actions/ui';
+import {toggleDrawer,setAllFavorites} from '../actions/ui';
 import AppBar from '../components/AppBar';
 import Sidebar from '../components/Sidebar';
-import {getFacilities, setFacilities} from '../actions/api';
+import { getFacilities, setFacilities } from '../actions/api';
 import Button from 'material-ui/Button';
 import CardContainer from '../components/CardContainer';
 import SearchBar from './SearchBar';
@@ -57,6 +57,12 @@ class Layout extends React.Component {
             const facilities = localStorage.getItem('facilities') 
             this.props.setFacilities(facilities)
         }
+
+        if(localStorage.getItem('favorites')){
+            const favorites = localStorage.getItem('favorites')
+            this.props.setAllFavorites(favorites);
+        }
+
         this.props.getFacilities()
     }
 
@@ -108,4 +114,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default compose(connect(mapStateToProps,{toggleDrawer,getFacilities,setFacilities}), withStyles(styleSheet))(Layout);
+export default compose(connect(mapStateToProps,{toggleDrawer,getFacilities,setFacilities,setAllFavorites}), withStyles(styleSheet))(Layout);
