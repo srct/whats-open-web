@@ -54,17 +54,17 @@ class Layout extends React.Component {
     
     componentWillMount = () => {
         if(localStorage.getItem('facilities')){
-            const facilities = localStorage.getItem('facilities') 
+            const facilities = localStorage.getItem('facilities');
             this.props.setFacilities(facilities)
         }
         if(localStorage.getItem('favorites')){
-            const favorites = JSON.parse(localStorage.getItem('favorites'))
-            console.log(favorites)
+            const favorites = JSON.parse(localStorage.getItem('favorites'));
+            console.log(favorites);
             this.props.setAllFavorites(favorites);
         }
 
         this.props.getFacilities()
-    }
+    };
 
     render() {
         const {classes, isDrawerOpen, toggleDrawer, getFacilities,sidebarFacility} = this.props;

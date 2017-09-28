@@ -10,7 +10,7 @@ const CardContainer = ({classes, searchTerm,facilities}) => {
         return name.includes(searchTerm.toLowerCase())
     }
     return (
-        <Grid container className={classes.root} spacing={24}>
+        <Grid container className={classes.root} spacing={24} justify={'center'}>
             {facilities.filter(filterCards).map(item =>{
                 return(<Grid key={item.slug} item>
                     <FacilityCard facility={item}/>

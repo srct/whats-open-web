@@ -6,9 +6,9 @@ import Grid from 'material-ui/Grid';
 import Avatar from 'material-ui/Avatar';
 import {compose} from 'redux'
 import {connect} from 'react-redux'
-import {setSidebar} from '../actions/ui'
-import FacilityStatus from './FacilityStatus';
-import FavoriteButton from './FavoriteButton';
+import {addFavoriteFacility, removeFavoriteFacility, setSidebar} from '../actions/ui'
+import FacilityStatus from '../components/FacilityStatus';
+import FavoriteButton from '../components/FavoriteButton';
 import {removeBrackets} from '../utils/nameUtils';
 
 import {
@@ -36,7 +36,7 @@ import {
 const materialColors = [red, pink, purple, deepPurple, indigo, blue, lightBlue, cyan, teal, green,
     lightGreen, lime, yellow, amber, orange, deepOrange, brown, grey, blueGrey];
 
-const FacilityCard = ({classes, facility, setSidebar}) => {
+const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, removeFavoriteFacility, setSidebar}) => {
 
     const handleClick = () => {
         setSidebar(facility)
@@ -109,7 +109,8 @@ const FacilityCard = ({classes, facility, setSidebar}) => {
     return (
         <Card onClick={handleClick} className={classes.root} raised>
             {/*<CardMedia className={classes.media} image={require('../images/chipotleLogo.png')}/>*/}
-            <FavoriteButton facility={facility}/>
+            <FavoriteButton facility={facility} isFavorite={favorites.includes(facility.slug)}
+                            addFavoriteFacility={addFavoriteFacility} removeFavoriteFacility={removeFavoriteFacility}/>
             <CardContent className={classes.cardContent}>
                 <Grid container>
                     <Grid item xs={4} className={classes.avatarContainer}>
@@ -174,4 +175,12 @@ const styleSheet = {
     },
 };
 
-export default compose(connect(null, {setSidebar}), withStyles(styleSheet))(FacilityCard);
+const mapStateToProps = state => ({
+    favorites: state.ui.favorites
+});
+
+export default compose(connect(mapStateToProps, {
+    setSidebar,
+    addFavoriteFacility,
+    removeFavoriteFacility
+}), withStyles(styleSheet))(FacilityCard);
