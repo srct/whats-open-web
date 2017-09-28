@@ -28,7 +28,7 @@ class FavoriteButton extends React.Component {
         });
     }
 
-    handleClick() {
+    handleClick(e) {
         e.stopPropagation(); //Stops the card from being selected in the sidebar.
 
         if (this.state.isFavorite) {
