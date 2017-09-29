@@ -19,13 +19,18 @@ import green from 'material-ui/colors/green';
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory();
 const extension = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
-if(extension){
-    const enhance = compose(
+
+let enhance;
+
+if(extension) {
+    enhance = compose(
         applyMiddleware(ReduxThunk,routerMiddleware(history))
         ,extension);
-}
-const enhance = compose(
+} else {
+    enhance = compose(
         applyMiddleware(ReduxThunk,routerMiddleware(history)));
+}
+
 const store = createStore(reducers,enhance);
 
 const theme = createMuiTheme({
