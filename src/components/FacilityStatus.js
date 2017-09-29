@@ -2,7 +2,7 @@ import React from 'react';
 import {withStyles} from 'material-ui/styles';
 import Chip from 'material-ui/Chip';
 import Typography from 'material-ui/Typography';
-import {green, red} from 'material-ui/colors'
+import {blue, green, orange, red} from 'material-ui/colors'
 
 const FacilityStatus = ({classes, facility}) => {
 
@@ -141,54 +141,80 @@ const FacilityStatus = ({classes, facility}) => {
     };
 
     /**
-     * Generates the chip label
+     * Determines how long until a facility open / closes.
      *
-     * @param facility The facility to determine the label for.
-     * @returns {string} The label for the chip
+     * @param facility
+     * @returns {number} The time in minutes until a facility open / closes. -1 if 24/7.
      */
-    const chipLabel = facility => {
+    const timeTill = facility => {
         const schedule = facility.main_schedule;
 
         //TODO: Logic for "Special Schedule". I have no idea what this is.
 
         //Facility is open 24/7
         if (schedule.twenty_four_hours) {
-            return "OPEN 24/7";
+            return -1;
         }
 
-        let time = facility.isOpen ? calcTimeTillClose(schedule) : calcTimeTillOpen(schedule);
+        return facility.isOpen ? calcTimeTillClose(schedule) : calcTimeTillOpen(schedule);
+    };
 
-        if (facility.isOpen && time > 60) {
+    /**
+     * Generates the chip label
+     *
+     * @param isOpen True if the facility is open, otherwise false.
+     * @param time The time in minutes until the facility opens / closes.
+     * @returns {string} The label for the chip
+     */
+    const chipLabel = (isOpen, time) => {
+        if (time === -1) {
+            return "OPEN 24/7"
+        }
+
+        if (isOpen && time > 60) {
             return "OPEN";
-        } else if (facility.isOpen && time <= 60) {
+        } else if (isOpen && time <= 60) {
             return "CLOSING SOON";
-        } else if (!facility.isOpen && time > 60) {
+        } else if (!isOpen && time > 15) {
             return "CLOSED";
         } else {
-            return "OPENING SOON";
+            return `OPENING IN ${time}m`;
+        }
+    };
+
+    /**
+     * Generates the background color of the chip.
+     *
+     * @param isOpen True if the facility is open, otherwise false.
+     * @param time The time in minutes until the facility opens / closes.
+     * @returns {string} The background color of the chip.
+     */
+    const backgroundColor = (isOpen, time) => {
+        if (time === -1) {
+            return green[500];
         }
 
-        /*/TODO: May want to use Math.ceil instead of Math.round
-        if (time < 60) { //Under one hour
-            const roundedMins = Math.round(time);
-            return `${roundedMins} ${roundedMins === 1 ? "min" : "mins"}`;
-        } else if (time < 1440) { //Under one day
-            const roundedHrs = Math.round(time / 60);
-            return `${roundedHrs} ${roundedHrs === 1 ? "hr" : "hrs"}`;
-        } else { //Over a day
-            const roundedDays = Math.round(time / 1440);
-            return `${roundedDays} ${roundedDays === 1 ? "day" : "days"}`;
-        }*/
+        if (isOpen && time > 60) {
+            return green[500];
+        } else if (isOpen && time <= 60) {
+            return orange[500];
+        } else if (!isOpen && time > 60) {
+            return red[500];
+        } else {
+            return blue[500];
+        }
     };
+
+    const time = timeTill(facility);
 
     return (
         <Chip label={
             <div>
                 <Typography type={'caption'} className={classes.isOpenText}>
-                    {chipLabel(facility)}
+                    {chipLabel(facility.isOpen, time)}
                 </Typography>
             </div>
-        } className={classes.chip} style={{backgroundColor: facility.isOpen ? green[500] : red[500]}}/>
+        } className={classes.chip} style={{backgroundColor: backgroundColor(facility.isOpen, time)}}/>
     )
 };
 const styleSheet = {
