@@ -141,24 +141,34 @@ const FacilityStatus = ({classes, facility}) => {
     };
 
     /**
-     * Calculates and formats the time until the facility open or closes.
+     * Generates the chip label
      *
-     * @param facility The facility to determine the message for.
-     * @returns {string} The formatted message of how long until a facility open or closes.
+     * @param facility The facility to determine the label for.
+     * @returns {string} The label for the chip
      */
-    const timeTillMessage = facility => {
+    const chipLabel = facility => {
         const schedule = facility.main_schedule;
 
         //TODO: Logic for "Special Schedule". I have no idea what this is.
 
         //Facility is open 24/7
         if (schedule.twenty_four_hours) {
-            return "24/7"
+            return "OPEN 24/7";
         }
 
         let time = facility.isOpen ? calcTimeTillClose(schedule) : calcTimeTillOpen(schedule);
 
-        //TODO: May want to use Math.ceil instead of Math.round
+        if (facility.isOpen && time > 60) {
+            return "OPEN";
+        } else if (facility.isOpen && time <= 60) {
+            return "CLOSING SOON";
+        } else if (!facility.isOpen && time > 60) {
+            return "CLOSED";
+        } else {
+            return "OPENING SOON";
+        }
+
+        /*/TODO: May want to use Math.ceil instead of Math.round
         if (time < 60) { //Under one hour
             const roundedMins = Math.round(time);
             return `${roundedMins} ${roundedMins === 1 ? "min" : "mins"}`;
@@ -168,17 +178,14 @@ const FacilityStatus = ({classes, facility}) => {
         } else { //Over a day
             const roundedDays = Math.round(time / 1440);
             return `${roundedDays} ${roundedDays === 1 ? "day" : "days"}`;
-        }
+        }*/
     };
 
     return (
         <Chip label={
             <div>
                 <Typography type={'caption'} className={classes.isOpenText}>
-                    {facility.isOpen ? "OPEN" : "CLOSED"}
-                </Typography>
-                <Typography type={'caption'} className={classes.timeText}>
-                    {timeTillMessage(facility)}
+                    {chipLabel(facility)}
                 </Typography>
             </div>
         } className={classes.chip} style={{backgroundColor: facility.isOpen ? green[500] : red[500]}}/>
@@ -186,22 +193,17 @@ const FacilityStatus = ({classes, facility}) => {
 };
 const styleSheet = {
     chip: {
-        margin: 'auto',
-        height: '24px',
-        borderRadius: '5px',
+        position: 'absolute',
+        left: '8px',
+        bottom: '4px',
+        opacity: .9,
+        height: '28px'
     },
     isOpenText: {
-        borderRight: '1px solid white',
-        paddingRight: '5px',
         color: 'white',
         fontFamily: 'Nunito',
-        display: 'inline'
-    },
-    timeText: {
-        paddingLeft: '5px',
-        color: 'white',
-        fontFamily: 'Nunito',
-        display: 'inline'
+        fontWeight: 'bold',
+        display: 'inline',
     }
 };
 

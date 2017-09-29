@@ -1,14 +1,16 @@
 import React from 'react'
 import {withStyles} from 'material-ui/styles';
-import Card, {CardContent} from 'material-ui/Card';
+import Card, {CardContent, CardHeader, CardMedia} from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
 import Avatar from 'material-ui/Avatar';
+import FavoriteButton from '../components/FavoriteButton';
+import FacilityStatus from '../components/FacilityStatus';
+import Chip from 'material-ui/Chip'
 import {compose} from 'redux'
 import {connect} from 'react-redux'
 import {addFavoriteFacility, removeFavoriteFacility, setSidebar} from '../actions/ui'
-import FacilityStatus from '../components/FacilityStatus';
-import FavoriteButton from '../components/FavoriteButton';
+import RestaurantIcon from 'material-ui-icons/Restaurant';
 import {removeBrackets} from '../utils/nameUtils';
 
 import {
@@ -108,32 +110,30 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
 
     return (
         <Card onClick={handleClick} className={classes.root} raised>
-            {/*<CardMedia className={classes.media} image={require('../images/chipotleLogo.png')}/>*/}
             <FavoriteButton facility={facility} isFavorite={favorites.includes(facility.slug)}
                             addFavoriteFacility={addFavoriteFacility} removeFavoriteFacility={removeFavoriteFacility}/>
-            <CardContent className={classes.cardContent}>
-                <Grid container>
-                    <Grid item xs={4} className={classes.avatarContainer}>
-                        <Avatar className={classes.avatar}
-                                style={{backgroundColor: materialColorFromSlug(facility.slug)}}>{getInitials(facility.facility_name)}</Avatar>
-                    </Grid>
 
-                    <Grid item xs={8}>
-                        <Grid container direction={'column'}>
-                            <Grid item className={classes.smallGridItemSpacing}>
-                                <Typography type={'title'} align={'center'} className={classes.title} noWrap>
-                                    {removeBrackets(facility.facility_name)}
-                                </Typography>
-                            </Grid>
-                            <Grid item className={classes.smallGridItemSpacing}>
-                                <FacilityStatus facility={facility}/>
-                            </Grid>
-                            <Grid item className={classes.smallGridItemSpacing}>
-                                <Typography type={'caption'} align={'center'} className={classes.location} noWrap>
-                                    {removeBrackets(facility.facility_location.building)}
-                                </Typography>
-                            </Grid>
-                        </Grid>
+            <CardHeader classes={{root: classes.header, avatar: classes.avatarContainer, title: classes.headerTitle}} avatar={
+                <Avatar className={classes.avatar}>
+                    <RestaurantIcon className={classes.icon}/>
+                </Avatar>} title={'Dining'}/>
+
+            <div className={classes.mediaContainer}>
+                <CardMedia className={classes.media} image={'https://gmucampus.files.wordpress.com/2010/09/00sothside2.jpg'}/>
+                <FacilityStatus facility={facility}/>
+            </div>
+
+            <CardContent className={classes.cardContent}>
+                <Grid container direction={'column'} className={classes.smallGridContainerSpacing}>
+                    <Grid item className={classes.smallGridItemSpacing}>
+                        <Typography type={'title'} className={classes.title} noWrap>
+                            {removeBrackets(facility.facility_name)}
+                        </Typography>
+                    </Grid>
+                    <Grid item className={classes.smallGridItemSpacing}>
+                        <Typography type={'caption'} className={classes.location} noWrap>
+                            {removeBrackets(facility.facility_location.building)}
+                        </Typography>
                     </Grid>
                 </Grid>
             </CardContent>
@@ -146,25 +146,41 @@ const styleSheet = {
         borderRadius: '5px',
         position: 'relative'
     },
+    header: {
+        padding: '4px'
+    },
+    headerTitle: {
+        fontFamily: 'Nunito'
+    },
     cardContent: {
-        paddingBottom: '16px !important'
+        padding: '8px 4px 16px 4px !important'
+    },
+    smallGridContainerSpacing: {
+        margin: '-2px -8px !important'
     },
     smallGridItemSpacing: {
-        padding: '2px !important'
+        padding: '2px 8px !important'
     },
-    /**media: {
+    media: {
         flex: 1,
-        width: 200,
-        height: 100,
-        resizeMode: 'cover',
-    },**/
+        margin: '0 4px',
+        height: '100px',
+    },
+    mediaContainer: {
+        position: 'relative'
+    },
     avatarContainer: {
-        display: 'flex',
+        marginRight: '8px'
     },
     avatar: {
-        margin: 'auto',
-        width: '50px',
-        height: '50px'
+        width: 'auto !important',
+        height: 'auto !important',
+        backgroundColor: red[500],
+    },
+    icon: {
+        width: '18px !important',
+        height: '18px !important',
+        padding: '4px !important'
     },
     title: { //TODO: Should the fonts be added here or in the muitheme (index.js)?
         fontFamily: 'Nunito',

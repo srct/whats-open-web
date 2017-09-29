@@ -46,8 +46,9 @@ const styleSheet = {
         top: '0px',
         right: '0px',
         color: yellow[600],
-        height: '20px',
-        width: '20px',
+        height: '26px',
+        width: '26px',
+        padding: '4px',
         cursor: 'pointer',
     }
 };
