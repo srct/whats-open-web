@@ -138,6 +138,7 @@ const FacilityStatus = ({classes, facility}) => {
             timeInParts[2]);
 
         return (closeTime - curDateTime) / 60000;
+        // return 6000
     };
 
     /**

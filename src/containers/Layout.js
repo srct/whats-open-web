@@ -2,13 +2,16 @@ import React from 'react';
 import {withStyles } from 'material-ui/styles';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {toggleDrawer,setAllFavorites} from '../actions/ui';
+import {toggleSidebar,setAllFavorites} from '../actions/ui';
 import AppBar from '../components/AppBar';
 import Sidebar from '../components/Sidebar';
 import { getFacilities, setFacilities } from '../actions/api';
 import Button from 'material-ui/Button';
 import CardContainer from '../components/CardContainer';
 import SearchBar from './SearchBar';
+import Icon from 'material-ui/Icon';
+import KeyboardArrowLeft from 'material-ui-icons/KeyboardArrowLeft';
+import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
 
 const suggestions = [
     { label: 'Afghanistan' },
@@ -59,7 +62,6 @@ class Layout extends React.Component {
         }
         if(localStorage.getItem('favorites')){
             const favorites = JSON.parse(localStorage.getItem('favorites'));
-            console.log(favorites);
             this.props.setAllFavorites(favorites);
         }
 
@@ -67,19 +69,26 @@ class Layout extends React.Component {
     };
 
     render() {
-        const {classes, isDrawerOpen, toggleDrawer, getFacilities,sidebarFacility} = this.props;
+        const {classes, isSidebarOpen, toggleSidebar, getFacilities,sidebarFacility} = this.props;
         return (
             <div className={classes.root}>
-                <AppBar isOpen={isDrawerOpen} handleMenuClick={ toggleDrawer }/>
+                <AppBar isOpen={false} handleMenuClick={ ()=>{} }/>
                 <div className={classes.container}>
                     <div className={classes.mainContent}>
-                        {/* <Button raised onClick={getFacilities} className={classes.button}>
-                            Default
-                        </Button> */}
-                        <SearchBar suggestions={suggestions}/>
-                        <CardContainer searchTerm={this.props.searchTerm} facilities={this.props.facilities}/>
+                        <SearchBar styles={styleSheet.searchBar} suggestions={suggestions}/>
+                        <CardContainer styles={styleSheet.cardContainer}searchTerm={this.props.searchTerm} facilities={this.props.facilities}/>
                     </div> 
-                    <Sidebar facility={sidebarFacility}/>
+                    <div className={classes.sidebarToggleContainer}>
+                        <button onClick={toggleSidebar} className={classes.openCloseButton}>
+                            {isSidebarOpen &&
+                            <KeyboardArrowLeft className={classes.arrowIcon}/>
+                            }
+                            {!isSidebarOpen &&
+                            <KeyboardArrowRight className={classes.arrowIcon}/>
+                            }
+                        </button>
+                    </div>
+                    <Sidebar facilities={this.props.facilities} facility={sidebarFacility} isSidebarOpen={isSidebarOpen}/>
                 </div> 
             </div>
         )
@@ -99,10 +108,35 @@ const styleSheet = {
     },
     mainContent:{
         boxSizing:'border-box',
+        position:'relative',
         flex:'1 1 100%',
         height:'100%',
-        padding:16,
+        paddingTop:16,
     },
+    sidebarToggleContainer:{
+        width:16,
+        position:'relative',
+    },
+    openCloseButton:{
+        width:24,
+        height:48,
+        position:'absolute',
+        top:16,
+        right:-1,
+        border:0,
+        backgroundColor:'white',
+        boxShadow:'0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)',
+        outline:'none',
+        borderRadius:1,
+    },
+    arrowIcon:{
+        position:'absolute',
+        top:12,
+        right:0,
+        width:24,
+        height:24,
+    },
+    
 }
 
 function mapStateToProps(state) {
@@ -110,8 +144,9 @@ function mapStateToProps(state) {
         facilities: state.facilities.data,
         searchTerm:state.ui.search.term,
         isLoading: state.facilities.isLoading,
-        sidebarFacility:state.ui.sidebar,
+        sidebarFacility:state.ui.sidebar.facility,
+        isSidebarOpen: state.ui.sidebar.isOpen,
     }
 }
 
-export default compose(connect(mapStateToProps,{toggleDrawer,getFacilities,setFacilities,setAllFavorites}), withStyles(styleSheet))(Layout);
+export default compose(connect(mapStateToProps,{toggleSidebar,getFacilities,setFacilities,setAllFavorites}), withStyles(styleSheet))(Layout);

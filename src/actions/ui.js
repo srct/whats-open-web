@@ -3,12 +3,12 @@ import {
     REMOVE_FAVORITE_FACILITY,
     SET_SEARCH_TERM,
     SET_SIDEBAR,
-    TOGGLE_DRAWER,
+    TOGGLE_SIDEBAR,
     SET_ALL_FAVORITES
 } from './action-types';
 
-export const toggleDrawer = () => ({
-    type: TOGGLE_DRAWER,
+export const toggleSidebar = () => ({
+    type: TOGGLE_SIDEBAR,
 });
 
 export const setSidebar = (facility) => ({

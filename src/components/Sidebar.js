@@ -5,7 +5,10 @@ import Avatar from 'material-ui/Avatar'
 import Typography from 'material-ui/Typography'
 import Divider from 'material-ui/Divider';
 import TextwTitle from '../components/TextwTitle'
-const Sidebar = ({classes,facility}) => {
+import FacilitiesMap from '../components/FacilitiesMap'
+import classNames from 'classnames'
+
+const Sidebar = ({classes,facility,isSidebarOpen,facilities}) => {
     const removeBrackets = (name) => {
        if(typeof(name) === "undefined"){
            return ""
@@ -16,7 +19,12 @@ const Sidebar = ({classes,facility}) => {
         }
         return name
     } 
-    return(<Paper className={classes.root}>
+    // if(isSidebarOpen){
+    //     return (<div></div>)
+    // }
+    return( 
+        
+    <Paper className={classNames([classes.root,(!isSidebarOpen && classes.openSidebar),(isSidebarOpen && classes.closedSidebar)])}>
        <div className={classes.row1}>
            <Avatar className={classes.avatar} src={require('../images/chipotleLogo.png')} />
            <div className={classes.title}>
@@ -34,22 +42,35 @@ const Sidebar = ({classes,facility}) => {
                    <TextwTitle label="Location" content="The Johnson Center asdfasdfasdfasdf  asd fas as asd asdfasdfasf " /> 
                </div>
            </div> 
-
+        <div className={classes.row2}>
+        <FacilitiesMap facilities={facilities}facility={facility}/>
+        </div>
     </Paper>
     )   
 }
 const styleSheet = {
+   
     labelRow:{
         display:'flex',
     },
     labelHolder:{
         margin:16,
     },
-    root:{
+    openSidebar:{
         flex:'1 0 400px',
+    },
+    closedSidebar:{
+        flex:'1 0 0px',
+    },
+    root:{
+        overflow:'hidden',
         display:'block',
         boxSizing:'border-box',
-        margin:16,
+        position:'relative',
+        webkitTransition: '150ms ease-in-out',
+        mozTransition: '150ms ease-in-out',
+        oTransition: ' 150ms ease-in-out',
+        transition: '150ms ease-in-out',
     },
     divider:{
         margin:16,
@@ -69,6 +90,9 @@ const styleSheet = {
         display:'flex',
         alignItems:'center'
     },
+    row2:{
+
+    }
 }
 
 export default withStyles(styleSheet)(Sidebar)
