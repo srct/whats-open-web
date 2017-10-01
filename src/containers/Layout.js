@@ -76,7 +76,9 @@ class Layout extends React.Component {
                 <div className={classes.container}>
                     <div className={classes.mainContent}>
                         <SearchBar styles={styleSheet.searchBar} suggestions={suggestions}/>
-                        <CardContainer styles={styleSheet.cardContainer}searchTerm={this.props.searchTerm} facilities={this.props.facilities}/>
+                        <div className={classes.cardContainer}>
+                            <CardContainer styles={styleSheet.cardContainer}searchTerm={this.props.searchTerm} facilities={this.props.facilities}/>
+                        </div>
                     </div> 
                     <div className={classes.sidebarToggleContainer}>
                         <button onClick={toggleSidebar} className={classes.openCloseButton}>
@@ -136,6 +138,10 @@ const styleSheet = {
         width:24,
         height:24,
     },
+    cardContainer:{
+        height:'calc(100% - 86px)',
+        overflowY:'scroll'
+    }
     
 }
 
