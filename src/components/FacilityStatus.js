@@ -219,11 +219,12 @@ const FacilityStatus = ({classes, facility}) => {
 };
 const styleSheet = {
     chip: {
-        position: 'absolute',
-        left: '8px',
-        bottom: '4px',
-        opacity: .9,
-        height: '28px'
+        //position: 'absolute',
+        //left: '8px',
+        //bottom: '4px',
+        //opacity: .9,
+        height: '28px',
+        borderRadius: '4px',
     },
     isOpenText: {
         color: 'white',
