@@ -178,7 +178,7 @@ const FacilityStatus = ({classes, facility}) => {
         } else if (!isOpen && time > 15) {
             return "CLOSED";
         } else {
-            return `OPENING IN ${time}m`;
+            return `OPENING IN ${Math.round(time)}m`;
         }
     };
 
@@ -198,7 +198,7 @@ const FacilityStatus = ({classes, facility}) => {
             return green[500];
         } else if (isOpen && time <= 60) {
             return orange[500];
-        } else if (!isOpen && time > 60) {
+        } else if (!isOpen && time > 15) {
             return red[500];
         } else {
             return blue[500];

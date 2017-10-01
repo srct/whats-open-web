@@ -1,16 +1,17 @@
 import React from 'react'
 import {withStyles} from 'material-ui/styles';
-import Card, {CardContent, CardHeader, CardMedia} from 'material-ui/Card';
+import Card, {CardActions, CardContent, CardMedia} from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
 import Avatar from 'material-ui/Avatar';
-import FavoriteButton from '../components/FavoriteButton';
 import FacilityStatus from '../components/FacilityStatus';
-import Chip from 'material-ui/Chip'
-import {compose} from 'redux'
-import {connect} from 'react-redux'
-import {addFavoriteFacility, removeFavoriteFacility, setSidebar} from '../actions/ui'
+import FavoriteButton from '../components/FavoriteButton';
+import {compose} from 'redux';
+import {connect} from 'react-redux';
+import {addFavoriteFacility, removeFavoriteFacility, setSidebar} from '../actions/ui';
 import RestaurantIcon from 'material-ui-icons/Restaurant';
+import DirectionsWalkIcon from 'material-ui-icons/DirectionsWalk';
+import LocationOnIcon from 'material-ui-icons/LocationOn';
 import {removeBrackets} from '../utils/nameUtils';
 
 import {
@@ -110,60 +111,62 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
 
     return (
         <Card onClick={handleClick} className={classes.root} raised>
-            <CardMedia className={classes.media} image={'https://gmucampus.files.wordpress.com/2010/09/00sothside2.jpg'}/>
+            <CardMedia className={classes.media}
+                       image={'https://gmucampus.files.wordpress.com/2010/09/00sothside2.jpg'}/>
 
             <div className={classes.logoContainer}>
-                <CardMedia className={classes.logo} image={'https://upload.wikimedia.org/wikipedia/en/d/d3/Starbucks_Corporation_Logo_2011.svg'}/>
+                <CardMedia className={classes.logo}
+                           image={'https://upload.wikimedia.org/wikipedia/en/d/d3/Starbucks_Corporation_Logo_2011.svg'}/>
             </div>
 
-            {/*<FavoriteButton facility={facility} isFavorite={favorites.includes(facility.slug)}
-                            addFavoriteFacility={addFavoriteFacility} removeFavoriteFacility={removeFavoriteFacility}/>*/}
 
-            {/*<CardHeader classes={{root: classes.header, avatar: classes.avatarContainer, title: classes.headerTitle}} avatar={
-                <Avatar className={classes.avatar}>
-                    <RestaurantIcon className={classes.icon}/>
-                </Avatar>} title={'Dining'}/>*/}
-
-            {/*<div className={classes.mediaContainer}>
-
-                <FacilityStatus facility={facility}/>
-            </div>*/}
+            <FavoriteButton facility={facility} isFavorite={favorites.includes(facility.slug)}
+                            addFavoriteFacility={addFavoriteFacility} removeFavoriteFacility={removeFavoriteFacility}/>
 
             <CardContent className={classes.cardContent}>
                 <Grid container align={'center'} direction={'column'} className={classes.smallGridContainerSpacing}>
                     <Grid item className={classes.smallGridItemSpacing}>
-                        <Typography type={'title'} align={'center'} className={classes.title}>
+                        <Typography type={'title'} align={'center'} className={classes.nunito}>
                             {removeBrackets(facility.facility_name)}
                         </Typography>
                     </Grid>
                     <Grid item className={classes.smallGridItemSpacing}>
-                        <FacilityStatus facility={facility} />
+                        <FacilityStatus facility={facility}/>
                     </Grid>
                     <Grid item className={classes.smallGridItemSpacing}>
                         <div className={classes.categoryWrapper}>
                             <Avatar className={classes.avatar}>
                                 <RestaurantIcon className={classes.categoryIcon}/>
                             </Avatar>
-                            <Typography type={'body1'} className={classes.categoryName} noWrap>
+                            <Typography type={'body1'} className={classes.nunito} noWrap>
                                 {facility.facility_category.name}
                             </Typography>
                         </div>
                     </Grid>
                 </Grid>
-
-                {/*<Grid container direction={'column'} className={classes.smallGridContainerSpacing}>
-                    <Grid item className={classes.smallGridItemSpacing}>
-                        <Typography type={'title'} align={'center'} className={classes.title} noWrap>
-                            {removeBrackets(facility.facility_name)}
-                        </Typography>
-                    </Grid>
-                    <Grid item className={classes.smallGridItemSpacing}>
-                        <Typography type={'caption'} className={classes.location} noWrap>
-                            {removeBrackets(facility.facility_location.building)}
-                        </Typography>
-                    </Grid>
-                </Grid>*/}
             </CardContent>
+
+            <CardActions>
+                <Grid container justify={'space-around'}>
+                    <Grid item className={classes.extraInfoWrapper}>
+                        <Typography type={'caption'}>
+                            <DirectionsWalkIcon/>
+                        </Typography>
+                        <Typography type={'caption'} align={'center'}>
+                            3M
+                        </Typography>
+                    </Grid>
+
+                    <Grid item className={classes.extraInfoWrapper}>
+                        <Typography type={'caption'}>
+                            <LocationOnIcon/>
+                        </Typography>
+                        <Typography type={'caption'} align={'center'}>
+                            {facility.facility_location.building}
+                        </Typography>
+                    </Grid>
+                </Grid>
+            </CardActions>
         </Card>
     )
 };
@@ -180,18 +183,17 @@ const styleSheet = {
         fontFamily: 'Nunito'
     },
     cardContent: {
-        padding: '8px 4px 16px 4px !important'
+        padding: '8px 4px !important'
     },
     smallGridContainerSpacing: {
         margin: '-2px -8px !important'
     },
     smallGridItemSpacing: {
-        padding: '2px 8px !important'
+        padding: '3px 8px !important'
     },
     media: {
         flex: 1,
-        //margin: '0 4px',
-        height: '100px',
+        height: '115px',
     },
     mediaContainer: {
         position: 'relative'
@@ -218,7 +220,7 @@ const styleSheet = {
         width: '100px',
         height: '100px',
         margin: 'auto',
-        marginTop: '-50px',
+        marginTop: '-60px',
         borderRadius: '90px',
         border: '5px solid white',
     },
@@ -229,16 +231,14 @@ const styleSheet = {
         borderRadius: '90px',
         boxShadow: '0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12)',
     },
-    categoryName: {
+    extraInfoWrapper: {
+        display: 'flex',
+        alignItems: 'center',
+        maxWidth: '50%'
+    },
+    nunito: {
         fontFamily: 'Nunito'
-    },
-    title: { //TODO: Should the fonts be added here or in the muitheme (index.js)?
-        fontFamily: 'Nunito',
-        fontWeight: 'Bold'
-    },
-    location: {
-        fontFamily: 'Nunito'
-    },
+    }
 };
 
 const mapStateToProps = state => ({

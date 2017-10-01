@@ -26,12 +26,10 @@ class FavoriteButton extends React.Component {
 
     render() {
         if (this.props.isFavorite) {
-            return (<FavoriteIcon onClick={this.handleClick} className={this.props.classes.heart}
-                                  style={{color: pink[400]}}/>);
+            return (<FavoriteIcon onClick={this.handleClick} className={this.props.classes.heart}/>);
         }
 
-        return (<FavoriteBorderIcon onClick={this.handleClick} className={this.props.classes.heart}
-                                    style={{color: grey[400]}}/>);
+        return (<FavoriteBorderIcon onClick={this.handleClick} className={this.props.classes.heart}/>);
     }
 }
 
@@ -52,6 +50,7 @@ const styleSheet = {
         width: '24px',
         padding: '5px',
         cursor: 'pointer',
+        color: pink[500]
     }
 };
 
