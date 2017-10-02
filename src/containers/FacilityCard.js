@@ -3,13 +3,12 @@ import {withStyles} from 'material-ui/styles';
 import Card, {CardActions, CardContent, CardMedia} from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
-import Avatar from 'material-ui/Avatar';
 import FacilityStatus from '../components/FacilityStatus';
 import FavoriteButton from '../components/FavoriteButton';
+import FacilityCategory from '../components/FacilityCategory';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {addFavoriteFacility, removeFavoriteFacility, setSidebar} from '../actions/ui';
-import RestaurantIcon from 'material-ui-icons/Restaurant';
 import DirectionsWalkIcon from 'material-ui-icons/DirectionsWalk';
 import LocationOnIcon from 'material-ui-icons/LocationOn';
 import {removeBrackets} from '../utils/nameUtils';
@@ -134,14 +133,7 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
                         <FacilityStatus facility={facility}/>
                     </Grid>
                     <Grid item className={classes.smallGridItemSpacing}>
-                        <div className={classes.categoryWrapper}>
-                            <Avatar className={classes.avatar}>
-                                <RestaurantIcon className={classes.categoryIcon}/>
-                            </Avatar>
-                            <Typography type={'body1'} className={classes.nunito} noWrap>
-                                {facility.facility_category.name}
-                            </Typography>
-                        </div>
+                        <FacilityCategory category={facility.facility_category} />
                     </Grid>
                 </Grid>
             </CardContent>
@@ -197,24 +189,6 @@ const styleSheet = {
     },
     mediaContainer: {
         position: 'relative'
-    },
-    avatarContainer: {
-        marginRight: '8px'
-    },
-    avatar: {
-        width: 'auto !important',
-        height: 'auto !important',
-        marginRight: '8px',
-        backgroundColor: red[500],
-    },
-    categoryWrapper: {
-        display: 'flex',
-        alignItems: 'center'
-    },
-    categoryIcon: {
-        width: '14px !important',
-        height: '14px !important',
-        padding: '4px !important',
     },
     logoContainer: {
         width: '100px',

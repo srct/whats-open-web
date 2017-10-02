@@ -56,7 +56,7 @@ const FacilityStatus = ({classes, facility}) => {
                 timeInParts[2]);
 
             const entryTillOpen = openTime - curDateTime;
-            if (!timeTillOpen || (entryTillOpen > 0 && entryTillOpen < timeTillOpen)) {
+            if (entryTillOpen > 0 && (!timeTillOpen || (entryTillOpen < timeTillOpen))) {
                 timeTillOpen = entryTillOpen;
             }
         }
