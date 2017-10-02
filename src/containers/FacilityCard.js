@@ -126,7 +126,7 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
             <CardContent className={classes.cardContent}>
                 <Grid container align={'center'} direction={'column'} className={classes.smallGridContainerSpacing}>
                     <Grid item className={classes.smallGridItemSpacing}>
-                        <Typography type={'title'} align={'center'} className={classes.nunito}>
+                        <Typography type={'title'} align={'center'} className={classes.title}>
                             {removeBrackets(facility.facility_name)}
                         </Typography>
                     </Grid>
@@ -235,6 +235,10 @@ const styleSheet = {
         display: 'flex',
         alignItems: 'center',
         maxWidth: '50%'
+    },
+    title: {
+      fontFamily: 'Nunito',
+      fontWeight: 'bold',
     },
     nunito: {
         fontFamily: 'Nunito'

@@ -10,7 +10,6 @@ import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers/index';
 import { MuiThemeProvider,createMuiTheme,createPalette } from 'material-ui/styles';
-import theme from './theme';
 import  blue  from 'material-ui/colors/blue';
 // import  fullWhite  from 'material-ui/colors/common';
 // import  grey  from 'material-ui/colors/grey';
@@ -34,10 +33,15 @@ if(extension) {
 
 const store = createStore(reducers,enhance);
 
+const theme = createMuiTheme({
+    palette: {primary:blue,secondary:green,warn:amber,error:red,type:'light'}
+});
+
+
 ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
-            <MuiThemeProvider theme={createMuiTheme(theme)}>
+            <MuiThemeProvider theme={theme}>
                 <Layout />
             </MuiThemeProvider>
         </ConnectedRouter>
