@@ -12,6 +12,7 @@ import {addFavoriteFacility, removeFavoriteFacility, setSidebar} from '../action
 import DirectionsWalkIcon from 'material-ui-icons/DirectionsWalk';
 import LocationOnIcon from 'material-ui-icons/LocationOn';
 import {removeBrackets} from '../utils/nameUtils';
+import classnames from 'classnames'
 
 import {
     amber,
@@ -108,6 +109,13 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
         return materialColors[Math.abs(hash) % 19][((Math.abs(hash) % 7) + 3) * 100];
     };
 
+    /**
+     * By adding this property to an element, the text will not exceed 2 lines. On webkit browsers,
+     * -webkit-line-clamp will show ellipsis. This checks to see if the browser is webkit and uses
+     * an appropriate class.
+     */
+    const twoLineEllipsis = CSS.supports('-webkit-line-clamp', 2) ? classes.twoLineEllipsisWebkit : classes.twoLineEllipsis;
+
     return (
         <Card onClick={handleClick} className={classes.root} raised>
             <CardMedia className={classes.media}
@@ -125,7 +133,7 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
             <CardContent className={classes.cardContent}>
                 <Grid container align={'center'} direction={'column'} className={classes.smallGridContainerSpacing}>
                     <Grid item className={classes.smallGridItemSpacing}>
-                        <Typography type={'title'} align={'center'} className={classes.title}>
+                        <Typography type={'title'} align={'center'} className={classnames(classes.title, twoLineEllipsis)}>
                             {removeBrackets(facility.facility_name)}
                         </Typography>
                     </Grid>
@@ -153,7 +161,7 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
                         <Typography type={'caption'}>
                             <LocationOnIcon/>
                         </Typography>
-                        <Typography type={'caption'} align={'center'}>
+                        <Typography type={'caption'} align={'center'} className={twoLineEllipsis}>
                             {facility.facility_location.building}
                         </Typography>
                     </Grid>
@@ -216,6 +224,19 @@ const styleSheet = {
     },
     nunito: {
         fontFamily: 'Nunito'
+    },
+    twoLineEllipsis: {
+        position: 'relative',
+        lineHeight: '1em',
+        maxHeight: '2em',
+        overflow: 'hidden',
+    },
+    twoLineEllipsisWebkit: {
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        display: '-webkit-box',
+        WebkitLineClamp: 2,
+        WebkitBoxOrient: 'vertical',
     }
 };
 
