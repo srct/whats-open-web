@@ -140,7 +140,8 @@ const styleSheet = {
     },
     cardContainer:{
         height:'calc(100% - 86px)',
-        overflowY:'scroll'
+        overflowY:'scroll',
+        overflowX:'hidden',
     }
     
 }
