@@ -138,9 +138,6 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
                         </Typography>
                     </Grid>
                     <Grid item className={classes.smallGridItemSpacing}>
-                        <FacilityStatus facility={facility}/>
-                    </Grid>
-                    <Grid item className={classes.smallGridItemSpacing}>
                         <FacilityCategory category={facility.facility_category} />
                     </Grid>
                 </Grid>
@@ -149,12 +146,7 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
             <CardActions>
                 <Grid container justify={'space-around'}>
                     <Grid item className={classes.extraInfoWrapper}>
-                        <Typography type={'caption'}>
-                            <DirectionsWalkIcon/>
-                        </Typography>
-                        <Typography type={'caption'} align={'center'}>
-                            3M
-                        </Typography>
+                        <FacilityStatus facility={facility}/>
                     </Grid>
 
                     <Grid item className={classes.extraInfoWrapper}>
@@ -177,7 +169,7 @@ const styleSheet = {
         position: 'relative'
     },
     cardContent: {
-        padding: '8px 4px !important'
+        padding: '8px 4px 0 4px !important'
     },
     smallGridContainerSpacing: {
         margin: '-2px -8px !important'

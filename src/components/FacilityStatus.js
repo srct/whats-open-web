@@ -1,7 +1,9 @@
 import React from 'react';
 import {withStyles} from 'material-ui/styles';
-import Chip from 'material-ui/Chip';
 import Typography from 'material-ui/Typography';
+import DoneIcon from 'material-ui-icons/Done';
+import CloseIcon from 'material-ui-icons/Close';
+import AlarmIcon from 'material-ui-icons/Alarm';
 import {blue, green, orange, red} from 'material-ui/colors'
 
 const FacilityStatus = ({classes, facility}) => {
@@ -184,64 +186,68 @@ const FacilityStatus = ({classes, facility}) => {
     };
 
     /**
-     * Generates the chip label
+     * Generates information about the facility's status.
      *
      * @param isOpen True if the facility is open, otherwise false.
      * @param time The time in minutes until the facility opens / closes.
-     * @returns {string} The label for the chip
+     * @returns {{label: string, color: *, icon: *}} Information about the facility.
      */
-    const chipLabel = (isOpen, time) => {
+    const generateStatusInfo = (isOpen, time) => {
+        let label;
+        let color;
+        let icon;
+
         if (time === -1) {
-            return "OPEN 24/7"
+            label = 'OPEN 24/7';
+            color = green[500];
+            icon = <DoneIcon/>;
+        } else if (isOpen && time > 60) {
+            label = 'OPEN';
+            color = green[500];
+            icon = <DoneIcon/>;
+        } else if (isOpen && time <= 30) {
+            label = 'CLOSING SOON';
+            color = orange[500];
+            icon = <AlarmIcon/>;
+        } else if (!isOpen && time > 15) {
+            label = 'CLOSED';
+            color = red[500];
+            icon = <CloseIcon/>
+        } else {
+            label = `OPENS IN ${Math.round(time)}m`;
+            color = blue[500];
+            icon = <AlarmIcon/>
         }
 
-        if (isOpen && time > 60) {
-            return "OPEN";
-        } else if (isOpen && time <= 30) {
-            return "CLOSING SOON";
-        } else if (!isOpen && time > 15) {
-            return "CLOSED";
-        } else {
-            return `OPENING IN ${Math.round(time)}m`;
+        return {
+            label: label,
+            color: color,
+            icon: icon,
         }
     };
 
-    /**
-     * Generates the background color of the chip.
-     *
-     * @param isOpen True if the facility is open, otherwise false.
-     * @param time The time in minutes until the facility opens / closes.
-     * @returns {string} The background color of the chip.
-     */
-    const backgroundColor = (isOpen, time) => {
-        if (time === -1) {
-            return green[500];
-        }
-
-        if (isOpen && time > 60) {
-            return green[500];
-        } else if (isOpen && time <= 30) {
-            return orange[500];
-        } else if (!isOpen && time > 15) {
-            return red[500];
-        } else {
-            return blue[500];
-        }
-    };
-
-    const time = timeTill(facility);
+    const statusInfo = generateStatusInfo(facility.isOpen, timeTill(facility));
 
     return (
-        <Chip label={
+        <Typography type={'caption'} className={classes.statusText} style={{color: statusInfo.color}}>
+            {statusInfo.icon}
+            {statusInfo.label}
+        </Typography>
+
+        /*<Chip label={
             <div>
                 <Typography type={'caption'} className={classes.isOpenText}>
                     {chipLabel(facility.isOpen, time)}
                 </Typography>
             </div>
-        } className={classes.chip} style={{backgroundColor: backgroundColor(facility.isOpen, time)}}/>
+        } className={classes.chip} style={{backgroundColor: backgroundColor(facility.isOpen, time)}}/>*/
     )
 };
 const styleSheet = {
+    statusText: {
+      display: 'flex',
+      alignItems: 'center'
+    },
     chip: {
         height: '28px',
         borderRadius: '4px',

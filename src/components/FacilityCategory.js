@@ -3,14 +3,13 @@ import {withStyles} from 'material-ui/styles';
 import Avatar from 'material-ui/Avatar';
 import Typography from 'material-ui/Typography';
 import RestaurantIcon from 'material-ui-icons/Restaurant';
-import RestaurantMenuIcon from 'material-ui-icons/RestaurantMenu';
 import StoreIcon from 'material-ui-icons/Store';
 import LocalCafeIcon from 'material-ui-icons/LocalCafe';
 import LocalPrintShopIcon from 'material-ui-icons/LocalPrintshop';
 import LocalPostOfficeIcon from 'material-ui-icons/LocalPostOffice';
 import FitnessCenterIcon from 'material-ui-icons/FitnessCenter';
 import ShoppingCartIcon from 'material-ui-icons/ShoppingCart'
-import {amber, purple, brown, grey, teal, blue, deepOrange, lime} from 'material-ui/colors';
+import {red, blue, brown, grey, teal, deepOrange, lime} from 'material-ui/colors';
 
 /*
     Proposed Category Types:
@@ -41,24 +40,19 @@ const FacilityCategory = ({classes, category}) => {
 
         switch (category.id) {
             case 1: //Dining Hall
-                color = amber[500];
-                icon = <RestaurantMenuIcon className={classes.categoryIcon}/>;
-                break;
             case 2: //Restaurant
-                color = blue[500];
+            case 5: //Take out dining hall
+                color = red[400];
                 icon = <RestaurantIcon className={classes.categoryIcon}/>;
                 break;
             case 3: //Convenience Store
-                color = purple[500];
+                color = blue[500];
                 icon = <StoreIcon className={classes.categoryIcon}/>;
                 break;
             case 4: //Cafe
                 color = brown[500];
                 icon = <LocalCafeIcon className={classes.categoryIcon}/>;
                 break;
-            //case 5: //Take out dining hall
-                //TODO: No idea for this icon...
-                //break;
             case 6: //Athletic Facility
                 color = teal[500];
                 icon = <FitnessCenterIcon className={classes.categoryIcon}/>;
