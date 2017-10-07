@@ -86,7 +86,7 @@ const FacilityCategory = ({classes, category}) => {
     return (
         <div className={classes.categoryWrapper}>
             {generateAvatar()}
-            <Typography type={'body1'} className={classes.nunito} noWrap>
+            <Typography type={'body1'} noWrap>
                 {category.name}
             </Typography>
         </div>
@@ -108,9 +108,6 @@ const styleSheet = {
         height: 'auto !important',
         marginRight: '8px'
     },
-    nunito: {
-        fontFamily: 'Nunito'
-    }
 };
 
 export default withStyles(styleSheet)(FacilityCategory);

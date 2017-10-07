@@ -147,9 +147,33 @@ const FacilityStatus = ({classes, facility}) => {
      * @returns {number} The time in minutes until a facility open / closes. -1 if 24/7.
      */
     const timeTill = facility => {
-        const schedule = facility.main_schedule;
+        let schedule = facility.main_schedule;
+        const curDateTime = new Date();
 
-        //TODO: Logic for "Special Schedule". I have no idea what this is.
+        for (let i = 0; i < facility.special_schedules; i++) {
+            const specialSchedule = facility.special_schedules[i];
+
+            const startInParts = specialSchedule.valid_start.split('-');
+            const endInParts = specialSchedule.valid_end.split('-');
+
+            const startDate = new Date(startInParts[0], startInParts[1], startInParts[2]);
+            const endDate = new Date(endInParts[0], endInParts[1], endInParts[2]);
+
+            /*
+                TODO: Possible issues may arise by only checking date and not time
+                    valid_start and valid_end come as dates without times. If a facility,
+                    such as Southside, closes are 2 am the day a special schedule is in use,
+                    a user checking between 12am and 2am would receive incorrect information.
+                    Possible solutions:
+                        - API valid_start and valid_end are in the format yyyy-mm-dd-hh-mm-ss (preferred)
+                        - Iterate over all schedules, find active schedule for current day of week,
+                          then add the time to startDate and endDate before the date checking.
+             */
+            if (startDate < curDateTime && endDate > curDateTime) {
+                schedule = specialSchedule;
+                break;
+            }
+        }
 
         //Facility is open 24/7
         if (schedule.twenty_four_hours) {
@@ -173,7 +197,7 @@ const FacilityStatus = ({classes, facility}) => {
 
         if (isOpen && time > 60) {
             return "OPEN";
-        } else if (isOpen && time <= 60) {
+        } else if (isOpen && time <= 30) {
             return "CLOSING SOON";
         } else if (!isOpen && time > 15) {
             return "CLOSED";
@@ -196,7 +220,7 @@ const FacilityStatus = ({classes, facility}) => {
 
         if (isOpen && time > 60) {
             return green[500];
-        } else if (isOpen && time <= 60) {
+        } else if (isOpen && time <= 30) {
             return orange[500];
         } else if (!isOpen && time > 15) {
             return red[500];
@@ -219,17 +243,11 @@ const FacilityStatus = ({classes, facility}) => {
 };
 const styleSheet = {
     chip: {
-        //position: 'absolute',
-        //left: '8px',
-        //bottom: '4px',
-        //opacity: .9,
         height: '28px',
         borderRadius: '4px',
     },
     isOpenText: {
         color: 'white',
-        fontFamily: 'Nunito',
-        fontWeight: 'bold',
         display: 'inline',
     }
 };

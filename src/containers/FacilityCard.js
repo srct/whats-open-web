@@ -133,7 +133,7 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
             <CardContent className={classes.cardContent}>
                 <Grid container align={'center'} direction={'column'} className={classes.smallGridContainerSpacing}>
                     <Grid item className={classes.smallGridItemSpacing}>
-                        <Typography type={'title'} align={'center'} className={classnames(classes.title, twoLineEllipsis)}>
+                        <Typography type={'title'} align={'center'} className={twoLineEllipsis}>
                             {removeBrackets(facility.facility_name)}
                         </Typography>
                     </Grid>
@@ -176,12 +176,6 @@ const styleSheet = {
         borderRadius: '5px',
         position: 'relative'
     },
-    header: {
-        padding: '4px'
-    },
-    headerTitle: {
-        fontFamily: 'Nunito'
-    },
     cardContent: {
         padding: '8px 4px !important'
     },
@@ -194,9 +188,6 @@ const styleSheet = {
     media: {
         flex: 1,
         height: '115px',
-    },
-    mediaContainer: {
-        position: 'relative'
     },
     logoContainer: {
         width: '100px',
@@ -217,13 +208,6 @@ const styleSheet = {
         display: 'flex',
         alignItems: 'center',
         maxWidth: '50%'
-    },
-    title: {
-      fontFamily: 'Nunito',
-      fontWeight: 'bold',
-    },
-    nunito: {
-        fontFamily: 'Nunito'
     },
     twoLineEllipsis: {
         position: 'relative',
