@@ -201,7 +201,7 @@ const FacilityStatus = ({classes, facility}) => {
             label = 'OPEN 24/7';
             color = green[500];
             icon = <DoneIcon/>;
-        } else if (isOpen && time > 60) {
+        } else if (isOpen && time > 30) {
             label = 'OPEN';
             color = green[500];
             icon = <DoneIcon/>;
