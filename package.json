@@ -8,6 +8,7 @@
     "fuzzysearch": "^1.0.3",
     "history": "^4.6.3",
     "immutability-helper": "^2.3.0",
+    "mapbox": "^1.0.0-beta9",
     "mapbox-gl": "^0.40.1",
     "material-ui": "next",
     "material-ui-icons": "^1.0.0-alpha.19",
