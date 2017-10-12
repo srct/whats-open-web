@@ -10,7 +10,7 @@ const CardContainer = ({classes, searchTerm,facilities}) => {
         return name.includes(searchTerm.toLowerCase())
     }
     return (
-        <Grid container className={classes.root} spacing={24} justify={'center'}>
+        <Grid container className={classes.root} spacing={24} justify={'center'} align={'flex-end'}>
             {facilities.filter(filterCards).map(item =>{
                 return(<Grid key={item.slug} item>
                     <FacilityCard facility={item}/>
@@ -20,13 +20,14 @@ const CardContainer = ({classes, searchTerm,facilities}) => {
     )
 }
 const styleSheet = {
-    root: {
+   
+    root:{
+        // backgroundColor:'red',
+        margin:0,
         width: '100%',
-        height: '100%',
         display: 'flex',
         flexWrap: 'wrap',
-        overflowY:'scroll',
-    }
+    },
 }
 
 export default withStyles(styleSheet)(CardContainer)

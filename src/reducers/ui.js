@@ -1,27 +1,25 @@
 import {
-    TOGGLE_DRAWER, SET_SIDEBAR, SET_SEARCH_TERM, SET_FILTERED_LIST,
+    TOGGLE_SIDEBAR, SET_SIDEBAR, SET_SEARCH_TERM, SET_FILTERED_LIST,
     ADD_FAVORITE_FACILITY, REMOVE_FAVORITE_FACILITY,SET_ALL_FAVORITES
 } from '../actions/action-types'
 
-function isOpen(state=false,action){
-    switch (action.type) {
-        case TOGGLE_DRAWER:
-            return !state;
-        default:
-            return state;
-    }
+const sidebarDefault = {
+    facility:{},
+    isOpen:false,
 }
 
-const drawer = (state={},action) => ({
-    isOpen:isOpen(state.isOpen,action)
-});
-
-const sidebar = (state={},action) => {
+const sidebar = (state=sidebarDefault,action) => {
     switch(action.type){
         case SET_SIDEBAR:
-            return action.facility;
+            return Object.assign({},state,{},{
+                facility:action.facility
+            });
+        case TOGGLE_SIDEBAR:
+            return Object.assign({},state,{
+                isOpen:!state.isOpen
+            });
         default:
-            return {};
+            return state;
     }
 };
 
@@ -65,7 +63,6 @@ const favorites = (state = [], action) => {
 
 
 const ui = (state={},action) =>({
-    drawer:drawer(state.drawer,action),
     sidebar:sidebar(state.sidebar,action),
     search: search(state.search,state.facilities,action),
     favorites: favorites(state.favorites, action),
