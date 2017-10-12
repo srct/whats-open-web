@@ -201,22 +201,14 @@ const FacilityStatus = ({classes, facility}) => {
             label = 'OPEN 24/7';
             color = green[500];
             icon = <DoneIcon/>;
-        } else if (isOpen && time > 30) {
+        } else if (isOpen) {
             label = 'OPEN';
             color = green[500];
             icon = <DoneIcon/>;
-        } else if (isOpen && time <= 30) {
-            label = 'CLOSING SOON';
-            color = orange[500];
-            icon = <AlarmIcon/>;
-        } else if (!isOpen && time > 15) {
+        }else {
             label = 'CLOSED';
             color = red[500];
             icon = <CloseIcon/>
-        } else {
-            label = `OPENS IN ${Math.round(time)}m`;
-            color = blue[500];
-            icon = <AlarmIcon/>
         }
 
         return {
@@ -233,14 +225,6 @@ const FacilityStatus = ({classes, facility}) => {
             {statusInfo.icon}
             {statusInfo.label}
         </Typography>
-
-        /*<Chip label={
-            <div>
-                <Typography type={'caption'} className={classes.isOpenText}>
-                    {chipLabel(facility.isOpen, time)}
-                </Typography>
-            </div>
-        } className={classes.chip} style={{backgroundColor: backgroundColor(facility.isOpen, time)}}/>*/
     )
 };
 const styleSheet = {

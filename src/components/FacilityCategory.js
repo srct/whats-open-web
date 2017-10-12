@@ -11,22 +11,6 @@ import FitnessCenterIcon from 'material-ui-icons/FitnessCenter';
 import ShoppingCartIcon from 'material-ui-icons/ShoppingCart'
 import {red, blue, brown, grey, teal, deepOrange, lime} from 'material-ui/colors';
 
-/*
-    Proposed Category Types:
-
-    dining hall
-    convenience store
-    cafe
-    restaurant
-    food truck ???
-    athletic
-    mailroom
-    print services
-    retail
-    school offices
-    student centers
- */
-
 const FacilityCategory = ({classes, category}) => {
 
     const generateAvatar = () => {
@@ -38,6 +22,21 @@ const FacilityCategory = ({classes, category}) => {
             this wouldn't be of any use unless the API returns something to indicate the icon / color.
          */
 
+        /*
+            Proposed Category Types:
+
+            dining hall
+            convenience store
+            cafe
+            restaurant
+            food truck ???
+            athletic
+            mailroom
+            print services
+            retail
+            school offices
+            student centers
+         */
         switch (category.id) {
             case 1: //Dining Hall
             case 2: //Restaurant

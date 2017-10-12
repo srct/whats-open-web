@@ -51,6 +51,7 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
      *
      * @param name The facility name to find the initials for.
      * @returns {string} The initials.
+     * @deprecated
      */
     const getInitials = name => {
         //TODO: May want to allow initials to be more than 2 characters or use a different strategy to decide which characters to use.
@@ -80,6 +81,7 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
      *
      * @param slug The slug of the facility to generate the material color from.
      * @return {string} The color code (in hex format) of a material color.
+     * @deprecated
      */
     const materialColorFromSlug = slug => {
 

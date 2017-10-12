@@ -1,6 +1,5 @@
 import React from 'react'
 import {withStyles} from 'material-ui/styles';
-import grey from 'material-ui/colors/grey'
 import pink from 'material-ui/colors/pink';
 import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder';
 import FavoriteIcon from 'material-ui-icons/Favorite';
