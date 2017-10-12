@@ -1,8 +1,10 @@
 import React from 'react';
 import {withStyles} from 'material-ui/styles';
-import Chip from 'material-ui/Chip';
 import Typography from 'material-ui/Typography';
-import {green, red} from 'material-ui/colors'
+import DoneIcon from 'material-ui-icons/Done';
+import CloseIcon from 'material-ui-icons/Close';
+import AlarmIcon from 'material-ui-icons/Alarm';
+import {blue, green, orange, red} from 'material-ui/colors'
 
 const FacilityStatus = ({classes, facility}) => {
 
@@ -56,7 +58,7 @@ const FacilityStatus = ({classes, facility}) => {
                 timeInParts[2]);
 
             const entryTillOpen = openTime - curDateTime;
-            if (!timeTillOpen || (entryTillOpen > 0 && entryTillOpen < timeTillOpen)) {
+            if (entryTillOpen > 0 && (!timeTillOpen || (entryTillOpen < timeTillOpen))) {
                 timeTillOpen = entryTillOpen;
             }
         }
@@ -142,67 +144,102 @@ const FacilityStatus = ({classes, facility}) => {
     };
 
     /**
-     * Calculates and formats the time until the facility open or closes.
+     * Determines how long until a facility open / closes.
      *
-     * @param facility The facility to determine the message for.
-     * @returns {string} The formatted message of how long until a facility open or closes.
+     * @param facility
+     * @returns {number} The time in minutes until a facility open / closes. -1 if 24/7.
      */
-    const timeTillMessage = facility => {
-        const schedule = facility.main_schedule;
+    const timeTill = facility => {
+        let schedule = facility.main_schedule;
+        const curDateTime = new Date();
 
-        //TODO: Logic for "Special Schedule". I have no idea what this is.
+        for (let i = 0; i < facility.special_schedules; i++) {
+            const specialSchedule = facility.special_schedules[i];
+
+            const startInParts = specialSchedule.valid_start.split('-');
+            const endInParts = specialSchedule.valid_end.split('-');
+
+            const startDate = new Date(startInParts[0], startInParts[1], startInParts[2]);
+            const endDate = new Date(endInParts[0], endInParts[1], endInParts[2]);
+
+            /*
+                TODO: Possible issues may arise by only checking date and not time
+                    valid_start and valid_end come as dates without times. If a facility,
+                    such as Southside, closes are 2 am the day a special schedule is in use,
+                    a user checking between 12am and 2am would receive incorrect information.
+                    Possible solutions:
+                        - API valid_start and valid_end are in the format yyyy-mm-dd-hh-mm-ss (preferred)
+                        - Iterate over all schedules, find active schedule for current day of week,
+                          then add the time to startDate and endDate before the date checking.
+             */
+            if (startDate < curDateTime && endDate > curDateTime) {
+                schedule = specialSchedule;
+                break;
+            }
+        }
 
         //Facility is open 24/7
         if (schedule.twenty_four_hours) {
-            return "24/7"
+            return -1;
         }
 
-        let time = facility.isOpen ? calcTimeTillClose(schedule) : calcTimeTillOpen(schedule);
+        return facility.isOpen ? calcTimeTillClose(schedule) : calcTimeTillOpen(schedule);
+    };
 
-        //TODO: May want to use Math.ceil instead of Math.round
-        if (time < 60) { //Under one hour
-            const roundedMins = Math.round(time);
-            return `${roundedMins} ${roundedMins === 1 ? "min" : "mins"}`;
-        } else if (time < 1440) { //Under one day
-            const roundedHrs = Math.round(time / 60);
-            return `${roundedHrs} ${roundedHrs === 1 ? "hr" : "hrs"}`;
-        } else { //Over a day
-            const roundedDays = Math.round(time / 1440);
-            return `${roundedDays} ${roundedDays === 1 ? "day" : "days"}`;
+    /**
+     * Generates information about the facility's status.
+     *
+     * @param isOpen True if the facility is open, otherwise false.
+     * @param time The time in minutes until the facility opens / closes.
+     * @returns {{label: string, color: *, icon: *}} Information about the facility.
+     */
+    const generateStatusInfo = (isOpen, time) => {
+        let label;
+        let color;
+        let icon;
+
+        if (time === -1) {
+            label = 'OPEN 24/7';
+            color = green[500];
+            icon = <DoneIcon/>;
+        } else if (isOpen) {
+            label = 'OPEN';
+            color = green[500];
+            icon = <DoneIcon/>;
+        }else {
+            label = 'CLOSED';
+            color = red[500];
+            icon = <CloseIcon/>
+        }
+
+        return {
+            label: label,
+            color: color,
+            icon: icon,
         }
     };
 
+    const statusInfo = generateStatusInfo(facility.isOpen, timeTill(facility));
+
     return (
-        <Chip label={
-            <div>
-                <Typography type={'caption'} className={classes.isOpenText}>
-                    {facility.isOpen ? "OPEN" : "CLOSED"}
-                </Typography>
-                <Typography type={'caption'} className={classes.timeText}>
-                    {timeTillMessage(facility)}
-                </Typography>
-            </div>
-        } className={classes.chip} style={{backgroundColor: facility.isOpen ? green[500] : red[500]}}/>
+        <Typography type={'caption'} className={classes.statusText} style={{color: statusInfo.color}}>
+            {statusInfo.icon}
+            {statusInfo.label}
+        </Typography>
     )
 };
 const styleSheet = {
+    statusText: {
+      display: 'flex',
+      alignItems: 'center'
+    },
     chip: {
-        margin: 'auto',
-        height: '24px',
-        borderRadius: '5px',
+        height: '28px',
+        borderRadius: '4px',
     },
     isOpenText: {
-        borderRight: '1px solid white',
-        paddingRight: '5px',
         color: 'white',
-        fontFamily: 'Nunito',
-        display: 'inline'
-    },
-    timeText: {
-        paddingLeft: '5px',
-        color: 'white',
-        fontFamily: 'Nunito',
-        display: 'inline'
+        display: 'inline',
     }
 };
 

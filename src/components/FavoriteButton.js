@@ -1,8 +1,8 @@
 import React from 'react'
 import {withStyles} from 'material-ui/styles';
-import yellow from 'material-ui/colors/yellow';
-import StarIcon from 'material-ui-icons/Star';
-import StarBorderIcon from 'material-ui-icons/StarBorder';
+import pink from 'material-ui/colors/pink';
+import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder';
+import FavoriteIcon from 'material-ui-icons/Favorite';
 import PropTypes from 'prop-types';
 
 class FavoriteButton extends React.Component {
@@ -25,10 +25,10 @@ class FavoriteButton extends React.Component {
 
     render() {
         if (this.props.isFavorite) {
-            return (<StarIcon onClick={this.handleClick} className={this.props.classes.star}/>);
+            return (<FavoriteIcon onClick={this.handleClick} className={this.props.classes.heart}/>);
         }
 
-        return (<StarBorderIcon onClick={this.handleClick} className={this.props.classes.star}/>);
+        return (<FavoriteBorderIcon onClick={this.handleClick} className={this.props.classes.heart}/>);
     }
 }
 
@@ -41,14 +41,15 @@ FavoriteButton.propTypes = {
 };
 
 const styleSheet = {
-    star: {
+    heart: {
         position: 'absolute',
         top: '0px',
         right: '0px',
-        color: yellow[600],
-        height: '20px',
-        width: '20px',
+        height: '24px',
+        width: '24px',
+        padding: '5px',
         cursor: 'pointer',
+        color: pink[500]
     }
 };
 

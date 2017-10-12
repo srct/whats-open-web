@@ -1,15 +1,18 @@
 import React from 'react'
 import {withStyles} from 'material-ui/styles';
-import Card, {CardContent} from 'material-ui/Card';
+import Card, {CardActions, CardContent, CardMedia} from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
-import Avatar from 'material-ui/Avatar';
-import {compose} from 'redux'
-import {connect} from 'react-redux'
-import {addFavoriteFacility, removeFavoriteFacility, setSidebar} from '../actions/ui'
 import FacilityStatus from '../components/FacilityStatus';
 import FavoriteButton from '../components/FavoriteButton';
+import FacilityCategory from '../components/FacilityCategory';
+import {compose} from 'redux';
+import {connect} from 'react-redux';
+import {addFavoriteFacility, removeFavoriteFacility, setSidebar} from '../actions/ui';
+import DirectionsWalkIcon from 'material-ui-icons/DirectionsWalk';
+import LocationOnIcon from 'material-ui-icons/LocationOn';
 import {removeBrackets} from '../utils/nameUtils';
+import classnames from 'classnames'
 
 import {
     amber,
@@ -48,6 +51,7 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
      *
      * @param name The facility name to find the initials for.
      * @returns {string} The initials.
+     * @deprecated
      */
     const getInitials = name => {
         //TODO: May want to allow initials to be more than 2 characters or use a different strategy to decide which characters to use.
@@ -77,6 +81,7 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
      *
      * @param slug The slug of the facility to generate the material color from.
      * @return {string} The color code (in hex format) of a material color.
+     * @deprecated
      */
     const materialColorFromSlug = slug => {
 
@@ -106,37 +111,56 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
         return materialColors[Math.abs(hash) % 19][((Math.abs(hash) % 7) + 3) * 100];
     };
 
+    /**
+     * By adding this property to an element, the text will not exceed 2 lines. On webkit browsers,
+     * -webkit-line-clamp will show ellipsis. This checks to see if the browser is webkit and uses
+     * an appropriate class.
+     */
+    const twoLineEllipsis = CSS.supports('-webkit-line-clamp', 2) ? classes.twoLineEllipsisWebkit : classes.twoLineEllipsis;
+
     return (
         <Card onClick={handleClick} className={classes.root} raised>
-            {/*<CardMedia className={classes.media} image={require('../images/chipotleLogo.png')}/>*/}
+            <CardMedia className={classes.media}
+                       image={'https://gmucampus.files.wordpress.com/2010/09/00sothside2.jpg'}/>
+
+            <div className={classes.logoContainer}>
+                <CardMedia className={classes.logo}
+                           image={'https://upload.wikimedia.org/wikipedia/en/d/d3/Starbucks_Corporation_Logo_2011.svg'}/>
+            </div>
+
+
             <FavoriteButton facility={facility} isFavorite={favorites.includes(facility.slug)}
                             addFavoriteFacility={addFavoriteFacility} removeFavoriteFacility={removeFavoriteFacility}/>
-            <CardContent className={classes.cardContent}>
-                <Grid container>
-                    <Grid item xs={4} className={classes.avatarContainer}>
-                        <Avatar className={classes.avatar}
-                                style={{backgroundColor: materialColorFromSlug(facility.slug)}}>{getInitials(facility.facility_name)}</Avatar>
-                    </Grid>
 
-                    <Grid item xs={8}>
-                        <Grid container direction={'column'}>
-                            <Grid item className={classes.smallGridItemSpacing}>
-                                <Typography type={'title'} align={'center'} className={classes.title} noWrap>
-                                    {removeBrackets(facility.facility_name)}
-                                </Typography>
-                            </Grid>
-                            <Grid item className={classes.smallGridItemSpacing}>
-                                <FacilityStatus facility={facility}/>
-                            </Grid>
-                            <Grid item className={classes.smallGridItemSpacing}>
-                                <Typography type={'caption'} align={'center'} className={classes.location} noWrap>
-                                    {removeBrackets(facility.facility_location.building)}
-                                </Typography>
-                            </Grid>
-                        </Grid>
+            <CardContent className={classes.cardContent}>
+                <Grid container align={'center'} direction={'column'} className={classes.smallGridContainerSpacing}>
+                    <Grid item className={classes.smallGridItemSpacing}>
+                        <Typography type={'title'} align={'center'} className={twoLineEllipsis}>
+                            {removeBrackets(facility.facility_name)}
+                        </Typography>
+                    </Grid>
+                    <Grid item className={classes.smallGridItemSpacing}>
+                        <FacilityCategory category={facility.facility_category} />
                     </Grid>
                 </Grid>
             </CardContent>
+
+            <CardActions>
+                <Grid container justify={'space-around'}>
+                    <Grid item className={classes.extraInfoWrapper}>
+                        <FacilityStatus facility={facility}/>
+                    </Grid>
+
+                    <Grid item className={classes.extraInfoWrapper}>
+                        <Typography type={'caption'}>
+                            <LocationOnIcon/>
+                        </Typography>
+                        <Typography type={'caption'} align={'center'} className={twoLineEllipsis}>
+                            {facility.facility_location.building}
+                        </Typography>
+                    </Grid>
+                </Grid>
+            </CardActions>
         </Card>
     )
 };
@@ -147,32 +171,51 @@ const styleSheet = {
         position: 'relative'
     },
     cardContent: {
-        paddingBottom: '16px !important'
+        padding: '8px 4px 0 4px !important'
+    },
+    smallGridContainerSpacing: {
+        margin: '-2px -8px !important'
     },
     smallGridItemSpacing: {
-        padding: '2px !important'
+        padding: '3px 8px !important'
     },
-    /**media: {
+    media: {
         flex: 1,
-        width: 200,
-        height: 100,
-        resizeMode: 'cover',
-    },**/
-    avatarContainer: {
-        display: 'flex',
+        height: '115px',
     },
-    avatar: {
+    logoContainer: {
+        width: '100px',
+        height: '100px',
         margin: 'auto',
-        width: '50px',
-        height: '50px'
+        marginTop: '-60px',
+        borderRadius: '90px',
+        border: '5px solid white',
     },
-    title: { //TODO: Should the fonts be added here or in the muitheme (index.js)?
-        fontFamily: 'Nunito',
-        fontWeight: 'Bold'
+    logo: {
+        width: '100px',
+        height: '100px',
+        margin: 'auto',
+        borderRadius: '90px',
+        boxShadow: '0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12)',
     },
-    location: {
-        fontFamily: 'Nunito'
+    extraInfoWrapper: {
+        display: 'flex',
+        alignItems: 'center',
+        maxWidth: '50%'
     },
+    twoLineEllipsis: {
+        position: 'relative',
+        lineHeight: '1em',
+        maxHeight: '2em',
+        overflow: 'hidden',
+    },
+    twoLineEllipsisWebkit: {
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        display: '-webkit-box',
+        WebkitLineClamp: 2,
+        WebkitBoxOrient: 'vertical',
+    }
 };
 
 const mapStateToProps = state => ({
