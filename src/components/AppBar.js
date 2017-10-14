@@ -10,6 +10,7 @@ import MenuIcon from 'material-ui-icons/Menu';
 import {compose} from 'redux';
 import Drawer from 'material-ui/Drawer';
 import List, {ListItem} from 'material-ui/List';
+import Divider from 'material-ui/Divider';
 
 class customAppBar extends React.Component {
 
@@ -47,20 +48,26 @@ class customAppBar extends React.Component {
                     </IconButton>
                 </Toolbar>
             </AppBar>
-            {<Drawer anchor="left" open={this.state.isDrawerOpen} onRequestClose={this.toggleDrawer}>
-                <List>
+            <Drawer anchor="left" open={this.state.isDrawerOpen} onRequestClose={this.toggleDrawer}>
+                <List className={this.props.classes.appBarDrawerList}>
                     <ListItem>
-                        <Button key={'about'}>
+                        <Typography type="title" color="inherit">
+                            What's Open
+                        </Typography>
+                    </ListItem>
+                    <Divider />
+                    <ListItem>
+                        <Button key={'about'} className={this.props.classes.drawerLinkButton}>
                             About
                         </Button>
                     </ListItem>
                     <ListItem>
-                        <Button key={'feedback'}>
+                        <Button key={'feedback'} className={this.props.classes.drawerLinkButton}>
                             Feedback
                         </Button>
                     </ListItem>
                 </List>
-            </Drawer>}
+            </Drawer>
         </div>);
     };
 }
@@ -83,6 +90,12 @@ const styleSheet = {
         appBarLinkButton: {
             color: 'rgba(255,255,255,1)'
         }
+    },
+    appBarDrawerList: {
+        width: '250px'
+    },
+    drawerLinkButton: {
+        width: '100%'
     },
     title: {
         marginRight: 'auto',
