@@ -12,7 +12,7 @@ import Drawer from 'material-ui/Drawer';
 import List, {ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 
-class customAppBar extends React.Component {
+class CustomAppBar extends React.Component {
 
     constructor(props) {
         super();
@@ -36,10 +36,10 @@ class customAppBar extends React.Component {
                     <Typography type="title" color="inherit" className={this.props.classes.title}>
                         What's Open
                     </Typography>
-                    <Button key={'about'} className={this.props.classes.appBarLinkButton}>
+                    <Button color="contrast" className={this.props.classes.appBarLinkButton}>
                         About
                     </Button>
-                    <Button key={'feedback'} className={this.props.classes.appBarLinkButton}>
+                    <Button color="contrast" className={this.props.classes.appBarLinkButton}>
                         Feedback
                     </Button>
                     <IconButton onClick={this.toggleDrawer} color="contrast" aria-label="Menu"
@@ -57,12 +57,12 @@ class customAppBar extends React.Component {
                     </ListItem>
                     <Divider />
                     <ListItem>
-                        <Button key={'about'} className={this.props.classes.drawerLinkButton}>
+                        <Button className={this.props.classes.drawerLinkButton}>
                             About
                         </Button>
                     </ListItem>
                     <ListItem>
-                        <Button key={'feedback'} className={this.props.classes.drawerLinkButton}>
+                        <Button className={this.props.classes.drawerLinkButton}>
                             Feedback
                         </Button>
                     </ListItem>
@@ -72,9 +72,8 @@ class customAppBar extends React.Component {
     };
 }
 
-customAppBar.propTypes = {
+CustomAppBar.propTypes = {
     classes: PropTypes.object.isRequired,
-    handleMenuClick: PropTypes.func.isRequired,
 };
 
 const styleSheet = {
@@ -84,11 +83,6 @@ const styleSheet = {
         },
         appBarMenuButton: {
             display: 'inherit !important'
-        }
-    },
-    '@media screen and (min-width: 601px)': {
-        appBarLinkButton: {
-            color: 'rgba(255,255,255,1)'
         }
     },
     appBarDrawerList: {
@@ -105,4 +99,4 @@ const styleSheet = {
     }
 };
 
-export default compose(withStyles(styleSheet), withTheme)(customAppBar);
+export default compose(withStyles(styleSheet), withTheme)(CustomAppBar);
