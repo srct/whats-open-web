@@ -11,6 +11,7 @@ import {compose} from 'redux';
 import Drawer from 'material-ui/Drawer';
 import List, {ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
+import classNames from 'classnames'
 
 class CustomAppBar extends React.Component {
 
@@ -31,19 +32,20 @@ class CustomAppBar extends React.Component {
 
     render() {
         return (<div>
-            <AppBar position="absolute">
+            <AppBar position="absolute" className={this.props.classes.appBar}>
                 <Toolbar>
-                    <Typography type="title" color="inherit" className={this.props.classes.title}>
+                    <img src={require('../images/SRCT_square.svg')} className={this.props.classes.navbarLogo} />
+                    <Typography type="title" className={classNames(this.props.classes.title, this.props.classes.navbarTextColor)}>
                         What's Open
                     </Typography>
-                    <Button color="contrast" className={this.props.classes.appBarLinkButton}>
+                    <Button className={classNames(this.props.classes.appBarLinkButton, this.props.classes.navbarTextColor)}>
                         About
                     </Button>
-                    <Button color="contrast" className={this.props.classes.appBarLinkButton}>
+                    <Button className={classNames(this.props.classes.appBarLinkButton, this.props.classes.navbarTextColor)}>
                         Feedback
                     </Button>
-                    <IconButton onClick={this.toggleDrawer} color="contrast" aria-label="Menu"
-                                className={this.props.classes.appBarMenuButton}>
+                    <IconButton onClick={this.toggleDrawer} aria-label="Menu"
+                                className={classNames(this.props.classes.appBarMenuButton, this.props.classes.navbarTextColor)}>
                         <MenuIcon/>
                     </IconButton>
                 </Toolbar>
@@ -55,7 +57,7 @@ class CustomAppBar extends React.Component {
                             What's Open
                         </Typography>
                     </ListItem>
-                    <Divider />
+                    <Divider/>
                     <ListItem>
                         <Button className={this.props.classes.drawerLinkButton}>
                             About
@@ -85,6 +87,10 @@ const styleSheet = {
             display: 'inherit !important'
         }
     },
+    appBar: {
+        backgroundColor: 'white',
+        boxShadow: '0px 1px 0px 0px rgba(0, 0, 0, 0.2)'
+    },
     appBarDrawerList: {
         width: '250px'
     },
@@ -96,6 +102,14 @@ const styleSheet = {
     },
     appBarMenuButton: {
         display: 'none'
+    },
+    navbarLogo: {
+        width: '30px',
+        height: '30px',
+        marginRight: '5px'
+    },
+    navbarTextColor: {
+        color: '#354052'
     }
 };
 
