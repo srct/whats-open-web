@@ -8,9 +8,6 @@ import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import {compose} from 'redux';
-import Drawer from 'material-ui/Drawer';
-import List, {ListItem} from 'material-ui/List';
-import Divider from 'material-ui/Divider';
 import classNames from 'classnames'
 
 class CustomAppBar extends React.Component {
@@ -18,58 +15,40 @@ class CustomAppBar extends React.Component {
     constructor(props) {
         super();
         this.state = {
-            isDrawerOpen: false
+            isAppBarExpanded: false
         };
 
-        this.toggleDrawer = this.toggleDrawer.bind(this);
+        this.toggleExpand = this.toggleExpand.bind(this);
     }
 
-    toggleDrawer() {
+    toggleExpand() {
         this.setState({
-            isDrawerOpen: !this.state.isDrawerOpen
+            isAppBarExpanded: !this.state.isAppBarExpanded
         })
     };
 
     render() {
         return (<div>
             <AppBar position="absolute" className={this.props.classes.appBar}>
-                <Toolbar>
+                <Toolbar className={this.props.classes.toolBar}>
                     <img src={require('../images/SRCT_square.svg')} className={this.props.classes.navbarLogo} />
                     <Typography type="title" className={classNames(this.props.classes.title, this.props.classes.navbarTextColor)}>
                         What's Open
                     </Typography>
-                    <Button className={classNames(this.props.classes.appBarLinkButton, this.props.classes.navbarTextColor)}>
-                        About
-                    </Button>
-                    <Button className={classNames(this.props.classes.appBarLinkButton, this.props.classes.navbarTextColor)}>
-                        Feedback
-                    </Button>
-                    <IconButton onClick={this.toggleDrawer} aria-label="Menu"
+                    <IconButton onClick={this.toggleExpand} aria-label="Menu"
                                 className={classNames(this.props.classes.appBarMenuButton, this.props.classes.navbarTextColor)}>
                         <MenuIcon/>
                     </IconButton>
-                </Toolbar>
-            </AppBar>
-            <Drawer anchor="left" open={this.state.isDrawerOpen} onRequestClose={this.toggleDrawer}>
-                <List className={this.props.classes.appBarDrawerList}>
-                    <ListItem>
-                        <Typography type="title" color="inherit">
-                            What's Open
-                        </Typography>
-                    </ListItem>
-                    <Divider/>
-                    <ListItem>
-                        <Button className={this.props.classes.drawerLinkButton}>
+                    <div className={classNames(this.props.classes.linkContainer, !this.state.isAppBarExpanded && this.props.classes.hide)}>
+                        <Button className={classNames(this.props.classes.appBarLinkButton, this.props.classes.navbarTextColor)}>
                             About
                         </Button>
-                    </ListItem>
-                    <ListItem>
-                        <Button className={this.props.classes.drawerLinkButton}>
+                        <Button className={classNames(this.props.classes.appBarLinkButton, this.props.classes.navbarTextColor)}>
                             Feedback
                         </Button>
-                    </ListItem>
-                </List>
-            </Drawer>
+                    </div>
+                </Toolbar>
+            </AppBar>
         </div>);
     };
 }
@@ -81,21 +60,29 @@ CustomAppBar.propTypes = {
 const styleSheet = {
     '@media screen and (max-width: 600px)': {
         appBarLinkButton: {
-            display: 'none',
+            display: 'block',
+            padding: 0,
+            textAlign: 'left'
         },
         appBarMenuButton: {
             display: 'inherit !important'
+        },
+        hide: {
+            maxHeight: '0 !important',
+            overflow: 'hidden'
+        },
+        toolBar: {
+            flexWrap: 'wrap',
+        },
+        linkContainer: {
+            display: 'block',
+            flexBasis: '100%',
+            transition: 'ease-in-out 2s'
         }
     },
     appBar: {
         backgroundColor: 'white',
         boxShadow: '0px 1px 0px 0px rgba(0, 0, 0, 0.2)'
-    },
-    appBarDrawerList: {
-        width: '250px'
-    },
-    drawerLinkButton: {
-        width: '100%'
     },
     title: {
         marginRight: 'auto',
@@ -110,7 +97,7 @@ const styleSheet = {
     },
     navbarTextColor: {
         color: '#354052'
-    }
+    },
 };
 
 export default compose(withStyles(styleSheet), withTheme)(CustomAppBar);
