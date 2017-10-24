@@ -55,7 +55,7 @@ class Layout extends React.Component {
         super(props);
     }
     
-    componentWillMount = () => {
+    componentWillMount() {
         if(localStorage.getItem('facilities')){
             const facilities = localStorage.getItem('facilities');
             this.props.setFacilities(facilities)

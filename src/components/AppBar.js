@@ -31,19 +31,23 @@ class CustomAppBar extends React.Component {
         return (<div>
             <AppBar position="absolute" className={this.props.classes.appBar}>
                 <Toolbar className={this.props.classes.toolBar}>
-                    <img src={require('../images/SRCT_square.svg')} className={this.props.classes.navbarLogo} />
-                    <Typography type="title" className={classNames(this.props.classes.title, this.props.classes.navbarTextColor)}>
+                    <img src={require('../images/SRCT_square.svg')} className={this.props.classes.navbarLogo}/>
+                    <Typography type="title"
+                                className={classNames(this.props.classes.title, this.props.classes.navbarTextColor)}>
                         What's Open
                     </Typography>
                     <IconButton onClick={this.toggleExpand} aria-label="Menu"
                                 className={classNames(this.props.classes.appBarMenuButton, this.props.classes.navbarTextColor)}>
                         <MenuIcon/>
                     </IconButton>
-                    <div className={classNames(this.props.classes.linkContainer, !this.state.isAppBarExpanded && this.props.classes.hide)}>
-                        <Button className={classNames(this.props.classes.appBarLinkButton, this.props.classes.navbarTextColor)}>
+                    <div
+                        className={classNames(this.props.classes.linkContainer, !this.state.isAppBarExpanded && this.props.classes.hide)}>
+                        <Button
+                            className={classNames(this.props.classes.appBarLinkButton, this.props.classes.navbarTextColor)}>
                             About
                         </Button>
-                        <Button className={classNames(this.props.classes.appBarLinkButton, this.props.classes.navbarTextColor)}>
+                        <Button
+                            className={classNames(this.props.classes.appBarLinkButton, this.props.classes.navbarTextColor)}>
                             Feedback
                         </Button>
                     </div>
