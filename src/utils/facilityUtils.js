@@ -7,7 +7,7 @@
 const getFacilityActiveSchedule = facility => {
     const curDateTime = new Date();
 
-    for (let i = 0; i < facility.special_schedules; i++) {
+    for (let i = 0; i < facility.special_schedules.length; i++) {
         const specialSchedule = facility.special_schedules[i];
 
         const startInParts = specialSchedule.valid_start.split('-');
