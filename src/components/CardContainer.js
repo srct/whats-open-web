@@ -4,7 +4,7 @@ import FacilityCard from '../containers/FacilityCard'
 import Grid from 'material-ui/Grid';
 import fuzzysearch from 'fuzzysearch';
 
-const CardContainer = ({classes, searchTerm,facilities}) => {
+const CardContainer = ({classes, searchTerm,facilities,favorites}) => {
     const filterCards = (facility) => {
         const name = facility.facility_name.toLowerCase()
         return name.includes(searchTerm.toLowerCase())

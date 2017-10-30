@@ -39,10 +39,15 @@ import {
 const materialColors = [red, pink, purple, deepPurple, indigo, blue, lightBlue, cyan, teal, green,
     lightGreen, lime, yellow, amber, orange, deepOrange, brown, grey, blueGrey];
 
-const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, removeFavoriteFacility, setSidebar}) => {
-
-    const handleClick = () => {
-        setSidebar(facility)
+class FacilityCard extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            isHovered:false
+        }
+    }
+    handleClick = () => {
+        setSidebar(this.props.facility)
     };
 
     /**
@@ -53,7 +58,7 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
      * @returns {string} The initials.
      * @deprecated
      */
-    const getInitials = name => {
+    getInitials = name => {
         //TODO: May want to allow initials to be more than 2 characters or use a different strategy to decide which characters to use.
 
         let words = removeBrackets(name).split(/[ -]+/); //TODO: Add case change to the regex (ex. IndAroma should be IA, not I).
@@ -75,7 +80,6 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
         return words[0].substring(0, 1).toUpperCase() + words[words.length - 1].substring(0, 1).toUpperCase();
     };
 
-
     /**
      * Gets a material color based off the facility's slug.
      *
@@ -83,7 +87,7 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
      * @return {string} The color code (in hex format) of a material color.
      * @deprecated
      */
-    const materialColorFromSlug = slug => {
+    materialColorFromSlug = slug => {
 
         /*
             Generates the hash code...
@@ -111,15 +115,26 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
         return materialColors[Math.abs(hash) % 19][((Math.abs(hash) % 7) + 3) * 100];
     };
 
+    handleMouseEnter = () =>{
+        this.setState({
+            isHovered:true
+        })
+    }
+    handleMouseLeave = () =>{
+        this.setState({
+            isHovered:false
+        })
+    }
     /**
      * By adding this property to an element, the text will not exceed 2 lines. On webkit browsers,
      * -webkit-line-clamp will show ellipsis. This checks to see if the browser is webkit and uses
      * an appropriate class.
      */
-    const twoLineEllipsis = CSS.supports('-webkit-line-clamp', 2) ? classes.twoLineEllipsisWebkit : classes.twoLineEllipsis;
-
-    return (
-        <Card onClick={handleClick} className={classes.root} raised>
+    render(){
+        const {classes, facility, favorites, addFavoriteFacility, removeFavoriteFacility, setSidebar} = this.props
+        const twoLineEllipsis = CSS.supports('-webkit-line-clamp', 2) ? classes.twoLineEllipsisWebkit : classes.twoLineEllipsis;
+        return (
+        <Card onClick={this.handleClick} className={classes.root} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} raised>
             <CardMedia className={classes.media}
                        image={'https://gmucampus.files.wordpress.com/2010/09/00sothside2.jpg'}/>
 
@@ -130,7 +145,7 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
 
 
             <FavoriteButton facility={facility} isFavorite={favorites.includes(facility.slug)}
-                            addFavoriteFacility={addFavoriteFacility} removeFavoriteFacility={removeFavoriteFacility}/>
+                            addFavoriteFacility={addFavoriteFacility} isHovered={this.state.isHovered} removeFavoriteFacility={removeFavoriteFacility}/>
 
             <CardContent className={classes.cardContent}>
                 <Grid container align={'center'} direction={'column'} className={classes.smallGridContainerSpacing}>
@@ -163,10 +178,12 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
             </CardActions>
         </Card>
     )
+    }
 };
+const sizeScale = .75
 const styleSheet = {
     root: {
-        width: 250,
+        width: 250 * sizeScale,
         borderRadius: '5px',
         position: 'relative'
     },
@@ -181,21 +198,21 @@ const styleSheet = {
     },
     media: {
         flex: 1,
-        height: '115px',
+        height: 115*sizeScale,
     },
     logoContainer: {
-        width: '100px',
-        height: '100px',
+        width: 100 * sizeScale,
+        height: 100 * sizeScale,
         margin: 'auto',
         marginTop: '-60px',
         borderRadius: '90px',
         border: '5px solid white',
     },
     logo: {
-        width: '100px',
-        height: '100px',
+        width: 100 * sizeScale,
+        height: 100 * sizeScale,
         margin: 'auto',
-        borderRadius: '90px',
+        borderRadius: '50%',
         boxShadow: '0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12)',
     },
     extraInfoWrapper: {

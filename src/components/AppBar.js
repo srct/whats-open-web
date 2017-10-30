@@ -13,7 +13,7 @@ import classNames from 'classnames';
 
 function customAppBar({ classes, handleMenuClick, isOpen}) {
   return (
-    <div  >
+    <div>
         <AppBar  position="absolute" >
             <Toolbar>
                 {/* <IconButton onClick={handleMenuClick} color="contrast" aria-label="Menu">

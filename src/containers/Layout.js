@@ -13,42 +13,7 @@ import Icon from 'material-ui/Icon';
 import KeyboardArrowLeft from 'material-ui-icons/KeyboardArrowLeft';
 import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
 
-const suggestions = [
-    { label: 'Afghanistan' },
-    { label: 'Aland Islands' },
-    { label: 'Albania' },
-    { label: 'Algeria' },
-    { label: 'American Samoa' },
-    { label: 'Andorra' },
-    { label: 'Angola' },
-    { label: 'Anguilla' },
-    { label: 'Antarctica' },
-    { label: 'Antigua and Barbuda' },
-    { label: 'Argentina' },
-    { label: 'Armenia' },
-    { label: 'Aruba' },
-    { label: 'Australia' },
-    { label: 'Austria' },
-    { label: 'Azerbaijan' },
-    { label: 'Bahamas' },
-    { label: 'Bahrain' },
-    { label: 'Bangladesh' },
-    { label: 'Barbados' },
-    { label: 'Belarus' },
-    { label: 'Belgium' },
-    { label: 'Belize' },
-    { label: 'Benin' },
-    { label: 'Bermuda' },
-    { label: 'Bhutan' },
-    { label: 'Bolivia, Plurinational State of' },
-    { label: 'Bonaire, Sint Eustatius and Saba' },
-    { label: 'Bosnia and Herzegovina' },
-    { label: 'Botswana' },
-    { label: 'Bouvet Island' },
-    { label: 'Brazil' },
-    { label: 'British Indian Ocean Territory' },
-    { label: 'Brunei Darussalam' },
-  ];
+
 
 class Layout extends React.Component {
     constructor(props){
@@ -75,9 +40,9 @@ class Layout extends React.Component {
                 <AppBar isOpen={false} handleMenuClick={ ()=>{} }/>
                 <div className={classes.container}>
                     <div className={classes.mainContent}>
-                        <SearchBar styles={styleSheet.searchBar} suggestions={suggestions}/>
+                        <SearchBar styles={styleSheet.searchBar} suggestions={{}}/>
                         <div className={classes.cardContainer}>
-                            <CardContainer styles={styleSheet.cardContainer}searchTerm={this.props.searchTerm} facilities={this.props.facilities}/>
+                            <CardContainer styles={styleSheet.cardContainer}searchTerm={this.props.searchTerm} favorites={this.props.favorites} facilities={this.props.facilities}/>
                         </div>
                     </div> 
                     <div className={classes.sidebarToggleContainer}>
@@ -149,6 +114,7 @@ const styleSheet = {
 function mapStateToProps(state) {
     return {
         facilities: state.facilities.data,
+        favorites:state.ui.favorites,
         searchTerm:state.ui.search.term,
         isLoading: state.facilities.isLoading,
         sidebarFacility:state.ui.sidebar.facility,

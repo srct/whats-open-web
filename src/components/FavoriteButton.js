@@ -4,16 +4,18 @@ import pink from 'material-ui/colors/pink';
 import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder';
 import FavoriteIcon from 'material-ui-icons/Favorite';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 class FavoriteButton extends React.Component {
 
     constructor(props) {
         super(props);
-
-        this.handleClick = this.handleClick.bind(this);
+        this.state = {
+            isHovered: false,
+        }
     }
 
-    handleClick(e) {
+    handleClick = (e) => {
         e.stopPropagation(); //Stops the card from being selected in the sidebar.
 
         if (this.props.isFavorite) {
@@ -23,12 +25,15 @@ class FavoriteButton extends React.Component {
         }
     }
 
+
     render() {
+        const {heart,heartFavorited,heartHover,heartNoHover} = this.props.classes;
+        const {isHovered} = this.props;
         if (this.props.isFavorite) {
-            return (<FavoriteIcon onClick={this.handleClick} className={this.props.classes.heart}/>);
+            return (<FavoriteIcon onClick={this.handleClick} className={classNames(heart,heartFavorited)}/>);
         }
 
-        return (<FavoriteBorderIcon onClick={this.handleClick} className={this.props.classes.heart}/>);
+        return (<FavoriteBorderIcon onClick={this.handleClick}  className={classNames(heart,{[heartHover]:isHovered,[heartNoHover]:!isHovered})}/>);
     }
 }
 
@@ -39,17 +44,25 @@ FavoriteButton.propTypes = {
     addFavoriteFacility: PropTypes.func.isRequired,
     removeFavoriteFacility: PropTypes.func.isRequired,
 };
-
+const sizeScale = .75
 const styleSheet = {
     heart: {
         position: 'absolute',
-        top: '0px',
-        right: '0px',
-        height: '24px',
-        width: '24px',
-        padding: '5px',
+        top: 0,
+        right: 0,
+        height: 24*sizeScale,
+        width: 24*sizeScale,
+        padding: 5*sizeScale,
         cursor: 'pointer',
-        color: pink[500]
+    },
+    heartFavorited:{
+        color:pink[500]
+    },
+    heartHover:{
+       color:'grey' 
+    },
+    heartNoHover:{
+        color:'rgba(0,0,0,0)'
     }
 };
 
