@@ -66,30 +66,30 @@ class FacilitiesMap extends React.Component {
         }
     }
 
-    componentWillReceiveProps = (nextProps) =>{
-        try {
-            const coordsArr = nextProps.facility.facility_location.coordinate_location.coordinates
-            const coordsObj = {latitude:coordsArr[1],longitude:coordsArr[0]}
-            if(this.state.positionReady){
-                getGeoLine(client,this.state.position,coordsObj,()=>{}).then((route)=>{
-                    const coords = route.geometry.coordinates
-                    const bounds = coords.reduce(function(bounds, coord) {
-                        return bounds.extend(coord);
-                    }, new mapboxgl.LngLatBounds(coords[0], coords[0]));
-                    const boundsArr = [[bounds._sw.lng,bounds._sw.lat],[bounds._ne.lng,bounds._ne.lat]]
-                    console.log(bounds)
-                    console.log(boundsArr)
-                    this.setState({
-                        mappedRoute:coords,
-                        fitBounds:boundsArr,
-                        fitBoundsOptions:{padding:20},
-                    })
-                })
-            }
-        }catch(e){
+    // componentWillReceiveProps = (nextProps) =>{
+    //     try {
+    //         const coordsArr = nextProps.facility.facility_location.coordinate_location.coordinates
+    //         const coordsObj = {latitude:coordsArr[1],longitude:coordsArr[0]}
+    //         if(this.state.positionReady){
+    //             getGeoLine(client,this.state.position,coordsObj,()=>{}).then((route)=>{
+    //                 const coords = route.geometry.coordinates
+    //                 const bounds = coords.reduce(function(bounds, coord) {
+    //                     return bounds.extend(coord);
+    //                 }, new mapboxgl.LngLatBounds(coords[0], coords[0]));
+    //                 const boundsArr = [[bounds._sw.lng,bounds._sw.lat],[bounds._ne.lng,bounds._ne.lat]]
+    //                 console.log(bounds)
+    //                 console.log(boundsArr)
+    //                 this.setState({
+    //                     mappedRoute:coords,
+    //                     fitBounds:boundsArr,
+    //                     fitBoundsOptions:{padding:20},
+    //                 })
+    //             })
+    //         }
+    //     }catch(e){
 
-        }
-    }
+    //     }
+    // }
 
 
     render (){ 
@@ -100,7 +100,12 @@ class FacilitiesMap extends React.Component {
         <div>
         <Map
         onStyleLoad={(map,e)=>{
-       
+        map.addControl(new mapboxgl.GeolocateControl({
+            positionOptions: {
+                enableHighAccuracy: true
+            },
+            trackUserLocation: true
+        }));
         }}
         style="mapbox://styles/mapbox/streets-v9"
         movingMethod={'easeTo'}
@@ -118,18 +123,12 @@ class FacilitiesMap extends React.Component {
                             key={item.slug}
                             coordinates={item.facility_location.coordinate_location.coordinates}
                             anchor="bottom">
-                            {/* <img height={20} width={20} src={require('../images/starbucksSVG.svg')}/> */}
-                            <div style={Mark}></div>
+                            <img height={20} width={20} src={require('../images/starbucksSVG.svg')}/>
+                            {/* <div style={Mark}></div> */}
                        </Marker>
                     )
             })} 
-               {<Layer
-                        type="line"
-                        layout={{"line-join": "round","line-cap": "round"}}
-                        paint={{"line-color": "#888","line-width": 5}}
-                      >
-                      {mappedRoute && <Feature coordinates={mappedRoute}/>}
-                      </Layer>} 
+             
       </Map>
         </div>
     )
@@ -141,3 +140,11 @@ const styleSheet  = {
 
 
 export default withStyles(styleSheet)(FacilitiesMap)
+
+// {<Layer
+//     type="line"
+//     layout={{"line-join": "round","line-cap": "round"}}
+//     paint={{"line-color": "#888","line-width": 5}}
+//   >
+//   {mappedRoute && <Feature coordinates={mappedRoute}/>}
+//   </Layer>} 
