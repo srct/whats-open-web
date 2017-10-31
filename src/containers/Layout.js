@@ -118,6 +118,7 @@ const styleSheet = {
         position:'relative',
         flex:'1 1 100%',
         height:'100%',
+        width: '100%',
         paddingTop:16,
     },
     sidebarToggleContainer:{
@@ -147,9 +148,13 @@ const styleSheet = {
         height:'calc(100% - 86px)',
         overflowY:'auto',
         overflowX:'hidden',
+    },
+    '@media screen and (max-width: 600px)': {
+        sidebarToggleContainer: {
+            display: 'none'
+        }
     }
-    
-}
+};
 
 function mapStateToProps(state) {
     return {
