@@ -135,7 +135,7 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
             <CardContent className={classes.cardContent}>
                 <Grid container align={'center'} direction={'column'} className={classes.smallGridContainerSpacing}>
                     <Grid item className={classes.smallGridItemSpacing}>
-                        <Typography type={'title'} align={'center'} className={twoLineEllipsis}>
+                        <Typography type={'title'} align={'center'} className={classnames(classes.title, twoLineEllipsis)}>
                             {removeBrackets(facility.facility_name)}
                         </Typography>
                     </Grid>
@@ -197,6 +197,9 @@ const styleSheet = {
         margin: 'auto',
         borderRadius: '90px',
         boxShadow: '0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12)',
+    },
+    title: {
+        fontWeight: 'bold'
     },
     extraInfoWrapper: {
         display: 'flex',

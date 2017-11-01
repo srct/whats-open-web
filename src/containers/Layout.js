@@ -55,7 +55,12 @@ class Layout extends React.Component {
         super(props);
     }
     
-    componentWillMount = () => {
+    componentWillMount() {
+        /*
+            This is done in order to immediately load the page (retrieving from local storage is faster
+            than an API call). After retrieving from local storage, then call the API to see if there
+            are any updates.
+         */
         if(localStorage.getItem('facilities')){
             const facilities = localStorage.getItem('facilities');
             this.props.setFacilities(facilities)
@@ -77,7 +82,7 @@ class Layout extends React.Component {
                     <div className={classes.mainContent}>
                         <SearchBar styles={styleSheet.searchBar} suggestions={suggestions}/>
                         <div className={classes.cardContainer}>
-                            <CardContainer styles={styleSheet.cardContainer}searchTerm={this.props.searchTerm} facilities={this.props.facilities}/>
+                            <CardContainer styles={styleSheet.cardContainer} searchTerm={this.props.searchTerm} facilities={this.props.facilities}/>
                         </div>
                     </div> 
                     <div className={classes.sidebarToggleContainer}>
@@ -113,6 +118,7 @@ const styleSheet = {
         position:'relative',
         flex:'1 1 100%',
         height:'100%',
+        width: '100%',
         paddingTop:16,
     },
     sidebarToggleContainer:{
@@ -142,9 +148,13 @@ const styleSheet = {
         height:'calc(100% - 86px)',
         overflowY:'auto',
         overflowX:'hidden',
+    },
+    '@media screen and (max-width: 600px)': {
+        sidebarToggleContainer: {
+            display: 'none'
+        }
     }
-    
-}
+};
 
 function mapStateToProps(state) {
     return {
