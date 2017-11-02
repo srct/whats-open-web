@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {applyMiddleware, compose, createStore} from 'redux';
 import './index.css';
+import './styles/containers/facilityCard.css'
 import Layout from './containers/Layout';
 import registerServiceWorker from './registerServiceWorker';
 import createHistory from 'history/createBrowserHistory'

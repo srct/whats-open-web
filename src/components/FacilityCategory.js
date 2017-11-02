@@ -78,7 +78,7 @@ const FacilityCategory = ({classes, category}) => {
 
     return (
         <div className={classes.categoryWrapper}>
-            {generateAvatar()}
+            {/* {generateAvatar()} */}
             <Typography type={'body1'} noWrap>
                 {category.name}
             </Typography>

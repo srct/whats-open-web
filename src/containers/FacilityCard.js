@@ -134,12 +134,12 @@ class FacilityCard extends React.Component {
         const {classes, facility, favorites, addFavoriteFacility, removeFavoriteFacility, setSidebar} = this.props
         const twoLineEllipsis = CSS.supports('-webkit-line-clamp', 2) ? classes.twoLineEllipsisWebkit : classes.twoLineEllipsis;
         return (
-        <Card onClick={this.handleClick} className={classes.root} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} raised>
-            <CardMedia className={classes.media}
+        <Card onClick={this.handleClick} className={'root'} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} raised>
+            <CardMedia className={'media'}
                        image={'https://gmucampus.files.wordpress.com/2010/09/00sothside2.jpg'}/>
 
-            <div className={classes.logoContainer}>
-                <CardMedia className={classes.logo}
+            <div className={'logoContainer'}>
+                <CardMedia className={'logo'}
                            image={'https://upload.wikimedia.org/wikipedia/en/d/d3/Starbucks_Corporation_Logo_2011.svg'}/>
             </div>
 
@@ -147,14 +147,14 @@ class FacilityCard extends React.Component {
             <FavoriteButton facility={facility} isFavorite={favorites.includes(facility.slug)}
                             addFavoriteFacility={addFavoriteFacility} isHovered={this.state.isHovered} removeFavoriteFacility={removeFavoriteFacility}/>
 
-            <CardContent className={classes.cardContent}>
-                <Grid container align={'center'} direction={'column'} className={classes.smallGridContainerSpacing}>
-                    <Grid item className={classes.smallGridItemSpacing}>
-                        <Typography type={'title'} align={'center'} className={twoLineEllipsis}>
+            <CardContent className={'cardContent'}>
+                <Grid container align={'center'} direction={'column'} className={'smallGridContainerSpacing'}>
+                    <Grid item className={'smallGridItemSpacing'}>
+                        <Typography type={'subheading'} align={'center'} className={twoLineEllipsis}>
                             {removeBrackets(facility.facility_name)}
                         </Typography>
                     </Grid>
-                    <Grid item className={classes.smallGridItemSpacing}>
+                    <Grid item className={'smallGridItemSpacing'}>
                         <FacilityCategory category={facility.facility_category} />
                     </Grid>
                 </Grid>
@@ -162,11 +162,11 @@ class FacilityCard extends React.Component {
 
             <CardActions>
                 <Grid container justify={'space-around'}>
-                    <Grid item className={classes.extraInfoWrapper}>
+                    <Grid item className={'extraInfoWrapper'}>
                         <FacilityStatus facility={facility}/>
                     </Grid>
 
-                    <Grid item className={classes.extraInfoWrapper}>
+                    <Grid item className={'extraInfoWrapper'}>
                         <Typography type={'caption'}>
                             <LocationOnIcon/>
                         </Typography>
