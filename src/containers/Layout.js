@@ -2,7 +2,7 @@ import React from 'react';
 import {withStyles } from 'material-ui/styles';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {toggleSidebar,setAllFavorites} from '../actions/ui';
+import {toggleSidebar,toggleSidebarMap,setAllFavorites} from '../actions/ui';
 import AppBar from '../components/AppBar';
 import Sidebar from '../components/Sidebar';
 import { getFacilities, setFacilities } from '../actions/api';
@@ -74,7 +74,7 @@ class Layout extends React.Component {
     };
 
     render() {
-        const {classes, isSidebarOpen, toggleSidebar, getFacilities,sidebarFacility} = this.props;
+        const {classes, isSidebarOpen, isSidebarMapOpen, toggleSidebar, toggleSidebarMap, getFacilities,sidebarFacility} = this.props;
         return (
             <div className={classes.root}>
                 <AppBar isOpen={false} handleMenuClick={ ()=>{} }/>
@@ -95,7 +95,7 @@ class Layout extends React.Component {
                             }
                         </button>
                     </div>
-                    <Sidebar facilities={this.props.facilities} facility={sidebarFacility} isSidebarOpen={isSidebarOpen}/>
+                    <Sidebar facilities={this.props.facilities} facility={sidebarFacility} isSidebarOpen={isSidebarOpen} isSidebarMapOpen={isSidebarMapOpen} toggleSidebarMap={toggleSidebarMap}/>
                 </div> 
             </div>
         )
@@ -163,7 +163,8 @@ function mapStateToProps(state) {
         isLoading: state.facilities.isLoading,
         sidebarFacility:state.ui.sidebar.facility,
         isSidebarOpen: state.ui.sidebar.isOpen,
+        isSidebarMapOpen: state.ui.sidebar.isMapOpen,
     }
 }
 
-export default compose(connect(mapStateToProps,{toggleSidebar,getFacilities,setFacilities,setAllFavorites}), withStyles(styleSheet))(Layout);
+export default compose(connect(mapStateToProps,{toggleSidebar,toggleSidebarMap,getFacilities,setFacilities,setAllFavorites}), withStyles(styleSheet))(Layout);

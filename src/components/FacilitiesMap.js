@@ -93,11 +93,11 @@ class FacilitiesMap extends React.Component {
 
 
     render (){ 
-        const {facilities,facility,classes} = this.props
+        const {facilities,facility,classes,isMapOpen} = this.props
         const {position,positionReady,fitBounds,maxBounds,mappedRoute,fitBoundsOptions} = this.state
         console.log(fitBounds)
         return(
-        <div>
+        <div className={classes.mapContainer} style={{'height': isMapOpen ? '400px' : 0}}>
         <Map
         onStyleLoad={(map,e)=>{
        
@@ -105,8 +105,8 @@ class FacilitiesMap extends React.Component {
         style="mapbox://styles/mapbox/streets-v9"
         movingMethod={'easeTo'}
         containerStyle={{
-          height: "400px",
-          width: "400px"
+          height: "100%",
+          width: "100%"
         }}
         fitBounds={fitBounds} 
         fitBoundsOptions={fitBoundsOptions} 
@@ -136,8 +136,10 @@ class FacilitiesMap extends React.Component {
 }
 }
 const styleSheet  = {
-
-}
+    mapContainer: {
+        transition: '250ms ease-in-out'
+    }
+};
 
 
 export default withStyles(styleSheet)(FacilitiesMap)

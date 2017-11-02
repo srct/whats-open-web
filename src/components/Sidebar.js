@@ -6,9 +6,10 @@ import Typography from 'material-ui/Typography'
 import Divider from 'material-ui/Divider';
 import TextwTitle from '../components/TextwTitle'
 import FacilitiesMap from '../components/FacilitiesMap'
-import classNames from 'classnames'
+import classNames from 'classnames';
+import Button from 'material-ui/Button';
 
-const Sidebar = ({classes,facility,isSidebarOpen,facilities}) => {
+const Sidebar = ({classes,facility,isSidebarOpen,isSidebarMapOpen,toggleSidebarMap,facilities}) => {
     const removeBrackets = (name) => {
        if(typeof(name) === "undefined"){
            return ""
@@ -43,7 +44,9 @@ const Sidebar = ({classes,facility,isSidebarOpen,facilities}) => {
                </div>
            </div>
         <div className={classes.row2}>
-        <FacilitiesMap facilities={facilities}facility={facility}/>
+            <FacilitiesMap isMapOpen={isSidebarMapOpen} facilities={facilities} facility={facility}/>
+
+            <Button className={classes.toggleMapBtn} onClick={toggleSidebarMap}>{isSidebarMapOpen ? 'Close Map' : 'Open Map'}</Button>
         </div>
     </Paper>
     )
@@ -52,7 +55,7 @@ const styleSheet = {
     '@media screen and (max-width: 600px)': {
         root: {
             display: 'none !important'
-        }
+        },
     },
     labelRow:{
         display:'flex',
@@ -95,7 +98,12 @@ const styleSheet = {
         alignItems:'center'
     },
     row2:{
-
+        position: 'absolute',
+        bottom: '0px',
+        width: '100%'
+    },
+    toggleMapBtn: {
+        width: '100%'
     }
 }
 
