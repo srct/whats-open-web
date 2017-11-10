@@ -216,7 +216,7 @@ const theme = createMuiTheme({
         },
         "title": {
             "fontSize": 21,
-            "fontWeight": 'bold',
+            "fontWeight": 500,
             "fontFamily": "\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
             "lineHeight": 1,
             "color": "rgba(0, 0, 0, 0.87)"

@@ -2,7 +2,7 @@ import React from 'react';
 import {withStyles } from 'material-ui/styles';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {toggleSidebar,setAllFavorites} from '../actions/ui';
+import {toggleSidebar,toggleSidebarMap,setAllFavorites} from '../actions/ui';
 import AppBar from '../components/AppBar';
 import Sidebar from '../components/Sidebar';
 import { getFacilities, setFacilities } from '../actions/api';
@@ -20,7 +20,12 @@ class Layout extends React.Component {
         super(props);
     }
     
-    componentWillMount = () => {
+    componentWillMount() {
+        /*
+            This is done in order to immediately load the page (retrieving from local storage is faster
+            than an API call). After retrieving from local storage, then call the API to see if there
+            are any updates.
+         */
         if(localStorage.getItem('facilities')){
             const facilities = localStorage.getItem('facilities');
             this.props.setFacilities(facilities)
@@ -34,7 +39,7 @@ class Layout extends React.Component {
     };
 
     render() {
-        const {classes, isSidebarOpen, toggleSidebar, getFacilities,sidebarFacility} = this.props;
+        const {classes, isSidebarOpen, isSidebarMapOpen, toggleSidebar, toggleSidebarMap, getFacilities,sidebarFacility} = this.props;
         return (
             <div className={classes.root}>
                 <AppBar isOpen={false} handleMenuClick={ ()=>{} }/>
@@ -42,7 +47,7 @@ class Layout extends React.Component {
                     <div className={classes.mainContent}>
                         <SearchBar styles={styleSheet.searchBar} suggestions={{}}/>
                         <div className={classes.cardContainer}>
-                            <CardContainer styles={styleSheet.cardContainer}searchTerm={this.props.searchTerm} favorites={this.props.favorites} facilities={this.props.facilities}/>
+                            <CardContainer styles={styleSheet.cardContainer} searchTerm={this.props.searchTerm} facilities={this.props.facilities}/>
                         </div>
                     </div> 
                     <div className={classes.sidebarToggleContainer}>
@@ -55,7 +60,7 @@ class Layout extends React.Component {
                             }
                         </button>
                     </div>
-                    <Sidebar facilities={this.props.facilities} facility={sidebarFacility} isSidebarOpen={isSidebarOpen}/>
+                    <Sidebar facilities={this.props.facilities} facility={sidebarFacility} isSidebarOpen={isSidebarOpen} isSidebarMapOpen={isSidebarMapOpen} toggleSidebarMap={toggleSidebarMap}/>
                 </div> 
             </div>
         )
@@ -78,6 +83,7 @@ const styleSheet = {
         position:'relative',
         flex:'1 1 100%',
         height:'100%',
+        width: '100%',
         paddingTop:16,
     },
     sidebarToggleContainer:{
@@ -107,9 +113,13 @@ const styleSheet = {
         height:'calc(100% - 86px)',
         overflowY:'auto',
         overflowX:'hidden',
+    },
+    '@media screen and (max-width: 600px)': {
+        sidebarToggleContainer: {
+            display: 'none'
+        }
     }
-    
-}
+};
 
 function mapStateToProps(state) {
     return {
@@ -119,7 +129,8 @@ function mapStateToProps(state) {
         isLoading: state.facilities.isLoading,
         sidebarFacility:state.ui.sidebar.facility,
         isSidebarOpen: state.ui.sidebar.isOpen,
+        isSidebarMapOpen: state.ui.sidebar.isMapOpen,
     }
 }
 
-export default compose(connect(mapStateToProps,{toggleSidebar,getFacilities,setFacilities,setAllFavorites}), withStyles(styleSheet))(Layout);
+export default compose(connect(mapStateToProps,{toggleSidebar,toggleSidebarMap,getFacilities,setFacilities,setAllFavorites}), withStyles(styleSheet))(Layout);

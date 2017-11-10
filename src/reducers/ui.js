@@ -1,11 +1,12 @@
 import {
     TOGGLE_SIDEBAR, SET_SIDEBAR, SET_SEARCH_TERM, SET_FILTERED_LIST,
-    ADD_FAVORITE_FACILITY, REMOVE_FAVORITE_FACILITY,SET_ALL_FAVORITES
+    ADD_FAVORITE_FACILITY, REMOVE_FAVORITE_FACILITY, SET_ALL_FAVORITES, TOGGLE_SIDEBAR_MAP
 } from '../actions/action-types'
 
 const sidebarDefault = {
     facility:{},
     isOpen:false,
+    isMapOpen:true,
 }
 
 const sidebar = (state=sidebarDefault,action) => {
@@ -17,6 +18,10 @@ const sidebar = (state=sidebarDefault,action) => {
         case TOGGLE_SIDEBAR:
             return Object.assign({},state,{
                 isOpen:!state.isOpen
+            });
+        case TOGGLE_SIDEBAR_MAP:
+            return Object.assign({}, state, {
+                isMapOpen: !state.isMapOpen
             });
         default:
             return state;
