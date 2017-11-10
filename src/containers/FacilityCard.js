@@ -168,7 +168,7 @@ class FacilityCard extends React.Component {
 
                     <Grid item className={'extraInfoWrapper'}>
                         <Typography type={'caption'}>
-                            <LocationOnIcon/>
+                            <LocationOnIcon className={'card-map-marker-icon'}/>
                         </Typography>
                         <Typography type={'caption'} align={'center'} className={twoLineEllipsis}>
                             {facility.facility_location.building}
@@ -232,6 +232,10 @@ const styleSheet = {
         display: '-webkit-box',
         WebkitLineClamp: 2,
         WebkitBoxOrient: 'vertical',
+    },
+    tempclass:{
+        width:20,
+        height:20,
     }
 };
 
