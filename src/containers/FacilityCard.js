@@ -40,14 +40,16 @@ const materialColors = [red, pink, purple, deepPurple, indigo, blue, lightBlue, 
     lightGreen, lime, yellow, amber, orange, deepOrange, brown, grey, blueGrey];
 
 class FacilityCard extends React.Component {
+
     constructor(props){
-        super(props)
+        super(props);
         this.state = {
             isHovered:false
         }
     }
+
     handleClick = () => {
-        setSidebar(this.props.facility)
+        this.props.setSidebar(this.props.facility)
     };
 
     /**
@@ -119,27 +121,31 @@ class FacilityCard extends React.Component {
         this.setState({
             isHovered:true
         })
-    }
+    };
+
     handleMouseLeave = () =>{
         this.setState({
             isHovered:false
         })
-    }
-    /**
-     * By adding this property to an element, the text will not exceed 2 lines. On webkit browsers,
-     * -webkit-line-clamp will show ellipsis. This checks to see if the browser is webkit and uses
-     * an appropriate class.
-     */
-    render(){
-        const {classes, facility, favorites, addFavoriteFacility, removeFavoriteFacility, setSidebar} = this.props
-        const twoLineEllipsis = CSS.supports('-webkit-line-clamp', 2) ? classes.twoLineEllipsisWebkit : classes.twoLineEllipsis;
+    };
+
+    render() {
+        const {facility, favorites, addFavoriteFacility, removeFavoriteFacility} = this.props;
+
+        /**
+         * By adding this property to an element, the text will not exceed 2 lines. On webkit browsers,
+         * -webkit-line-clamp will show ellipsis. This checks to see if the browser is webkit and uses
+         * an appropriate class.
+         */
+        const twoLineEllipsis = CSS.supports('-webkit-line-clamp', 2) ? 'fc-two-line-ellipsis-webkit' : 'fc-two-line-ellipsis';
+
         return (
-        <Card onClick={this.handleClick} className={'root'} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} raised>
-            <CardMedia className={'media'}
+        <Card onClick={this.handleClick} className={'fc-root'} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} raised>
+            <CardMedia className={'fc-media'}
                        image={'https://gmucampus.files.wordpress.com/2010/09/00sothside2.jpg'}/>
 
-            <div className={'logoContainer'}>
-                <CardMedia className={'logo'}
+            <div className={'fc-logo-container'}>
+                <CardMedia className={'fc-logo'}
                            image={'https://upload.wikimedia.org/wikipedia/en/d/d3/Starbucks_Corporation_Logo_2011.svg'}/>
             </div>
 
@@ -147,14 +153,14 @@ class FacilityCard extends React.Component {
             <FavoriteButton facility={facility} isFavorite={favorites.includes(facility.slug)}
                             addFavoriteFacility={addFavoriteFacility} isHovered={this.state.isHovered} removeFavoriteFacility={removeFavoriteFacility}/>
 
-            <CardContent className={'cardContent'}>
-                <Grid container align={'center'} direction={'column'} className={'smallGridContainerSpacing'}>
-                    <Grid item className={'smallGridItemSpacing'}>
+            <CardContent className={'fc-card-content'}>
+                <Grid container align={'center'} direction={'column'} className={'fc-small-grid-container-spacing'}>
+                    <Grid item className={'fc-small-grid-item-spacing'}>
                         <Typography type={'subheading'} align={'center'} className={twoLineEllipsis}>
                             {removeBrackets(facility.facility_name)}
                         </Typography>
                     </Grid>
-                    <Grid item className={'smallGridItemSpacing'}>
+                    <Grid item className={'fc-small-grid-item-spacing'}>
                         <FacilityCategory category={facility.facility_category} />
                     </Grid>
                 </Grid>
@@ -162,13 +168,13 @@ class FacilityCard extends React.Component {
 
             <CardActions>
                 <Grid container justify={'space-around'}>
-                    <Grid item className={'extraInfoWrapper'}>
+                    <Grid item className={'fc-extraInfoWrapper'}>
                         <FacilityStatus facility={facility}/>
                     </Grid>
 
-                    <Grid item className={'extraInfoWrapper'}>
+                    <Grid item className={'fc-extra-info-wrapper'}>
                         <Typography type={'caption'}>
-                            <LocationOnIcon className={'card-map-marker-icon'}/>
+                            <LocationOnIcon className={'fc-card-map-marker-icon'}/>
                         </Typography>
                         <Typography type={'caption'} align={'center'} className={twoLineEllipsis}>
                             {facility.facility_location.building}
@@ -179,72 +185,14 @@ class FacilityCard extends React.Component {
         </Card>
     )
     }
-};
-const sizeScale = .75
-const styleSheet = {
-    root: {
-        width: 250 * sizeScale,
-        borderRadius: '5px',
-        position: 'relative'
-    },
-    cardContent: {
-        padding: '8px 4px 0 4px !important'
-    },
-    smallGridContainerSpacing: {
-        margin: '-2px -8px !important'
-    },
-    smallGridItemSpacing: {
-        padding: '3px 8px !important'
-    },
-    media: {
-        flex: 1,
-        height: 115*sizeScale,
-    },
-    logoContainer: {
-        width: 100 * sizeScale,
-        height: 100 * sizeScale,
-        margin: 'auto',
-        marginTop: '-60px',
-        borderRadius: '90px',
-        border: '5px solid white',
-    },
-    logo: {
-        width: 100 * sizeScale,
-        height: 100 * sizeScale,
-        margin: 'auto',
-        borderRadius: '50%',
-        boxShadow: '0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12)',
-    },
-    extraInfoWrapper: {
-        display: 'flex',
-        alignItems: 'center',
-        maxWidth: '50%'
-    },
-    twoLineEllipsis: {
-        position: 'relative',
-        lineHeight: '1em',
-        maxHeight: '2em',
-        overflow: 'hidden',
-    },
-    twoLineEllipsisWebkit: {
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        display: '-webkit-box',
-        WebkitLineClamp: 2,
-        WebkitBoxOrient: 'vertical',
-    },
-    tempclass:{
-        width:20,
-        height:20,
-    }
-};
+}
 
 const mapStateToProps = state => ({
     favorites: state.ui.favorites
 });
 
-export default compose(connect(mapStateToProps, {
+export default connect(mapStateToProps, {
     setSidebar,
     addFavoriteFacility,
     removeFavoriteFacility
-}), withStyles(styleSheet))(FacilityCard);
+})(FacilityCard);
