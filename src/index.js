@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {applyMiddleware, compose, createStore} from 'redux';
 import './index.css';
-import './styles/whatsOpen.css'
 import Layout from './containers/Layout';
 import registerServiceWorker from './registerServiceWorker';
 import createHistory from 'history/createBrowserHistory'
@@ -12,6 +11,7 @@ import ReduxThunk from 'redux-thunk';
 import reducers from './reducers/index';
 import {MuiThemeProvider} from 'material-ui/styles';
 import theme from './theme';
+import './styles/whatsOpen.css';
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory();

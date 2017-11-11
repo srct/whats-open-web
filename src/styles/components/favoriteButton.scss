@@ -2,28 +2,28 @@
   position: absolute;
   top: 0;
   right: 0;
-  height: 24px;
-  width: 24px;
-  padding: 5px;
+  height: 24px !important;
+  width: 24px !important;
+  padding: 5px !important;
   cursor: pointer;
-};
+}
 
 .favorite-button-heart-favorited {
   color: #E91E63; //TODO: Somehow use materials color system
-};
+}
 
 .favorite-button-heart-hover {
   color: grey;
-};
-
-.favorite-button-heart-no-hover {
-  color: rgba(0,0,0,0);
 }
 
-@media screen and (min-width:1024px) and (max-width:1679px) {
+.favorite-button-heart-no-hover {
+  color: rgba(0, 0, 0, 0);
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1679px) {
   .favorite-button-heart {
-    height: 24 * $favorite-button-md-scale;
-    width: 24 * $favorite-button-md-scale;
-    padding: 5 * $favorite-button-md-scale;
+    height: 24px * $favorite-button-md-scale !important;
+    width: 24px * $favorite-button-md-scale !important;
+    padding: 5px * $favorite-button-md-scale !important;
   }
 }

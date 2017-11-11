@@ -1,18 +1,18 @@
 .sidebar-label-row {
-  display:flex;
-};
+  display: flex;
+}
 
 .sidebar-label-holder {
   margin: 16px;
-};
+}
 
 .sidebar-open {
   flex: 1 0 400px;
-};
+}
 
 .sidebar-closed {
   flex: 1 0 0;
-};
+}
 
 .sidebar-root {
   overflow: hidden;
@@ -21,35 +21,34 @@
   position: relative;
 
   @include transition(150ms ease-in-out);
-};
+}
 
 .sidebar-divider {
   margin: 16px;
-};
+}
 
 .sidebar-row1 {
   display: flex;
   padding: 8px;
-
-};
+}
 
 .sidebar-avatar {
   width: 100px !important;
   height: 100px !important;
-};
+}
 
 .sidebar-title {
   height: 100px;
   margin-left: 8px;
   display: flex;
   align-items: center;
-};
+}
 
 .sidebar-row2 {
   position: absolute;
   bottom: 0;
   width: 100%;
-};
+}
 
 .sidebar-toggle-map-btn {
   width: 100%;
@@ -58,5 +57,5 @@
 @media screen and (max-width: 600px) {
   .sidebar-root {
     display: none !important;
-  };
+  }
 }
