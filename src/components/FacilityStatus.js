@@ -1,12 +1,11 @@
 import React from 'react';
-import {withStyles} from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 import DoneIcon from 'material-ui-icons/Done';
 import CloseIcon from 'material-ui-icons/Close';
 import {green, red} from 'material-ui/colors'
 import FacilityUtils from '../utils/facilityUtils';
 
-const FacilityStatus = ({classes, facility}) => {
+const FacilityStatus = ({facility}) => {
 
     /**
      * Generates information about the facility's status.
@@ -27,7 +26,7 @@ const FacilityStatus = ({classes, facility}) => {
             label = 'OPEN';
             color = green[500];
             icon = <DoneIcon/>;
-        }else {
+        } else {
             label = 'CLOSED';
             color = red[500];
             icon = <CloseIcon/>
@@ -43,25 +42,11 @@ const FacilityStatus = ({classes, facility}) => {
     const statusInfo = generateStatusInfo(facility);
 
     return (
-        <Typography type={'caption'} className={classes.statusText} style={{color: statusInfo.color}}>
+        <Typography type={'caption'} className={'facility-status-text'} style={{color: statusInfo.color}}>
             {statusInfo.icon}
             {statusInfo.label}
         </Typography>
     )
 };
-const styleSheet = {
-    statusText: {
-      display: 'flex',
-      alignItems: 'center'
-    },
-    chip: {
-        height: '28px',
-        borderRadius: '4px',
-    },
-    isOpenText: {
-        color: 'white',
-        display: 'inline',
-    }
-};
 
-export default withStyles(styleSheet)(FacilityStatus);
+export default FacilityStatus;

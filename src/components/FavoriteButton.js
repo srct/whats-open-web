@@ -23,47 +23,24 @@ class FavoriteButton extends React.Component {
         } else {
             this.props.addFavoriteFacility(this.props.facility.slug);
         }
-    }
+    };
 
 
     render() {
-        const {heart,heartFavorited,heartHover,heartNoHover} = this.props.classes;
         const {isHovered} = this.props;
         if (this.props.isFavorite) {
-            return (<FavoriteIcon onClick={this.handleClick} className={classNames(heart,heartFavorited)}/>);
+            return (<FavoriteIcon onClick={this.handleClick} className={classNames('favorite-button-heart', 'favorite-button-heart-favorited')}/>);
         }
 
-        return (<FavoriteBorderIcon onClick={this.handleClick}  className={classNames(heart,{[heartHover]:isHovered,[heartNoHover]:!isHovered})}/>);
+        return (<FavoriteBorderIcon onClick={this.handleClick}  className={classNames('favorite-button-heart', isHovered ? 'favorite-button-heart-hover' : 'favorite-button-heart-no-hover')}/>);
     }
 }
 
 FavoriteButton.propTypes = {
-    classes: PropTypes.object.isRequired,
     facility: PropTypes.object.isRequired,
     isFavorite: PropTypes.bool.isRequired,
     addFavoriteFacility: PropTypes.func.isRequired,
     removeFavoriteFacility: PropTypes.func.isRequired,
 };
-const sizeScale = .75
-const styleSheet = {
-    heart: {
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        height: 24*sizeScale,
-        width: 24*sizeScale,
-        padding: 5*sizeScale,
-        cursor: 'pointer',
-    },
-    heartFavorited:{
-        color:pink[500]
-    },
-    heartHover:{
-       color:'grey' 
-    },
-    heartNoHover:{
-        color:'rgba(0,0,0,0)'
-    }
-};
 
-export default withStyles(styleSheet)(FavoriteButton);
+export default FavoriteButton;
