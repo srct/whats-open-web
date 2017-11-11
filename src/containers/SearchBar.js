@@ -97,11 +97,6 @@ function getSuggestions(value,suggestions) {
 }
 
 const styles = theme => ({
-    '@media screen and (max-width: 600px)': {
-        paperBackground: {
-            width: '90% !important'
-        }
-    },
   container: {
     flexGrow: 1,
     position: 'relative',
@@ -133,7 +128,8 @@ const styles = theme => ({
   },
   paperBackground:{
       height:54,
-      width:600,
+      maxWidth:600,
+      width:'90%',
       display:'flex',
       margin:'0px auto 16px auto',
   },
