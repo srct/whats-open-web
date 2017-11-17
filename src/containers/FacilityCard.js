@@ -132,13 +132,6 @@ class FacilityCard extends React.Component {
     render() {
         const {facility, favorites, addFavoriteFacility, removeFavoriteFacility} = this.props;
 
-        /**
-         * By adding this property to an element, the text will not exceed 2 lines. On webkit browsers,
-         * -webkit-line-clamp will show ellipsis. This checks to see if the browser is webkit and uses
-         * an appropriate class.
-         */
-        const twoLineEllipsis = CSS.supports('-webkit-line-clamp', 2) ? 'fc-two-line-ellipsis-webkit' : 'fc-two-line-ellipsis';
-
         return (
         <Card onClick={this.handleClick} className={'fc-root'} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} raised>
             <CardMedia className={'fc-media'}
@@ -155,8 +148,8 @@ class FacilityCard extends React.Component {
 
             <CardContent className={'fc-card-content'}>
                 <Grid container align={'center'} direction={'column'} className={'fc-small-grid-container-spacing'}>
-                    <Grid item className={'fc-small-grid-item-spacing'}>
-                        <Typography type={'subheading'} align={'center'} className={classnames('fc-title', twoLineEllipsis)}>
+                    <Grid item className={classnames('fc-small-grid-item-spacing', 'fc-ellipsis-container')}>
+                        <Typography type={'subheading'} align={'center'} className={classnames('fc-title', 'fc-one-line-ellipsis')}>
                             {removeBrackets(facility.facility_name)}
                         </Typography>
                     </Grid>
@@ -176,7 +169,7 @@ class FacilityCard extends React.Component {
                         <Typography type={'caption'}>
                             <LocationOnIcon className={'fc-card-map-marker-icon'}/>
                         </Typography>
-                        <Typography type={'caption'} align={'center'} className={twoLineEllipsis}>
+                        <Typography type={'caption'} align={'center'} className={'fc-two-line-ellipsis'}>
                             {facility.facility_location.building}
                         </Typography>
                     </Grid>
