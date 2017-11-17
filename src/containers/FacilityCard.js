@@ -8,7 +8,7 @@ import FavoriteButton from '../components/FavoriteButton';
 import FacilityCategory from '../components/FacilityCategory';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {addFavoriteFacility, removeFavoriteFacility, setSidebar} from '../actions/ui';
+import {addFavoriteFacility, removeFavoriteFacility, setSelectedFacility} from '../actions/ui';
 import DirectionsWalkIcon from 'material-ui-icons/DirectionsWalk';
 import LocationOnIcon from 'material-ui-icons/LocationOn';
 import {removeBrackets} from '../utils/nameUtils';
@@ -49,7 +49,7 @@ class FacilityCard extends React.Component {
     }
 
     handleClick = () => {
-        this.props.setSidebar(this.props.facility)
+        this.props.setSelectedFacility(this.props.facility);
     };
 
     /**
@@ -130,10 +130,11 @@ class FacilityCard extends React.Component {
     };
 
     render() {
-        const {facility, favorites, addFavoriteFacility, removeFavoriteFacility} = this.props;
+        const {facility, favorites, selectedFacility, addFavoriteFacility, removeFavoriteFacility} = this.props;
 
         return (
-        <Card onClick={this.handleClick} className={'fc-root'} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} raised>
+        <Card onClick={this.handleClick} className={classnames('fc-root', selectedFacility.slug === facility.slug && 'fc-selected')}
+              onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} raised>
             <CardMedia className={'fc-media'}
                        image={'https://gmucampus.files.wordpress.com/2010/09/00sothside2.jpg'}/>
 
@@ -181,11 +182,12 @@ class FacilityCard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    favorites: state.ui.favorites
+    favorites: state.ui.favorites,
+    selectedFacility: state.ui.selectedFacility
 });
 
 export default connect(mapStateToProps, {
-    setSidebar,
+    setSelectedFacility,
     addFavoriteFacility,
     removeFavoriteFacility
 })(FacilityCard);

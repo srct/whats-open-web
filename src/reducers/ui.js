@@ -1,20 +1,24 @@
 import {
-    TOGGLE_SIDEBAR, SET_SIDEBAR, SET_SEARCH_TERM, SET_FILTERED_LIST,
+    TOGGLE_SIDEBAR, SET_SELECTED_FACILITY, SET_SEARCH_TERM, SET_FILTERED_LIST,
     ADD_FAVORITE_FACILITY, REMOVE_FAVORITE_FACILITY, SET_ALL_FAVORITES, TOGGLE_SIDEBAR_MAP
 } from '../actions/action-types'
 
+const selectedFacility = (state = {}, action) => {
+    switch(action.type) {
+        case SET_SELECTED_FACILITY:
+            return Object.assign({}, action.facility);
+        default:
+            return state;
+    }
+};
+
 const sidebarDefault = {
-    facility:{},
     isOpen:false,
     isMapOpen:true,
-}
+};
 
 const sidebar = (state=sidebarDefault,action) => {
     switch(action.type){
-        case SET_SIDEBAR:
-            return Object.assign({},state,{},{
-                facility:action.facility
-            });
         case TOGGLE_SIDEBAR:
             return Object.assign({},state,{
                 isOpen:!state.isOpen
@@ -68,6 +72,7 @@ const favorites = (state = [], action) => {
 
 
 const ui = (state={},action) =>({
+    selectedFacility:selectedFacility(state.selectedFacility, action),
     sidebar:sidebar(state.sidebar,action),
     search: search(state.search,state.facilities,action),
     favorites: favorites(state.favorites, action),

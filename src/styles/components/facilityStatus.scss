@@ -1,4 +1,19 @@
+//TODO: DRY violation w/ color.
+
 .facility-status-text {
-  display: flex !important;
   align-items: center;
+  border: 2px solid;
+  border-radius: 10px;
+  padding: 5px;
+  font-weight: bold !important;
+
+  &.facility-status-closed {
+    color: rgb(244, 67, 54);
+    border-color: rgb(244, 67, 54);
+  }
+
+  &.facility-status-open {
+    color: rgb(76, 175, 80);
+    border-color: rgb(76, 175, 80);
+  }
 }
