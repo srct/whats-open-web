@@ -12,7 +12,10 @@ import {addFavoriteFacility, removeFavoriteFacility, setSelectedFacility} from '
 import DirectionsWalkIcon from 'material-ui-icons/DirectionsWalk';
 import LocationOnIcon from 'material-ui-icons/LocationOn';
 import {removeBrackets} from '../utils/nameUtils';
-import classnames from 'classnames'
+import classnames from 'classnames';
+import FacilitiesMap from '../components/FacilitiesMap';
+import Dialog, {DialogTitle, DialogContent, DialogActions} from 'material-ui/Dialog';
+import Button from 'material-ui/Button';
 
 import {
     amber,
@@ -44,12 +47,17 @@ class FacilityCard extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            isHovered:false
+            isHovered: false,
+            isMapOpen: false
         }
     }
 
-    handleClick = () => {
+    handleCardClick = () => {
         this.props.setSelectedFacility(this.props.facility);
+    };
+
+    toggleMap = () => {
+        this.setState({isMapOpen: !this.state.isMapOpen});
     };
 
     /**
@@ -130,10 +138,12 @@ class FacilityCard extends React.Component {
     };
 
     render() {
-        const {facility, favorites, selectedFacility, addFavoriteFacility, removeFavoriteFacility} = this.props;
+        const {facility, facilities, favorites, selectedFacility, addFavoriteFacility, removeFavoriteFacility} = this.props;
+
+        const isSelected = selectedFacility.slug === facility.slug;
 
         return (
-        <Card onClick={this.handleClick} className={classnames('fc-root', selectedFacility.slug === facility.slug && 'fc-selected')}
+        <Card onClick={this.handleCardClick} className={classnames('fc-root', isSelected && 'fc-selected')}
               onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} raised>
             <CardMedia className={'fc-media'}
                        image={'https://gmucampus.files.wordpress.com/2010/09/00sothside2.jpg'}/>
@@ -162,7 +172,7 @@ class FacilityCard extends React.Component {
 
             <CardActions>
                 <Grid container justify={'space-around'}>
-                    <Grid item className={'fc-extraInfoWrapper'}>
+                    <Grid item className={'fc-extra-info-wrapper'}>
                         <FacilityStatus facility={facility}/>
                     </Grid>
 
@@ -176,6 +186,12 @@ class FacilityCard extends React.Component {
                     </Grid>
                 </Grid>
             </CardActions>
+
+            <Button className={'fc-toggle-map-btn'} onClick={this.toggleMap}>Open Map</Button>
+
+            <Dialog open={this.state.isMapOpen} onRequestClose={this.toggleMap} classes={{paper: 'fc-map-dialog'}}>
+                <FacilitiesMap facilities={facilities} facility={facility} isMapOpen={true}/>
+            </Dialog>
         </Card>
     )
     }

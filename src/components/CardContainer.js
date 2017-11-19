@@ -13,7 +13,7 @@ const CardContainer = ({searchTerm, facilities}) => {
             {facilities.filter(filterCards).map(item =>{
                 return(
                     <Grid key={item.slug} item>
-                        <FacilityCard facility={item}/>
+                        <FacilityCard facility={item} facilities={facilities}/>
                     </Grid>
                 )
             })}

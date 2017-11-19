@@ -60,6 +60,10 @@
   overflow: hidden;
 }
 
+.fc-toggle-map-btn {
+  display: none !important;
+}
+
 @supports (-webkit-line-clamp: 2) {
   .fc-two-line-ellipsis {
     overflow: hidden;
@@ -118,12 +122,22 @@
 
 @media screen and (max-width: 1023px) {
   .fc-root {
+    @include transition(150ms ease-in-out);
 
     &.fc-selected {
       .fc-one-line-ellipsis {
         white-space: normal;
         overflow: inherit;
       }
+
+      .fc-toggle-map-btn {
+        display: block !important;
+        width: 100% !important;
+      }
     }
+  }
+
+  .fc-map-dialog {
+    width: 100% !important;
   }
 }

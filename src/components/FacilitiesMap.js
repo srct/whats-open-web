@@ -136,7 +136,8 @@ class FacilitiesMap extends React.Component {
 }
 const styleSheet  = {
     mapContainer: {
-        transition: '250ms ease-in-out'
+        transition: '250ms ease-in-out',
+        width: '100%'
     }
 };
 
