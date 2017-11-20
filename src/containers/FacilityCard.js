@@ -170,7 +170,7 @@ class FacilityCard extends React.Component {
                 </Grid>
             </CardContent>
 
-            <CardActions>
+            <CardActions className={'fc-card-actions'}>
                 <Grid container justify={'space-around'}>
                     <Grid item className={'fc-extra-info-wrapper'}>
                         <FacilityStatus facility={facility}/>
@@ -184,10 +184,12 @@ class FacilityCard extends React.Component {
                             {facility.facility_location.building}
                         </Typography>
                     </Grid>
+
+                    <Grid item className={classnames('fc-extra-info-wrapper', 'fc-toggle-map-btn-container')}>
+                        <Button className={'fc-toggle-map-btn'} onClick={this.toggleMap}>Open Map</Button>
+                    </Grid>
                 </Grid>
             </CardActions>
-
-            <Button className={'fc-toggle-map-btn'} onClick={this.toggleMap}>Open Map</Button>
 
             <Dialog open={this.state.isMapOpen} onRequestClose={this.toggleMap} classes={{paper: 'fc-map-dialog'}}>
                 <FacilitiesMap facilities={facilities} facility={facility} isMapOpen={true}/>

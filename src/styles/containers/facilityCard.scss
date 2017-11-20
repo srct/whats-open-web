@@ -60,7 +60,7 @@
   overflow: hidden;
 }
 
-.fc-toggle-map-btn {
+.fc-toggle-map-btn-container {
   display: none !important;
 }
 
@@ -130,9 +130,24 @@
         overflow: inherit;
       }
 
-      .fc-toggle-map-btn {
+      .fc-toggle-map-btn-container {
         display: block !important;
+      }
+
+      .fc-toggle-map-btn {
         width: 100% !important;
+      }
+
+      .fc-extra-info-wrapper {
+        max-width: 100%;
+        width: 100%;
+        justify-content: center;
+        padding: 4px !important;
+      }
+
+      .fc-card-actions {
+        height: inherit !important;
+        padding-top: 8px !important;
       }
     }
   }
