@@ -3,7 +3,7 @@ image: node:6.5.0
 build:
   stage: build
   variables:
-    HOMEPAGE: "https://whatsopen.gmu.edu/beta/"
+    HOMEPAGE: "https://srct.gmu.edu/whats-open/"
   script:
   - >
     node -e "require('fs').writeFileSync('./package.json', JSON.stringify(Object.assign(require('./package.json'), {'homepage': process.env.HOMEPAGE}), null, 2));"
