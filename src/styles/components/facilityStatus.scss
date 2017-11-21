@@ -3,9 +3,9 @@
 .facility-status-text {
   align-items: center;
   border: 1.5px solid;
-  border-radius: 7px;
+  border-radius: 3px;
   padding: 5px;
-  font-weight: bold !important;
+  font-weight: bold !important; 
 
   &.facility-status-closed {
     color: rgb(244, 67, 54);

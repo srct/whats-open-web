@@ -180,7 +180,7 @@ class FacilityCard extends React.Component {
                         <Typography type={'caption'}>
                             <LocationOnIcon className={'fc-card-map-marker-icon'}/>
                         </Typography>
-                        <Typography type={'caption'} align={'center'} className={'fc-two-line-ellipsis'}>
+                        <Typography title={facility.facility_location.building} type={'caption'} align={'center'} className={'fc-two-line-ellipsis'}>
                             {facility.facility_location.building}
                         </Typography>
                     </Grid>
