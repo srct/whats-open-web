@@ -2,11 +2,9 @@ image: node:6.5.0
 
 build:
   stage: build
-  environment:
-    CI: false
   script:
   - npm install
-  - npm run build
+  - CI=false npm run build
   artifacts:
     paths:
     - build
