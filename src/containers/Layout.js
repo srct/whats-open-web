@@ -21,13 +21,19 @@ class Layout extends React.Component {
             than an API call). After retrieving from local storage, then call the API to see if there
             are any updates.
          */
-        if (localStorage.getItem('facilities')) {
-            const facilities = localStorage.getItem('facilities');
-            this.props.setFacilities(facilities)
-        }
-        if (localStorage.getItem('favorites')) {
-            const favorites = JSON.parse(localStorage.getItem('favorites'));
-            this.props.setAllFavorites(favorites);
+        try {
+            localStorage = window.localStorage;
+          
+            if (localStorage.getItem('facilities')) {
+                const facilities = localStorage.getItem('facilities');
+                this.props.setFacilities(facilities)
+            }
+            if (localStorage.getItem('favorites')) {
+                const favorites = JSON.parse(localStorage.getItem('favorites'));
+                this.props.setAllFavorites(favorites);
+            }
+        } catch(e) {
+            console.log('you should enable cookies so we can remember what places you favorite')
         }
 
         this.props.getFacilities()
