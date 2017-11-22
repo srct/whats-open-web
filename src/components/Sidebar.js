@@ -7,6 +7,7 @@ import TextwTitle from '../components/TextwTitle'
 import FacilitiesMap from '../components/FacilitiesMap'
 import classNames from 'classnames';
 import Button from 'material-ui/Button';
+import { toggleSidebar } from '../actions/ui';
 
 const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, toggleSidebarMap, facilities}) => {
 
@@ -22,7 +23,16 @@ const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, toggleSidebarMap, f
 
         return name;
     };
-
+    const handleSidebarMapToggle = () =>{
+        if (navigator.geolocation) {
+            console.log('Geolocation is supported!');
+            // navigator.geolocation.getCurrentPosition(()=>{})
+          }
+          else {
+            console.log('Geolocation is not supported for this Browser/OS.');
+          }
+          toggleSidebarMap()
+    }
     return (
         <Paper
             className={classNames(['sidebar-root', (!isSidebarOpen && 'sidebar-open'), (isSidebarOpen && 'sidebar-closed')])}>
@@ -48,7 +58,7 @@ const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, toggleSidebarMap, f
                 <FacilitiesMap isMapOpen={isSidebarMapOpen} facilities={facilities} facility={facility}/>
 
                 <Button className={'sidebar-toggle-map-btn'}
-                        onClick={toggleSidebarMap}>{isSidebarMapOpen ? 'Close Map' : 'Open Map'}</Button>
+                        onClick={handleSidebarMapToggle}>{isSidebarMapOpen ? 'Close Map' : 'Open Map'}</Button>
             </div>
         </Paper>
     )

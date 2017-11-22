@@ -50,20 +50,21 @@ class FacilitiesMap extends React.Component {
     }
     componentWillMount = () =>{
 
-        if ("geolocation" in navigator) {
-            const t1 = performance.now();
-            navigator.geolocation.getCurrentPosition((position) =>{
-                const newCoords = position.coords
-                this.setState({
-                    position:position.coords,
-                    positionReady:true,
-                })
-                const t2 = performance.now()
-                console.log("took "+(t2-t1)/1000 + " seconds to load your current position")
-            })
-         } else {
-            console.log('geolocation is not availabe for your computer')
-        }
+        // if ("geolocation" in navigator) {
+        //     const t1 = performance.now();
+        //     navigator.geolocation.getCurrentPosition((position) =>{
+        //         const newCoords = position.coords
+                // this.setState({
+                //     position:newCoords,
+                //     positionReady:true,
+                // })
+        //         const t2 = performance.now()
+        //         console.log("took "+(t2-t1)/1000 + " seconds to load your current position")
+        //     })
+        //  } else {
+        //     console.log('geolocation is not availabe for your computer')
+        // }
+       
     }
 
     // componentWillReceiveProps = (nextProps) =>{
@@ -97,7 +98,7 @@ class FacilitiesMap extends React.Component {
         const {position,positionReady,fitBounds,maxBounds,mappedRoute,fitBoundsOptions} = this.state
         console.log(fitBounds)
         return(
-        <div className={classes.mapContainer} style={{'height': isMapOpen ? '400px' : 0}}>
+        <div className={classes.mapContainer} style={{'transform': isMapOpen ? 'translateY(0px)' : 'translateY(436px)'}}>
         <Map
         onStyleLoad={(map,e)=>{
         map.addControl(new mapboxgl.GeolocateControl({
@@ -110,8 +111,9 @@ class FacilitiesMap extends React.Component {
         style="mapbox://styles/mapbox/streets-v9"
         movingMethod={'easeTo'}
         containerStyle={{
-          height: "100%",
-          width: "100%"
+          height: "400px",
+          width: "400px"
+
         }}
         fitBounds={fitBounds} 
         fitBoundsOptions={fitBoundsOptions} 
