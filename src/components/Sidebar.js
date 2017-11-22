@@ -36,12 +36,12 @@ const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, toggleSidebarMap, f
             <div className={'sidebar-label-holder'}>
                 <div className={'sidebar-label-row'}>
                     <TextwTitle label="Location" content="The Johnson Center"/>
-                    <TextwTitle label="Location" content="The Johnson Center"/>
+                    <TextwTitle label="Menu" content="https://amenufromaplace.com"/>
                 </div>
                 <div className={'sidebar-label-row'}>
                     <TextwTitle label="Location" content="The Johnson Center"/>
-                    <TextwTitle label="Location"
-                                content="The Johnson Center asdfasdfasdfasdf  asd fas as asd asdfasdfasf "/>
+                    <TextwTitle label="Labels"
+                                content=""/>
                 </div>
             </div>
             <div className={'sidebar-row2'}>
