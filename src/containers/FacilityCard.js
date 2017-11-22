@@ -8,11 +8,14 @@ import FavoriteButton from '../components/FavoriteButton';
 import FacilityCategory from '../components/FacilityCategory';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {addFavoriteFacility, removeFavoriteFacility, setSidebar} from '../actions/ui';
+import {addFavoriteFacility, removeFavoriteFacility, setSelectedFacility} from '../actions/ui';
 import DirectionsWalkIcon from 'material-ui-icons/DirectionsWalk';
 import LocationOnIcon from 'material-ui-icons/LocationOn';
 import {removeBrackets} from '../utils/nameUtils';
-import classnames from 'classnames'
+import classnames from 'classnames';
+import FacilitiesMap from '../components/FacilitiesMap';
+import Dialog, {DialogTitle, DialogContent, DialogActions} from 'material-ui/Dialog';
+import Button from 'material-ui/Button';
 
 import {
     amber,
@@ -39,10 +42,22 @@ import {
 const materialColors = [red, pink, purple, deepPurple, indigo, blue, lightBlue, cyan, teal, green,
     lightGreen, lime, yellow, amber, orange, deepOrange, brown, grey, blueGrey];
 
-const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, removeFavoriteFacility, setSidebar}) => {
+class FacilityCard extends React.Component {
 
-    const handleClick = () => {
-        setSidebar(facility)
+    constructor(props){
+        super(props);
+        this.state = {
+            isHovered: false,
+            isMapOpen: false
+        }
+    }
+
+    handleCardClick = () => {
+        this.props.setSelectedFacility(this.props.facility);
+    };
+
+    toggleMap = () => {
+        this.setState({isMapOpen: !this.state.isMapOpen});
     };
 
     /**
@@ -53,7 +68,7 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
      * @returns {string} The initials.
      * @deprecated
      */
-    const getInitials = name => {
+    getInitials = name => {
         //TODO: May want to allow initials to be more than 2 characters or use a different strategy to decide which characters to use.
 
         let words = removeBrackets(name).split(/[ -]+/); //TODO: Add case change to the regex (ex. IndAroma should be IA, not I).
@@ -75,7 +90,6 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
         return words[0].substring(0, 1).toUpperCase() + words[words.length - 1].substring(0, 1).toUpperCase();
     };
 
-
     /**
      * Gets a material color based off the facility's slug.
      *
@@ -83,7 +97,7 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
      * @return {string} The color code (in hex format) of a material color.
      * @deprecated
      */
-    const materialColorFromSlug = slug => {
+    materialColorFromSlug = slug => {
 
         /*
             Generates the hash code...
@@ -111,122 +125,85 @@ const FacilityCard = ({classes, facility, favorites, addFavoriteFacility, remove
         return materialColors[Math.abs(hash) % 19][((Math.abs(hash) % 7) + 3) * 100];
     };
 
-    /**
-     * By adding this property to an element, the text will not exceed 2 lines. On webkit browsers,
-     * -webkit-line-clamp will show ellipsis. This checks to see if the browser is webkit and uses
-     * an appropriate class.
-     */
-    const twoLineEllipsis = CSS.supports('-webkit-line-clamp', 2) ? classes.twoLineEllipsisWebkit : classes.twoLineEllipsis;
+    handleMouseEnter = () =>{
+        this.setState({
+            isHovered:true
+        })
+    };
 
-    return (
-        <Card onClick={handleClick} className={classes.root} raised>
-            <CardMedia className={classes.media}
+    handleMouseLeave = () =>{
+        this.setState({
+            isHovered:false
+        })
+    };
+
+    render() {
+        const {facility, facilities, favorites, selectedFacility, addFavoriteFacility, removeFavoriteFacility} = this.props;
+
+        const isSelected = selectedFacility.slug === facility.slug;
+
+        return (
+        <Card onClick={this.handleCardClick} className={classnames('fc-root', isSelected && 'fc-selected')}
+              onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} raised>
+            <CardMedia className={'fc-media'}
                        image={'https://gmucampus.files.wordpress.com/2010/09/00sothside2.jpg'}/>
 
-            <div className={classes.logoContainer}>
-                <CardMedia className={classes.logo}
+            <div className={'fc-logo-container'}>
+                <CardMedia className={'fc-logo'}
                            image={'https://upload.wikimedia.org/wikipedia/en/d/d3/Starbucks_Corporation_Logo_2011.svg'}/>
             </div>
 
 
             <FavoriteButton facility={facility} isFavorite={favorites.includes(facility.slug)}
-                            addFavoriteFacility={addFavoriteFacility} removeFavoriteFacility={removeFavoriteFacility}/>
+                            addFavoriteFacility={addFavoriteFacility} isHovered={this.state.isHovered} removeFavoriteFacility={removeFavoriteFacility}/>
 
-            <CardContent className={classes.cardContent}>
-                <Grid container align={'center'} direction={'column'} className={classes.smallGridContainerSpacing}>
-                    <Grid item className={classes.smallGridItemSpacing}>
-                        <Typography type={'title'} align={'center'} className={classnames(classes.title, twoLineEllipsis)}>
+            <CardContent className={'fc-card-content'}>
+                <Grid container align={'center'} direction={'column'} className={'fc-small-grid-container-spacing'}>
+                    <Grid item className={classnames('fc-small-grid-item-spacing', 'fc-ellipsis-container')}>
+                        <Typography type={'subheading'} align={'center'} className={classnames('fc-title', 'fc-one-line-ellipsis')}>
                             {removeBrackets(facility.facility_name)}
                         </Typography>
                     </Grid>
-                    <Grid item className={classes.smallGridItemSpacing}>
+                    <Grid item className={'fc-small-grid-item-spacing'}>
                         <FacilityCategory category={facility.facility_category} />
                     </Grid>
                 </Grid>
-            </CardContent>
 
-            <CardActions>
-                <Grid container justify={'space-around'}>
-                    <Grid item className={classes.extraInfoWrapper}>
+                <Grid container justify={'space-around'} className={'fc-extra-info-wrapper'}>
+                    <Grid item className={'fc-extra-info'}>
                         <FacilityStatus facility={facility}/>
                     </Grid>
 
-                    <Grid item className={classes.extraInfoWrapper}>
+                    <Grid item className={'fc-extra-info'}>
                         <Typography type={'caption'}>
-                            <LocationOnIcon/>
+                            <LocationOnIcon className={'fc-card-map-marker-icon'}/>
                         </Typography>
-                        <Typography type={'caption'} align={'center'} className={twoLineEllipsis}>
+                        <Typography title={facility.facility_location.building} type={'caption'} align={'center'} className={'fc-two-line-ellipsis'}>
                             {facility.facility_location.building}
                         </Typography>
                     </Grid>
                 </Grid>
-            </CardActions>
+
+                <Grid item className={'fc-toggle-map-btn-container'}>
+                    <Button className={'fc-toggle-map-btn'} onClick={this.toggleMap}>Open Map</Button>
+                </Grid>
+            </CardContent>
+
+            <Dialog open={this.state.isMapOpen} onRequestClose={this.toggleMap} classes={{paper: 'fc-map-dialog'}}>
+                <FacilitiesMap facilities={facilities} facility={facility} isMapOpen={true}/>
+            </Dialog>
         </Card>
     )
-};
-const styleSheet = {
-    root: {
-        width: 250,
-        borderRadius: '5px',
-        position: 'relative'
-    },
-    cardContent: {
-        padding: '8px 4px 0 4px !important'
-    },
-    smallGridContainerSpacing: {
-        margin: '-2px -8px !important'
-    },
-    smallGridItemSpacing: {
-        padding: '3px 8px !important'
-    },
-    media: {
-        flex: 1,
-        height: '115px',
-    },
-    logoContainer: {
-        width: '100px',
-        height: '100px',
-        margin: 'auto',
-        marginTop: '-60px',
-        borderRadius: '90px',
-        border: '5px solid white',
-    },
-    logo: {
-        width: '100px',
-        height: '100px',
-        margin: 'auto',
-        borderRadius: '90px',
-        boxShadow: '0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12)',
-    },
-    title: {
-        fontWeight: 'bold'
-    },
-    extraInfoWrapper: {
-        display: 'flex',
-        alignItems: 'center',
-        maxWidth: '50%'
-    },
-    twoLineEllipsis: {
-        position: 'relative',
-        lineHeight: '1em',
-        maxHeight: '2em',
-        overflow: 'hidden',
-    },
-    twoLineEllipsisWebkit: {
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        display: '-webkit-box',
-        WebkitLineClamp: 2,
-        WebkitBoxOrient: 'vertical',
     }
-};
+}
 
 const mapStateToProps = state => ({
-    favorites: state.ui.favorites
+    favorites: state.ui.favorites,
+    selectedFacility: state.ui.selectedFacility
 });
 
-export default compose(connect(mapStateToProps, {
-    setSidebar,
+export default connect(mapStateToProps, {
+    setSelectedFacility,
     addFavoriteFacility,
     removeFavoriteFacility
-}), withStyles(styleSheet))(FacilityCard);
+})(FacilityCard);

@@ -2,10 +2,9 @@ import {
     ADD_FAVORITE_FACILITY,
     REMOVE_FAVORITE_FACILITY,
     SET_SEARCH_TERM,
-    SET_SIDEBAR,
     TOGGLE_SIDEBAR,
     TOGGLE_SIDEBAR_MAP,
-    SET_ALL_FAVORITES
+    SET_ALL_FAVORITES, SET_SELECTED_FACILITY
 } from './action-types';
 
 export const toggleSidebar = () => ({
@@ -16,9 +15,9 @@ export const toggleSidebarMap = () => ({
    type: TOGGLE_SIDEBAR_MAP,
 });
 
-export const setSidebar = (facility) => ({
-    type: SET_SIDEBAR,
-    facility,
+export const setSelectedFacility = (facility) => ({
+   type: SET_SELECTED_FACILITY,
+   facility
 });
 
 export const setSearchTerm = (term) => ({

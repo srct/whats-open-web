@@ -1,5 +1,4 @@
 import { SET_FACILITIES,GET_FACILITIES } from '../actions/action-types'
-
 const defaultState = {
     isLoading:false,
     data:[]
@@ -12,6 +11,7 @@ export const facilities = (state = defaultState, action) => {
                 isLoading:true,
             });
         case SET_FACILITIES:
+        
             return {
                 data:action.facilities,
                 isLoading:false

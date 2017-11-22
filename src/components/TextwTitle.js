@@ -1,32 +1,16 @@
 import React from 'react'
 import {withStyles } from 'material-ui/styles';
 
-const TextwTitle = ({classes,label,content}) => {
+const TextwTitle = ({label,content}) => {
 
  return(<div>
-     <div className={classes.label}>
+     <div className={'text-w-title-label'}>
         {label}
      </div>
-     <div className={classes.content}>
+     <div className={'text-w-title-content'}>
          {content}
      </div>
  </div>)
-}
-const styleSheet  = {
-    label:{
-        fontWeight:400,
-        fontSize:"12px",
-        color:"rgba(0,0,0,.54)",
-    },
-    content:{
-        fontWeight:400,
-        fontSize:"14px",
-        textOverflow: 'ellipsis',
-        width:176,
-        whiteSpace:'nowrap',
-        overflow:'hidden',
+};
 
-    }
-}
-
-export default withStyles(styleSheet)(TextwTitle) 
+export default TextwTitle;

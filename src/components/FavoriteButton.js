@@ -4,16 +4,18 @@ import pink from 'material-ui/colors/pink';
 import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder';
 import FavoriteIcon from 'material-ui-icons/Favorite';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 class FavoriteButton extends React.Component {
 
     constructor(props) {
         super(props);
-
-        this.handleClick = this.handleClick.bind(this);
+        this.state = {
+            isHovered: false,
+        }
     }
 
-    handleClick(e) {
+    handleClick = (e) => {
         e.stopPropagation(); //Stops the card from being selected in the sidebar.
 
         if (this.props.isFavorite) {
@@ -21,36 +23,24 @@ class FavoriteButton extends React.Component {
         } else {
             this.props.addFavoriteFacility(this.props.facility.slug);
         }
-    }
+    };
+
 
     render() {
+        const {isHovered} = this.props;
         if (this.props.isFavorite) {
-            return (<FavoriteIcon onClick={this.handleClick} className={this.props.classes.heart}/>);
+            return (<FavoriteIcon onClick={this.handleClick} className={classNames('favorite-button-heart', 'favorite-button-heart-favorited')}/>);
         }
 
-        return (<FavoriteBorderIcon onClick={this.handleClick} className={this.props.classes.heart}/>);
+        return (<FavoriteBorderIcon onClick={this.handleClick}  className={classNames('favorite-button-heart', isHovered ? 'favorite-button-heart-hover' : 'favorite-button-heart-no-hover')}/>);
     }
 }
 
 FavoriteButton.propTypes = {
-    classes: PropTypes.object.isRequired,
     facility: PropTypes.object.isRequired,
     isFavorite: PropTypes.bool.isRequired,
     addFavoriteFacility: PropTypes.func.isRequired,
     removeFavoriteFacility: PropTypes.func.isRequired,
 };
 
-const styleSheet = {
-    heart: {
-        position: 'absolute',
-        top: '0px',
-        right: '0px',
-        height: '24px',
-        width: '24px',
-        padding: '5px',
-        cursor: 'pointer',
-        color: pink[500]
-    }
-};
-
-export default withStyles(styleSheet)(FavoriteButton);
+export default FavoriteButton;

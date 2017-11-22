@@ -24,3 +24,4 @@ yarn-error.log*
 #local dotfiles
 /.storybook
 /src/stories
+/src/styles/whatsOpen.css

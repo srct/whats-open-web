@@ -11,7 +11,7 @@ import FitnessCenterIcon from 'material-ui-icons/FitnessCenter';
 import ShoppingCartIcon from 'material-ui-icons/ShoppingCart'
 import {red, blue, brown, grey, teal, deepOrange, lime} from 'material-ui/colors';
 
-const FacilityCategory = ({classes, category}) => {
+const FacilityCategory = ({category}) => {
 
     const generateAvatar = () => {
         let color;
@@ -42,43 +42,43 @@ const FacilityCategory = ({classes, category}) => {
             case 2: //Restaurant
             case 5: //Take out dining hall
                 color = red[400];
-                icon = <RestaurantIcon className={classes.categoryIcon}/>;
+                icon = <RestaurantIcon className={'facility-category-icon'}/>;
                 break;
             case 3: //Convenience Store
                 color = blue[500];
-                icon = <StoreIcon className={classes.categoryIcon}/>;
+                icon = <StoreIcon className={'facility-category-icon'}/>;
                 break;
             case 4: //Cafe
                 color = brown[500];
-                icon = <LocalCafeIcon className={classes.categoryIcon}/>;
+                icon = <LocalCafeIcon className={'facility-category-icon'}/>;
                 break;
             case 6: //Athletic Facility
                 color = teal[500];
-                icon = <FitnessCenterIcon className={classes.categoryIcon}/>;
+                icon = <FitnessCenterIcon className={'facility-category-icon'}/>;
                 break;
             case 7: //TODO: Print Services - NOT IN API
                 color = grey[500];
-                icon = <LocalPrintShopIcon className={classes.categoryIcon} />;
+                icon = <LocalPrintShopIcon className={'facility-category-icon'} />;
                 break;
             case 8: //TODO Mailroom - NOT IN API
                 color = deepOrange[500];
-                icon = <LocalPostOfficeIcon className={classes.categoryIcon}/>;
+                icon = <LocalPostOfficeIcon className={'facility-category-icon'}/>;
                 break;
             default:
                 color = lime[500];
-                icon = <ShoppingCartIcon className={classes.categoryIcon}/>
+                icon = <ShoppingCartIcon className={'facility-category-icon'}/>
         }
 
         return (
-            <Avatar className={classes.avatar} style={{backgroundColor: color}}>
+            <Avatar className={'facility-category-avatar'} style={{backgroundColor: color}}>
                 {icon}
             </Avatar>
         )
     };
 
     return (
-        <div className={classes.categoryWrapper}>
-            {generateAvatar()}
+        <div className={'facility-category-wrapper'}>
+            {/* {generateAvatar()} */}
             <Typography type={'body1'} noWrap>
                 {category.name}
             </Typography>
@@ -86,21 +86,4 @@ const FacilityCategory = ({classes, category}) => {
     )
 };
 
-const styleSheet = {
-    categoryWrapper: {
-        display: 'flex',
-        alignItems: 'center'
-    },
-    categoryIcon: {
-        width: '14px !important',
-        height: '14px !important',
-        padding: '4px !important',
-    },
-    avatar: {
-        width: 'auto !important',
-        height: 'auto !important',
-        marginRight: '8px'
-    },
-};
-
-export default withStyles(styleSheet)(FacilityCategory);
+export default FacilityCategory;
