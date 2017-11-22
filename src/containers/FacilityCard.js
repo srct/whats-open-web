@@ -164,7 +164,7 @@ class FacilityCard extends React.Component {
                             {removeBrackets(facility.facility_name)}
                         </Typography>
                     </Grid>
-                    <Grid item justify={'center'} className={'fc-small-grid-item-spacing'}>
+                    <Grid item className={'fc-small-grid-item-spacing'}>
                         <FacilityCategory category={facility.facility_category} />
                     </Grid>
                 </Grid>
