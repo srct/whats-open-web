@@ -5,6 +5,7 @@ build:
   variables:
     HOMEPAGE: "https://cefaoycoympc.srct.gmu.edu/"
   script:
+  - npm install -g yarn
   - >
     node -e "require('fs').writeFileSync('./package.json', JSON.stringify(Object.assign(require('./package.json'), {'homepage': process.env.HOMEPAGE}), null, 2));"
   - yarn install
