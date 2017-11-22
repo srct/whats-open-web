@@ -20,10 +20,20 @@
   color: rgba(0, 0, 0, 0);
 }
 
-@media screen and (min-width: 1024px) and (max-width: 1679px) {
+//Between lg and xl
+@media screen and (min-width: map-get($breakpoints, lg)) and (max-width: map-get($breakpoints, xl)) {
   .favorite-button-heart {
-    height: 24px * $favorite-button-md-scale !important;
-    width: 24px * $favorite-button-md-scale !important;
-    padding: 5px * $favorite-button-md-scale !important;
+    height: 24px * $favorite-button-lg-scale !important;
+    width: 24px * $favorite-button-lg-scale !important;
+    padding: 5px * $favorite-button-lg-scale !important;
+  }
+}
+
+//Under lg
+@media screen and (max-width: map-get($breakpoints, lg)) {
+  .favorite-button-heart {
+    height: 24px * $favorite-button-sm-scale !important;
+    width: 24px * $favorite-button-sm-scale !important;
+    padding: 5px * $favorite-button-sm-scale !important;
   }
 }

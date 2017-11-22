@@ -168,15 +168,13 @@ class FacilityCard extends React.Component {
                         <FacilityCategory category={facility.facility_category} />
                     </Grid>
                 </Grid>
-            </CardContent>
 
-            <CardActions className={'fc-card-actions'}>
-                <Grid container justify={'space-around'}>
-                    <Grid item className={'fc-extra-info-wrapper'}>
+                <Grid container justify={'space-around'} className={'fc-extra-info-wrapper'}>
+                    <Grid item className={'fc-extra-info'}>
                         <FacilityStatus facility={facility}/>
                     </Grid>
 
-                    <Grid item className={'fc-extra-info-wrapper'}>
+                    <Grid item className={'fc-extra-info'}>
                         <Typography type={'caption'}>
                             <LocationOnIcon className={'fc-card-map-marker-icon'}/>
                         </Typography>
@@ -184,12 +182,12 @@ class FacilityCard extends React.Component {
                             {facility.facility_location.building}
                         </Typography>
                     </Grid>
-
-                    <Grid item className={classnames('fc-extra-info-wrapper', 'fc-toggle-map-btn-container')}>
-                        <Button className={'fc-toggle-map-btn'} onClick={this.toggleMap}>Open Map</Button>
-                    </Grid>
                 </Grid>
-            </CardActions>
+
+                <Grid item className={'fc-toggle-map-btn-container'}>
+                    <Button className={'fc-toggle-map-btn'} onClick={this.toggleMap}>Open Map</Button>
+                </Grid>
+            </CardContent>
 
             <Dialog open={this.state.isMapOpen} onRequestClose={this.toggleMap} classes={{paper: 'fc-map-dialog'}}>
                 <FacilitiesMap facilities={facilities} facility={facility} isMapOpen={true}/>

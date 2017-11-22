@@ -1,10 +1,17 @@
+$breakpoints: (
+        xs: 360px,
+        sm: 600px,
+        md: 900px,
+        lg: 1024px,
+        xl: 1680px,
+);
+
 /* FacilityCard */
 
-/*
-  This is the scaling that is applied to medium sized devices.
- */
-$fc-mdScale: .8;
+$fc-lg-scale: .8;
+$fc-sm-scale: .75;
 
 /* Favorite Button */
 
-$favorite-button-md-scale: .8;
+$favorite-button-lg-scale: .8;
+$favorite-button-sm-scale: .75;

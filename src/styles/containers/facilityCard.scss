@@ -5,7 +5,7 @@
 }
 
 .fc-card-content {
-  padding: 8px 4px 0 4px !important;
+  padding: 8px 4px !important;
 }
 
 .fc-small-grid-container-spacing {
@@ -47,10 +47,14 @@
   font-weight: bold !important;
 }
 
-.fc-extra-info-wrapper {
+.fc-extra-info {
   display: flex;
   align-items: center;
   max-width: 50%;
+}
+
+.fc-extra-info-wrapper {
+  padding-top: 8px;
 }
 
 .fc-two-line-ellipsis {
@@ -82,9 +86,10 @@
   overflow: hidden;
 }
 
-@media screen and (min-width: 1024px) and (max-width: 1679px) {
+//Between lg and xl
+@media screen and (min-width: map-get($breakpoints, lg)) and (max-width: map-get($breakpoints, xl)) {
   .fc-root {
-    width: 250px * $fc-mdScale;
+    width: 250px * $fc-lg-scale;
     height: 230px;
   }
 
@@ -93,24 +98,23 @@
   }
 
   .fc-media {
-    border-radius: 5px 5px 0 0;
-    height: 115px * $fc-mdScale;
+    height: 115px * $fc-lg-scale;
   }
 
   .fc-logo-container {
-    width: 100px * $fc-mdScale;
-    height: 100px * $fc-mdScale;
-    margin-top: -60px * $fc-mdScale;
+    width: 100px * $fc-lg-scale;
+    height: 100px * $fc-lg-scale;
+    margin-top: -60px * $fc-lg-scale;
     border-radius: 50%;
-    border: 5px * $fc-mdScale solid white;
+    border: 5px * $fc-lg-scale solid white;
   }
 
   .fc-logo {
-    width: 100px * $fc-mdScale;
-    height: 100px * $fc-mdScale;
+    width: 100px * $fc-lg-scale;
+    height: 100px * $fc-lg-scale;
   }
 
-  .fc-extra-info-wrapper {
+  .fc-extra-info {
     font-size: 11px;
   }
 
@@ -120,10 +124,9 @@
   }
 }
 
-@media screen and (max-width: 1023px) {
+//Under lg
+@media screen and (max-width: map-get($breakpoints, lg)) {
   .fc-root {
-    @include transition(150ms ease-in-out);
-
     &.fc-selected {
       .fc-one-line-ellipsis {
         white-space: normal;
@@ -138,18 +141,47 @@
         width: 100% !important;
       }
 
-      .fc-extra-info-wrapper {
-        max-width: 100%;
+      .fc-extra-info {
+        max-width: 100% ;
         width: 100%;
         justify-content: center;
-        padding: 4px !important;
+        padding: 4px 8px !important;
       }
 
-      .fc-card-actions {
-        height: inherit !important;
-        padding-top: 8px !important;
+      .fc-card-content {
+        padding-bottom: 0 !important;
       }
     }
+  }
+
+  .fc-small-grid-item-spacing {
+    padding: 0 8px !important;
+  }
+
+  .fc-media {
+    height: 115px * $fc-sm-scale;
+  }
+
+  .fc-logo-container {
+    width: 100px * $fc-sm-scale;
+    height: 100px * $fc-sm-scale;
+    margin-top: -60px * $fc-sm-scale;
+    border-radius: 50%;
+    border: 5px * $fc-sm-scale solid white;
+  }
+
+  .fc-logo {
+    width: 100px * $fc-sm-scale;
+    height: 100px * $fc-sm-scale;
+  }
+
+  .fc-extra-info {
+    font-size: 11px;
+  }
+
+  .fc-card-map-marker-icon {
+    height: 20px !important;
+    width: 20px !important;
   }
 
   .fc-map-dialog {
