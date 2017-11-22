@@ -7,7 +7,7 @@ build:
   script:
   - >
     node -e "require('fs').writeFileSync('./package.json', JSON.stringify(Object.assign(require('./package.json'), {'homepage': process.env.HOMEPAGE}), null, 2));"
-  - npm install
+  - yarn install
   - CI=false npm run build
   artifacts:
     paths:
