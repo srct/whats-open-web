@@ -9,7 +9,7 @@ const CardContainer = ({searchTerm, facilities}) => {
         return name.includes(searchTerm.toLowerCase())
     }
     return (
-        <Grid container className={'card-container-root'} spacing={24} justify={'center'} align={'flex-end'}>
+        <Grid container className={'card-container-root'} spacing={24} justify={'center'} alignItems={'flex-end'}>
             {facilities.filter(filterCards).map(item =>{
                 return(
                     <Grid key={item.slug} item>
