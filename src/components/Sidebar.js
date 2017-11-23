@@ -57,8 +57,8 @@ const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, toggleSidebarMap, f
             <div className={'sidebar-row2'}>
                 <FacilitiesMap isMapOpen={isSidebarMapOpen} facilities={facilities} facility={facility}/>
 
-                <Button className={'sidebar-toggle-map-btn'}
-                        onClick={handleSidebarMapToggle}>{isSidebarMapOpen ? 'Close Map' : 'Open Map'}</Button>
+                {/* <Button className={'sidebar-toggle-map-btn'}
+                        onClick={handleSidebarMapToggle}>{isSidebarMapOpen ? 'Close Map' : 'Open Map'}</Button> */}
             </div>
         </Paper>
     )

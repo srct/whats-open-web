@@ -4,6 +4,7 @@ import MapboxClient from 'mapbox'
 import mapboxgl from 'mapbox-gl'
 import {withStyles} from 'material-ui/styles';
 import {addRoute,getGeoLine} from '../utils/mapboxUtils';
+import MapDialog from './MapDialog';
 
 const token = "pk.eyJ1IjoibWR1ZmZ5OCIsImEiOiJjaXk2a2lxODQwMDdyMnZzYTdyb3M4ZTloIn0.mSocl7zUnZBO6-CV9cvmnA";
 let starbucksLogo = new Image();
@@ -13,8 +14,10 @@ starbucksLogo.height = 60
 const images = ['starbucks',starbucksLogo,{pixelRatio:3}]
 const Map = ReactMapboxGl({
   accessToken: token,
+  interactive:false,
+  attributionControl:false,
 });
-const client = new MapboxClient(token);
+// const client = new MapboxClient(token);
 
 const Mark = {
 backgroundColor: '#e74c3c',
@@ -45,7 +48,8 @@ class FacilitiesMap extends React.Component {
                 [ -77.295213,38.835720]  // Northeast coordinates
             ],
             fitBoundsOptions:{
-            }
+            },
+            mapDialogOpen:false
         }
     }
     componentWillMount = () =>{
@@ -91,34 +95,57 @@ class FacilitiesMap extends React.Component {
 
     //     }
     // }
-
+    handleRequestClose = () => {
+        this.setState({
+            mapDialogOpen:false,
+        })
+    }
 
     render (){ 
         const {facilities,facility,classes,isMapOpen} = this.props
-        const {position,positionReady,fitBounds,maxBounds,mappedRoute,fitBoundsOptions} = this.state
+        const {position,positionReady,fitBounds,maxBounds,mappedRoute,fitBoundsOptions,mapDialogOpen} = this.state
         console.log(fitBounds)
+        let center,zoom;
+        try{
+            center = facility.facility_location.coordinate_location.coordinates;
+            zoom = 17;
+        }catch(e){
+            center = [(maxBounds[0][0]+maxBounds[1][0])/2,(maxBounds[0][1]+maxBounds[1][1])/2]
+            zoom=13;
+        }
         return(
         <div className={classes.mapContainer} style={{'transform': isMapOpen ? 'translateY(0px)' : 'translateY(436px)'}}>
         <Map
         onStyleLoad={(map,e)=>{
-        map.addControl(new mapboxgl.GeolocateControl({
-            positionOptions: {
-                enableHighAccuracy: true
-            },
-            trackUserLocation: true
-        }));
+        // map.addControl(new mapboxgl.GeolocateControl({
+        //     positionOptions: {
+        //         enableHighAccuracy: true
+        //     },
+        //     trackUserLocation: true
+        // }));
+           
+        }}
+        onClick={(map,e)=>{
+            this.setState({
+                mapDialogOpen: true
+            })
+            console.log('changed')
         }}
         style="mapbox://styles/mapbox/streets-v9"
         movingMethod={'easeTo'}
         containerStyle={{
-          height: "400px",
-          width: "400px"
+          height: "200px",
+          width: "380px",
+          margin:"10px",
+          borderRadius:'5px',
+          cursor: 'pointer',
 
         }}
+        center={center}
+        zoom={[zoom]}
         fitBounds={fitBounds} 
         fitBoundsOptions={fitBoundsOptions} 
         maxBounds={maxBounds}>
-         
             {(facilities.length > 0) && facilities.map((item) =>{
                     return(
                        <Marker
@@ -132,6 +159,13 @@ class FacilitiesMap extends React.Component {
             })} 
              
       </Map>
+      <MapDialog
+          open={mapDialogOpen}
+          facilities={facilities}
+          facility={facility}
+          maxBounds={maxBounds}
+          onRequestClose={this.handleRequestClose}
+        />
         </div>
     )
 }
