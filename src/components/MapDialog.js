@@ -62,7 +62,6 @@ class MapDialog extends React.Component {
             positionOptions: {
                 enableHighAccuracy: true,
             },
-            fitBoundsOptions:map.fitBounds(maxBounds, {}),
             trackUserLocation: true
         }));
            
