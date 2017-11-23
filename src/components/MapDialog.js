@@ -34,7 +34,7 @@ const Map = ReactMapboxGl({
   starbucksLogo.height = 60
   const images = ['starbucks',starbucksLogo,{pixelRatio:3}]
 
-class SimpleDialog extends React.Component {
+class MapDialog extends React.Component {
   handleRequestClose = () => {
     this.props.onRequestClose(this.props.selectedValue);
   };
@@ -60,8 +60,9 @@ class SimpleDialog extends React.Component {
         onStyleLoad={(map,e)=>{
         map.addControl(new mapboxgl.GeolocateControl({
             positionOptions: {
-                enableHighAccuracy: true
+                enableHighAccuracy: true,
             },
+            fitBoundsOptions:map.fitBounds(maxBounds, {}),
             trackUserLocation: true
         }));
            
@@ -101,11 +102,10 @@ class SimpleDialog extends React.Component {
   }
 }
 
-SimpleDialog.propTypes = {
+MapDialog.propTypes = {
   classes: PropTypes.object.isRequired,
   onRequestClose: PropTypes.func,
   selectedValue: PropTypes.string,
 };
 
-const MapDialog = withStyles(styles)(SimpleDialog);
-export default MapDialog 
+export default withStyles(styles)(MapDialog);
