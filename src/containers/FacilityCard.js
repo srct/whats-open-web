@@ -53,7 +53,8 @@ class FacilityCard extends React.Component {
     }
 
     handleCardClick = () => {
-        this.props.setSelectedFacility(this.props.facility);
+        const isSelected = this.props.selectedFacility.slug === this.props.facility.slug;
+        this.props.setSelectedFacility(isSelected ? null : this.props.facility);
     };
 
     toggleMap = () => {
@@ -158,7 +159,7 @@ class FacilityCard extends React.Component {
                             addFavoriteFacility={addFavoriteFacility} isHovered={this.state.isHovered} removeFavoriteFacility={removeFavoriteFacility}/>
 
             <CardContent className={'fc-card-content'}>
-                <Grid container align={'center'} direction={'column'} className={'fc-small-grid-container-spacing'}>
+                <Grid container alignItems={'center'} direction={'column'} className={'fc-small-grid-container-spacing'}>
                     <Grid item className={classnames('fc-small-grid-item-spacing', 'fc-ellipsis-container')}>
                         <Typography type={'subheading'} align={'center'} className={classnames('fc-title', 'fc-one-line-ellipsis')}>
                             {removeBrackets(facility.facility_name)}
