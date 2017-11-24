@@ -44,15 +44,7 @@ class MapDialog extends React.Component {
   };
 
   render() {
-    const { classes, selectedValue,facility,facilities,maxBounds,...other } = this.props;
-    let center,zoom
-    try{
-        center = facility.facility_location.coordinate_location.coordinates;
-        zoom = 17;
-    }catch(e){
-        zoom=13;
-        center = [(maxBounds[0][0]+maxBounds[1][0])/2,(maxBounds[0][1]+maxBounds[1][1])/2]
-    }
+    const { classes, selectedValue,facility,facilities,zoom,center,maxBounds,...other } = this.props;
 
     return (
       <Dialog onRequestClose={this.handleRequestClose} {...other}>

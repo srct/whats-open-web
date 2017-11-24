@@ -105,10 +105,10 @@ class FacilitiesMap extends React.Component {
         let center,zoom;
         try{
             center = facility.facility_location.coordinate_location.coordinates;
-            zoom = 17;
+            zoom = [17];
         }catch(e){
             center = [(maxBounds[0][0]+maxBounds[1][0])/2,(maxBounds[0][1]+maxBounds[1][1])/2]
-            zoom=13;
+            zoom=[13];
         }
         return(
         <div className={classes.mapContainer} style={{'transform': isMapOpen ? 'translateY(0px)' : 'translateY(436px)'}}>
@@ -139,9 +139,10 @@ class FacilitiesMap extends React.Component {
 
         }}
         center={center}
-        zoom={[zoom]}
+        zoom={zoom}
         fitBounds={fitBounds} 
         fitBoundsOptions={fitBoundsOptions} 
+        zoom={zoom}
         maxBounds={maxBounds}>
             {(facilities.length > 0) && facilities.map((item) =>{
                     return(
@@ -161,6 +162,8 @@ class FacilitiesMap extends React.Component {
           facilities={facilities}
           facility={facility}
           maxBounds={maxBounds}
+          zoom={zoom}
+          center={center}
           onRequestClose={this.handleRequestClose}
         />
         </div>
