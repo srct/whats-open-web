@@ -3,7 +3,11 @@
 }
 
 .sidebar-label-holder {
-  margin: 16px;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+.sidebar-label-holder>*{
+    margin-bottom:16px;
 }
 
 .sidebar-open {

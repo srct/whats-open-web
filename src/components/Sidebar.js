@@ -44,15 +44,11 @@ const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, toggleSidebarMap, f
             </div>
             <Divider className={'sidebar-divider'}/>
             <div className={'sidebar-label-holder'}>
-                <div className={'sidebar-label-row'}>
                     <TextwTitle label="Location" content="The Johnson Center"/>
                     <TextwTitle label="Menu" content="https://amenufromaplace.com"/>
-                </div>
-                <div className={'sidebar-label-row'}>
                     <TextwTitle label="Location" content="The Johnson Center"/>
                     <TextwTitle label="Labels"
                                 content=""/>
-                </div>
             </div>
             <div className={'sidebar-row2'}>
                 <FacilitiesMap isMapOpen={isSidebarMapOpen} facilities={facilities} facility={facility}/>

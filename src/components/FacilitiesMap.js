@@ -137,7 +137,7 @@ class FacilitiesMap extends React.Component {
           height: "200px",
           width: "380px",
           margin:"10px",
-          borderRadius:'5px',
+          borderRadius:'3px',
           cursor: 'pointer',
 
         }}
