@@ -142,8 +142,18 @@ class FacilityCard extends React.Component {
 
     render() {
         const {facility, facilities, favorites, selectedFacility, addFavoriteFacility, removeFavoriteFacility} = this.props;
+        const {isMapOpen, maxBounds} = this.state;
 
         const isSelected = selectedFacility.slug === facility.slug;
+
+        let mapCenter, mapZoom;
+        try {
+            mapCenter = facility.facility_location.coordinate_location.coordinates;
+            mapZoom = [17];
+        } catch(e) {
+            mapCenter = [(maxBounds[0][0]+maxBounds[1][0])/2,(maxBounds[0][1]+maxBounds[1][1])/2];
+            mapZoom=[13];
+        }
 
         return (
         <Card onClick={this.handleCardClick} className={classnames('fc-root', isSelected && 'fc-selected')}
@@ -193,10 +203,12 @@ class FacilityCard extends React.Component {
             </CardContent>
 
             <MapDialog
-                open={this.state.isMapOpen}
+                open={isMapOpen}
                 facilities={facilities}
                 facility={facility}
-                maxBounds={this.state.maxBounds}
+                maxBounds={maxBounds}
+                zoom={mapZoom}
+                center={mapCenter}
                 onRequestClose={this.toggleMap}
             />
         </Card>
