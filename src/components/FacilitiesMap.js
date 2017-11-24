@@ -3,7 +3,7 @@ import ReactMapboxGl, { Layer, Feature,Marker,Source,GeoJSONLayer } from "react-
 import MapboxClient from 'mapbox'
 import mapboxgl from 'mapbox-gl'
 import {withStyles} from 'material-ui/styles';
-import {addRoute,getGeoLine} from '../utils/mapboxUtils';
+import {addRoute,getGeoLine, getMaxBounds} from '../utils/mapboxUtils';
 import MapDialog from './MapDialog';
 
 const token = "pk.eyJ1IjoibWR1ZmZ5OCIsImEiOiJjaXk2a2lxODQwMDdyMnZzYTdyb3M4ZTloIn0.mSocl7zUnZBO6-CV9cvmnA";
@@ -43,10 +43,7 @@ class FacilitiesMap extends React.Component {
                 [ -77.321649,38.823919], // Southwest coordinates
                 [ -77.295213,38.835720]  // Northeast coordinates
             ],
-            maxBounds:[
-                [ -77.321649,38.823919], // Southwest coordinates
-                [ -77.295213,38.835720]  // Northeast coordinates
-            ],
+            maxBounds: getMaxBounds(),
             fitBoundsOptions:{
             },
             mapDialogOpen:false

@@ -19,7 +19,7 @@ const addRoute = (map,geometry) =>{
             "line-width": 5
         }
     });
-}
+};
 
 const getGeoLine = (mapboxClient,start,end,callback) =>{
 
@@ -36,5 +36,13 @@ const getGeoLine = (mapboxClient,start,end,callback) =>{
             }
         );
     });
-}
-export {addRoute,getGeoLine};
+};
+
+const getMaxBounds = () => {
+    return [
+        [ -77.321649,38.823919], // Southwest coordinates
+        [ -77.295213,38.835720]  // Northeast coordinates
+    ];
+};
+
+export {addRoute, getGeoLine, getMaxBounds};
