@@ -101,7 +101,6 @@ class FacilitiesMap extends React.Component {
     render (){ 
         const {facilities,facility,classes,isMapOpen} = this.props
         const {position,positionReady,fitBounds,maxBounds,mappedRoute,fitBoundsOptions,mapDialogOpen} = this.state
-        console.log(fitBounds)
         let center,zoom;
         try{
             center = facility.facility_location.coordinate_location.coordinates;

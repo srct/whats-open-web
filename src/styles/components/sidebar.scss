@@ -31,7 +31,7 @@
 }
 
 .sidebar-divider {
-  margin: 16px;
+  margin: 16px !important;
 }
 
 .sidebar-row1 {
@@ -61,6 +61,10 @@
   width: 100%;
 }
 
+.chip-holder {
+    display: flex;
+    height:32px;
+}
 @media screen and (max-width: map-get($breakpoints, lg)) {
   .sidebar-root {
     display: none !important;

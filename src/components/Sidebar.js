@@ -7,6 +7,8 @@ import TextwTitle from '../components/TextwTitle'
 import FacilitiesMap from '../components/FacilitiesMap'
 import classNames from 'classnames';
 import Button from 'material-ui/Button';
+import Chip from 'material-ui/Chip';
+import WeekHours from './WeekHours';
 import { toggleSidebar } from '../actions/ui';
 
 const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, toggleSidebarMap, facilities}) => {
@@ -33,6 +35,18 @@ const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, toggleSidebarMap, f
           }
           toggleSidebarMap()
     }
+
+    
+    let productChips;
+    try{
+        let index = -1;
+        productChips = facility.facility_product_tags.map((tag) => {
+            index++;
+        return (<Chip key={tag+index} label={tag} />)
+    })
+    }catch(e){
+       productChips = ''
+    }
     return (
         <Paper
             className={classNames(['sidebar-root', (!isSidebarOpen && 'sidebar-open'), (isSidebarOpen && 'sidebar-closed')])}>
@@ -44,11 +58,13 @@ const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, toggleSidebarMap, f
             </div>
             <Divider className={'sidebar-divider'}/>
             <div className={'sidebar-label-holder'}>
-                    <TextwTitle label="Location" content="The Johnson Center"/>
-                    <TextwTitle label="Menu" content="https://amenufromaplace.com"/>
-                    <TextwTitle label="Location" content="The Johnson Center"/>
-                    <TextwTitle label="Labels"
-                                content=""/>
+                    <TextwTitle label="Building" content="The Johnson Center"/>
+                    <TextwTitle label="Address" content="https://amenufromaplace.com"/>
+                    <TextwTitle label="Phone Number" content="The Johnson Center"/>
+                    <TextwTitle label="Tags" content={<div className='chip-holder'>{productChips}</div>}/>
+                    <TextwTitle label="Hours" content={<WeekHours facility={facility}/>}/>
+                    
+
             </div>
             <div className={'sidebar-row2'}>
                 <FacilitiesMap isMapOpen={isSidebarMapOpen} facilities={facilities} facility={facility}/>
