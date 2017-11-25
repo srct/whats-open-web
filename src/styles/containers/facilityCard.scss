@@ -87,7 +87,9 @@
 }
 
 //Between lg and xl
-@media screen and (min-width: map-get($breakpoints, lg)) and (max-width: map-get($breakpoints, xl)) {
+// (min-width: 1024px) and (max-width: 1680px) 
+//@media screen and (min-width: map-get($breakpoints, lg)) and (max-width: map-get($breakpoints, xl)) {
+@media screen and (min-width: 1024px) and (max-width: 1680px) {
   .fc-root {
     width: 250px * $fc-lg-scale;
     height: 230px;
@@ -125,7 +127,9 @@
 }
 
 //Under lg
-@media screen and (max-width: map-get($breakpoints, lg)) {
+// (max-width: 1024px)
+//@media screen and (max-width: map-get($breakpoints, lg)) {
+@media screen and (max-width: 1024px) {
   .fc-root {
     &.fc-selected {
       .fc-one-line-ellipsis {

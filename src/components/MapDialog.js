@@ -72,7 +72,7 @@ class MapDialog extends React.Component {
           borderRadius:'5px',
         }}
         center={center}
-        zoom={[zoom]}
+        zoom={zoom}
         maxBounds={maxBounds}>
          
             {(facilities.length > 0) && facilities.map((item) =>{

@@ -1,0 +1,13 @@
+.facility-category-wrapper {
+  display: flex;
+  justify-content: center; }
+
+.facility-category-icon {
+  width: 14px !important;
+  height: 14px !important;
+  padding: 4px !important; }
+
+.facility-category-icon {
+  width: auto !important;
+  height: auto !important;
+  margin-right: 8px; }
