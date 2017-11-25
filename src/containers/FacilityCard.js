@@ -13,9 +13,9 @@ import DirectionsWalkIcon from 'material-ui-icons/DirectionsWalk';
 import LocationOnIcon from 'material-ui-icons/LocationOn';
 import {removeBrackets} from '../utils/nameUtils';
 import classnames from 'classnames';
-import FacilitiesMap from '../components/FacilitiesMap';
-import Dialog, {DialogTitle, DialogContent, DialogActions} from 'material-ui/Dialog';
+import MapDialog from '../components/MapDialog';
 import Button from 'material-ui/Button';
+import {getMaxBounds} from '../utils/mapboxUtils';
 
 import {
     amber,
@@ -48,8 +48,9 @@ class FacilityCard extends React.Component {
         super(props);
         this.state = {
             isHovered: false,
-            isMapOpen: false
-        }
+            isMapOpen: false,
+            maxBounds: getMaxBounds()
+        };
     }
 
     handleCardClick = () => {
@@ -57,7 +58,8 @@ class FacilityCard extends React.Component {
         this.props.setSelectedFacility(isSelected ? null : this.props.facility);
     };
 
-    toggleMap = () => {
+    toggleMap = e => {
+        e.stopPropagation();
         this.setState({isMapOpen: !this.state.isMapOpen});
     };
 
@@ -140,8 +142,18 @@ class FacilityCard extends React.Component {
 
     render() {
         const {facility, facilities, favorites, selectedFacility, addFavoriteFacility, removeFavoriteFacility} = this.props;
+        const {isMapOpen, maxBounds} = this.state;
 
         const isSelected = selectedFacility.slug === facility.slug;
+
+        let mapCenter, mapZoom;
+        try {
+            mapCenter = facility.facility_location.coordinate_location.coordinates;
+            mapZoom = [17];
+        } catch(e) {
+            mapCenter = [(maxBounds[0][0]+maxBounds[1][0])/2,(maxBounds[0][1]+maxBounds[1][1])/2];
+            mapZoom=[13];
+        }
 
         return (
         <Card onClick={this.handleCardClick} className={classnames('fc-root', isSelected && 'fc-selected')}
@@ -190,9 +202,15 @@ class FacilityCard extends React.Component {
                 </Grid>
             </CardContent>
 
-            <Dialog open={this.state.isMapOpen} onRequestClose={this.toggleMap} classes={{paper: 'fc-map-dialog'}}>
-                <FacilitiesMap facilities={facilities} facility={facility} isMapOpen={true}/>
-            </Dialog>
+            <MapDialog
+                open={isMapOpen}
+                facilities={facilities}
+                facility={facility}
+                maxBounds={maxBounds}
+                zoom={mapZoom}
+                center={mapCenter}
+                onRequestClose={this.toggleMap}
+            />
         </Card>
     )
     }

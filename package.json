@@ -32,7 +32,7 @@
   },
   "proxy": "http://localhost:3001",
   "scripts": {
-    "build-css": "node-sass-chokidar src/styles/ -o src/styles/",
+    "build-css": "node-sass-chokidar src/styles/ -o src/styles/build",
     "watch-css": "npm run build-css --watch --recursive",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
