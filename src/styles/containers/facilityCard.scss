@@ -1,4 +1,5 @@
 @import '../_variables.scss';
+@import '../_mixins.scss';
 
 .fc-root {
   width: 250px;
@@ -88,10 +89,19 @@
   overflow: hidden;
 }
 
+//Above lg
+@media screen and (min-width: map-get($breakpoints, lg)) {
+  .fc-root {
+    @include transition(150ms ease-in-out);
+
+    &.fc-selected {
+      transform: scale(.9);
+    }
+  }
+}
+
 //Between lg and xl
-// (min-width: 1024px) and (max-width: 1680px) 
-//@media screen and (min-width: map-get($breakpoints, lg)) and (max-width: map-get($breakpoints, xl)) {
-@media screen and (min-width: 1024px) and (max-width: 1680px) {
+@media screen and (min-width: map-get($breakpoints, lg)) and (max-width: map-get($breakpoints, xl)) {
   .fc-root {
     width: 250px * $fc-lg-scale;
     height: 230px;
@@ -129,9 +139,7 @@
 }
 
 //Under lg
-// (max-width: 1024px)
-//@media screen and (max-width: map-get($breakpoints, lg)) {
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: map-get($breakpoints, lg) - 1px) {
   .fc-root {
     &.fc-selected {
       .fc-one-line-ellipsis {
