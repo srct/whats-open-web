@@ -11,7 +11,7 @@ import ReduxThunk from 'redux-thunk';
 import reducers from './reducers/index';
 import {MuiThemeProvider} from 'material-ui/styles';
 import theme from './theme';
-import './styles/whatsOpen.css';
+import './styles/build/whatsOpen.css';
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory();
