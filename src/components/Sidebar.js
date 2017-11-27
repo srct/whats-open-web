@@ -10,6 +10,7 @@ import Button from 'material-ui/Button';
 import Chip from 'material-ui/Chip';
 import WeekHours from './WeekHours';
 import { toggleSidebar } from '../actions/ui';
+import FacilityTags from './FacilityTags';
 
 const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, toggleSidebarMap, facilities}) => {
 
@@ -36,17 +37,6 @@ const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, toggleSidebarMap, f
           toggleSidebarMap()
     }
 
-    
-    let productChips;
-    try{
-        let index = -1;
-        productChips = facility.facility_product_tags.map((tag) => {
-            index++;
-        return (<Chip key={tag+index} label={tag} />)
-    })
-    }catch(e){
-       productChips = ''
-    }
     return (
         <Paper
             className={classNames(['sidebar-root', (!isSidebarOpen && 'sidebar-open'), (isSidebarOpen && 'sidebar-closed')])}>
@@ -61,8 +51,8 @@ const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, toggleSidebarMap, f
                     <TextwTitle label="Building" content="The Johnson Center"/>
                     <TextwTitle label="Address" content="https://amenufromaplace.com"/>
                     <TextwTitle label="Phone Number" content="The Johnson Center"/>
-                    <TextwTitle label="Tags" content={<div className='chip-holder'>{productChips}</div>}/>
-                    <TextwTitle label="Hours" content={<WeekHours facility={facility}/>}/>
+                    <TextwTitle label="Tags" content={<FacilityTags facility={facility} />}/>
+                    <TextwTitle label="Hours" content={<WeekHours facility={facility} />}/>
                     
 
             </div>

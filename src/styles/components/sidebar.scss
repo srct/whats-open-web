@@ -61,10 +61,6 @@
   width: 100%;
 }
 
-.chip-holder {
-    display: flex;
-    height:32px;
-}
 @media screen and (max-width: map-get($breakpoints, lg) - 1px) {
   .sidebar-root {
     display: none !important;

@@ -1,14 +1,18 @@
-.week-hours-row{
-    display: flex;
-    font-size: 14px; 
-    color:#354052;
+@import '../variables';
+
+.week-hours-row {
+    font-size: 14px;
+    color: #354052;
 }
-.week-hours-day{
+.week-hours-day {
     font-family: Roboto-Regular,Helvetica-Neue;
-    margin-right: 16px;
-    // width:28px;
 }
-.week-hours-times{
+.week-hours-times {
     font-family: Roboto-Medium;
-    margin-bottom: 4px;
+}
+
+@media screen and (max-width: map-get($breakpoints, lg) - 1px) {
+  .week-hours-row {
+    justify-content: center;
+  }
 }

@@ -22,8 +22,6 @@ class Layout extends React.Component {
             are any updates.
          */
         try {
-            localStorage = window.localStorage;
-          
             if (localStorage.getItem('facilities')) {
                 const facilities = localStorage.getItem('facilities');
                 this.props.setFacilities(facilities)

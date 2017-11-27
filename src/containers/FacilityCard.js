@@ -16,6 +16,8 @@ import classnames from 'classnames';
 import MapDialog from '../components/MapDialog';
 import Button from 'material-ui/Button';
 import {getMaxBounds} from '../utils/mapboxUtils';
+import WeekHours from '../components/WeekHours';
+import FacilityTags from '../components/FacilityTags';
 
 import {
     amber,
@@ -195,6 +197,14 @@ class FacilityCard extends React.Component {
                             {facility.facility_location.building}
                         </Typography>
                     </Grid>
+                </Grid>
+
+                <Grid item className={'fc-facility-tags'}>
+                    <FacilityTags facility={facility}/>
+                </Grid>
+
+                <Grid item className={'fc-week-hours'}>
+                    <WeekHours facility={facility} />
                 </Grid>
 
                 <Grid item className={'fc-toggle-map-btn-container'}>

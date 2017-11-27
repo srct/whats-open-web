@@ -1,6 +1,5 @@
 import React from 'react'
-import {withStyles} from 'material-ui/styles';
-import {facilities} from '../reducers/api';
+import Grid from 'material-ui/Grid';
 
 const WeekHours = ({facility}) => {
 
@@ -56,15 +55,15 @@ const WeekHours = ({facility}) => {
                     break;
                 }
             }
-            console.log(dayOfWeek)
+
             if (hours === null) {
                 hours = 'Closed'
             }
             output[dayOfWeek] = (
-                <div key={facility.slug + dayOfWeek} className='week-hours-row'>
-                    <div className='week-hours-day'>{weekDays[dayOfWeek]}</div>
-                    <div className='week-hours-times'>{hours}</div>
-                </div>
+                <Grid container key={facility.slug + dayOfWeek} className='week-hours-row'>
+                    <Grid item xs={2} className='week-hours-day'>{weekDays[dayOfWeek]}</Grid>
+                    <Grid item className='week-hours-times'>{hours}</Grid>
+                </Grid>
             )
         }
     } catch (e) {}
