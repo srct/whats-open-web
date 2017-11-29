@@ -1,48 +1,16 @@
 import React from 'react'
-import {withStyles} from 'material-ui/styles';
-import Card, {CardActions, CardContent, CardMedia} from 'material-ui/Card';
+import Card, {CardContent, CardMedia} from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
 import FacilityStatus from '../components/FacilityStatus';
 import FavoriteButton from '../components/FavoriteButton';
 import FacilityCategory from '../components/FacilityCategory';
-import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {addFavoriteFacility, removeFavoriteFacility, setSelectedFacility} from '../actions/ui';
-import DirectionsWalkIcon from 'material-ui-icons/DirectionsWalk';
 import LocationOnIcon from 'material-ui-icons/LocationOn';
 import {removeBrackets} from '../utils/nameUtils';
 import classnames from 'classnames';
-import MapDialog from '../components/MapDialog';
-import Button from 'material-ui/Button';
-import {getMaxBounds} from '../utils/mapboxUtils';
-import WeekHours from '../components/WeekHours';
-import FacilityTags from '../components/FacilityTags';
-
-import {
-    amber,
-    blue,
-    blueGrey,
-    brown,
-    cyan,
-    deepOrange,
-    deepPurple,
-    green,
-    grey,
-    indigo,
-    lightBlue,
-    lightGreen,
-    lime,
-    orange,
-    pink,
-    purple,
-    red,
-    teal,
-    yellow
-} from 'material-ui/colors';
-
-const materialColors = [red, pink, purple, deepPurple, indigo, blue, lightBlue, cyan, teal, green,
-    lightGreen, lime, yellow, amber, orange, deepOrange, brown, grey, blueGrey];
+import FacilityDialog from '../components/FacilityDialog';
 
 class FacilityCard extends React.Component {
 
@@ -50,8 +18,6 @@ class FacilityCard extends React.Component {
         super(props);
         this.state = {
             isHovered: false,
-            isMapOpen: false,
-            maxBounds: getMaxBounds()
         };
     }
 
@@ -60,75 +26,6 @@ class FacilityCard extends React.Component {
         this.props.setSelectedFacility(isSelected ? null : this.props.facility);
     };
 
-    toggleMap = e => {
-        e.stopPropagation();
-        this.setState({isMapOpen: !this.state.isMapOpen});
-    };
-
-    /**
-     * Gets the the initials for a facility name. The initials will be the first character of the first and last word
-     * of the facility. Initial lengths range from 1-2.
-     *
-     * @param name The facility name to find the initials for.
-     * @returns {string} The initials.
-     * @deprecated
-     */
-    getInitials = name => {
-        //TODO: May want to allow initials to be more than 2 characters or use a different strategy to decide which characters to use.
-
-        let words = removeBrackets(name).split(/[ -]+/); //TODO: Add case change to the regex (ex. IndAroma should be IA, not I).
-
-        /*
-           TODO: Probably want this to be a regex test and remove any useless word / symbol (ex. the, and, &, etc.)
-           Words that are empty or start with ( must be removed.
-                Example: 'Recreation and Athletic Complex (RAC)' will result in the initials 'R(' without the filter.
-        */
-        words = words.filter(word => word && !word.startsWith("("));
-
-        if (words.length === 0) {
-            return "";
-        }
-        if (words.length === 1) {
-            return words[0].substring(0, 1).toUpperCase();
-        }
-
-        return words[0].substring(0, 1).toUpperCase() + words[words.length - 1].substring(0, 1).toUpperCase();
-    };
-
-    /**
-     * Gets a material color based off the facility's slug.
-     *
-     * @param slug The slug of the facility to generate the material color from.
-     * @return {string} The color code (in hex format) of a material color.
-     * @deprecated
-     */
-    materialColorFromSlug = slug => {
-
-        /*
-            Generates the hash code...
-            https://stackoverflow.com/questions/194846/is-there-any-kind-of-hash-code-function-in-javascript
-        */
-        let hash = 0;
-        for (let i = 0; i < slug.length; i++) {
-            let c = slug.charCodeAt(i);
-            hash = ((hash << 5) - hash) + c;
-            hash = hash & hash;
-        }
-
-        /*
-            materialColors is an array of all the different color palettes which contain hues for
-            multiples of 100.
-
-            materialColors[Math.abs(hash) % 19] will result in a color palette.
-
-            [((Math.abs(hash) % 7) + 3) * 100] will result in a hue on the palette.
-            Only hues 300-900 are selected because 50, 100, and 200 are usually very light and sometimes hard to read.
-
-            List of palettes:
-            https://material-ui-1dab0.firebaseapp.com/style/color/
-        */
-        return materialColors[Math.abs(hash) % 19][((Math.abs(hash) % 7) + 3) * 100];
-    };
 
     handleMouseEnter = () =>{
         this.setState({
@@ -144,18 +41,8 @@ class FacilityCard extends React.Component {
 
     render() {
         const {facility, facilities, favorites, selectedFacility, addFavoriteFacility, removeFavoriteFacility} = this.props;
-        const {isMapOpen, maxBounds} = this.state;
 
         const isSelected = selectedFacility.slug === facility.slug;
-
-        let mapCenter, mapZoom;
-        try {
-            mapCenter = facility.facility_location.coordinate_location.coordinates;
-            mapZoom = [17];
-        } catch(e) {
-            mapCenter = [(maxBounds[0][0]+maxBounds[1][0])/2,(maxBounds[0][1]+maxBounds[1][1])/2];
-            mapZoom=[13];
-        }
 
         return (
         <Card onClick={this.handleCardClick} className={classnames('fc-root', isSelected && 'fc-selected')}
@@ -198,29 +85,9 @@ class FacilityCard extends React.Component {
                         </Typography>
                     </Grid>
                 </Grid>
-
-                <Grid item className={'fc-facility-tags'}>
-                    <FacilityTags facility={facility}/>
-                </Grid>
-
-                <Grid item className={'fc-week-hours'}>
-                    <WeekHours facility={facility} />
-                </Grid>
-
-                <Grid item className={'fc-toggle-map-btn-container'}>
-                    <Button className={'fc-toggle-map-btn'} onClick={this.toggleMap}>Open Map</Button>
-                </Grid>
             </CardContent>
 
-            <MapDialog
-                open={isMapOpen}
-                facilities={facilities}
-                facility={facility}
-                maxBounds={maxBounds}
-                zoom={mapZoom}
-                center={mapCenter}
-                onRequestClose={this.toggleMap}
-            />
+            <FacilityDialog facility={facility} facilities={facilities} isOpen={isSelected} onRequestClose={this.handleCardClick} />
         </Card>
     )
     }

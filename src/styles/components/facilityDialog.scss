@@ -1,0 +1,46 @@
+@import '../variables';
+
+.fd-dialog-paper {
+  width: 100%;
+}
+
+.fd-container {
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+.fd-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.fd-facility-tags {
+  width: 100%;
+}
+
+.fd-week-hours {
+  width: 100%;
+}
+
+.fd-toggle-map-btn-container {
+  padding: 0 !important;
+  width: 100%;
+}
+
+.fd-toggle-map-btn {
+  width: 100%;
+}
+
+
+@media screen and (min-width: map-get($breakpoints, lg)) {
+  .fd-dialog-root {
+    display: none !important;
+  }
+}
+
+
+//Under lg
+@media screen and (max-width: map-get($breakpoints, lg) - 1px) {
+
+}

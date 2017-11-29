@@ -67,18 +67,6 @@
   overflow: hidden;
 }
 
-.fc-toggle-map-btn-container {
-  display: none !important;
-}
-
-.fc-week-hours {
-  display: none !important;
-}
-
-.fc-facility-tags {
-  display: none !important;
-}
-
 @supports (-webkit-line-clamp: 2) {
   .fc-two-line-ellipsis {
     overflow: hidden;
@@ -148,42 +136,6 @@
 
 //Under lg
 @media screen and (max-width: map-get($breakpoints, lg) - 1px) {
-  .fc-root {
-    &.fc-selected {
-      .fc-one-line-ellipsis {
-        white-space: normal;
-        overflow: inherit;
-      }
-
-      .fc-toggle-map-btn-container {
-        display: block !important;
-      }
-
-      .fc-week-hours {
-        display: block !important;
-      }
-
-      .fc-facility-tags {
-        display: block !important;
-      }
-
-      .fc-toggle-map-btn {
-        width: 100% !important;
-      }
-
-      .fc-extra-info {
-        max-width: 100% ;
-        width: 100%;
-        justify-content: center;
-        padding: 4px 8px !important;
-      }
-
-      .fc-card-content {
-        padding-bottom: 0 !important;
-      }
-    }
-  }
-
   .fc-small-grid-item-spacing {
     padding: 0 8px !important;
   }
