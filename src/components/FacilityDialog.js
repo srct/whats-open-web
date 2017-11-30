@@ -1,5 +1,5 @@
 import React from 'react';
-import Dialog, {DialogTitle, DialogContent} from 'material-ui/Dialog';
+import Dialog from 'material-ui/Dialog';
 import Grid from 'material-ui/Grid';
 import FacilityTags from './FacilityTags';
 import WeekHours from './WeekHours';
@@ -7,7 +7,9 @@ import Button from 'material-ui/Button';
 import Avatar from 'material-ui/Avatar';
 import Typography from 'material-ui/Typography';
 import MapDialog from './MapDialog';
-import TextwTitle from './TextwTitle';
+import CloseIcon from 'material-ui-icons/Close';
+import IconButton from 'material-ui/IconButton';
+import LocationOnIcon from 'material-ui-icons/LocationOn';
 import {getMaxBounds} from '../utils/mapboxUtils';
 import {removeBrackets} from '../utils/nameUtils';
 
@@ -42,23 +44,31 @@ class FacilityDialog extends React.Component {
 
         return (
             <Dialog classes={{root: 'fd-dialog-root', paper: 'fd-dialog-paper'}} open={isOpen} onRequestClose={onRequestClose}>
-                <Grid container className={'fd-container'}>
-                    <Grid item>
+                <IconButton className={'fd-close-btn'} onClick={onRequestClose}>
+                    <CloseIcon />
+                </IconButton>
+                <Grid container className={'fd-container'} justify={'center'}>
+                    <Grid item className={'fd-header-container'}>
                         <Grid container className={'fd-header'}>
                             <Grid item>
                                 <Avatar src={require('../images/chipotleLogo.png')} />
                             </Grid>
-                            <Grid item>
-                                <Typography type={'headline'}>{removeBrackets(facility.facility_name)}</Typography>
+                            <Grid item className={'fd-header-text-container'}>
+                                <Typography className={'fd-header-text'} type={'headline'}>
+                                    {removeBrackets(facility.facility_name)}
+                                    </Typography>
                             </Grid>
                         </Grid>
                     </Grid>
 
-
-                    <Grid item>
-                        <TextwTitle label="Building" content={facility.facility_location.building} />
+                    <Grid item className={'fd-location-wrapper'}>
+                        <Typography type={'caption'}>
+                            <LocationOnIcon/>
+                        </Typography>
+                        <Typography title={facility.facility_location.building} type={'caption'} align={'center'}>
+                            {facility.facility_location.building}
+                        </Typography>
                     </Grid>
-
 
                     <Grid item className={'fd-facility-tags'}>
                         <FacilityTags facility={facility}/>

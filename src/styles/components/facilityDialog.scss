@@ -1,25 +1,65 @@
 @import '../variables';
 
+.fd-small-grid {
+  padding: 4px !important;
+}
+
 .fd-dialog-paper {
-  width: 100%;
+  //width: 100%;
+  width: auto !important;
+  border-radius: 5px !important;
 }
 
 .fd-container {
   margin: 0 !important;
   width: 100% !important;
+  overflow-x: hidden;
 }
 
-.fd-header {
-  display: flex;
-  align-items: center;
+.fd-close-btn {
+  position: absolute !important;
+  width: 24px !important;
+  height: 24px !important;
+  top: 5px;
+  right: 5px;
+}
+
+.fd-header-container {
+  @extend .fd-small-grid;
+
   width: 100%;
 }
 
+.fd-header {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center;
+}
+
+.fd-header-text-container {
+  flex: 1 !important;
+}
+
+.fd-header-text {
+  max-width: 80% !important;
+}
+
+.fd-location-wrapper {
+  @extend .fd-small-grid;
+
+  display: flex !important;
+  align-items: center;
+}
+
 .fd-facility-tags {
+  @extend .fd-small-grid;
+
   width: 100%;
 }
 
 .fd-week-hours {
+  @extend .fd-small-grid;
+
   width: 100%;
 }
 
