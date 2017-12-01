@@ -60,6 +60,31 @@
   padding-top: 8px;
 }
 
+.fc-one-line-ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.fc-two-line-ellipsis {
+  position: relative;
+  line-height: 1em;
+  max-height: 2em;
+  overflow: hidden;
+}
+
+@supports (-webkit-line-clamp: 2) {
+  .fc-two-line-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box !important;
+    /* autoprefixer: off */
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    /* autoprefixer: on */
+  }
+}
+
 //Above lg
 @media screen and (min-width: map-get($breakpoints, lg)) {
   .fc-root {
@@ -68,31 +93,6 @@
     &.fc-selected {
       transform: scale(.9);
     }
-  }
-
-  .fc-two-line-ellipsis {
-    position: relative;
-    line-height: 1em;
-    max-height: 2em;
-    overflow: hidden;
-  }
-
-  @supports (-webkit-line-clamp: 2) {
-    .fc-two-line-ellipsis {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box !important;
-      /* autoprefixer: off */
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      /* autoprefixer: on */
-    }
-  }
-
-  .fc-one-line-ellipsis {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
   }
 }
 
@@ -142,14 +142,15 @@
 
   .fc-card-content {
     flex: 1;
+    min-width: 0;
   }
 
   .fc-media {
     display: none !important;
   }
 
-  .fc-logo-container {
-    margin: 0 !important;
+  .fc-title-container {
+    width: 90%;
   }
 
   .fc-extra-info {
@@ -157,24 +158,17 @@
     width: 100% !important;
     padding: 0 !important;
     justify-content: center;
+    font-size: 11px;
   }
 
-}
-
-//Under lg
-@media screen and (max-width: map-get($breakpoints, lg) - 1px) {
   .fc-small-grid-item-spacing {
     padding: 0 8px !important;
-  }
-
-  .fc-media {
-    height: 115px * $fc-sm-scale;
   }
 
   .fc-logo-container {
     width: 100px * $fc-sm-scale;
     height: 100px * $fc-sm-scale;
-    margin-top: -60px * $fc-sm-scale;
+    margin: 0 !important;
     border-radius: 50%;
     border: 5px * $fc-sm-scale solid white;
   }
@@ -184,16 +178,8 @@
     height: 100px * $fc-sm-scale;
   }
 
-  .fc-extra-info {
-    font-size: 11px;
-  }
-
   .fc-card-map-marker-icon {
     height: 20px !important;
     width: 20px !important;
-  }
-
-  .fc-map-dialog {
-    width: 100% !important;
   }
 }

@@ -61,7 +61,7 @@ class FacilityCard extends React.Component {
 
             <CardContent className={'fc-card-content'}>
                 <Grid container alignItems={'center'} direction={'column'} className={'fc-small-grid-container-spacing'}>
-                    <Grid item className={classnames('fc-small-grid-item-spacing', 'fc-ellipsis-container')}>
+                    <Grid item className={classnames('fc-small-grid-item-spacing', 'fc-ellipsis-container', 'fc-title-container')}>
                         <Typography type={'subheading'} align={'center'} className={classnames('fc-title', 'fc-one-line-ellipsis')}>
                             {removeBrackets(facility.facility_name)}
                         </Typography>
