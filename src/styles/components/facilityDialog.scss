@@ -5,7 +5,6 @@
 }
 
 .fd-dialog-paper {
-  //width: 100%;
   width: auto !important;
   border-radius: 5px !important;
 }
@@ -38,6 +37,7 @@
 
 .fd-header-text-container {
   flex: 1 !important;
+  padding: 0 !important;
 }
 
 .fd-header-text {
