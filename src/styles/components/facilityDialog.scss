@@ -5,7 +5,6 @@
 }
 
 .fd-dialog-paper {
-  width: auto !important;
   border-radius: 5px !important;
 }
 
@@ -42,6 +41,7 @@
 
 .fd-header-text {
   max-width: 80% !important;
+  padding: 8px 0;
 }
 
 .fd-location-wrapper {
@@ -72,15 +72,16 @@
   width: 100%;
 }
 
+//Above sm
+@media screen and (min-width: map-get($breakpoints, sm)) {
+  .fd-dialog-paper {
+    width: 50% !important;
+  }
+}
 
+//Above lg
 @media screen and (min-width: map-get($breakpoints, lg)) {
   .fd-dialog-root {
     display: none !important;
   }
-}
-
-
-//Under lg
-@media screen and (max-width: map-get($breakpoints, lg) - 1px) {
-
 }

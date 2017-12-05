@@ -156,7 +156,7 @@
   .fc-extra-info {
     max-width: 100% !important;
     width: 100% !important;
-    padding: 0 !important;
+    padding: 2px 0 !important;
     justify-content: center;
     font-size: 11px;
   }
@@ -169,6 +169,7 @@
     width: 100px * $fc-sm-scale;
     height: 100px * $fc-sm-scale;
     margin: 0 !important;
+    padding-left: 5px;
     border-radius: 50%;
     border: 5px * $fc-sm-scale solid white;
   }
