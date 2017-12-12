@@ -136,6 +136,7 @@
 
 @media screen and (max-width: map-get($breakpoints, lg) - 1px) {
   .fc-root {
+    width: 270px !important;
     display: flex !important;
     align-items: center !important;
   }
