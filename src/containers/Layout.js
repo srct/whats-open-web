@@ -64,7 +64,7 @@ class Layout extends React.Component {
                             }
                         </button>
                     </div>
-                    <button onClick={sortByFavorites}>Text</button>
+                    
                     <Sidebar facilities={facilities} facility={selectedFacility} isSidebarOpen={isSidebarOpen}
                              isSidebarMapOpen={isSidebarMapOpen} toggleSidebarMap={toggleSidebarMap}/>
                 </div>
@@ -74,8 +74,6 @@ class Layout extends React.Component {
 }
 
 function mapStateToProps(state) {
-    console.log('sorted')
-    console.log(state.facilities.data)
     return {
         facilities: state.facilities.data,
         favorites: state.ui.favorites,
