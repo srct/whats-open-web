@@ -36,7 +36,9 @@ export const getFacilities = () => dispatch => {
 };
 
 export const setFacilities = (facilities) => {
-    localStorage.setItem('facilities', facilities);
+    try{
+        localStorage.setItem('facilities', facilities);
+    }catch(e){}
     return {
         type: SET_FACILITIES,
         facilities: JSON.parse(facilities)
