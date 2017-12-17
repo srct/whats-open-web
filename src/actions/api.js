@@ -1,4 +1,4 @@
-import {GET_FACILITIES, SET_FACILITIES} from './action-types'
+import {GET_FACILITIES, SET_FACILITIES, SORT_BY_FAVORITES} from './action-types'
 
 export const apiTest = () => {
     return (dispatch) => {
@@ -42,3 +42,7 @@ export const setFacilities = (facilities) => {
         facilities: JSON.parse(facilities)
     }
 };
+
+export const sortByFavorites = () => ({
+        type: SORT_BY_FAVORITES
+})

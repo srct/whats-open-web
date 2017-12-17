@@ -142,7 +142,8 @@ const styles = theme => ({
   },
   searchIcon:{
       display:'block',
-      opacity:.54,
+    //   opacity:.54,
+    color:'rgba(0,0,0,0.54)'
   },
   noSuggestInput:{
       display:'flex',

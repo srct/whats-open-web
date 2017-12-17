@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {setAllFavorites, toggleSidebar, toggleSidebarMap} from '../actions/ui';
 import AppBar from '../components/AppBar';
 import Sidebar from '../components/Sidebar';
-import {getFacilities, setFacilities} from '../actions/api';
+import {getFacilities, setFacilities,sortByFavorites} from '../actions/api';
 import CardContainer from '../components/CardContainer';
 import SearchBar from './SearchBar';
 import KeyboardArrowLeft from 'material-ui-icons/KeyboardArrowLeft';
@@ -15,13 +15,15 @@ class Layout extends React.Component {
         super(props);
     }
 
-    componentWillMount() {
+    componentWillMount = () => {
         /*
             This is done in order to immediately load the page (retrieving from local storage is faster
             than an API call). After retrieving from local storage, then call the API to see if there
             are any updates.
          */
         try {
+            localStorage = window.localStorage;
+          
             if (localStorage.getItem('facilities')) {
                 const facilities = localStorage.getItem('facilities');
                 this.props.setFacilities(facilities)
@@ -30,6 +32,7 @@ class Layout extends React.Component {
                 const favorites = JSON.parse(localStorage.getItem('favorites'));
                 this.props.setAllFavorites(favorites);
             }
+            this.props.sortByFavorites()
         } catch(e) {
             console.log('you should enable cookies so we can remember what places you favorite')
         }
@@ -38,7 +41,7 @@ class Layout extends React.Component {
     };
 
     render() {
-        const {isSidebarOpen, isSidebarMapOpen, toggleSidebar, toggleSidebarMap, getFacilities, selectedFacility} = this.props;
+        const {isSidebarOpen, isSidebarMapOpen, toggleSidebar, toggleSidebarMap, getFacilities, selectedFacility,facilities,searchTerm,sortByFavorites,favorites} = this.props;
         return (
             <div className={'layout-root'}>
                 <AppBar isOpen={false} handleMenuClick={() => {
@@ -47,8 +50,8 @@ class Layout extends React.Component {
                     <div className={'layout-main-content'}>
                         <SearchBar suggestions={{}}/>
                         <div className={'layout-card-container'}>
-                            <CardContainer styles={'layout-card-container'} searchTerm={this.props.searchTerm}
-                                           facilities={this.props.facilities}/>
+                            <CardContainer styles={'layout-card-container'} searchTerm={searchTerm}
+                                           facilities={facilities} />
                         </div>
                     </div>
                     <div className={'layout-sidebar-toggle-container'}>
@@ -61,7 +64,8 @@ class Layout extends React.Component {
                             }
                         </button>
                     </div>
-                    <Sidebar facilities={this.props.facilities} facility={selectedFacility} isSidebarOpen={isSidebarOpen}
+                    <button onClick={sortByFavorites}>Text</button>
+                    <Sidebar facilities={facilities} facility={selectedFacility} isSidebarOpen={isSidebarOpen}
                              isSidebarMapOpen={isSidebarMapOpen} toggleSidebarMap={toggleSidebarMap}/>
                 </div>
             </div>
@@ -70,6 +74,8 @@ class Layout extends React.Component {
 }
 
 function mapStateToProps(state) {
+    console.log('sorted')
+    console.log(state.facilities.data)
     return {
         facilities: state.facilities.data,
         favorites: state.ui.favorites,
@@ -86,5 +92,6 @@ export default connect(mapStateToProps, {
     toggleSidebarMap,
     getFacilities,
     setFacilities,
-    setAllFavorites
+    setAllFavorites,
+    sortByFavorites
 })(Layout);
