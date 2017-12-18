@@ -107,7 +107,7 @@ class FacilitiesMap extends React.Component {
             zoom = [17];
         }catch(e){
             center = [(maxBounds[0][0]+maxBounds[1][0])/2,(maxBounds[0][1]+maxBounds[1][1])/2]
-            zoom=[13];
+            zoom=[17];
         }
         return(
         <div className={classes.mapContainer} style={{'transform': isMapOpen ? 'translateY(0px)' : 'translateY(436px)'}}>
@@ -120,6 +120,9 @@ class FacilitiesMap extends React.Component {
         //     trackUserLocation: true
         // }));
            
+        }}
+        animationOptions={{
+            animate:false
         }}
         onClick={(map,e)=>{
             this.setState({
@@ -138,7 +141,7 @@ class FacilitiesMap extends React.Component {
 
         }}
         center={center}
-        zoom={zoom}
+        zoom={17}
         fitBounds={fitBounds} 
         fitBoundsOptions={fitBoundsOptions} 
         zoom={zoom}
@@ -149,8 +152,8 @@ class FacilitiesMap extends React.Component {
                             key={item.slug}
                             coordinates={item.facility_location.coordinate_location.coordinates}
                             anchor="bottom">
-                            <img height={20} width={20} src={require('../images/starbucksSVG.svg')}/>
-                            {/* <div style={Mark}></div> */}
+                            {/*<img height={20} width={20} src={require('../images/starbucksSVG.svg')}/>*/}
+                             <div style={Mark}></div> 
                        </Marker>
                     )
             })} 

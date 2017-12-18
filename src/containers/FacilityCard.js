@@ -6,7 +6,7 @@ import FacilityStatus from '../components/FacilityStatus';
 import FavoriteButton from '../components/FavoriteButton';
 import FacilityCategory from '../components/FacilityCategory';
 import {connect} from 'react-redux';
-import {addFavoriteFacility, removeFavoriteFacility, setSelectedFacility} from '../actions/ui';
+import {addFavoriteFacility, removeFavoriteFacility, setSelectedFacility,setSidebar} from '../actions/ui';
 import LocationOnIcon from 'material-ui-icons/LocationOn';
 import {removeBrackets} from '../utils/nameUtils';
 import classnames from 'classnames';
@@ -24,6 +24,7 @@ class FacilityCard extends React.Component {
     handleCardClick = () => {
         const isSelected = this.props.selectedFacility.slug === this.props.facility.slug;
         this.props.setSelectedFacility(isSelected ? null : this.props.facility);
+        this.props.setSidebar(!isSelected);
     };
 
 
@@ -101,5 +102,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
     setSelectedFacility,
     addFavoriteFacility,
-    removeFavoriteFacility
+    removeFavoriteFacility,
+    setSidebar,
 })(FacilityCard);

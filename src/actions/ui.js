@@ -4,11 +4,18 @@ import {
     SET_SEARCH_TERM,
     TOGGLE_SIDEBAR,
     TOGGLE_SIDEBAR_MAP,
-    SET_ALL_FAVORITES, SET_SELECTED_FACILITY
+    SET_ALL_FAVORITES, SET_SELECTED_FACILITY, SET_SIDEBAR
 } from './action-types';
 
 export const toggleSidebar = () => ({
     type: TOGGLE_SIDEBAR,
+});
+
+export const setSidebar = (setOpen) => ({
+    type: SET_SIDEBAR,
+    setOpen,
+
+
 });
 
 export const toggleSidebarMap = () => ({

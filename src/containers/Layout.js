@@ -22,7 +22,6 @@ class Layout extends React.Component {
             are any updates.
          */
         try {
-          
             if (localStorage.getItem('facilities')) {
                 const facilities = localStorage.getItem('facilities');
                 this.props.setFacilities(facilities)
@@ -52,16 +51,6 @@ class Layout extends React.Component {
                             <CardContainer styles={'layout-card-container'} searchTerm={searchTerm}
                                            facilities={facilities} />
                         </div>
-                    </div>
-                    <div className={'layout-sidebar-toggle-container'}>
-                        <button onClick={toggleSidebar} className={'layout-sidebar-toggle-btn'}>
-                            {isSidebarOpen &&
-                            <KeyboardArrowLeft className={'layout-arrow-icon'}/>
-                            }
-                            {!isSidebarOpen &&
-                            <KeyboardArrowRight className={'layout-arrow-icon'}/>
-                            }
-                        </button>
                     </div>
                     
                     <Sidebar facilities={facilities} facility={selectedFacility} isSidebarOpen={isSidebarOpen}

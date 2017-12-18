@@ -39,7 +39,7 @@ const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, toggleSidebarMap, f
 
     return (
         <Paper
-            className={classNames(['sidebar-root', (!isSidebarOpen && 'sidebar-open'), (isSidebarOpen && 'sidebar-closed')])}>
+            className={classNames(['sidebar-root', (isSidebarOpen && 'sidebar-open'), (!isSidebarOpen && 'sidebar-closed')])}>
             <div className={'sidebar-row1'}>
                 <Avatar className={'sidebar-avatar'} src={require('../images/chipotleLogo.png')}/>
                 <div className={'sidebar-title'}>
