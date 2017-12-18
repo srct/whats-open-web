@@ -130,7 +130,7 @@ class FacilitiesMap extends React.Component {
             })
             console.log('changed')
         }}
-        style="mapbox://styles/mapbox/streets-v9"
+        style="mapbox://styles/mduffy8/cjbcdxi3v73hp2spiyhxbkjde"
         movingMethod={'easeTo'}
         containerStyle={{
           height: "200px",
@@ -166,7 +166,7 @@ class FacilitiesMap extends React.Component {
           maxBounds={maxBounds}
           zoom={zoom}
           center={center}
-          onRequestClose={this.handleRequestClose}
+          onClose={this.handleRequestClose}
         />
         </div>
     )

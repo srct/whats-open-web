@@ -88,7 +88,7 @@ class FacilityCard extends React.Component {
                 </Grid>
             </CardContent>
 
-            <FacilityDialog facility={facility} facilities={facilities} isOpen={isSelected} onRequestClose={this.handleCardClick} />
+            <FacilityDialog facility={facility} facilities={facilities} isOpen={isSelected} onClose={this.handleCardClick} />
         </Card>
     )
     }

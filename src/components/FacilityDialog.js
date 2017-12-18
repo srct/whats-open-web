@@ -30,7 +30,7 @@ class FacilityDialog extends React.Component {
     };
 
     render() {
-        const {facility, facilities, isOpen, onRequestClose} = this.props;
+        const {facility, facilities, isOpen, onClose} = this.props;
         const {isMapOpen, maxBounds} = this.state;
 
         let mapCenter, mapZoom;
@@ -43,8 +43,8 @@ class FacilityDialog extends React.Component {
         }
 
         return (
-            <Dialog classes={{root: 'fd-dialog-root', paper: 'fd-dialog-paper'}} open={isOpen} onRequestClose={onRequestClose}>
-                <IconButton className={'fd-close-btn'} onClick={onRequestClose}>
+            <Dialog classes={{root: 'fd-dialog-root', paper: 'fd-dialog-paper'}} open={isOpen} onClose={onClose}>
+                <IconButton className={'fd-close-btn'} onClick={onClose}>
                     <CloseIcon />
                 </IconButton>
                 <Grid container className={'fd-container'} justify={'center'}>
@@ -90,7 +90,7 @@ class FacilityDialog extends React.Component {
                     maxBounds={maxBounds}
                     zoom={mapZoom}
                     center={mapCenter}
-                    onRequestClose={this.toggleMap}
+                    onClose={this.toggleMap}
                 />
             </Dialog>
         )

@@ -36,18 +36,18 @@ const Map = ReactMapboxGl({
 
 class MapDialog extends React.Component {
   handleRequestClose = () => {
-    this.props.onRequestClose(this.props.selectedValue);
+    this.props.onClose(this.props.selectedValue);
   };
 
   handleListItemClick = value => {
-    this.props.onRequestClose(value);
+    this.props.onClose(value);
   };
 
   render() {
     const { classes, selectedValue,facility,facilities,zoom,center,maxBounds,...other } = this.props;
 
     return (
-      <Dialog onRequestClose={this.handleRequestClose} {...other}>
+      <Dialog onClose={this.handleRequestClose} {...other}>
         <Map
         onStyleLoad={(map,e)=>{
         map.addControl(new mapboxgl.GeolocateControl({
@@ -64,7 +64,7 @@ class MapDialog extends React.Component {
             })
             console.log('changed')
         }}
-        style="mapbox://styles/mapbox/streets-v9"
+        style="mapbox://styles/mduffy8/cjbcdxi3v73hp2spiyhxbkjde"
         movingMethod={'easeTo'}
         containerStyle={{
           height: "500px",
@@ -95,7 +95,7 @@ class MapDialog extends React.Component {
 
 MapDialog.propTypes = {
   classes: PropTypes.object.isRequired,
-  onRequestClose: PropTypes.func,
+  onClose: PropTypes.func,
   selectedValue: PropTypes.string,
 };
 
