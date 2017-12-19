@@ -202,6 +202,81 @@ const getActiveEntry = schedule => {
     return null;
 };
 
+/**
+ * Determines the entry based on the day of the week.
+ *
+ * @param schedule A schedule.
+ * @param dayOfWeek The day of the week
+ * @returns {*} A schedule entry for the specified day, null if no entries found for that day.
+ */
+const getEntryByDay = (schedule, dayOfWeek) => {
+    const openTimes = schedule.open_times;
+
+    for (let i = 0; i < openTimes.length; i++) {
+        const entry = openTimes[i];
+
+        const startDay = entry.start_day;
+        const endDay = entry.end_day;
+
+        if ((startDay <= endDay &&
+                dayOfWeek >= startDay &&
+                dayOfWeek <= endDay) ||
+
+            (startDay > endDay &&
+                dayOfWeek >= startDay ||
+                dayOfWeek <= endDay)
+        ) {
+            return entry;
+        }
+    }
+
+    return null;
+};
+
+
+const getHoursByDay = (facility, dayOfWeek) => {
+    const schedule = getFacilityActiveSchedule(facility);
+
+    if (schedule.twenty_four_hours) {
+        return 'All Day';
+    }
+
+    const entry = getEntryByDay(schedule, dayOfWeek);
+
+    if (entry === null) {
+        return 'Closed';
+    }
+
+    return convertToMeridiemTime(entry.start_time) + '  -  ' + convertToMeridiemTime(entry.end_time);
+
+};
+
+
+/**
+ * Converts military time to 12-hour time.
+ *
+ * @param time The time as military time
+ * @returns {string} The time as 12-hour time.
+ */
+const convertToMeridiemTime = (time) => {
+    const timeArr = time
+        .split(":")
+        .map((item) => {
+            return Number(item)
+        });
+
+    let am_pm = "am";
+    if (timeArr[0] > 12) {
+        timeArr[0] = timeArr[0] - 12;
+        am_pm = "pm";
+    }
+    if (timeArr[1] === 0) {
+        timeArr[1] = "";
+    } else {
+        timeArr[1] = ":" + timeArr[1]
+    }
+    return timeArr[0] + timeArr[1] + am_pm;
+};
 
 /**
  * Calculates the number of days between dayFrom and dayTo.
@@ -226,6 +301,7 @@ const daysTill = (dayFrom, dayTo) => {
 export default {
     getFacilityActiveSchedule: getFacilityActiveSchedule,
     isFacilityOpen: isFacilityOpen,
+    getHoursByDay: getHoursByDay,
     calcTimeTillOpen: calcTimeTillOpen,
     calcTimeTillClose: calcTimeTillClose
 }

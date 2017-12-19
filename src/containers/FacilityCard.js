@@ -11,6 +11,7 @@ import LocationOnIcon from 'material-ui-icons/LocationOn';
 import {removeBrackets} from '../utils/nameUtils';
 import classnames from 'classnames';
 import FacilityDialog from '../components/FacilityDialog';
+import FacilityUtils from '../utils/facilityUtils';
 
 class FacilityCard extends React.Component {
 
@@ -45,6 +46,8 @@ class FacilityCard extends React.Component {
 
         const isSelected = selectedFacility.slug === facility.slug;
 
+        const dayOfWeek = [6, 0, 1, 2, 3, 4, 5][new Date().getDay()];
+
         return (
         <Card onClick={this.handleCardClick} className={classnames('fc-root', isSelected && 'fc-selected')}
               onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} raised>
@@ -69,6 +72,11 @@ class FacilityCard extends React.Component {
                     </Grid>
                     <Grid item className={'fc-small-grid-item-spacing'}>
                         <FacilityCategory category={facility.facility_category} />
+                    </Grid>
+                    <Grid item className={'fc-small-grid-item-spacing'}>
+                        <Typography type={'body1'}>
+                            {"Today: " + FacilityUtils.getHoursByDay(facility, dayOfWeek)}
+                        </Typography>
                     </Grid>
                 </Grid>
 

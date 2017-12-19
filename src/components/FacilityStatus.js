@@ -15,10 +15,7 @@ const FacilityStatus = ({facility}) => {
         let label;
         let isOpen;
 
-        if (FacilityUtils.getFacilityActiveSchedule(facility).twenty_four_hours) {
-            label = 'OPEN 24/7';
-            isOpen = true;
-        } else if (FacilityUtils.isFacilityOpen(facility)) {
+        if (FacilityUtils.isFacilityOpen(facility)) {
             label = 'OPEN';
             isOpen = true;
         } else {

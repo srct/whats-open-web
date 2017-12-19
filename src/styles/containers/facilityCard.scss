@@ -100,7 +100,7 @@
 @media screen and (min-width: map-get($breakpoints, lg)) and (max-width: map-get($breakpoints, xl)) {
   .fc-root {
     width: 250px * $fc-lg-scale;
-    height: 230px;
+    height: 250px;
   }
 
   .fc-small-grid-item-spacing {
