@@ -5,8 +5,20 @@ import Grid from 'material-ui/Grid';
 
 const CardContainer = ({searchTerm, facilities}) => {
     const filterCards = (facility) => {
+        const lsearchTerm = searchTerm.toLowerCase()
         const name = facility.facility_name.toLowerCase()
-        return name.includes(searchTerm.toLowerCase())
+        const tags = facility.facility_product_tags
+        tags.forEach((tag) =>{
+            return tag.toLowerCase()
+        })
+        let hasTag = true;
+        let index = tags.findIndex((tag) =>{
+            return tag.includes(lsearchTerm)
+        })
+        if(index === -1){
+            hasTag = false
+        }
+        return name.includes(lsearchTerm) || hasTag
      }
     //  console.log(facilities)
     return (
