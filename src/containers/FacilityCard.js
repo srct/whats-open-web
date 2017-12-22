@@ -40,6 +40,7 @@ class FacilityCard extends React.Component {
             isHovered:false
         })
     };
+   
 
     render() {
         const {facility, facilities, favorites, selectedFacility, addFavoriteFacility, removeFavoriteFacility} = this.props;
@@ -47,6 +48,20 @@ class FacilityCard extends React.Component {
         const isSelected = selectedFacility.slug === facility.slug;
 
         const dayOfWeek = [6, 0, 1, 2, 3, 4, 5][new Date().getDay()];
+        
+        const getDisplayHours = ()  => {
+            let currentHour = new Date().getHours();
+            const todaysHours = FacilityUtils.getHoursByDay(facility, dayOfWeek)
+            if(todaysHours.length > 1){
+            for(let i = 0; i < todaysHours.length; i++){
+                const hour = todaysHours[i]
+                if(currentHour <= parseInt(hour.end) && currentHour >= parseInt(hour.start)){
+                    return hour.text;
+                }
+            } 
+        }
+            return todaysHours[0].text
+        } 
 
         return (
         <Card onClick={this.handleCardClick} className={classnames('fc-root', isSelected && 'fc-selected')}
@@ -75,7 +90,7 @@ class FacilityCard extends React.Component {
                     </Grid>
                     <Grid item className={'fc-small-grid-item-spacing'}>
                         <Typography type={'body1'}>
-                            {"Today: " + FacilityUtils.getHoursByDay(facility, dayOfWeek)}
+                            {"Today: " + getDisplayHours()}
                         </Typography>
                     </Grid>
                 </Grid>

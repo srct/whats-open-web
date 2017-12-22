@@ -167,12 +167,12 @@ const getActiveEntry = schedule => {
             ex. start day is Sunday (6), end day is Monday (0)
          */
         if ((scheduleEntry.start_day <= scheduleEntry.end_day &&
-                dayOfWeek >= scheduleEntry.start_day &&
-                dayOfWeek <= scheduleEntry.end_day) ||
+                (dayOfWeek >= scheduleEntry.start_day &&
+                dayOfWeek <= scheduleEntry.end_day)) ||
 
             (scheduleEntry.start_day > scheduleEntry.end_day &&
-                dayOfWeek >= scheduleEntry.start_day ||
-                dayOfWeek <= scheduleEntry.end_day)
+                (dayOfWeek >= scheduleEntry.start_day ||
+                dayOfWeek <= scheduleEntry.end_day))
         ) {
 
             if (scheduleEntry.start_day === scheduleEntry.end_day) {
@@ -219,12 +219,12 @@ const getEntryByDay = (schedule, dayOfWeek) => {
         const endDay = entry.end_day;
 
         if ((startDay <= endDay &&
-                dayOfWeek >= startDay &&
-                dayOfWeek <= endDay) ||
+                (dayOfWeek >= startDay &&
+                dayOfWeek <= endDay)) ||
 
             (startDay > endDay &&
-                dayOfWeek >= startDay ||
-                dayOfWeek <= endDay)
+                (dayOfWeek >= startDay ||
+                dayOfWeek <= endDay))
         ) {
             return entry;
         }
@@ -233,21 +233,73 @@ const getEntryByDay = (schedule, dayOfWeek) => {
     return null;
 };
 
+/**
+ * Determines  an array of entires based on the day of the week.
+ *
+ * @param schedule A schedule.
+ * @param dayOfWeek The day of the week
+ * @returns {*} an array of entries that are active on the given day of the week
+ */
+const getEntriesByDay = (schedule, dayOfWeek) => {
+    const openTimes = schedule.open_times;
+    let entries = []
+    for (let i = 0; i < openTimes.length; i++) {
+        const entry = openTimes[i];
+
+        const startDay = entry.start_day;
+        const endDay = entry.end_day;
+
+        if ((startDay <= endDay &&
+                (dayOfWeek >= startDay &&
+                dayOfWeek <= endDay)) ||
+
+            (startDay > endDay &&
+                (dayOfWeek >= startDay ||
+                dayOfWeek <= endDay))
+        ) {
+            // console.log(entry)
+            entries.push(entry)
+        }
+    }
+    // if(entries.length === 0){
+    //     return null;
+    // }
+    return entries;
+};
 
 const getHoursByDay = (facility, dayOfWeek) => {
     const schedule = getFacilityActiveSchedule(facility);
 
     if (schedule.twenty_four_hours) {
-        return 'All Day';
+        return [{text:'All Day',
+                start:0,
+                end:0,
+                allDayOrClosed:true}]
     }
+    
+    const entries = getEntriesByDay(schedule, dayOfWeek);
 
-    const entry = getEntryByDay(schedule, dayOfWeek);
-
-    if (entry === null) {
-        return 'Closed';
+    if (entries.length === 0) {
+        return [{text:'Closed',
+                start:0,
+                end:0,
+                allDayOrClosed:true}];
     }
+    let hours = [];
 
-    return convertToMeridiemTime(entry.start_time) + '  -  ' + convertToMeridiemTime(entry.end_time);
+    for(let i = 0; i < entries.length; i++){
+        hours.push({
+            text:convertToMeridienTime(entries[i].start_time) + '  -  ' + convertToMeridienTime(entries[i].end_time),
+            start:entries[i].start_time,
+            end:entries[i].end_time,
+            allDayOrClosed:false
+    })
+    }
+   
+    return hours.sort((a,b) => {
+        return parseInt(a.start) - parseInt(b.start)
+    })
+     
 
 };
 
@@ -258,7 +310,7 @@ const getHoursByDay = (facility, dayOfWeek) => {
  * @param time The time as military time
  * @returns {string} The time as 12-hour time.
  */
-const convertToMeridiemTime = (time) => {
+const convertToMeridienTime = (time) => {
     const timeArr = time
         .split(":")
         .map((item) => {
@@ -301,6 +353,7 @@ const daysTill = (dayFrom, dayTo) => {
 export default {
     getFacilityActiveSchedule: getFacilityActiveSchedule,
     isFacilityOpen: isFacilityOpen,
+    getEntriesByDay:getEntriesByDay,
     getHoursByDay: getHoursByDay,
     calcTimeTillOpen: calcTimeTillOpen,
     calcTimeTillClose: calcTimeTillClose
