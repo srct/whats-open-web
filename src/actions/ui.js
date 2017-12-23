@@ -2,6 +2,7 @@ import {
     ADD_FAVORITE_FACILITY,
     REMOVE_FAVORITE_FACILITY,
     SET_SEARCH_TERM,
+    SET_CAMPUS_REGION,
     TOGGLE_SIDEBAR,
     TOGGLE_SIDEBAR_MAP,
     SET_ALL_FAVORITES, SET_SELECTED_FACILITY, SET_SIDEBAR
@@ -13,9 +14,7 @@ export const toggleSidebar = () => ({
 
 export const setSidebar = (setOpen) => ({
     type: SET_SIDEBAR,
-    setOpen,
-
-
+    setOpen
 });
 
 export const toggleSidebarMap = () => ({
@@ -32,6 +31,11 @@ export const setSearchTerm = (term) => ({
     term,
 });
 
+export const setCampusRegion = (campusRegion) => ({
+   type: SET_CAMPUS_REGION,
+   campusRegion
+});
+
 export const addFavoriteFacility = slug => ({
     type: ADD_FAVORITE_FACILITY,
     slug
@@ -45,6 +49,6 @@ export const removeFavoriteFacility = slug => ({
 export const setAllFavorites = (favorites) => ({
     type: SET_ALL_FAVORITES,
     favorites,
-})
+});
 
 

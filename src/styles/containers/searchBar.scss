@@ -40,6 +40,11 @@
   display: none !important;
 }
 
+.search-bar-campus-control {
+  width: 150px;
+  justify-content: center;
+}
+
 .search-bar-has-value {
   .search-bar-close-btn {
     display: inline-flex !important;
@@ -75,9 +80,17 @@
     width: 0 !important;
   }
 
+  .search-bar-campus-control {
+    display: none !important;
+  }
+
   .search-bar-mobile-open {
     .search-bar-input {
       width: 100% !important;
+    }
+
+    .search-bar-campus-control {
+      display: inline-flex !important;
     }
 
     .search-bar-search-btn {

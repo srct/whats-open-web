@@ -2,9 +2,13 @@ import React from 'react'
 import FacilityCard from '../containers/FacilityCard'
 import Grid from 'material-ui/Grid';
 
-const CardContainer = ({searchTerm, facilities}) => {
+const CardContainer = ({searchTerm, campusRegion, facilities}) => {
 
     const filterCards = (facility) => {
+        if (facility.facility_location.campus_region.toLowerCase() !== campusRegion.toLowerCase()) {
+            return false;
+        }
+
         const lSearchTerm = searchTerm.toLowerCase();
         const facilityName = facility.facility_name.toLowerCase();
         const facilityLocation = facility.facility_location.building.toLowerCase();
