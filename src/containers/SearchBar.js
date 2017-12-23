@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {setSearchTerm} from '../actions/ui';
+import {setSearchTerm, setCampusRegion} from '../actions/ui';
 import SearchIcon from 'material-ui-icons/Search';
 import CloseIcon from 'material-ui-icons/Close';
 import ArrowBackIcon from 'material-ui-icons/ArrowBack';
 import IconButton from 'material-ui/IconButton';
 import Input from 'material-ui/Input';
 import Paper from 'material-ui/Paper';
+import {MenuItem} from 'material-ui/Menu';
+import Select from 'material-ui/Select';
+import {FormControl} from 'material-ui/Form';
 import classNames from 'classnames';
 
 class SearchBar extends React.Component {
@@ -18,7 +21,8 @@ class SearchBar extends React.Component {
         this.state = {
             isFocused: false,
             isMobileOpen: false,
-            value: ''
+            value: '',
+            campus: 'fairfax'
         };
     }
 
@@ -26,7 +30,16 @@ class SearchBar extends React.Component {
         this.setState({
             value: e.target.value,
         });
-        this.props.setSearchTerm(e.target.value)
+
+        this.props.setSearchTerm(e.target.value);
+    };
+
+    handleRegionChange = (e) => {
+        this.setState({
+            campus: e.target.value
+        });
+
+        this.props.setCampusRegion(e.target.value);
     };
 
     handleFocus = () => {
@@ -93,6 +106,16 @@ class SearchBar extends React.Component {
                 <IconButton onClick={this.clear} disableRipple className={'search-bar-close-btn'}>
                     <CloseIcon/>
                 </IconButton>
+                <FormControl className={'search-bar-campus-control'}>
+                    <Select
+                        value={this.state.campus}
+                        onChange={this.handleRegionChange}>
+                        <MenuItem value={'fairfax'}>Fairfax</MenuItem>
+                        <MenuItem value={'arlington'}>Arlington</MenuItem>
+                        <MenuItem value={'prince william county science and technology'}>Prince William</MenuItem>
+                        <MenuItem value={'mason korea'}>Korea</MenuItem>
+                    </Select>
+                </FormControl>
             </Paper>
         );
     }
@@ -103,4 +126,4 @@ SearchBar.propTypes = {
     onSearchCollapse: PropTypes.func
 };
 
-export default connect(null, {setSearchTerm})(SearchBar);
+export default connect(null, {setSearchTerm, setCampusRegion})(SearchBar);

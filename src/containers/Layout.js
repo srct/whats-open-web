@@ -39,7 +39,7 @@ class Layout extends React.Component {
     };
 
     render() {
-        const {isSidebarOpen, isSidebarMapOpen, toggleSidebar, toggleSidebarMap, getFacilities, selectedFacility,facilities,searchTerm,sortByFavorites,favorites} = this.props;
+        const {isSidebarOpen, isSidebarMapOpen, toggleSidebar, toggleSidebarMap, getFacilities, selectedFacility, facilities, searchTerm, campusRegion, sortByFavorites, favorites} = this.props;
         return (
             <div className={'layout-root'}>
                 <AppBar isOpen={false} handleMenuClick={() => {
@@ -47,7 +47,7 @@ class Layout extends React.Component {
                 <div className={'layout-container'}>
                     <div className={'layout-main-content'}>
                         <div className={'layout-card-container'}>
-                            <CardContainer styles={'layout-card-container'} searchTerm={searchTerm}
+                            <CardContainer styles={'layout-card-container'} searchTerm={searchTerm} campusRegion={campusRegion}
                                            facilities={facilities} />
                         </div>
                     </div>
@@ -65,6 +65,7 @@ function mapStateToProps(state) {
         facilities: state.facilities.data,
         favorites: state.ui.favorites,
         searchTerm: state.ui.search.term,
+        campusRegion: state.ui.search.campusRegion,
         isLoading: state.facilities.isLoading,
         selectedFacility: state.ui.selectedFacility,
         isSidebarOpen: state.ui.sidebar.isOpen,
