@@ -46,7 +46,6 @@ class Layout extends React.Component {
                 }}/>
                 <div className={'layout-container'}>
                     <div className={'layout-main-content'}>
-                        <SearchBar suggestions={{}}/>
                         <div className={'layout-card-container'}>
                             <CardContainer styles={'layout-card-container'} searchTerm={searchTerm}
                                            facilities={facilities} />

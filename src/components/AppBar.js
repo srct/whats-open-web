@@ -5,6 +5,7 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
+import SearchBar from '../containers/SearchBar';
 import classNames from 'classnames'
 
 class CustomAppBar extends React.Component {
@@ -36,6 +37,7 @@ class CustomAppBar extends React.Component {
                                 className={classNames('app-bar-menu-button', 'app-bar-text-color')}>
                         <MenuIcon/>
                     </IconButton>
+                    <SearchBar />
                     <div
                         className={classNames('app-bar-link-container', !this.state.isAppBarExpanded && 'app-bar-hide')}>
                         <Button

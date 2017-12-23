@@ -1,14 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import Paper from 'material-ui/Paper';
-import {withStyles} from 'material-ui/styles';
-import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {setSearchTerm} from '../actions/ui';
-import Search from 'material-ui-icons/Search'
+import SearchIcon from 'material-ui-icons/Search'
 import Input from 'material-ui/Input';
+import Paper from 'material-ui/Paper';
+import classNames from 'classnames';
 
 class SearchBar extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isFocused: false,
+            value: ''
+        };
+    }
+
     handleChange = (e) => {
         this.setState({
             value: e.target.value,
@@ -16,23 +24,36 @@ class SearchBar extends React.Component {
         this.props.setSearchTerm(e.target.value)
     };
 
+    handleFocus = () => {
+        this.setState({
+            isFocused: true
+        });
+    };
+
+    handleBlur = () => {
+        this.setState({
+            isFocused: false
+        });
+    };
+
     render() {
         return (
-            <Paper className={'search-bar-paper-background'} elevation={3}>
+            <Paper className={classNames('search-bar-paper-background', this.state.isFocused && 'search-bar-focus')}>
+                <div className={'search-bar-left-search-container'}>
+                    <SearchIcon className={'search-bar-search-icon'}/>
+                </div>
                 <Input
-                    placeholder="names, locations, etc"
-                    disableUnderline
-                    fullWidth
+                    placeholder="Names, Locations, etc."
                     autoFocus
-                    className={'search-bar-no-suggest-input'}
+                    disableUnderline
+                    className={'search-bar-input'}
                     onChange={this.handleChange}
+                    onFocus={this.handleFocus}
+                    onBlur={this.handleBlur}
                     inputProps={{
-                        'aria-label': 'Description',
+                        'aria-label': 'Search Bar',
                     }}
                 />
-                <div className={'search-bar-right-search-container'}>
-                    <Search className={'search-bar-search-icon'}/>
-                </div>
             </Paper>
         );
     }

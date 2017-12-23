@@ -1,12 +1,18 @@
 .search-bar-paper-background {
-  height: 54px;
-  max-width: 600px;
-  width: 90%;
+  height: 44px;
+  width: 400px;
   display: flex;
-  margin: 0 auto 16px auto;
+  border-radius: 4px !important;
+  background-color: rgba(0, 0, 0, 0.04) !important;
+  box-shadow: none !important;
+
+  &.search-bar-focus {
+    background-color: rgba(255, 255, 255, 1) !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.24) !important;
+  }
 }
 
-.search-bar-right-search-container {
+.search-bar-left-search-container {
   height: 100%;
   display: flex;
   align-items: center;
@@ -18,8 +24,9 @@
   color: rgba(0,0,0,0.54);
 }
 
-.search-bar-no-suggest-input {
+.search-bar-input {
   display: flex !important;
   align-items: center !important;
-  margin-left: 8px !important;
+  transition: ease-in-out width 250ms;
+  width: 100%
 }
