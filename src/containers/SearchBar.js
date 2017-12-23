@@ -1,8 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {setSearchTerm} from '../actions/ui';
 import SearchIcon from 'material-ui-icons/Search';
 import CloseIcon from 'material-ui-icons/Close';
+import ArrowBackIcon from 'material-ui-icons/ArrowBack';
 import IconButton from 'material-ui/IconButton';
 import Input from 'material-ui/Input';
 import Paper from 'material-ui/Paper';
@@ -15,6 +17,7 @@ class SearchBar extends React.Component {
 
         this.state = {
             isFocused: false,
+            isMobileOpen: false,
             value: ''
         };
     }
@@ -38,6 +41,24 @@ class SearchBar extends React.Component {
         });
     };
 
+    handleMobileExpand = () => {
+        this.setState({
+            isMobileOpen: true
+        });
+
+        this.props.onSearchExpand();
+
+        this.inputElement.focus();
+    };
+
+    handleMobileCollapse = () => {
+        this.setState({
+            isMobileOpen: false
+        });
+
+        this.props.onSearchCollapse();
+    };
+
     clear = () => {
         this.setState({
             value: ''
@@ -49,13 +70,15 @@ class SearchBar extends React.Component {
     render() {
         return (
             <Paper className={classNames('search-bar-paper-background', this.state.isFocused && 'search-bar-focus',
-                this.state.value && 'search-bar-has-value')}>
-                <div className={'search-bar-left-search-container'}>
+                this.state.value && 'search-bar-has-value', this.state.isMobileOpen && 'search-bar-mobile-open')}>
+                <IconButton onClick={this.handleMobileExpand} disableRipple className={'search-bar-search-btn'}>
                     <SearchIcon className={'search-bar-search-icon'}/>
-                </div>
+                </IconButton>
+                <IconButton onClick={this.handleMobileCollapse} disableRipple className={'search-bar-back-btn'}>
+                    <ArrowBackIcon className={'search-bar-back-icon'}/>
+                </IconButton>
                 <Input
-                    placeholder="Names, Locations, etc."
-                    autoFocus
+                    placeholder="Name, Location, etc."
                     disableUnderline
                     className={'search-bar-input'}
                     onChange={this.handleChange}
@@ -64,14 +87,20 @@ class SearchBar extends React.Component {
                     inputProps={{
                         'aria-label': 'Search Bar',
                     }}
+                    inputRef={el => this.inputElement = el}
                     value={this.state.value}
                 />
-                <IconButton onClick={this.clear} className={'search-bar-close-btn'}>
-                    <CloseIcon />
+                <IconButton onClick={this.clear} disableRipple className={'search-bar-close-btn'}>
+                    <CloseIcon/>
                 </IconButton>
             </Paper>
         );
     }
 }
+
+SearchBar.propTypes = {
+    onSearchExpand: PropTypes.func,
+    onSearchCollapse: PropTypes.func
+};
 
 export default connect(null, {setSearchTerm})(SearchBar);
