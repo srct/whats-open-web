@@ -30,3 +30,15 @@
   transition: ease-in-out width 250ms;
   width: 100%
 }
+
+.search-bar-close-btn {
+  width: 44px !important;
+  height: 44px !important;
+  display: none !important;
+}
+
+.search-bar-has-value {
+  .search-bar-close-btn {
+    display: inline-flex !important;
+  }
+}

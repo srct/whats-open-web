@@ -1,7 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {setSearchTerm} from '../actions/ui';
-import SearchIcon from 'material-ui-icons/Search'
+import SearchIcon from 'material-ui-icons/Search';
+import CloseIcon from 'material-ui-icons/Close';
+import IconButton from 'material-ui/IconButton';
 import Input from 'material-ui/Input';
 import Paper from 'material-ui/Paper';
 import classNames from 'classnames';
@@ -36,9 +38,18 @@ class SearchBar extends React.Component {
         });
     };
 
+    clear = () => {
+        this.setState({
+            value: ''
+        });
+
+        this.props.setSearchTerm('');
+    };
+
     render() {
         return (
-            <Paper className={classNames('search-bar-paper-background', this.state.isFocused && 'search-bar-focus')}>
+            <Paper className={classNames('search-bar-paper-background', this.state.isFocused && 'search-bar-focus',
+                this.state.value && 'search-bar-has-value')}>
                 <div className={'search-bar-left-search-container'}>
                     <SearchIcon className={'search-bar-search-icon'}/>
                 </div>
@@ -53,7 +64,11 @@ class SearchBar extends React.Component {
                     inputProps={{
                         'aria-label': 'Search Bar',
                     }}
+                    value={this.state.value}
                 />
+                <IconButton onClick={this.clear} className={'search-bar-close-btn'}>
+                    <CloseIcon />
+                </IconButton>
             </Paper>
         );
     }
