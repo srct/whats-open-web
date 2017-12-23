@@ -47,6 +47,7 @@ const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, toggleSidebarMap, f
                 </div>
             </div>
             <Divider className={'sidebar-divider'}/>
+            <div className={'sidebar-scroll'}>
             <div className={'sidebar-label-holder'}>
                     <TextwTitle label="Building" content="The Johnson Center"/>
                     <TextwTitle label="Address" content="https://amenufromaplace.com"/>
@@ -55,6 +56,7 @@ const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, toggleSidebarMap, f
                     <TextwTitle label="Hours" content={<WeekHours facility={facility} />}/>
                     
 
+            </div>
             </div>
             <div className={'sidebar-row2'}>
                 <FacilitiesMap isMapOpen={isSidebarMapOpen} facilities={facilities} facility={facility}/>
