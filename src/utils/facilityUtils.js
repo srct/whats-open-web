@@ -295,17 +295,17 @@ const getHoursByDay = (facility, dayOfWeek) => {
             allDayOrClosed:false
     })
     }
-    hours = [{
-        text: "11am - 2pm",
-        start:"11:00:00",
-        end:"14:00:00",
-        allDayOrClosed:false
-},{
-    text: "4pm - 5pm",
-    start:"16:00:00",
-    end:"17:00:00",
-    allDayOrClosed:false
-}];
+//     hours = [{
+//         text: "11am - 2pm",
+//         start:"11:00:00",
+//         end:"14:00:00",
+//         allDayOrClosed:false
+// },{
+//     text: "4pm - 5pm",
+//     start:"16:00:00",
+//     end:"17:00:00",
+//     allDayOrClosed:false
+// }];
     return hours.sort((a,b) => {
         return parseInt(a.start) - parseInt(b.start)
     })

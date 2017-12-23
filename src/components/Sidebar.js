@@ -38,6 +38,7 @@ const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, toggleSidebarMap, f
     }
 
     return (
+        <div className={classNames(['card-container-offset', (isSidebarOpen && 'card-container-offset-open'), (!isSidebarOpen && 'card-container-offset-closed')])}>
         <Paper
             className={classNames(['sidebar-root', (isSidebarOpen && 'sidebar-open'), (!isSidebarOpen && 'sidebar-closed')])}>
             <div className={'sidebar-row1'}>
@@ -54,8 +55,6 @@ const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, toggleSidebarMap, f
                     <TextwTitle label="Phone Number" content="The Johnson Center"/>
                     <TextwTitle label="Tags" content={<FacilityTags facility={facility} />}/>
                     <TextwTitle label="Hours" content={<WeekHours facility={facility} />}/>
-                    
-
             </div>
             </div>
             <div className={'sidebar-row2'}>
@@ -64,7 +63,8 @@ const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, toggleSidebarMap, f
                 {/* <Button className={'sidebar-toggle-map-btn'}
                         onClick={handleSidebarMapToggle}>{isSidebarMapOpen ? 'Close Map' : 'Open Map'}</Button> */}
             </div>
-        </Paper>
+        </Paper> 
+        </div>
     )
 };
 
