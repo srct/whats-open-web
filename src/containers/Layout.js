@@ -8,6 +8,7 @@ import CardContainer from '../components/CardContainer';
 import SearchBar from './SearchBar';
 import KeyboardArrowLeft from 'material-ui-icons/KeyboardArrowLeft';
 import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 
 class Layout extends React.Component {
@@ -46,10 +47,10 @@ class Layout extends React.Component {
                 }}/>
                 <div className={'layout-container'}>
                     <div className={'layout-main-content'}>
-                        <div className={'layout-card-container'}>
+                        <Scrollbars className={'layout-card-container'}>
                             <CardContainer styles={'layout-card-container'} searchTerm={searchTerm} campusRegion={campusRegion}
                                            facilities={facilities} />
-                        </div>
+                        </Scrollbars>
                     </div>
                     
                     <Sidebar facilities={facilities} facility={selectedFacility} isSidebarOpen={isSidebarOpen}

@@ -11,6 +11,7 @@ import Chip from 'material-ui/Chip';
 import WeekHours from './WeekHours';
 import { toggleSidebar } from '../actions/ui';
 import FacilityTags from './FacilityTags';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, toggleSidebarMap, facilities}) => {
 
@@ -48,7 +49,7 @@ const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, toggleSidebarMap, f
                 </div>
             </div>
             <Divider className={'sidebar-divider'}/>
-            <div className={'sidebar-scroll'}>
+            <Scrollbars className={'sidebar-scroll'}>
             <div className={'sidebar-label-holder'}>
                     <TextwTitle label="Building" content="The Johnson Center"/>
                     <TextwTitle label="Address" content="https://amenufromaplace.com"/>
@@ -56,7 +57,7 @@ const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, toggleSidebarMap, f
                     <TextwTitle label="Tags" content={<FacilityTags facility={facility} />}/>
                     <TextwTitle label="Hours" content={<WeekHours facility={facility} />}/>
             </div>
-            </div>
+            </Scrollbars>
             <div className={'sidebar-row2'}>
                 <FacilitiesMap isMapOpen={isSidebarMapOpen} facilities={facilities} facility={facility}/>
 

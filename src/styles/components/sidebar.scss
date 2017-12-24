@@ -82,7 +82,7 @@
   width: 100%;
 }
 .sidebar-scroll{
-    height:calc(100% - 220px - 116px - 32px);
+    height:calc(100% - 220px - 116px - 32px) !important;
     overflow-y: auto;
 }
 
