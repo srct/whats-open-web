@@ -11,7 +11,7 @@
     "immutability-helper": "^2.3.0",
     "mapbox": "^1.0.0-beta9",
     "mapbox-gl": "^0.40.1",
-    "material-ui": "^1.0.0-beta.24",
+    "material-ui": "^1.0.0-beta.25",
     "material-ui-icons": "^1.0.0-alpha.19",
     "node-sass-chokidar": "^0.0.3",
     "npm-run-all": "^4.1.1",
