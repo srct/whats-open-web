@@ -1,25 +1,111 @@
+@import '../_variables.scss';
+
 .search-bar-paper-background {
-  height: 54px;
-  max-width: 600px;
-  width: 90%;
+  height: 44px;
+  width: 400px;
   display: flex;
-  margin: 0 auto 16px auto;
+  border-radius: 4px !important;
+  background-color: rgba(0, 0, 0, 0.04) !important;
+  box-shadow: none !important;
 }
 
-.search-bar-right-search-container {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  margin: 0 8px;
+.search-bar-search-btn {
+  width: 44px !important;
+  height: 44px !important;
+  cursor: default !important;
 }
 
-.search-bar-search-icon {
+.search-bar-back-btn {
+  display: none !important;
+}
+
+.search-bar-search-icon, .search-bar-arrow-icon {
   display: block;
   color: rgba(0,0,0,0.54);
 }
 
-.search-bar-no-suggest-input {
+.search-bar-arrow-icon {
+  display: none !important;
+}
+
+.search-bar-input {
   display: flex !important;
   align-items: center !important;
-  margin-left: 8px !important;
+  width: 100%
+}
+
+.search-bar-close-btn {
+  width: 44px !important;
+  height: 44px !important;
+  display: none !important;
+}
+
+.search-bar-campus-control {
+  width: 150px;
+  justify-content: center;
+}
+
+.search-bar-has-value {
+  .search-bar-close-btn {
+    display: inline-flex !important;
+  }
+}
+
+@media screen and (min-width: map-get($breakpoints, lg)) {
+  .search-bar-paper-background {
+    &.search-bar-focus {
+      background-color: rgba(255, 255, 255, 1) !important;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.24) !important;
+      border: 1px solid rgba(0,0,0,0.15);
+    }
+  }
+
+  .search-bar-input {
+    transition: ease-in-out width 250ms;
+  }
+}
+
+@media screen and (max-width: map-get($breakpoints, lg) - 1px) {
+  .search-bar-paper-background {
+    background-color: rgba(255, 255, 255, 1) !important;
+    width: auto !important;
+
+    &.search-bar-mobile-open {
+      height: 100% !important;
+      width: 100% !important;
+    }
+  }
+
+  .search-bar-input {
+    width: 0 !important;
+  }
+
+  .search-bar-campus-control {
+    display: none !important;
+  }
+
+  .search-bar-mobile-open {
+    .search-bar-input {
+      width: 100% !important;
+    }
+
+    .search-bar-campus-control {
+      display: inline-flex !important;
+    }
+
+    .search-bar-search-btn {
+      display: none !important;
+    }
+
+    .search-bar-back-btn {
+      display: inline-flex !important;
+      width: 56px !important;
+      height: 56px !important;
+    }
+
+    .search-bar-close-btn {
+      width: 56px !important;
+      height: 56px !important;
+    }
+  }
 }

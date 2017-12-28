@@ -1,6 +1,6 @@
 import {
-    TOGGLE_SIDEBAR, SET_SELECTED_FACILITY, SET_SEARCH_TERM, SET_FILTERED_LIST,
-    ADD_FAVORITE_FACILITY, REMOVE_FAVORITE_FACILITY, SET_ALL_FAVORITES, TOGGLE_SIDEBAR_MAP, SET_SIDEBAR, 
+    TOGGLE_SIDEBAR, SET_SELECTED_FACILITY, SET_SEARCH_TERM, SET_CAMPUS_REGION,
+    ADD_FAVORITE_FACILITY, REMOVE_FAVORITE_FACILITY, SET_ALL_FAVORITES, TOGGLE_SIDEBAR_MAP, SET_SIDEBAR,
 } from '../actions/action-types'
 
 const selectedFacility = (state = {}, action) => {
@@ -37,8 +37,9 @@ const sidebar = (state=sidebarDefault,action) => {
 };
 
 const searchbarState = {
-    term:'',
-    filteredList:[],
+    term: '',
+    campusRegion: 'fairfax',
+    filteredList: [],
 };
 
 const filterList = (state) =>{
@@ -49,6 +50,10 @@ const search = (state=searchbarState,facilities=[],action) =>{
         case SET_SEARCH_TERM:
             return Object.assign({},state,{
                 term:action.term,
+            });
+        case SET_CAMPUS_REGION:
+            return Object.assign({}, state, {
+                campusRegion: action.campusRegion
             });
         default:
             return state;

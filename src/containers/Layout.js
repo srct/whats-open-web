@@ -5,10 +5,8 @@ import AppBar from '../components/AppBar';
 import Sidebar from '../components/Sidebar';
 import {getFacilities, setFacilities,sortByFavorites} from '../actions/api';
 import CardContainer from '../components/CardContainer';
-import SearchBar from './SearchBar';
 import KeyboardArrowLeft from 'material-ui-icons/KeyboardArrowLeft';
 import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
-
 
 class Layout extends React.Component {
     constructor(props) {
@@ -39,16 +37,15 @@ class Layout extends React.Component {
     };
 
     render() {
-        const {isSidebarOpen, isSidebarMapOpen, toggleSidebar, toggleSidebarMap, getFacilities, selectedFacility,facilities,searchTerm,sortByFavorites,favorites} = this.props;
+        const {isSidebarOpen, isSidebarMapOpen, toggleSidebar, toggleSidebarMap, getFacilities, selectedFacility, facilities, searchTerm, campusRegion, sortByFavorites, favorites} = this.props;
         return (
             <div className={'layout-root'}>
                 <AppBar isOpen={false} handleMenuClick={() => {
                 }}/>
                 <div className={'layout-container'}>
                     <div className={'layout-main-content'}>
-                        <SearchBar suggestions={{}}/>
                         <div className={'layout-card-container'}>
-                            <CardContainer styles={'layout-card-container'} searchTerm={searchTerm}
+                            <CardContainer styles={'layout-card-container'} searchTerm={searchTerm} campusRegion={campusRegion}
                                            facilities={facilities} />
                         </div>
                     </div>
@@ -66,6 +63,7 @@ function mapStateToProps(state) {
         facilities: state.facilities.data,
         favorites: state.ui.favorites,
         searchTerm: state.ui.search.term,
+        campusRegion: state.ui.search.campusRegion,
         isLoading: state.facilities.isLoading,
         selectedFacility: state.ui.selectedFacility,
         isSidebarOpen: state.ui.sidebar.isOpen,

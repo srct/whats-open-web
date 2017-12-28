@@ -21,7 +21,7 @@
   flex: 1 1 100%;
   height: 100%;
   width: 100%;
-  padding-top: 16px;
+//   padding-top: 32px;
 }
 
 .layout-sidebar-toggle-container {
@@ -52,7 +52,7 @@
 }
 
 .layout-card-container {
-  height: calc(100% - 70px);
+  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -61,4 +61,5 @@
   .layout-sidebar-toggle-container {
     display: none;
   }
+
 }
