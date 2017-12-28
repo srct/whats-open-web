@@ -82,8 +82,8 @@
   width: 100%;
 }
 .sidebar-scroll{
-    height:calc(100% - 220px - 116px - 32px) !important;
-    overflow-y: auto;
+  height:calc(100% - 220px - 116px - 32px) !important;
+  overflow-y: auto;
 }
 
 @media screen and (max-width: map-get($breakpoints, lg) - 1px) {
