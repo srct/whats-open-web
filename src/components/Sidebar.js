@@ -50,9 +50,8 @@ const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, toggleSidebarMap, f
             <Divider className={'sidebar-divider'}/>
             <div className={'sidebar-scroll'}>
             <div className={'sidebar-label-holder'}>
-                    <TextwTitle label="Building" content="The Johnson Center"/>
-                    <TextwTitle label="Address" content="https://amenufromaplace.com"/>
-                    <TextwTitle label="Phone Number" content="The Johnson Center"/>
+                    <TextwTitle label="Building" content={facility.facility_location && facility.facility_location.building}/>
+                    <TextwTitle label="Address" content={facility.facility_location && facility.facility_location.address}/>
                     <TextwTitle label="Tags" content={<FacilityTags facility={facility} />}/>
                     <TextwTitle label="Hours" content={<WeekHours facility={facility} />}/>
             </div>
