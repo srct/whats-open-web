@@ -1,5 +1,5 @@
-import React from 'react'
-import FacilityCard from '../containers/FacilityCard'
+import React from 'react';
+import FacilityCard from '../containers/FacilityCard';
 import Grid from 'material-ui/Grid';
 
 const CardContainer = ({searchTerm, campusRegion, facilities}) => {

@@ -93,9 +93,13 @@ const calcTimeTillOpen = schedule => {
  * This function does not work correctly if the facility is closed.
  *
  * @param schedule The active schedule for the facility.
- * @returns {number} The time (in minutes) until the facility closes.
+ * @returns {number} The time (in minutes) until the facility closes. Returns -1 is the facility is open 24/7
  */
 const calcTimeTillClose = schedule => {
+    if (schedule.twenty_four_hours) {
+        return -1;
+    }
+
     const curDateTime = new Date();
     //Converts the JS day of week (0 is sunday), to the API day of week (0 is monday).
     const dayOfWeek = [6, 0, 1, 2, 3, 4, 5][curDateTime.getDay()];
@@ -138,7 +142,7 @@ const isScheduleOpen = schedule => {
  *
  * @param schedule The schedule to determine the active entry.
  * @returns {*} A schedule entry if there is a current active entry. If there are no
- *              active entries (the schedule is closed) returns null.
+ *              active entries (the schedule is closed or open 24/7) returns null.
  */
 const getActiveEntry = schedule => {
     const curDateTime = new Date();
@@ -168,11 +172,11 @@ const getActiveEntry = schedule => {
          */
         if ((scheduleEntry.start_day <= scheduleEntry.end_day &&
                 (dayOfWeek >= scheduleEntry.start_day &&
-                dayOfWeek <= scheduleEntry.end_day)) ||
+                    dayOfWeek <= scheduleEntry.end_day)) ||
 
             (scheduleEntry.start_day > scheduleEntry.end_day &&
                 (dayOfWeek >= scheduleEntry.start_day ||
-                dayOfWeek <= scheduleEntry.end_day))
+                    dayOfWeek <= scheduleEntry.end_day))
         ) {
 
             if (scheduleEntry.start_day === scheduleEntry.end_day) {
@@ -220,11 +224,11 @@ const getEntryByDay = (schedule, dayOfWeek) => {
 
         if ((startDay <= endDay &&
                 (dayOfWeek >= startDay &&
-                dayOfWeek <= endDay)) ||
+                    dayOfWeek <= endDay)) ||
 
             (startDay > endDay &&
                 (dayOfWeek >= startDay ||
-                dayOfWeek <= endDay))
+                    dayOfWeek <= endDay))
         ) {
             return entry;
         }
@@ -251,11 +255,11 @@ const getEntriesByDay = (schedule, dayOfWeek) => {
 
         if ((startDay <= endDay &&
                 (dayOfWeek >= startDay &&
-                dayOfWeek <= endDay)) ||
+                    dayOfWeek <= endDay)) ||
 
             (startDay > endDay &&
                 (dayOfWeek >= startDay ||
-                dayOfWeek <= endDay))
+                    dayOfWeek <= endDay))
         ) {
             // console.log(entry)
             entries.push(entry)
@@ -271,29 +275,33 @@ const getHoursByDay = (facility, dayOfWeek) => {
     const schedule = getFacilityActiveSchedule(facility);
 
     if (schedule.twenty_four_hours) {
-        return [{text:'All Day',
-                start:0,
-                end:0,
-                allDayOrClosed:true}]
+        return [{
+            text: 'All Day',
+            start: 0,
+            end: 0,
+            allDayOrClosed: true
+        }]
     }
-    
+
     const entries = getEntriesByDay(schedule, dayOfWeek);
 
     if (entries.length === 0) {
-        return [{text:'Closed',
-                start:0,
-                end:0,
-                allDayOrClosed:true}];
+        return [{
+            text: 'Closed',
+            start: 0,
+            end: 0,
+            allDayOrClosed: true
+        }];
     }
     let hours = [];
 
-    for(let i = 0; i < entries.length; i++){
+    for (let i = 0; i < entries.length; i++) {
         hours.push({
-            text:convertToMeridienTime(entries[i].start_time) + '  -  ' + convertToMeridienTime(entries[i].end_time),
-            start:entries[i].start_time,
-            end:entries[i].end_time,
-            allDayOrClosed:false
-    })
+            text: convertToMeridienTime(entries[i].start_time) + '  -  ' + convertToMeridienTime(entries[i].end_time),
+            start: entries[i].start_time,
+            end: entries[i].end_time,
+            allDayOrClosed: false
+        })
     }
 //     hours = [{
 //         text: "11am - 2pm",
@@ -306,10 +314,10 @@ const getHoursByDay = (facility, dayOfWeek) => {
 //     end:"17:00:00",
 //     allDayOrClosed:false
 // }];
-    return hours.sort((a,b) => {
+    return hours.sort((a, b) => {
         return parseInt(a.start) - parseInt(b.start)
     })
-     
+
 
 };
 
@@ -363,7 +371,7 @@ const daysTill = (dayFrom, dayTo) => {
 export default {
     getFacilityActiveSchedule: getFacilityActiveSchedule,
     isFacilityOpen: isFacilityOpen,
-    getEntriesByDay:getEntriesByDay,
+    getEntriesByDay: getEntriesByDay,
     getHoursByDay: getHoursByDay,
     calcTimeTillOpen: calcTimeTillOpen,
     calcTimeTillClose: calcTimeTillClose

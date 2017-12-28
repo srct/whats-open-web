@@ -32,8 +32,8 @@ const FacilityStatus = ({facility}) => {
     const statusInfo = generateStatusInfo(facility);
 
     return (
-        <Typography type={'caption'} className={classNames('facility-status-text', statusInfo.isOpen ? 'facility-status-open' : 'facility-status-closed')}>
-            {/*{statusInfo.icon}*/}
+        <Typography type={'caption'}
+                    className={classNames('facility-status-text', statusInfo.isOpen ? 'facility-status-open' : 'facility-status-closed')}>
             {statusInfo.label}
         </Typography>
     )

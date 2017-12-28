@@ -20,12 +20,9 @@ const extension = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS
 let enhance;
 
 if (extension) {
-    enhance = compose(
-        applyMiddleware(ReduxThunk, routerMiddleware(history))
-        , extension);
+    enhance = compose(applyMiddleware(ReduxThunk, routerMiddleware(history)), extension);
 } else {
-    enhance = compose(
-        applyMiddleware(ReduxThunk, routerMiddleware(history)));
+    enhance = compose(applyMiddleware(ReduxThunk, routerMiddleware(history)));
 }
 
 const store = createStore(reducers, enhance);
@@ -37,7 +34,6 @@ ReactDOM.render(
                 <Layout/>
             </MuiThemeProvider>
         </ConnectedRouter>
-    </Provider>
-    , document.getElementById('root'));
+    </Provider>, document.getElementById('root'));
 
 registerServiceWorker();

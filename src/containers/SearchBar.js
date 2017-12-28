@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {setSearchTerm, setCampusRegion} from '../actions/ui';
+import {setCampusRegion, setSearchTerm} from '../actions/ui';
 import SearchIcon from 'material-ui-icons/Search';
 import CloseIcon from 'material-ui-icons/Close';
 import ArrowBackIcon from 'material-ui-icons/ArrowBack';

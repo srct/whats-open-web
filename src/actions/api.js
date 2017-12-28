@@ -1,24 +1,13 @@
-import {GET_FACILITIES, SET_FACILITIES, SORT_BY_FAVORITES} from './action-types'
+import {GET_FACILITIES, SET_FACILITIES, SORT_BY_FAVORITES} from './action-types';
 
-export const apiTest = () => {
-    return (dispatch) => {
-
-        return fetch('/api/facilities', {'method': 'get'}).then((res) => {
-            return res.json()
-        }, (error) => {
-            console.log(error)
-        }).then(json => {
-            console.log(json[0])
-        })
-    }
-};
+const API_GET_FACILITIES = 'https://api.srct.gmu.edu/whatsopen/v2/facilities/';
 
 export const getFacilities = () => dispatch => {
     dispatch({
         type: GET_FACILITIES
     });
 
-    const request = new Request('https://api.srct.gmu.edu/whatsopen/v2/facilities/', {
+    const request = new Request(API_GET_FACILITIES, {
         method: 'GET'
     });
 
@@ -29,16 +18,16 @@ export const getFacilities = () => dispatch => {
             }
 
             return res.json();
-        })
-        .then(json => {
+        }).then(json => {
             dispatch(setFacilities(JSON.stringify(json)));
         });
 };
 
 export const setFacilities = (facilities) => {
-    try{
+    try {
         localStorage.setItem('facilities', facilities);
-    }catch(e){}
+    } catch (e) {
+    }
     return {
         type: SET_FACILITIES,
         facilities: JSON.parse(facilities)
@@ -46,5 +35,5 @@ export const setFacilities = (facilities) => {
 };
 
 export const sortByFavorites = () => ({
-        type: SORT_BY_FAVORITES
-})
+    type: SORT_BY_FAVORITES
+});

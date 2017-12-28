@@ -1,6 +1,4 @@
 import React from 'react'
-import {withStyles} from 'material-ui/styles';
-import pink from 'material-ui/colors/pink';
 import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder';
 import FavoriteIcon from 'material-ui-icons/Favorite';
 import PropTypes from 'prop-types';
@@ -29,10 +27,12 @@ class FavoriteButton extends React.Component {
     render() {
         const {isHovered} = this.props;
         if (this.props.isFavorite) {
-            return (<FavoriteIcon onClick={this.handleClick} className={classNames('favorite-button-heart', 'favorite-button-heart-favorited')}/>);
+            return (<FavoriteIcon onClick={this.handleClick}
+                                  className={classNames('favorite-button-heart', 'favorite-button-heart-favorited')}/>);
         }
 
-        return (<FavoriteBorderIcon onClick={this.handleClick}  className={classNames('favorite-button-heart', isHovered ? 'favorite-button-heart-hover' : 'favorite-button-heart-no-hover')}/>);
+        return (<FavoriteBorderIcon onClick={this.handleClick}
+                                    className={classNames('favorite-button-heart', isHovered ? 'favorite-button-heart-hover' : 'favorite-button-heart-no-hover')}/>);
     }
 }
 

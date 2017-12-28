@@ -1,4 +1,4 @@
-const addRoute = (map,geometry) =>{
+const addRoute = (map, geometry) => {
     map.addLayer({
         "id": "route",
         "type": "line",
@@ -7,7 +7,7 @@ const addRoute = (map,geometry) =>{
             "data": {
                 "type": "Feature",
                 "properties": {},
-                "geometry":geometry 
+                "geometry": geometry
             }
         },
         "layout": {
@@ -21,17 +21,17 @@ const addRoute = (map,geometry) =>{
     });
 };
 
-const getGeoLine = (mapboxClient,start,end,callback) =>{
+const getGeoLine = (mapboxClient, start, end, callback) => {
 
     return new Promise((resolve, reject) => {
         mapboxClient.getDirections([
-            start,
-            end
+                start,
+                end
             ], {
-            profile: 'walking',
-            alternatives: false,
-            geometry: 'geojson'
-            }, function(err, results) {
+                profile: 'walking',
+                alternatives: false,
+                geometry: 'geojson'
+            }, function (err, results) {
                 resolve(results.routes[0])
             }
         );
@@ -40,8 +40,8 @@ const getGeoLine = (mapboxClient,start,end,callback) =>{
 
 const getMaxBounds = () => {
     return [
-        [ -77.321649,38.823919], // Southwest coordinates
-        [ -77.295213,38.835720]  // Northeast coordinates
+        [-77.321649, 38.823919], // Southwest coordinates
+        [-77.295213, 38.835720]  // Northeast coordinates
     ];
 };
 

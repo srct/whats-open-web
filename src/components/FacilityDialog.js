@@ -45,18 +45,18 @@ class FacilityDialog extends React.Component {
         return (
             <Dialog classes={{root: 'fd-dialog-root', paper: 'fd-dialog-paper'}} open={isOpen} onClose={onClose}>
                 <IconButton className={'fd-close-btn'} onClick={onClose}>
-                    <CloseIcon />
+                    <CloseIcon/>
                 </IconButton>
                 <Grid container className={'fd-container'} justify={'center'}>
                     <Grid item className={'fd-header-container'}>
                         <Grid container className={'fd-header'}>
                             <Grid item>
-                                <Avatar src={require('../images/chipotleLogo.png')} />
+                                <Avatar src={require('../images/chipotleLogo.png')}/>
                             </Grid>
                             <Grid item className={'fd-header-text-container'}>
                                 <Typography className={'fd-header-text'} type={'headline'}>
                                     {removeBrackets(facility.facility_name)}
-                                    </Typography>
+                                </Typography>
                             </Grid>
                         </Grid>
                     </Grid>

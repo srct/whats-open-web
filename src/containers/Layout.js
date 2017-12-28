@@ -1,12 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {setAllFavorites, toggleSidebar, toggleSidebarMap} from '../actions/ui';
+import {setAllFavorites} from '../actions/ui';
 import AppBar from '../components/AppBar';
 import Sidebar from '../components/Sidebar';
-import {getFacilities, setFacilities,sortByFavorites} from '../actions/api';
+import {getFacilities, setFacilities, sortByFavorites} from '../actions/api';
 import CardContainer from '../components/CardContainer';
-import KeyboardArrowLeft from 'material-ui-icons/KeyboardArrowLeft';
-import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
 
 class Layout extends React.Component {
     constructor(props) {
@@ -22,36 +20,38 @@ class Layout extends React.Component {
         try {
             if (localStorage.getItem('facilities')) {
                 const facilities = localStorage.getItem('facilities');
-                this.props.setFacilities(facilities)
+                this.props.setFacilities(facilities);
             }
+
             if (localStorage.getItem('favorites')) {
                 const favorites = JSON.parse(localStorage.getItem('favorites'));
                 this.props.setAllFavorites(favorites);
             }
-            this.props.sortByFavorites()
-        } catch(e) {
-            console.log('you should enable cookies so we can remember what places you favorite')
+
+            this.props.sortByFavorites();
+        } catch (e) {
+            console.warn('you should enable cookies so we can remember what places you favorite');
         }
 
-        this.props.getFacilities()
+        this.props.getFacilities();
     };
 
     render() {
-        const {isSidebarOpen, isSidebarMapOpen, toggleSidebar, toggleSidebarMap, getFacilities, selectedFacility, facilities, searchTerm, campusRegion, sortByFavorites, favorites} = this.props;
+        const {isSidebarOpen, isSidebarMapOpen, selectedFacility, facilities, searchTerm, campusRegion} = this.props;
+
         return (
             <div className={'layout-root'}>
-                <AppBar isOpen={false} handleMenuClick={() => {
-                }}/>
+                <AppBar isOpen={false}/>
                 <div className={'layout-container'}>
                     <div className={'layout-main-content'}>
                         <div className={'layout-card-container'}>
-                            <CardContainer styles={'layout-card-container'} searchTerm={searchTerm} campusRegion={campusRegion}
-                                           facilities={facilities} />
+                            <CardContainer styles={'layout-card-container'} searchTerm={searchTerm}
+                                           campusRegion={campusRegion} facilities={facilities}/>
                         </div>
                     </div>
-                    
+
                     <Sidebar facilities={facilities} facility={selectedFacility} isSidebarOpen={isSidebarOpen}
-                             isSidebarMapOpen={isSidebarMapOpen} toggleSidebarMap={toggleSidebarMap}/>
+                             isSidebarMapOpen={isSidebarMapOpen}/>
                 </div>
             </div>
         )
@@ -72,8 +72,6 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-    toggleSidebar,
-    toggleSidebarMap,
     getFacilities,
     setFacilities,
     setAllFavorites,

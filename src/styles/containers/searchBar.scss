@@ -21,7 +21,7 @@
 
 .search-bar-search-icon, .search-bar-arrow-icon {
   display: block;
-  color: rgba(0,0,0,0.54);
+  color: rgba(0, 0, 0, 0.54);
 }
 
 .search-bar-arrow-icon {
@@ -56,7 +56,7 @@
     &.search-bar-focus {
       background-color: rgba(255, 255, 255, 1) !important;
       box-shadow: 0 1px 1px rgba(0, 0, 0, 0.24) !important;
-      border: 1px solid rgba(0,0,0,0.15);
+      border: 1px solid rgba(0, 0, 0, 0.15);
     }
   }
 
