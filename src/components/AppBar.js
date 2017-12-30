@@ -44,10 +44,12 @@ class CustomAppBar extends React.Component {
                         </IconButton>
                         <div
                             className={classNames('app-bar-link-container', !this.state.isAppBarExpanded && 'app-bar-hide')}>
-                            <Button className={classNames('app-bar-link-button', 'app-bar-text-color')}>
+                            <Button className={classNames('app-bar-link-button', 'app-bar-text-color')}
+                                    href={'https://srct.gmu.edu/'} target='_blank'>
                                 About
                             </Button>
-                            <Button className={classNames('app-bar-link-button', 'app-bar-text-color')}>
+                            <Button className={classNames('app-bar-link-button', 'app-bar-text-color')}
+                                    href={'https://srct.gmu.edu/contact/'} target='_blank'>
                                 Feedback
                             </Button>
                         </div>
