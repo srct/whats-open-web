@@ -1,4 +1,5 @@
 {
+  "parser": "babel-eslint",
   "env": {
     "browser": true,
     "commonjs": true,
@@ -11,18 +12,22 @@
     },
     "sourceType": "module"
   },
-  "extends": "eslint:recommended",
+  "plugins": [
+    "react"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
   "rules": {
     //Overridden from eslint:reccomended
     "no-console": "off",
     //Possible Errors
-    "for-direction": "warn",
     "no-template-curly-in-string": "warn",
     //Best Practices
     "block-scoped-var": "error",
     "no-empty-function": "error",
     "no-implicit-globals": "error",
-    "no-invalid-this": "error",
     "no-multi-spaces": "error",
     "no-self-compare": "warn",
     //Variables
@@ -38,21 +43,20 @@
     "comma-spacing": "warn",
     "computed-property-spacing": "error",
     "func-call-spacing": "error",
-    "implicit-arrow-linebreak": "warn",
     "indent": "error",
     "jsx-quotes": "error",
     "key-spacing": "warn",
     "keyword-spacing": "warn",
-    "lines-between-class-members": "warn",
-    "multiline-comment-style": "warn",
     "no-lonely-if": "warn",
     "no-multiple-empty-lines": "warn",
     "no-tabs": "error",
     "no-trailing-spaces": "error",
     "no-whitespace-before-property": "error",
     "object-curly-newline": [
-      "warn",
-      "always"
+      "warn", {
+        "ObjectExpression": {"minProperties": 1},
+        "ObjectPattern": "never"
+      }
     ],
     "object-curly-spacing": "warn",
     "object-property-newline": "warn",
@@ -74,7 +78,6 @@
         "after": true
       }
     ],
-    "semi-style": "error",
     "space-before-blocks": "error",
     "space-before-function-paren": [
       "error",
@@ -89,7 +92,6 @@
         "nonwords": false
       }
     ],
-    "switch-colon-spacing": "error",
     //ECMAScript 6
     "arrow-parens": "warn",
     "arrow-spacing": [
@@ -109,6 +111,16 @@
     "prefer-spread": "error",
     "prefer-template": "warn",
     "rest-spread-spacing": "error",
-    "template-curly-spacing": "error"
+    "template-curly-spacing": "error",
+    //Overriden from plugin:react/reccommended
+    "react/no-unescaped-entities": "off",
+    //plugin:react
+    "react/boolean-prop-naming": "warn",
+    "react/no-danger": "error",
+    "react/no-typos": "warn",
+    "react/jsx-indent": "error",
+    "react/jsx-pascal-case": "error",
+    "react/jsx-space-before-closing": "warn",
+    "react/jsx-wrap-multilines": "warn"
   }
 }
