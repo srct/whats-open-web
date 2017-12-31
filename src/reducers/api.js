@@ -28,17 +28,17 @@ export const facilities = (state = defaultState, action, ui) => {
     switch (action.type) {
         case GET_FACILITIES:
             return Object.assign({}, state, {
-                isLoading: true,
+                isLoading: true
             });
         case SET_FACILITIES:
             return Object.assign({}, state, {
                 data: action.facilities.sort(sortFunc),
-                isLoading: false,
+                isLoading: false
             });
         case SORT_BY_FAVORITES:
             const newData = cloneDeep(state.data);
             return Object.assign({}, state, {
-                data: newData.sort(sortFunc),
+                data: newData.sort(sortFunc)
             });
         default:
             return state;

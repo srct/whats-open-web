@@ -16,11 +16,11 @@ const CardContainer = ({searchTerm, campusRegion, facilities}) => {
         const facilityTags = facility.facility_product_tags;
 
         facilityTags.forEach((tag) => {
-            return tag.toLowerCase()
+            return tag.toLowerCase();
         });
 
-        let index = facilityTags.findIndex((tag) => {
-            return tag.includes(lSearchTerm)
+        const index = facilityTags.findIndex((tag) => {
+            return tag.includes(lSearchTerm);
         });
 
         const hasTag = index !== -1;
@@ -31,15 +31,15 @@ const CardContainer = ({searchTerm, campusRegion, facilities}) => {
 
     return (
         <Grid container className={'card-container-root'} spacing={24} justify={'center'} alignItems={'flex-end'}>
-            {facilities.filter(filterCards).map(item => {
+            {facilities.filter(filterCards).map((item) => {
                 return (
                     <Grid key={item.slug} item>
-                        <FacilityCard facility={item} facilities={facilities}/>
+                        <FacilityCard facility={item} facilities={facilities} />
                     </Grid>
-                )
+                );
             })}
         </Grid>
-    )
+    );
 };
 
 export default CardContainer;

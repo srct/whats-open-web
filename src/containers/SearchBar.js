@@ -28,7 +28,7 @@ class SearchBar extends React.Component {
 
     handleChange = (e) => {
         this.setState({
-            value: e.target.value,
+            value: e.target.value
         });
 
         this.props.setSearchTerm(e.target.value);
@@ -85,10 +85,10 @@ class SearchBar extends React.Component {
             <Paper className={classNames('search-bar-paper-background', this.state.isFocused && 'search-bar-focus',
                 this.state.value && 'search-bar-has-value', this.state.isMobileOpen && 'search-bar-mobile-open')}>
                 <IconButton onClick={this.handleMobileExpand} disableRipple className={'search-bar-search-btn'}>
-                    <SearchIcon className={'search-bar-search-icon'}/>
+                    <SearchIcon className={'search-bar-search-icon'} />
                 </IconButton>
                 <IconButton onClick={this.handleMobileCollapse} disableRipple className={'search-bar-back-btn'}>
-                    <ArrowBackIcon className={'search-bar-back-icon'}/>
+                    <ArrowBackIcon className={'search-bar-back-icon'} />
                 </IconButton>
                 <Input
                     placeholder="Name, Location, etc."
@@ -98,13 +98,13 @@ class SearchBar extends React.Component {
                     onFocus={this.handleFocus}
                     onBlur={this.handleBlur}
                     inputProps={{
-                        'aria-label': 'Search Bar',
+                        'aria-label': 'Search Bar'
                     }}
-                    inputRef={el => this.inputElement = el}
+                    inputRef={(el) => this.inputElement = el}
                     value={this.state.value}
                 />
                 <IconButton onClick={this.clear} disableRipple className={'search-bar-close-btn'}>
-                    <CloseIcon/>
+                    <CloseIcon />
                 </IconButton>
                 <FormControl className={'search-bar-campus-control'}>
                     <Select
@@ -126,4 +126,7 @@ SearchBar.propTypes = {
     onSearchCollapse: PropTypes.func
 };
 
-export default connect(null, {setSearchTerm, setCampusRegion})(SearchBar);
+export default connect(null, {
+    setSearchTerm,
+    setCampusRegion
+})(SearchBar);

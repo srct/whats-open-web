@@ -14,7 +14,7 @@ class CustomAppBar extends React.Component {
         super();
         this.state = {
             isAppBarExpanded: false,
-            isSearchExpanded: false,
+            isSearchExpanded: false
         };
 
         this.toggleExpand = this.toggleExpand.bind(this);
@@ -24,7 +24,7 @@ class CustomAppBar extends React.Component {
         this.setState({
             isAppBarExpanded: !this.state.isAppBarExpanded
         });
-    };
+    }
 
     render() {
         return (
@@ -32,24 +32,28 @@ class CustomAppBar extends React.Component {
                 <AppBar position="absolute"
                         className={classNames('app-bar', this.state.isSearchExpanded && 'app-bar-search-expanded')}>
                     <Toolbar className={'app-bar-tool-bar'}>
-                        <img src={require('../images/SRCT_square.svg')} className={'app-bar-logo'}/>
+                        <img src={require('../images/SRCT_square.svg')} className={'app-bar-logo'} />
                         <Typography type="title" className={classNames('app-bar-title', 'app-bar-text-color')}>
                             What's Open
                         </Typography>
-                        <SearchBar onSearchExpand={() => this.setState({isSearchExpanded: true})}
-                                   onSearchCollapse={() => this.setState({isSearchExpanded: false})}/>
+                        <SearchBar onSearchExpand={() => this.setState({
+                            isSearchExpanded: true
+                        })}
+                                   onSearchCollapse={() => this.setState({
+                                       isSearchExpanded: false
+                                   })} />
                         <IconButton onClick={this.toggleExpand} aria-label="Menu"
                                     className={classNames('app-bar-menu-button', 'app-bar-text-color')}>
-                            <MenuIcon/>
+                            <MenuIcon />
                         </IconButton>
                         <div
                             className={classNames('app-bar-link-container', !this.state.isAppBarExpanded && 'app-bar-hide')}>
                             <Button className={classNames('app-bar-link-button', 'app-bar-text-color')}
-                                    href={'https://srct.gmu.edu/'} target='_blank'>
+                                    href={'https://srct.gmu.edu/'} target="_blank">
                                 About
                             </Button>
                             <Button className={classNames('app-bar-link-button', 'app-bar-text-color')}
-                                    href={'https://srct.gmu.edu/contact/'} target='_blank'>
+                                    href={'https://srct.gmu.edu/contact/'} target="_blank">
                                 Feedback
                             </Button>
                         </div>
@@ -57,7 +61,7 @@ class CustomAppBar extends React.Component {
                 </AppBar>
             </div>
         );
-    };
+    }
 }
 
 export default CustomAppBar;

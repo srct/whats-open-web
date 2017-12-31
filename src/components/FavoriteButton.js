@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder';
 import FavoriteIcon from 'material-ui-icons/Favorite';
 import PropTypes from 'prop-types';
@@ -9,8 +9,8 @@ class FavoriteButton extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isHovered: false,
-        }
+            isHovered: false
+        };
     }
 
     handleClick = (e) => {
@@ -28,11 +28,11 @@ class FavoriteButton extends React.Component {
         const {isHovered} = this.props;
         if (this.props.isFavorite) {
             return (<FavoriteIcon onClick={this.handleClick}
-                                  className={classNames('favorite-button-heart', 'favorite-button-heart-favorited')}/>);
+                                  className={classNames('favorite-button-heart', 'favorite-button-heart-favorited')} />);
         }
 
         return (<FavoriteBorderIcon onClick={this.handleClick}
-                                    className={classNames('favorite-button-heart', isHovered ? 'favorite-button-heart-hover' : 'favorite-button-heart-no-hover')}/>);
+                                    className={classNames('favorite-button-heart', isHovered ? 'favorite-button-heart-hover' : 'favorite-button-heart-no-hover')} />);
     }
 }
 
@@ -40,7 +40,7 @@ FavoriteButton.propTypes = {
     facility: PropTypes.object.isRequired,
     isFavorite: PropTypes.bool.isRequired,
     addFavoriteFacility: PropTypes.func.isRequired,
-    removeFavoriteFacility: PropTypes.func.isRequired,
+    removeFavoriteFacility: PropTypes.func.isRequired
 };
 
 export default FavoriteButton;

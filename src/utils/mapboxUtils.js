@@ -1,39 +1,39 @@
 const addRoute = (map, geometry) => {
     map.addLayer({
-        "id": "route",
-        "type": "line",
-        "source": {
-            "type": "geojson",
-            "data": {
-                "type": "Feature",
-                "properties": {},
-                "geometry": geometry
+        id: 'route',
+        type: 'line',
+        source: {
+            type: 'geojson',
+            data: {
+                type: 'Feature',
+                properties: {},
+                geometry: geometry
             }
         },
-        "layout": {
-            "line-join": "round",
-            "line-cap": "round"
+        layout: {
+            'line-join': 'round',
+            'line-cap': 'round'
         },
-        "paint": {
-            "line-color": "#4790E5",
-            "line-width": 5
+        paint: {
+            'line-color': '#4790E5',
+            'line-width': 5
         }
     });
 };
 
-const getGeoLine = (mapboxClient, start, end, callback) => {
+const getGeoLine = (mapboxClient, start, end) => {
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         mapboxClient.getDirections([
-                start,
-                end
-            ], {
-                profile: 'walking',
-                alternatives: false,
-                geometry: 'geojson'
-            }, function (err, results) {
-                resolve(results.routes[0])
-            }
+            start,
+            end
+        ], {
+            profile: 'walking',
+            alternatives: false,
+            geometry: 'geojson'
+        }, (err, results) => {
+            resolve(results.routes[0]);
+        }
         );
     });
 };

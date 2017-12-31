@@ -21,12 +21,14 @@ class FacilityDialog extends React.Component {
         this.state = {
             isMapOpen: false,
             maxBounds: getMaxBounds()
-        }
+        };
     }
 
-    toggleMap = e => {
+    toggleMap = (e) => {
         e.stopPropagation();
-        this.setState({isMapOpen: !this.state.isMapOpen});
+        this.setState({
+            isMapOpen: !this.state.isMapOpen
+        });
     };
 
     render() {
@@ -43,15 +45,18 @@ class FacilityDialog extends React.Component {
         }
 
         return (
-            <Dialog classes={{root: 'fd-dialog-root', paper: 'fd-dialog-paper'}} open={isOpen} onClose={onClose}>
+            <Dialog classes={{
+                root: 'fd-dialog-root',
+                paper: 'fd-dialog-paper'
+            }} open={isOpen} onClose={onClose}>
                 <IconButton className={'fd-close-btn'} onClick={onClose}>
-                    <CloseIcon/>
+                    <CloseIcon />
                 </IconButton>
                 <Grid container className={'fd-container'} justify={'center'}>
                     <Grid item className={'fd-header-container'}>
                         <Grid container className={'fd-header'}>
                             <Grid item>
-                                <Avatar src={require('../images/chipotleLogo.png')}/>
+                                <Avatar src={require('../images/chipotleLogo.png')} />
                             </Grid>
                             <Grid item className={'fd-header-text-container'}>
                                 <Typography className={'fd-header-text'} type={'headline'}>
@@ -63,7 +68,7 @@ class FacilityDialog extends React.Component {
 
                     <Grid item className={'fd-location-wrapper'}>
                         <Typography type={'caption'}>
-                            <LocationOnIcon/>
+                            <LocationOnIcon />
                         </Typography>
                         <Typography title={facility.facility_location.building} type={'caption'} align={'center'}>
                             {facility.facility_location.building}
@@ -71,11 +76,11 @@ class FacilityDialog extends React.Component {
                     </Grid>
 
                     <Grid item className={'fd-facility-tags'}>
-                        <FacilityTags facility={facility}/>
+                        <FacilityTags facility={facility} />
                     </Grid>
 
                     <Grid item className={'fd-week-hours'}>
-                        <WeekHours facility={facility}/>
+                        <WeekHours facility={facility} />
                     </Grid>
 
                     <Grid item className={'fd-toggle-map-btn-container'}>
@@ -93,7 +98,7 @@ class FacilityDialog extends React.Component {
                     onClose={this.toggleMap}
                 />
             </Dialog>
-        )
+        );
     }
 }
 

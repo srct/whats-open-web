@@ -1,7 +1,7 @@
 import {
     ADD_FAVORITE_FACILITY, REMOVE_FAVORITE_FACILITY, SET_ALL_FAVORITES, SET_CAMPUS_REGION, SET_SEARCH_TERM,
-    SET_SELECTED_FACILITY, SET_SIDEBAR,
-} from '../actions/action-types'
+    SET_SELECTED_FACILITY, SET_SIDEBAR
+} from '../actions/action-types';
 
 const selectedFacility = (state = {}, action) => {
     switch (action.type) {
@@ -13,7 +13,7 @@ const selectedFacility = (state = {}, action) => {
 };
 
 const sidebarDefault = {
-    isOpen: false,
+    isOpen: false
 };
 
 const sidebar = (state = sidebarDefault, action) => {
@@ -30,14 +30,14 @@ const sidebar = (state = sidebarDefault, action) => {
 const searchbarState = {
     term: '',
     campusRegion: 'fairfax',
-    filteredList: [],
+    filteredList: []
 };
 
 const search = (state = searchbarState, facilities = [], action) => {
     switch (action.type) {
         case SET_SEARCH_TERM:
             return Object.assign({}, state, {
-                term: action.term,
+                term: action.term
             });
         case SET_CAMPUS_REGION:
             return Object.assign({}, state, {
@@ -48,7 +48,6 @@ const search = (state = searchbarState, facilities = [], action) => {
     }
 };
 
-//TODO: Favorites should be stored in a cookie, not in the redux store.
 const favorites = (state = [], action) => {
     let newState;
     switch (action.type) {
@@ -57,7 +56,7 @@ const favorites = (state = [], action) => {
             localStorage.setItem('favorites', JSON.stringify(newState));
             return newState;
         case REMOVE_FAVORITE_FACILITY:
-            newState = state.filter(slug => slug !== action.slug);
+            newState = state.filter((slug) => slug !== action.slug);
             localStorage.setItem('favorites', JSON.stringify(newState));
             return newState;
         case SET_ALL_FAVORITES:
@@ -72,7 +71,7 @@ const ui = (state = {}, action) => ({
     selectedFacility: selectedFacility(state.selectedFacility, action),
     sidebar: sidebar(state.sidebar, action),
     search: search(state.search, state.facilities, action),
-    favorites: favorites(state.favorites, action),
+    favorites: favorites(state.favorites, action)
 });
 
 export default ui;

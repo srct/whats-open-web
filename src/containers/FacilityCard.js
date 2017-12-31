@@ -18,7 +18,7 @@ class FacilityCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isHovered: false,
+            isHovered: false
         };
     }
 
@@ -32,13 +32,13 @@ class FacilityCard extends React.Component {
     handleMouseEnter = () => {
         this.setState({
             isHovered: true
-        })
+        });
     };
 
     handleMouseLeave = () => {
         this.setState({
             isHovered: false
-        })
+        });
     };
 
 
@@ -50,7 +50,7 @@ class FacilityCard extends React.Component {
         const dayOfWeek = [6, 0, 1, 2, 3, 4, 5][new Date().getDay()];
 
         const getDisplayHours = () => {
-            let currentHour = new Date().getHours();
+            const currentHour = new Date().getHours();
             const todaysHours = FacilityUtils.getHoursByDay(facility, dayOfWeek);
 
             if (todaysHours.length > 1) {
@@ -62,24 +62,24 @@ class FacilityCard extends React.Component {
                 }
             }
 
-            return todaysHours[0].text
+            return todaysHours[0].text;
         };
 
         return (
             <Card onClick={this.handleCardClick} className={classNames('fc-root', isSelected && 'fc-selected')}
                   onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} raised>
                 <CardMedia className={'fc-media'}
-                           image={'https://gmucampus.files.wordpress.com/2010/09/00sothside2.jpg'}/>
+                           image={'https://gmucampus.files.wordpress.com/2010/09/00sothside2.jpg'} />
 
                 <div className={'fc-logo-container'}>
                     <CardMedia className={'fc-logo'}
-                               image={'https://upload.wikimedia.org/wikipedia/en/d/d3/Starbucks_Corporation_Logo_2011.svg'}/>
+                               image={'https://upload.wikimedia.org/wikipedia/en/d/d3/Starbucks_Corporation_Logo_2011.svg'} />
                 </div>
 
 
                 <FavoriteButton facility={facility} isFavorite={favorites.includes(facility.slug)}
                                 addFavoriteFacility={addFavoriteFacility} isHovered={this.state.isHovered}
-                                removeFavoriteFacility={removeFavoriteFacility}/>
+                                removeFavoriteFacility={removeFavoriteFacility} />
 
                 <CardContent className={'fc-card-content'}>
                     <Grid container alignItems={'center'} direction={'column'}
@@ -92,23 +92,23 @@ class FacilityCard extends React.Component {
                             </Typography>
                         </Grid>
                         <Grid item className={'fc-small-grid-item-spacing'}>
-                            <FacilityCategory category={facility.facility_category}/>
+                            <FacilityCategory category={facility.facility_category} />
                         </Grid>
                         <Grid item className={'fc-small-grid-item-spacing'}>
                             <Typography type={'body1'}>
-                                {"Today: " + getDisplayHours()}
+                                {`Today: ${getDisplayHours()}`}
                             </Typography>
                         </Grid>
                     </Grid>
 
                     <Grid container justify={'space-around'} className={'fc-extra-info-wrapper'}>
                         <Grid item className={'fc-extra-info'}>
-                            <FacilityStatus facility={facility}/>
+                            <FacilityStatus facility={facility} />
                         </Grid>
 
                         <Grid item className={'fc-extra-info'}>
                             <Typography type={'caption'}>
-                                <LocationOnIcon className={'fc-card-map-marker-icon'}/>
+                                <LocationOnIcon className={'fc-card-map-marker-icon'} />
                             </Typography>
                             <Typography title={facility.facility_location.building} type={'caption'} align={'center'}
                                         className={'fc-two-line-ellipsis'}>
@@ -119,13 +119,13 @@ class FacilityCard extends React.Component {
                 </CardContent>
 
                 <FacilityDialog facility={facility} facilities={facilities} isOpen={isSelected}
-                                onClose={this.handleCardClick}/>
+                                onClose={this.handleCardClick} />
             </Card>
-        )
+        );
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     favorites: state.ui.favorites,
     selectedFacility: state.ui.selectedFacility
 });
@@ -134,5 +134,5 @@ export default connect(mapStateToProps, {
     setSelectedFacility,
     addFavoriteFacility,
     removeFavoriteFacility,
-    setSidebar,
+    setSidebar
 })(FacilityCard);

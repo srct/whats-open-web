@@ -1,17 +1,17 @@
 import React from 'react';
-import ReactMapboxGl, {Marker} from "react-mapbox-gl";
+import ReactMapboxGl, {Marker} from 'react-mapbox-gl';
 import mapboxgl from 'mapbox-gl';
 import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';
 
-const mapboxToken = "pk.eyJ1IjoibWR1ZmZ5OCIsImEiOiJjaXk2a2lxODQwMDdyMnZzYTdyb3M4ZTloIn0.mSocl7zUnZBO6-CV9cvmnA";
+const mapboxToken = 'pk.eyJ1IjoibWR1ZmZ5OCIsImEiOiJjaXk2a2lxODQwMDdyMnZzYTdyb3M4ZTloIn0.mSocl7zUnZBO6-CV9cvmnA';
 
 const Map = ReactMapboxGl({
     accessToken: mapboxToken,
-    attributionControl: false,
+    attributionControl: false
 });
 
-let starbucksLogo = new Image();
+const starbucksLogo = new Image();
 starbucksLogo.src = require('../images/starbucksSVG.svg');
 starbucksLogo.width = 60;
 starbucksLogo.height = 60;
@@ -22,7 +22,7 @@ class MapDialog extends React.Component {
     };
 
     render() {
-        const {facilities, facility, zoom, center, maxBounds, ...other} = this.props;
+        const {facilities, zoom, center, maxBounds, ...other} = this.props;
 
         return (
             <Dialog onClose={this.handleRequestClose} {...other}>
@@ -30,7 +30,7 @@ class MapDialog extends React.Component {
                     onStyleLoad={(map) => {
                         map.addControl(new mapboxgl.GeolocateControl({
                             positionOptions: {
-                                enableHighAccuracy: true,
+                                enableHighAccuracy: true
                             },
                             trackUserLocation: true
                         }));
@@ -44,9 +44,9 @@ class MapDialog extends React.Component {
                     style="mapbox://styles/mduffy8/cjbcdxi3v73hp2spiyhxbkjde"
                     movingMethod={'easeTo'}
                     containerStyle={{
-                        height: "500px",
-                        width: "600px",
-                        borderRadius: '5px',
+                        height: '500px',
+                        width: '600px',
+                        borderRadius: '5px'
                     }}
                     center={center}
                     zoom={zoom}
@@ -57,9 +57,9 @@ class MapDialog extends React.Component {
                                 key={item.slug}
                                 coordinates={item.facility_location.coordinate_location.coordinates}
                                 anchor="bottom">
-                                <img height={20} width={20} src={require('../images/starbucksSVG.svg')}/>
+                                <img height={20} width={20} src={require('../images/starbucksSVG.svg')} />
                             </Marker>
-                        )
+                        );
                     })}
                 </Map>
             </Dialog>
@@ -69,7 +69,7 @@ class MapDialog extends React.Component {
 
 MapDialog.propTypes = {
     onClose: PropTypes.func,
-    selectedValue: PropTypes.string,
+    selectedValue: PropTypes.string
 };
 
 export default MapDialog;

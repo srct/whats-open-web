@@ -23,12 +23,12 @@ export const setCampusRegion = (campusRegion) => ({
     campusRegion
 });
 
-export const addFavoriteFacility = slug => ({
+export const addFavoriteFacility = (slug) => ({
     type: ADD_FAVORITE_FACILITY,
     slug
 });
 
-export const removeFavoriteFacility = slug => ({
+export const removeFavoriteFacility = (slug) => ({
     type: REMOVE_FAVORITE_FACILITY,
     slug
 });

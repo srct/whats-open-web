@@ -41,20 +41,20 @@ class Layout extends React.Component {
 
         return (
             <div className={'layout-root'}>
-                <AppBar isOpen={false}/>
+                <AppBar isOpen={false} />
                 <div className={'layout-container'}>
                     <div className={'layout-main-content'}>
                         <div className={'layout-card-container'}>
                             <CardContainer styles={'layout-card-container'} searchTerm={searchTerm}
-                                           campusRegion={campusRegion} facilities={facilities}/>
+                                           campusRegion={campusRegion} facilities={facilities} />
                         </div>
                     </div>
 
                     <Sidebar facilities={facilities} facility={selectedFacility} isSidebarOpen={isSidebarOpen}
-                             isSidebarMapOpen={isSidebarMapOpen}/>
+                             isSidebarMapOpen={isSidebarMapOpen} />
                 </div>
             </div>
-        )
+        );
     }
 }
 
@@ -67,8 +67,8 @@ function mapStateToProps(state) {
         isLoading: state.facilities.isLoading,
         selectedFacility: state.ui.selectedFacility,
         isSidebarOpen: state.ui.sidebar.isOpen,
-        isSidebarMapOpen: state.ui.sidebar.isMapOpen,
-    }
+        isSidebarMapOpen: state.ui.sidebar.isMapOpen
+    };
 }
 
 export default connect(mapStateToProps, {

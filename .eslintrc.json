@@ -22,6 +22,7 @@
   "rules": {
     //Overridden from eslint:reccomended
     "no-console": "off",
+    "no-case-declarations": "off",
     //Possible Errors
     "no-template-curly-in-string": "warn",
     //Best Practices
@@ -31,7 +32,7 @@
     "no-multi-spaces": "error",
     "no-self-compare": "warn",
     //Variables
-    "no-shadow": "error",
+    "no-shadow": "warn",
     "no-shadow-restricted-names": "error",
     "no-undef-init": "error",
     //Styling
@@ -43,18 +44,26 @@
     "comma-spacing": "warn",
     "computed-property-spacing": "error",
     "func-call-spacing": "error",
-    "indent": "error",
+    "indent": [
+      "error",
+      4,
+      {
+        "SwitchCase": 1
+      }
+    ],
     "jsx-quotes": "error",
     "key-spacing": "warn",
     "keyword-spacing": "warn",
-    "no-lonely-if": "warn",
     "no-multiple-empty-lines": "warn",
     "no-tabs": "error",
     "no-trailing-spaces": "error",
     "no-whitespace-before-property": "error",
     "object-curly-newline": [
-      "warn", {
-        "ObjectExpression": {"minProperties": 1},
+      "warn",
+      {
+        "ObjectExpression": {
+          "minProperties": 1
+        },
         "ObjectPattern": "never"
       }
     ],
@@ -114,6 +123,7 @@
     "template-curly-spacing": "error",
     //Overriden from plugin:react/reccommended
     "react/no-unescaped-entities": "off",
+    "react/prop-types": "off",
     //plugin:react
     "react/boolean-prop-naming": "warn",
     "react/no-danger": "error",

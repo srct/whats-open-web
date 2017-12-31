@@ -4,8 +4,8 @@ import {applyMiddleware, compose, createStore} from 'redux';
 import './index.css';
 import Layout from './containers/Layout';
 import registerServiceWorker from './registerServiceWorker';
-import createHistory from 'history/createBrowserHistory'
-import {ConnectedRouter, routerMiddleware} from 'react-router-redux'
+import createHistory from 'history/createBrowserHistory';
+import {ConnectedRouter, routerMiddleware} from 'react-router-redux';
 import {Provider} from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers/index';
@@ -31,7 +31,7 @@ ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
             <MuiThemeProvider theme={theme}>
-                <Layout/>
+                <Layout />
             </MuiThemeProvider>
         </ConnectedRouter>
     </Provider>, document.getElementById('root'));

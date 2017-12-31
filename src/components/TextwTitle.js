@@ -9,7 +9,7 @@ const TextwTitle = ({label, content}) => {
         <div className={'text-w-title-content'}>
             {content}
         </div>
-    </div>)
+    </div>);
 };
 
 export default TextwTitle;

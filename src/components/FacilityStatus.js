@@ -8,10 +8,9 @@ const FacilityStatus = ({facility}) => {
     /**
      * Generates information about the facility's status.
      *
-     * @param facility The facility to get generate information about.
      * @returns {{label: string, color: *, icon: *}} Information about the facility.
      */
-    const generateStatusInfo = facility => {
+    const generateStatusInfo = () => {
         let label;
         let isOpen;
 
@@ -25,18 +24,18 @@ const FacilityStatus = ({facility}) => {
 
         return {
             label: label,
-            isOpen: isOpen,
-        }
+            isOpen: isOpen
+        };
     };
 
-    const statusInfo = generateStatusInfo(facility);
+    const statusInfo = generateStatusInfo();
 
     return (
         <Typography type={'caption'}
                     className={classNames('facility-status-text', statusInfo.isOpen ? 'facility-status-open' : 'facility-status-closed')}>
             {statusInfo.label}
         </Typography>
-    )
+    );
 };
 
 export default FacilityStatus;

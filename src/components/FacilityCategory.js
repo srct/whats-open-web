@@ -8,7 +8,7 @@ const FacilityCategory = ({category}) => {
                 {category.name}
             </Typography>
         </div>
-    )
+    );
 };
 
 export default FacilityCategory;
