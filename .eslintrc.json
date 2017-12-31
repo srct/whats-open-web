@@ -15,33 +15,29 @@
   "rules": {
     //Overridden from eslint:reccomended
     "no-console": "off",
-
     //Possible Errors
     "for-direction": "warn",
     "no-template-curly-in-string": "warn",
-
     //Best Practices
-    "block-scoped-var": "warn",
-    "no-empty-function": "warn",
+    "block-scoped-var": "error",
+    "no-empty-function": "error",
     "no-implicit-globals": "error",
     "no-invalid-this": "error",
-    "no-multi-spaces": "warn",
+    "no-multi-spaces": "error",
     "no-self-compare": "warn",
-
     //Variables
     "no-shadow": "error",
+    "no-shadow-restricted-names": "error",
     "no-undef-init": "error",
-
     //Styling
-    "array-bracket-spacing": "warn",
-    "block-spacing": "warn",
+    "array-bracket-spacing": "error",
+    "block-spacing": "error",
     "brace-style": "error",
-    "camelcase": "warn",
-    "capitalized-comments": "warn",
+    "camelcase": "error",
     "comma-dangle": "warn",
     "comma-spacing": "warn",
-    "computed-property-spacing": "warn",
-    "func-call-spacing": "warn",
+    "computed-property-spacing": "error",
+    "func-call-spacing": "error",
     "implicit-arrow-linebreak": "warn",
     "indent": "error",
     "jsx-quotes": "error",
@@ -54,32 +50,65 @@
     "no-tabs": "error",
     "no-trailing-spaces": "error",
     "no-whitespace-before-property": "error",
-    "object-curly-newline": ["warn", "always"],
+    "object-curly-newline": [
+      "warn",
+      "always"
+    ],
     "object-curly-spacing": "warn",
     "object-property-newline": "warn",
     "operator-assignment": "warn",
     "operator-linebreak": "warn",
-    "quote-props": ["warn", "as-needed"],
-    "quotes": ["warn", "single"],
+    "quote-props": [
+      "warn",
+      "as-needed"
+    ],
+    "quotes": [
+      "warn",
+      "single"
+    ],
     "semi": "error",
-    "semi-spacing": ["error", {"before": false, "after": true}],
+    "semi-spacing": [
+      "error",
+      {
+        "before": false,
+        "after": true
+      }
+    ],
     "semi-style": "error",
-    "space-before-blocks": "warn",
-    "space-before-function-paren": ["warn", "never"],
-    "space-in-parens": "warn",
-    "space-infix-ops": "warn",
-    "space-unary-ops": ["error", {"words": true, "nonwords": false}],
-    "switch-colon-spacing": "warn",
-
+    "space-before-blocks": "error",
+    "space-before-function-paren": [
+      "error",
+      "never"
+    ],
+    "space-in-parens": "error",
+    "space-infix-ops": "error",
+    "space-unary-ops": [
+      "error",
+      {
+        "words": true,
+        "nonwords": false
+      }
+    ],
+    "switch-colon-spacing": "error",
     //ECMAScript 6
-
-    //Default -- Check to remove
-    "no-const-assign": "warn",
-    "no-this-before-super": "warn",
-    "no-undef": "warn",
-    "no-unreachable": "warn",
-    "no-unused-vars": "warn",
-    "constructor-super": "warn",
-    "valid-typeof": "warn"
+    "arrow-parens": "warn",
+    "arrow-spacing": [
+      "warn",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "no-duplicate-imports": "warn",
+    "no-useless-computed-key": "warn",
+    "no-useless-rename": "warn",
+    "no-var": "error",
+    "prefer-arrow-callback": "warn",
+    "prefer-const": "error",
+    "prefer-rest-params": "error",
+    "prefer-spread": "error",
+    "prefer-template": "warn",
+    "rest-spread-spacing": "error",
+    "template-curly-spacing": "error"
   }
 }
