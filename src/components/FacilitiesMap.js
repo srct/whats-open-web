@@ -54,7 +54,7 @@ class FacilitiesMap extends React.Component {
     };
 
     render() {
-        const {facilities, facility, classes, isMapOpen} = this.props;
+        const {facilities, facility, classes} = this.props;
         const {fitBounds, maxBounds, fitBoundsOptions, mapDialogOpen} = this.state;
 
         let center, zoom;
@@ -67,10 +67,7 @@ class FacilitiesMap extends React.Component {
         }
 
         return (
-            <div className={classes.mapContainer}
-                 style={{
-                     transform: isMapOpen ? 'translateY(0px)' : 'translateY(436px)'
-                 }}>
+            <div className={classes.mapContainer}>
                 <Map
                     animationOptions={{
                         animate: false

@@ -10,7 +10,7 @@ import WeekHours from './WeekHours';
 import FacilityTags from './FacilityTags';
 import {removeBrackets} from '../utils/nameUtils';
 
-const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, facilities}) => {
+const Sidebar = ({facility, isSidebarOpen, facilities}) => {
     return (
         <div
             className={classNames(['card-container-offset', (isSidebarOpen && 'card-container-offset-open'), (!isSidebarOpen && 'card-container-offset-closed')])}>
@@ -34,7 +34,7 @@ const Sidebar = ({facility, isSidebarOpen, isSidebarMapOpen, facilities}) => {
                     </div>
                 </div>
                 <div className={'sidebar-row2'}>
-                    <FacilitiesMap isMapOpen={isSidebarMapOpen} facilities={facilities} facility={facility} />
+                    <FacilitiesMap facilities={facilities} facility={facility} />
                 </div>
             </Paper>
         </div>
