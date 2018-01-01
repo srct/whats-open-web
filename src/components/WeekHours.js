@@ -14,18 +14,22 @@ const WeekHours = ({facility}) => {
     ];
 
     const output = [];
-    let index = 0;
-    for (let dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++) {
-        const todaysHours = facilityUtils.getHoursByDay(facility, dayOfWeek);
-        for (let i = 0; i < todaysHours.length; i++) {
-            output[index] = (
-                <Grid container spacing={0} key={facility.slug + index} className="week-hours-row">
-                    <Grid item xs={2} className="week-hours-day">{weekDays[dayOfWeek]}</Grid>
-                    <Grid item className="week-hours-times">{todaysHours[i].text}</Grid>
-                </Grid>
-            );
-            index++;
+    try {
+        let index = 0;
+        for (let dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++) {
+            const todaysHours = facilityUtils.getHoursByDay(facility, dayOfWeek);
+            for (let i = 0; i < todaysHours.length; i++) {
+                output[index] = (
+                    <Grid container spacing={0} key={facility.slug + index} className="week-hours-row">
+                        <Grid item xs={2} className="week-hours-day">{weekDays[dayOfWeek]}</Grid>
+                        <Grid item className="week-hours-times">{todaysHours[i].text}</Grid>
+                    </Grid>
+                );
+                index++;
+            }
         }
+    } catch (e) {
+        //Empty
     }
 
     return (

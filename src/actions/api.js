@@ -27,8 +27,9 @@ export const setFacilities = (facilities) => {
     try {
         localStorage.setItem('facilities', facilities);
     } catch (e) {
-        console.error('Set localstorage fail for facilities.');
+        //Empty
     }
+
     return {
         type: SET_FACILITIES,
         facilities: JSON.parse(facilities)
