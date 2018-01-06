@@ -122,7 +122,6 @@
     "react/no-typos": "warn",
     "react/jsx-indent": "error",
     "react/jsx-pascal-case": "error",
-    "react/jsx-space-before-closing": "warn",
     "react/jsx-wrap-multilines": "warn"
   }
 }
