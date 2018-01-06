@@ -20,22 +20,17 @@
     "plugin:react/recommended"
   ],
   "rules": {
-    //Overridden from eslint:reccomended
     "no-console": "off",
     "no-case-declarations": "off",
-    //Possible Errors
     "no-template-curly-in-string": "warn",
-    //Best Practices
     "block-scoped-var": "error",
     "no-empty-function": "error",
     "no-implicit-globals": "error",
     "no-multi-spaces": "error",
     "no-self-compare": "warn",
-    //Variables
     "no-shadow": "warn",
     "no-shadow-restricted-names": "error",
     "no-undef-init": "error",
-    //Styling
     "array-bracket-spacing": "error",
     "block-spacing": "error",
     "brace-style": "error",
@@ -121,10 +116,8 @@
     "prefer-template": "warn",
     "rest-spread-spacing": "error",
     "template-curly-spacing": "error",
-    //Overriden from plugin:react/reccommended
     "react/no-unescaped-entities": "off",
     "react/prop-types": "off",
-    //plugin:react
     "react/boolean-prop-naming": "warn",
     "react/no-danger": "error",
     "react/no-typos": "warn",
