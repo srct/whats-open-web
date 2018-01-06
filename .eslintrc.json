@@ -96,7 +96,6 @@
         "nonwords": false
       }
     ],
-    //ECMAScript 6
     "arrow-parens": "warn",
     "arrow-spacing": [
       "warn",
