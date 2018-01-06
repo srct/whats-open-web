@@ -32,20 +32,24 @@ class CustomAppBar extends React.Component {
                 <AppBar position="absolute"
                         className={classNames('app-bar', this.state.isSearchExpanded && 'app-bar-search-expanded')}>
                     <Toolbar className={'app-bar-tool-bar'}>
-                        <img src={require('../images/SRCT_square.svg')} className={'app-bar-logo'} />
-                        <Typography type="title" className={classNames('app-bar-title', 'app-bar-text-color')}>
-                            What's Open
-                        </Typography>
-                        <SearchBar onSearchExpand={() => this.setState({
-                            isSearchExpanded: true
-                        })}
-                                   onSearchCollapse={() => this.setState({
-                                       isSearchExpanded: false
-                                   })} />
-                        <IconButton onClick={this.toggleExpand} aria-label="Menu"
-                                    className={classNames('app-bar-menu-button', 'app-bar-text-color')}>
-                            <MenuIcon />
-                        </IconButton>
+                        <div className={'app-bar-logo-name'}>
+                            <img src={require('../images/SRCT_square.svg')} className={'app-bar-logo'}/>
+                            <Typography type="title" className={classNames('app-bar-title', 'app-bar-text-color')}>
+                                What's Open
+                            </Typography>
+                        </div>
+                        <div className={'app-bar-search-menu'}>
+                            <SearchBar onSearchExpand={() => this.setState({
+                                isSearchExpanded: true
+                            })}
+                                       onSearchCollapse={() => this.setState({
+                                           isSearchExpanded: false
+                                       })}/>
+                            <IconButton onClick={this.toggleExpand} aria-label="Menu"
+                                        className={classNames('app-bar-menu-button', 'app-bar-text-color')}>
+                                <MenuIcon/>
+                            </IconButton>
+                        </div>
                         <div
                             className={classNames('app-bar-link-container', !this.state.isAppBarExpanded && 'app-bar-hide')}>
                             <Button className={classNames('app-bar-link-button', 'app-bar-text-color')}
