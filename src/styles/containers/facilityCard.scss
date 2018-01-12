@@ -32,19 +32,23 @@
 .fc-logo-container {
   width: 100px;
   height: 100px;
+//   box-sizing: border-box;
   margin: auto;
   margin-top: -60px;
-  border-radius: 90px;
-  border: 5px solid white;
+  border-radius: 50%;
+//   border: 5px solid white;
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
 }
 
 .fc-logo {
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   margin: auto;
-  border-radius: 50%;
+//   border-radius: 50%;
   background-size: contain !important;
-  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+//   padding:5px;
+//   box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
 .fc-title {
@@ -172,17 +176,11 @@
   }
 
   .fc-logo-container {
-    width: 100px * $fc-sm-scale;
-    height: 100px * $fc-sm-scale;
-    margin: 0 !important;
-    padding-left: 5px;
-    border-radius: 50%;
-    border: 5px * $fc-sm-scale solid white;
+    margin: 0 0 0 5px !important;
   }
 
   .fc-logo {
-    width: 100px * $fc-sm-scale;
-    height: 100px * $fc-sm-scale;
+      margin:5px;
   }
 
   .fc-card-map-marker-icon {
