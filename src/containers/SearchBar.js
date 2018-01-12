@@ -108,6 +108,7 @@ class SearchBar extends React.Component {
                 </IconButton>
                 <FormControl className={'search-bar-campus-control'}>
                     <Select
+                        disableUnderline
                         value={this.state.campus}
                         onChange={this.handleRegionChange}>
                         <MenuItem value={'fairfax'}>Fairfax</MenuItem>
