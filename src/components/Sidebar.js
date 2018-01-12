@@ -17,7 +17,7 @@ const Sidebar = ({facility, isSidebarOpen, facilities}) => {
             <Paper
                 className={classNames(['sidebar-root', (isSidebarOpen && 'sidebar-open'), (!isSidebarOpen && 'sidebar-closed')])}>
                 <div className={'sidebar-row1'}>
-                    <Avatar className={'sidebar-avatar'} src={require('../images/chipotleLogo.png')} />
+                    <Avatar className={'sidebar-avatar'} src={facility.logo} />
                     <div className={'sidebar-title'}>
                         <Typography type="display1">{removeBrackets(facility.facility_name)}</Typography>
                     </div>
@@ -29,6 +29,8 @@ const Sidebar = ({facility, isSidebarOpen, facilities}) => {
                                     content={facility.facility_location && facility.facility_location.building} />
                         <TextwTitle label="Address"
                                     content={facility.facility_location && facility.facility_location.address} />
+                        <TextwTitle label="Phone Number"
+                                    content={facility.phone_number ? facility.phone_number : 'Unknown'} />
                         <TextwTitle label="Tags" content={<FacilityTags facility={facility} />} />
                         <TextwTitle label="Hours" content={<WeekHours facility={facility} />} />
                     </div>

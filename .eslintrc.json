@@ -65,7 +65,7 @@
     "object-curly-spacing": "warn",
     "object-property-newline": "warn",
     "operator-assignment": "warn",
-    "operator-linebreak": "warn",
+    "operator-linebreak": ["warn", "after"],
     "quote-props": [
       "warn",
       "as-needed"

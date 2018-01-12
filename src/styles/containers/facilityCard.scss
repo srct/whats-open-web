@@ -96,6 +96,7 @@
   }
 }
 
+/**
 //Between lg and xl
 @media screen and (min-width: map-get($breakpoints, lg)) and (max-width: map-get($breakpoints, xl)) {
   .fc-root {
@@ -133,8 +134,9 @@
     width: 20px !important;
   }
 }
+**/
 
-@media screen and (max-width: map-get($breakpoints, lg) - 1px) {
+//@media screen and (max-width: map-get($breakpoints, lg) - 1px) {
   .fc-root {
     width: 270px !important;
     display: flex !important;
@@ -184,4 +186,4 @@
     height: 20px !important;
     width: 20px !important;
   }
-}
+//}

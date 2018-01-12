@@ -65,6 +65,10 @@ class FacilityCard extends React.Component {
             return todaysHours[0].text;
         };
 
+        const buildingName = facility.facility_location.friendly_building ?
+            facility.facility_location.friendly_building :
+            facility.facility_location.building;
+
         return (
             <Card onClick={this.handleCardClick} className={classNames('fc-root', isSelected && 'fc-selected')}
                   onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} raised>
@@ -73,7 +77,7 @@ class FacilityCard extends React.Component {
 
                 <div className={'fc-logo-container'}>
                     <CardMedia className={'fc-logo'}
-                               image={'https://upload.wikimedia.org/wikipedia/en/d/d3/Starbucks_Corporation_Logo_2011.svg'} />
+                               image={facility.logo} />
                 </div>
 
 
@@ -110,9 +114,9 @@ class FacilityCard extends React.Component {
                             <Typography type={'caption'}>
                                 <LocationOnIcon className={'fc-card-map-marker-icon'} />
                             </Typography>
-                            <Typography title={facility.facility_location.building} type={'caption'} align={'center'}
+                            <Typography title={buildingName} type={'caption'} align={'center'}
                                         className={'fc-two-line-ellipsis'}>
-                                {facility.facility_location.building}
+                                {buildingName}
                             </Typography>
                         </Grid>
                     </Grid>
