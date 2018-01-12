@@ -1,42 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="167.512px" height="166.341px" viewBox="0 0 167.512 166.341" enable-background="new 0 0 167.512 166.341"
-	 xml:space="preserve">
-<g>
-	<defs>
-		<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="3.003" y="19.473" width="145.191" height="128.147">
-			
-				<feColorMatrix  type="matrix" values="-1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0" color-interpolation-filters="sRGB" result="source"/>
-			<feFlood  style="flood-color:white;flood-opacity:1" result="back"/>
-			<feBlend  in="source" in2="back" mode="normal"/>
-		</filter>
-	</defs>
-	<mask maskUnits="userSpaceOnUse" x="3.003" y="19.473" width="145.191" height="128.147" id="SVGID_1_">
-		<g filter="url(#Adobe_OpacityMaskFilter)">
-			<g>
-				<text transform="matrix(0.8849 0 0 1 55.0654 160.4102)" fill="#FFFFFF" font-family="'Xolonium-Bold'" font-size="8.7214">srct.gmu.edu</text>
-			</g>
-		</g>
-	</mask>
-	<g mask="url(#SVGID_1_)">
-		<path fill="#232A38" stroke="#232A38" stroke-width="2" stroke-miterlimit="10" d="M21.142,69.849h37.987
-			c2.034,0,4.069,0,4.069-3.143V55.484c0-3.141-2.035-3.141-4.069-3.141H37.422c-8.14,0-16.28,0-16.28-12.12v-7.631
-			c0-12.119,8.14-12.119,16.28-12.119h37.005v9.875H36.743c-2.034,0-4.069,0-4.069,3.142v5.835c0,3.142,2.035,3.142,4.069,3.142
-			h21.709c8.14,0,16.279,0,16.279,12.121v13.016c0,12.121-8.14,12.121-16.279,12.121h-37.31V69.849z"/>
-		<path fill="#232A38" stroke="#232A38" stroke-width="2" stroke-miterlimit="10" d="M130.987,79.726l-19.441-24.243H98.585v24.243
-			h-12.24V20.473h39.604c8.641,0,17.281,0,17.281,12.119v10.773c0,12.118-8.641,12.118-16.563,12.118l19.443,24.243H130.987z
-			 M126.667,45.607c2.16,0,4.32,0,4.32-3.141V33.49c0-3.142-2.16-3.142-4.32-3.142H98.585v15.26H126.667z"/>
-		<path fill="#232A38" stroke="#232A38" stroke-width="2" stroke-miterlimit="10" d="M21.142,100.168
-			c0-11.943,8.642-11.943,17.283-11.943h36.002v9.732H37.704c-2.16,0-4.321,0-4.321,3.098v32.734c0,3.096,2.161,3.096,4.321,3.096
-			h36.723v9.734H38.425c-8.641,0-17.283,0-17.283-11.943V100.168z"/>
-		<path fill="#232A38" stroke="#232A38" stroke-width="2" stroke-miterlimit="10" d="M86.345,88.225h60.763v9.732h-24.304v48.662
-			H110.65V97.958H86.345V88.225z"/>
-		<ellipse fill="#232A38" cx="8.936" cy="96.088" rx="5.933" ry="6.148"/>
-	</g>
-	<path fill="none" stroke="#242A38" stroke-width="11.808" stroke-miterlimit="10" d="M8.936,96.106v49.324
-		c0,6.75,5.16,12.393,11.232,12.393h-0.063h127.531l0,0c5.89,0,11.232-5.432,11.232-12.393V21.504
-		c0-6.752-5.16-12.495-11.232-12.495l0,0H20.892c-5.889,0-11.957,5.533-11.957,12.495v40.413c0,6.753,6.134,12.906,12.207,12.906"/>
-</g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="162px" height="161px" viewBox="0 0 162 161" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>SRCT_square</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="SRCT_square" transform="translate(0.000000, 6.000000)">
+            <g id="Clipped" transform="translate(0.000000, 11.000000)" fill="#232A38" fill-rule="nonzero">
+                <g id="Group">
+                    <path d="M18.142,49.849 L56.129,49.849 C58.163,49.849 60.198,49.849 60.198,46.706 L60.198,35.484 C60.198,32.343 58.163,32.343 56.129,32.343 L34.422,32.343 C26.282,32.343 18.142,32.343 18.142,20.223 L18.142,12.592 C18.142,0.473 26.282,0.473 34.422,0.473 L71.427,0.473 L71.427,10.348 L33.743,10.348 C31.709,10.348 29.674,10.348 29.674,13.49 L29.674,19.325 C29.674,22.467 31.709,22.467 33.743,22.467 L55.452,22.467 C63.592,22.467 71.731,22.467 71.731,34.588 L71.731,47.604 C71.731,59.725 63.591,59.725 55.452,59.725 L18.142,59.725 L18.142,49.849 Z" id="Shape" stroke="#232A38" stroke-width="2"></path>
+                    <path d="M127.987,59.726 L108.546,35.483 L95.585,35.483 L95.585,59.726 L83.345,59.726 L83.345,0.473 L122.949,0.473 C131.59,0.473 140.23,0.473 140.23,12.592 L140.23,23.365 C140.23,35.483 131.589,35.483 123.667,35.483 L143.11,59.726 L127.987,59.726 Z M123.667,25.607 C125.827,25.607 127.987,25.607 127.987,22.466 L127.987,13.49 C127.987,10.348 125.827,10.348 123.667,10.348 L95.585,10.348 L95.585,25.608 L123.667,25.608 L123.667,25.607 Z" id="Shape" stroke="#232A38" stroke-width="2"></path>
+                    <path d="M18.142,80.168 C18.142,68.225 26.784,68.225 35.425,68.225 L71.427,68.225 L71.427,77.957 L34.704,77.957 C32.544,77.957 30.383,77.957 30.383,81.055 L30.383,113.789 C30.383,116.885 32.544,116.885 34.704,116.885 L71.427,116.885 L71.427,126.619 L35.425,126.619 C26.784,126.619 18.142,126.619 18.142,114.676 L18.142,80.168 Z" id="Shape" stroke="#232A38" stroke-width="2"></path>
+                    <polygon id="Shape" stroke="#232A38" stroke-width="2" points="83.345 68.225 144.108 68.225 144.108 77.957 119.804 77.957 119.804 126.619 107.65 126.619 107.65 77.958 83.345 77.958"></polygon>
+                    <ellipse id="Oval" cx="5.936" cy="76.088" rx="5.933" ry="6.148"></ellipse>
+                </g>
+            </g>
+            <path d="M5.936,87.106 L5.936,136.43 C5.936,143.18 11.096,148.823 17.168,148.823 L17.105,148.823 L144.636,148.823 C150.526,148.823 155.868,143.391 155.868,136.43 L155.868,12.504 C155.868,5.752 150.708,0.009 144.636,0.009 L17.892,0.009 C12.003,0.009 5.935,5.542 5.935,12.504 L5.935,52.917 C5.935,59.67 12.069,65.823 18.142,65.823" id="Shape" stroke="#242A38" stroke-width="11.808"></path>
+        </g>
+    </g>
 </svg>
