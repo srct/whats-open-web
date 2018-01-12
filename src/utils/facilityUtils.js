@@ -321,10 +321,15 @@ const convertToMeridienTime = (time) => {
         });
 
     let amPM = 'am';
-    if (timeArr[0] > 12) {
-        timeArr[0] -= 12;
-        amPM = 'pm';
+    if(timeArr[0] === 0 || timeArr[0] === 24){
+        timeArr[0] = 12;
+    }else{
+        if (timeArr[0] > 12) {
+            timeArr[0] -= 12;
+            amPM = 'pm';
+        }
     }
+    
     if (timeArr[1] === 0) {
         timeArr[1] = '';
     } else {
