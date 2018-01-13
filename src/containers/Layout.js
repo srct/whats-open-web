@@ -4,6 +4,7 @@ import {setAllFavorites} from '../actions/ui';
 import AppBar from '../components/AppBar';
 import Sidebar from '../components/Sidebar';
 import {getFacilities, setFacilities, sortByFavorites} from '../actions/api';
+import {setSidebar, setSelectedFacility} from '../actions/ui';
 import CardContainer from '../components/CardContainer';
 
 class Layout extends React.Component {
@@ -37,7 +38,7 @@ class Layout extends React.Component {
     };
 
     render() {
-        const {isSidebarOpen, selectedFacility, facilities, searchTerm, campusRegion} = this.props;
+        const {isSidebarOpen, selectedFacility, facilities, searchTerm, campusRegion, setSidebar, setSelectedFacility} = this.props;
 
         return (
             <div className={'layout-root'}>
@@ -50,7 +51,7 @@ class Layout extends React.Component {
                         </div>
                     </div>
 
-                    <Sidebar facilities={facilities} facility={selectedFacility} isSidebarOpen={isSidebarOpen} />
+                    <Sidebar facilities={facilities} facility={selectedFacility} isSidebarOpen={isSidebarOpen} setSidebar={setSidebar} setSelectedFacility={setSelectedFacility}/>
                 </div>
             </div>
         );
@@ -73,5 +74,7 @@ export default connect(mapStateToProps, {
     getFacilities,
     setFacilities,
     setAllFavorites,
-    sortByFavorites
+    sortByFavorites,
+    setSidebar,
+    setSelectedFacility
 })(Layout);

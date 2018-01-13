@@ -8,14 +8,25 @@ import FacilitiesMap from '../components/FacilitiesMap';
 import classNames from 'classnames';
 import WeekHours from './WeekHours';
 import FacilityTags from './FacilityTags';
+import CloseIcon from 'material-ui-icons/Close';
+import IconButton from 'material-ui/IconButton';
 import {removeBrackets} from '../utils/nameUtils';
 
-const Sidebar = ({facility, isSidebarOpen, facilities}) => {
+const Sidebar = ({facility, isSidebarOpen, facilities, setSidebar, setSelectedFacility}) => {
+
+    const handleSidebarClose = () => {
+        setSelectedFacility(null);
+        setSidebar(false);
+    };
+
     return (
         <div
             className={classNames(['card-container-offset', (isSidebarOpen && 'card-container-offset-open'), (!isSidebarOpen && 'card-container-offset-closed')])}>
             <Paper
                 className={classNames(['sidebar-root', (isSidebarOpen && 'sidebar-open'), (!isSidebarOpen && 'sidebar-closed')])}>
+                <IconButton className={'sidebar-close-btn'} onClick={handleSidebarClose}>
+                    <CloseIcon />
+                </IconButton>
                 <div className={'sidebar-row1'}>
                     <Avatar className={'sidebar-avatar'} src={facility.logo} />
                     <div className={'sidebar-title'}>
