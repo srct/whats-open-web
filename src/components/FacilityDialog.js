@@ -56,7 +56,7 @@ class FacilityDialog extends React.Component {
                     <Grid item className={'fd-header-container'}>
                         <Grid container className={'fd-header'}>
                             <Grid item>
-                                <Avatar src={facility.logo} />
+                                <Avatar className={'fd-avatar'} src={facility.logo} />
                             </Grid>
                             <Grid item className={'fd-header-text-container'}>
                                 <Typography className={'fd-header-text'} type={'headline'}>

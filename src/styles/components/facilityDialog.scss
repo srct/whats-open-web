@@ -28,6 +28,15 @@
   width: 100%;
 }
 
+.fd-avatar {
+  border-radius: 0 !important;
+
+  & > img {
+    object-fit: contain !important;
+    border-radius: 0 !important;
+  }
+}
+
 .fd-header {
   display: flex !important;
   flex-wrap: nowrap !important;
