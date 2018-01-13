@@ -10,23 +10,10 @@ const getFacilityActiveSchedule = (facility) => {
     for (let i = 0; i < facility.special_schedules.length; i++) {
         const specialSchedule = facility.special_schedules[i];
 
-        const startInParts = specialSchedule.valid_start.split('-');
-        const endInParts = specialSchedule.valid_end.split('-');
+        const startDateTime = new Date(specialSchedule.valid_start);
+        const endDateTime = new Date(specialSchedule.valid_end);
 
-        const startDate = new Date(startInParts[0], startInParts[1], startInParts[2]);
-        const endDate = new Date(endInParts[0], endInParts[1], endInParts[2]);
-
-        /*
-            TODO: Possible issues may arise by only checking date and not time
-                valid_start and valid_end come as dates without times. If a facility,
-                such as Southside, closes are 2 am the day a special schedule is in use,
-                a user checking between 12am and 2am would receive incorrect information.
-                Possible solutions:
-                    - API valid_start and valid_end are in the format yyyy-mm-dd-hh-mm-ss (preferred)
-                    - Iterate over all schedules, find active schedule for current day of week,
-                      then add the time to startDate and endDate before the date checking.
-         */
-        if (startDate < curDateTime && endDate > curDateTime) {
+        if (startDateTime < curDateTime && endDateTime > curDateTime) {
             return specialSchedule;
         }
     }
@@ -207,38 +194,7 @@ const getActiveEntry = (schedule) => {
 };
 
 /**
- * Determines the entry based on the day of the week.
- *
- * @param schedule A schedule.
- * @param dayOfWeek The day of the week
- * @returns {*} A schedule entry for the specified day, null if no entries found for that day.
- */
-const getEntryByDay = (schedule, dayOfWeek) => {
-    const openTimes = schedule.open_times;
-
-    for (let i = 0; i < openTimes.length; i++) {
-        const entry = openTimes[i];
-
-        const startDay = entry.start_day;
-        const endDay = entry.end_day;
-
-        if ((startDay <= endDay &&
-                (dayOfWeek >= startDay &&
-                    dayOfWeek <= endDay)) ||
-
-            (startDay > endDay &&
-                (dayOfWeek >= startDay ||
-                    dayOfWeek <= endDay))
-        ) {
-            return entry;
-        }
-    }
-
-    return null;
-};
-
-/**
- * Determines  an array of entires based on the day of the week.
+ * Determines an array of entries based on the day of the week.
  *
  * @param schedule A schedule.
  * @param dayOfWeek The day of the week
@@ -253,15 +209,27 @@ const getEntriesByDay = (schedule, dayOfWeek) => {
         const startDay = entry.start_day;
         const endDay = entry.end_day;
 
-        if ((startDay <= endDay &&
-                (dayOfWeek >= startDay &&
-                    dayOfWeek <= endDay)) ||
+        /*
+            If the start and end days are equal, then simply check if the startDay is the dayOfWeek.
+            If the start and end days are not equal, two scenarios must be checked, if the startDay is
+            before or after the endDay (startDay could be before if a facility opens on a Sunday (6) and
+            closes on a Monday (0).
+         */
+        if (startDay === endDay) {
+            if (startDay === dayOfWeek) {
+                entries.push(entry);
+            }
+        } else {
+            if ((startDay <= endDay &&
+                    (dayOfWeek >= startDay &&
+                        dayOfWeek < endDay)) ||
 
-            (startDay > endDay &&
-                (dayOfWeek >= startDay ||
-                    dayOfWeek <= endDay))
-        ) {
-            entries.push(entry);
+                (startDay > endDay &&
+                    (dayOfWeek >= startDay ||
+                        dayOfWeek < endDay))
+            ) {
+                entries.push(entry);
+            }
         }
     }
 
@@ -294,7 +262,7 @@ const getHoursByDay = (facility, dayOfWeek) => {
 
     for (let i = 0; i < entries.length; i++) {
         hours.push({
-            text: `${convertToMeridienTime(entries[i].start_time)}  -  ${convertToMeridienTime(entries[i].end_time)}`,
+            text: `${convertToMeridianTime(entries[i].start_time)}  -  ${convertToMeridianTime(entries[i].end_time)}`,
             start: entries[i].start_time,
             end: entries[i].end_time,
             allDayOrClosed: false
@@ -313,7 +281,7 @@ const getHoursByDay = (facility, dayOfWeek) => {
  * @param time The time as military time
  * @returns {string} The time as 12-hour time.
  */
-const convertToMeridienTime = (time) => {
+const convertToMeridianTime = (time) => {
     const timeArr = time
         .split(':')
         .map((item) => {
@@ -321,15 +289,15 @@ const convertToMeridienTime = (time) => {
         });
 
     let amPM = 'am';
-    if(timeArr[0] === 0 || timeArr[0] === 24){
+    if (timeArr[0] === 0 || timeArr[0] === 24) {
         timeArr[0] = 12;
-    }else{
+    } else {
         if (timeArr[0] > 12) {
             timeArr[0] -= 12;
             amPM = 'pm';
         }
     }
-    
+
     if (timeArr[1] === 0) {
         timeArr[1] = '';
     } else {
@@ -361,8 +329,6 @@ const daysTill = (dayFrom, dayTo) => {
 export default {
     getFacilityActiveSchedule: getFacilityActiveSchedule,
     isFacilityOpen: isFacilityOpen,
-    getEntriesByDay: getEntriesByDay,
-    getEntryByDay: getEntryByDay,
     getHoursByDay: getHoursByDay,
     calcTimeTillOpen: calcTimeTillOpen,
     calcTimeTillClose: calcTimeTillClose
