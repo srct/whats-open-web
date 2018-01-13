@@ -91,7 +91,6 @@ class FacilityDialog extends React.Component {
                 <MapDialog
                     open={isMapOpen}
                     facilities={facilities}
-                    facility={facility}
                     maxBounds={maxBounds}
                     zoom={mapZoom}
                     center={mapCenter}

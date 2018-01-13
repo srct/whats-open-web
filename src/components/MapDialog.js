@@ -11,11 +11,6 @@ const Map = ReactMapboxGl({
     attributionControl: false
 });
 
-const starbucksLogo = new Image();
-starbucksLogo.src = require('../images/starbucksSVG.svg');
-starbucksLogo.width = 60;
-starbucksLogo.height = 60;
-
 class MapDialog extends React.Component {
     handleRequestClose = () => {
         this.props.onClose(this.props.selectedValue);
@@ -57,7 +52,9 @@ class MapDialog extends React.Component {
                                 key={item.slug}
                                 coordinates={item.facility_location.coordinate_location.coordinates}
                                 anchor="bottom">
-                                <img height={20} width={20} src={require('../images/starbucksSVG.svg')} />
+                                <img style={{
+                                    objectFit: 'contain'
+                                }} height={40} width={40} src={item.logo} />
                             </Marker>
                         );
                     })}

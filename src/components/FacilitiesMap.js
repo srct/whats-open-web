@@ -6,11 +6,6 @@ import MapDialog from './MapDialog';
 
 const mapboxToken = 'pk.eyJ1IjoibWR1ZmZ5OCIsImEiOiJjaXk2a2lxODQwMDdyMnZzYTdyb3M4ZTloIn0.mSocl7zUnZBO6-CV9cvmnA';
 
-const starbucksLogo = new Image();
-starbucksLogo.src = require('../images/starbucksSVG.svg');
-starbucksLogo.width = 60;
-starbucksLogo.height = 60;
-
 const Map = ReactMapboxGl({
     accessToken: mapboxToken,
     interactive: false,
