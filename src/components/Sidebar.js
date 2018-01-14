@@ -7,7 +7,7 @@ import TextwTitle from '../components/TextwTitle';
 import FacilitiesMap from '../components/FacilitiesMap';
 import classNames from 'classnames';
 import WeekHours from './WeekHours';
-import FacilityTags from './FacilityTags';
+import FacilityLabels from './FacilityLabels';
 import CloseIcon from 'material-ui-icons/Close';
 import IconButton from 'material-ui/IconButton';
 import {removeBrackets} from '../utils/nameUtils';
@@ -42,7 +42,7 @@ const Sidebar = ({facility, isSidebarOpen, facilities, setSidebar, setSelectedFa
                                     content={facility.facility_location && facility.facility_location.address} />
                         <TextwTitle label="Phone Number"
                                     content={facility.phone_number ? facility.phone_number : 'Unknown'} />
-                        <TextwTitle label="Tags" content={<FacilityTags facility={facility} />} />
+                        <TextwTitle label="Labels" content={<FacilityLabels facility={facility} />} />
                         <TextwTitle label="Hours" content={<WeekHours facility={facility} />} />
                     </div>
                 </div>

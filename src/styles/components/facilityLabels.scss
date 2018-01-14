@@ -1,17 +1,17 @@
 @import '../variables';
 
-.tag-chip-holder {
+.label-chip-holder {
   display: flex;
   flex-wrap: wrap;
 }
 
-.tag-chip {
+.label-chip {
   height: 24px !important;
   margin: 2px;
 }
 
 @media screen and (max-width: map-get($breakpoints, lg) - 1px) {
-  .tag-chip-holder {
+  .label-chip-holder {
     justify-content: center;
   }
 }
