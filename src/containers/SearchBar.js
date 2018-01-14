@@ -90,10 +90,10 @@ class SearchBar extends React.Component {
                 <IconButton onClick={this.handleMobileCollapse} disableRipple className={'search-bar-back-btn'}>
                     <ArrowBackIcon className={'search-bar-back-icon'} />
                 </IconButton>
-                <Input
+                (<Input
                     placeholder="Name, Location, etc."
                     disableUnderline
-                    className={classNames('search-bar-input','hide-search-input' && this.state.isMobileOpen)}
+                    className={classNames('search-bar-input',{'hide-search-input':!this.state.isMobileOpen})}
                     onChange={this.handleChange}
                     onFocus={this.handleFocus}
                     onBlur={this.handleBlur}
@@ -102,7 +102,7 @@ class SearchBar extends React.Component {
                     }}
                     inputRef={(el) => this.inputElement = el}
                     value={this.state.value}
-                />
+                />)
                 <IconButton onClick={this.clear} disableRipple className={'search-bar-close-btn'}>
                     <CloseIcon />
                 </IconButton>
