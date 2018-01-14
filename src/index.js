@@ -12,6 +12,7 @@ import reducers from './reducers/index';
 import {MuiThemeProvider} from 'material-ui/styles';
 import theme from './theme';
 import './styles/build/whatsOpen.css';
+import 'typeface-roboto';
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory();
