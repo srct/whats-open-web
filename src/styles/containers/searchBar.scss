@@ -18,7 +18,9 @@
 .search-bar-back-btn {
   display: none !important;
 }
-
+.hide-search-input {
+    display: none !important;
+}
 .search-bar-search-icon, .search-bar-arrow-icon {
   display: block;
   color: rgba(0, 0, 0, 0.54);
