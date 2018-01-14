@@ -93,7 +93,7 @@ class SearchBar extends React.Component {
                 <Input
                     placeholder="Name, Location, etc."
                     disableUnderline
-                    className={classNames('search-bar-input-open' && !this.state.isMobileOpen,'hide-search-input' && this.state.isMobileOpen)}
+                    className={classNames('search-bar-input','hide-search-input' && this.state.isMobileOpen)}
                     onChange={this.handleChange}
                     onFocus={this.handleFocus}
                     onBlur={this.handleBlur}

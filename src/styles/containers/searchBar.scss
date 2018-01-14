@@ -31,7 +31,7 @@
 }
 
 .search-bar-input {
-  display: flex !important;
+  display: flex;
   align-items: center !important;
   width: 100%
 }
@@ -43,7 +43,7 @@
 }
 
 .search-bar-campus-control {
-  margin-right: 8px !important;
+//   margin-right: 8px !important;
   width: 150px;
   justify-content: center;
 }
