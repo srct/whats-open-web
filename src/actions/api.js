@@ -1,7 +1,8 @@
 import {GET_FACILITIES, SET_FACILITIES, SORT_BY_FAVORITES} from './action-types';
 
 const API_GET_FACILITIES = 'https://api.srct.gmu.edu/whatsopen/v2/facilities/';
-
+// SHOP MASON ONLY
+//const API_GET_FACILITIES = 'https://api.srct.gmu.edu/whatsopen/v2/facilities/?facility_classifier=shopmason';
 export const getFacilities = () => (dispatch) => {
     dispatch({
         type: GET_FACILITIES
