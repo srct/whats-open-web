@@ -9,7 +9,7 @@ build:
   - >
     sed "s|^const API_GET_FACILITIES .*|const API_GET_FACILITIES = '$API_GET_FACILITIES';|" -i src/actions/api.js
   - yarn install
-  - npm run build
+  - CI=false npm run build
   artifacts:
     paths:
     - build
