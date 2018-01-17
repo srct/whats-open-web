@@ -1,16 +1,39 @@
 image: node:6.5.0
 
+stages:
+  - build
+  - deploy
+
 build:
   stage: build
   variables:
-    HOMEPAGE: "https://cefaoycoympc.srct.gmu.edu/"
+    API_GET_FACILITIES: "https://api.srct.gmu.edu/whatsopen/v2/facilities/"
   script:
   - npm install -g yarn
   - >
-    node -e "require('fs').writeFileSync('./package.json', JSON.stringify(Object.assign(require('./package.json'), {'homepage': process.env.HOMEPAGE}), null, 2));"
+    sed "s|^const API_GET_FACILITIES .*|const API_GET_FACILITIES = '$API_GET_FACILITIES';|" -i src/actions/api.js
   - yarn install
   - CI=false npm run build
   artifacts:
     paths:
     - build
 
+deploy_staging:
+  stage: deploy
+  script: echo "Deploy bot awayyyyy"
+  environment:
+    name: staging
+    url: https://whatsopen.gmu.io
+  only:
+    - master
+
+deploy_production:
+  stage: deploy
+  script: echo "Deploy bot awayyyyy"
+  environment:
+    name: production
+    url: https://whatsopen.gmu.edu
+  when: manual
+  only:
+    - master
+  
