@@ -9,7 +9,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: "Roboto", "-apple-system", "Helvetica", "Arial", sans-serif;
     background-color: #f1f2f6;
 }
 
