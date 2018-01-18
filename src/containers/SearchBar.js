@@ -85,15 +85,15 @@ class SearchBar extends React.Component {
             <Paper className={classNames('search-bar-paper-background', this.state.isFocused && 'search-bar-focus',
                 this.state.value && 'search-bar-has-value', this.state.isMobileOpen && 'search-bar-mobile-open')}>
                 <IconButton onClick={this.handleMobileExpand} disableRipple className={'search-bar-search-btn'}>
-                    <SearchIcon className={'search-bar-search-icon'} />
+                    <SearchIcon className={'search-bar-search-icon'}/>
                 </IconButton>
                 <IconButton onClick={this.handleMobileCollapse} disableRipple className={'search-bar-back-btn'}>
-                    <ArrowBackIcon className={'search-bar-back-icon'} />
+                    <ArrowBackIcon className={'search-bar-back-icon'}/>
                 </IconButton>
-                (<Input
+                <Input
                     placeholder="Name, Location, etc."
                     disableUnderline
-                    className={classNames('search-bar-input',{'hide-search-input':!this.state.isMobileOpen})}
+                    className={classNames('search-bar-input', {'hide-search-input': !this.state.isMobileOpen})}
                     onChange={this.handleChange}
                     onFocus={this.handleFocus}
                     onBlur={this.handleBlur}
@@ -102,9 +102,9 @@ class SearchBar extends React.Component {
                     }}
                     inputRef={(el) => this.inputElement = el}
                     value={this.state.value}
-                />)
+                />
                 <IconButton onClick={this.clear} disableRipple className={'search-bar-close-btn'}>
-                    <CloseIcon />
+                    <CloseIcon/>
                 </IconButton>
                 <FormControl className={'search-bar-campus-control'}>
                     <Select
