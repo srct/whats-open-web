@@ -19,7 +19,12 @@ const history = createHistory();
 const extension = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 const isProduction = process.env.NODE_ENV === 'production';
 
-const enhance = compose(applyMiddleware(ReduxThunk, routerMiddleware(history)), !isProduction && extension);
+let enhance;
+if (isProduction) {
+    enhance = compose(applyMiddleware(ReduxThunk, routerMiddleware(history)));
+} else {
+    enhance = compose(applyMiddleware(ReduxThunk, routerMiddleware(history)), extension);
+}
 
 if (isProduction) {
     window.dataLayer = window.dataLayer || [];
