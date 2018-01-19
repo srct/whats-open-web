@@ -10,7 +10,7 @@ import MapDialog from './MapDialog';
 import CloseIcon from 'material-ui-icons/Close';
 import IconButton from 'material-ui/IconButton';
 import LocationOnIcon from 'material-ui-icons/LocationOn';
-import {getMaxBounds} from '../utils/mapboxUtils';
+// import {getMaxBounds} from '../utils/mapboxUtils';
 import {removeBrackets} from '../utils/nameUtils';
 
 class FacilityDialog extends React.Component {
@@ -20,7 +20,7 @@ class FacilityDialog extends React.Component {
 
         this.state = {
             isMapOpen: false,
-            maxBounds: getMaxBounds()
+            maxBounds: props.maxBounds,
         };
     }
 

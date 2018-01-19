@@ -1,3 +1,21 @@
+const campusBounds = {
+    fairfax: [
+        [-77.321649, 38.823919], // Southwest coordinates
+        [-77.295213, 38.835720]  // Northeast coordinates
+    ],
+    arlington: [
+        [-77.10344017, 38.88401789],
+        [-77.09945977, 38.88638969]
+    ],
+    'prince william county science and technology': [
+        [-77.52532482, 38.75497015],
+        [-77.51772881, 38.75983938]
+    ],
+    'mason korea': [
+        [126.65918827, 37.37121447],
+        [126.68343544, 37.38836766]
+    ]
+};
 /**
  * paints geojson data onto map
  *
@@ -55,7 +73,10 @@ const getGeoLine = (mapboxClient, start, end) => {
  *
  * @returns {array} the bounds of the George Mason Fairfax Campus
  */
-const getMaxBounds = () => {
+const getMaxBounds = (campus) => {
+    console.log('holy fuck this is working');
+    console.log(campus);
+    console.log(campusBounds[campus]);
     return [
         [-77.321649, 38.823919], // Southwest coordinates
         [-77.295213, 38.835720]  // Northeast coordinates

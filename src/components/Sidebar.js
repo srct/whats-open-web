@@ -12,7 +12,7 @@ import CloseIcon from 'material-ui-icons/Close';
 import IconButton from 'material-ui/IconButton';
 import {removeBrackets} from '../utils/nameUtils';
 
-const Sidebar = ({facility, isSidebarOpen, facilities, setSidebar, setSelectedFacility}) => {
+const Sidebar = ({facility, isSidebarOpen, facilities, setSidebar, setSelectedFacility, campusRegion}) => {
 
     const handleSidebarClose = () => {
         setSelectedFacility(null);
@@ -47,7 +47,7 @@ const Sidebar = ({facility, isSidebarOpen, facilities, setSidebar, setSelectedFa
                     </div>
                 </div>
                 <div className={'sidebar-row2'}>
-                    <FacilitiesMap facilities={facilities} facility={facility} />
+                    <FacilitiesMap facilities={facilities} facility={facility} campusRegion={campusRegion} />
                 </div>
             </Paper>
         </div>

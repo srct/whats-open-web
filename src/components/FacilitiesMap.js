@@ -24,9 +24,11 @@ const Mark = {
 class FacilitiesMap extends React.Component {
     constructor(props) {
         super(props);
-
-        const southWestBounds = [-77.321649, 38.823919]; //Coordinates for the south-west bound
-        const northEastBounds = [-77.295213, 38.835720]; //Coordinates for the north-east bound
+        const maxBounds = getMaxBounds(props.campusRegion);
+        // const southWestBounds = [-77.321649, 38.823919]; //Coordinates for the south-west bound
+        // const northEastBounds = [-77.295213, 38.835720]; //Coordinates for the north-east bound
+        const southWestBounds = maxBounds[0]; //Coordinates for the south-west bound
+        const northEastBounds = maxBounds[1]; //Coordinates for the north-east bound
 
         this.state = {
             positionReady: false,
@@ -36,7 +38,7 @@ class FacilitiesMap extends React.Component {
             },
             mappedRoute: false,
             fitBounds: [southWestBounds, northEastBounds],
-            maxBounds: getMaxBounds(),
+            maxBounds: maxBounds,
             fitBoundsOptions: {},
             mapDialogOpen: false
         };

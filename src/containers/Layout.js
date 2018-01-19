@@ -51,7 +51,7 @@ class Layout extends React.Component {
                         </div>
                     </div>
 
-                    <Sidebar facilities={facilities} facility={selectedFacility} isSidebarOpen={isSidebarOpen} setSidebar={setSidebar} setSelectedFacility={setSelectedFacility}/>
+                    <Sidebar facilities={facilities} facility={selectedFacility} isSidebarOpen={isSidebarOpen} setSidebar={setSidebar} setSelectedFacility={setSelectedFacility} campusRegion={campusRegion}/>
                 </div>
             </div>
         );
