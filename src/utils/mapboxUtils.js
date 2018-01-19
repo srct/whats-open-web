@@ -1,3 +1,9 @@
+/**
+ * paints geojson data onto map
+ *
+ * @param map object
+ * @param geojson object
+ */
 const addRoute = (map, geometry) => {
     map.addLayer({
         id: 'route',
@@ -20,7 +26,14 @@ const addRoute = (map, geometry) => {
         }
     });
 };
-
+/**
+ * Gets directions from start coord to end cood and returns a geojson line object
+ *
+ * @param mapbox client object
+ * @param start coordinate
+ * @param end coordinate
+ * @returns {Promise} the line object
+ */
 const getGeoLine = (mapboxClient, start, end) => {
 
     return new Promise((resolve) => {
@@ -37,7 +50,11 @@ const getGeoLine = (mapboxClient, start, end) => {
         );
     });
 };
-
+/**
+ * Calculates the number of days between dayFrom and dayTo.
+ *
+ * @returns {array} the bounds of the George Mason Fairfax Campus
+ */
 const getMaxBounds = () => {
     return [
         [-77.321649, 38.823919], // Southwest coordinates

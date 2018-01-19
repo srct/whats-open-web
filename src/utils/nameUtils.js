@@ -1,3 +1,10 @@
+/**
+ * removes the building name in brackets
+ *
+ * @param cleaned name
+
+ * @returns {Promise} the line object
+ */
 export const removeBrackets = (name) => {
     if (typeof (name) === 'undefined') {
         return '';

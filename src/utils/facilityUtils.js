@@ -236,6 +236,13 @@ const getEntriesByDay = (schedule, dayOfWeek) => {
     return entries;
 };
 
+/**
+ * returns the hours open in the format 10am - 9pm for example
+ *
+ * @param facility object
+ * @param dayOfWeek The day of the week
+ * @returns {array} array of objects with text,start,end,allDayOrClosed properties.
+ */
 const getHoursByDay = (facility, dayOfWeek) => {
     const schedule = getFacilityActiveSchedule(facility);
 
