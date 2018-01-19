@@ -1,11 +1,11 @@
 .text-w-title-label {
-  font-family: "Roboto-Regular";
+  font-family: "Roboto-Regular","-apple-system", "Helvetica", "Arial", sans-serif;;
   font-size: 12px;
   color: rgba(0, 0, 0, .54);
 }
 
 .text-w-title-content {
-  font-family: "Roboto-Medium";
+  font-family: "Roboto-Medium", "-apple-system", "Helvetica", "Arial", sans-serif;
   font-size: 14px;
   text-overflow: ellipsis;
   width: 100%;
