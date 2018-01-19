@@ -70,17 +70,14 @@ const getGeoLine = (mapboxClient, start, end) => {
 };
 /**
  * Calculates the number of days between dayFrom and dayTo.
- *
- * @returns {array} the bounds of the George Mason Fairfax Campus
- */
-const getMaxBounds = (campus) => {
-    console.log('holy fuck this is working');
-    console.log(campus);
-    console.log(campusBounds[campus]);
-    return [
+ *[
         [-77.321649, 38.823919], // Southwest coordinates
         [-77.295213, 38.835720]  // Northeast coordinates
     ];
+ * @returns {array} the bounds of the George Mason Fairfax Campus
+ */
+const getMaxBounds = (campus) => {
+    return campusBounds[campus];
 };
 
 export {addRoute, getGeoLine, getMaxBounds};
