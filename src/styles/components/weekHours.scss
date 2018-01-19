@@ -2,15 +2,6 @@
 
 .week-hours-row {
   font-size: 14px;
-  color: #354052;
-}
-
-.week-hours-day {
-  font-family: Roboto-Regular, Helvetica-Neue;
-}
-
-.week-hours-times {
-  font-family: Roboto-Medium;
 }
 
 @media screen and (max-width: map-get($breakpoints, lg) - 1px) {

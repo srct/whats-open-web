@@ -1,15 +1,19 @@
 .text-w-title-label {
-  font-family: "Roboto-Regular","-apple-system", "Helvetica", "Arial", sans-serif;;
-  font-size: 12px;
-  color: rgba(0, 0, 0, .54);
+  font-family: "Roboto", "-apple-system", "Helvetica", "Arial", sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 .text-w-title-content {
-  font-family: "Roboto-Medium", "-apple-system", "Helvetica", "Arial", sans-serif;
+  font-family: "Roboto", "-apple-system", "Helvetica", "Arial", sans-serif;
   font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.87);
   text-overflow: ellipsis;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
-  color: #354052;
 }
