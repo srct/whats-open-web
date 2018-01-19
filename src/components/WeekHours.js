@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from 'material-ui/Grid';
 import facilityUtils from '../utils/facilityUtils';
+import Typography from 'material-ui/Typography';
 
 const WeekHours = ({facility}) => {
     const weekDays = [
@@ -21,8 +22,12 @@ const WeekHours = ({facility}) => {
             for (let i = 0; i < todaysHours.length; i++) {
                 output[index] = (
                     <Grid container spacing={0} key={facility.slug + index} className="week-hours-row">
-                        <Grid item xs={2} className="week-hours-day">{weekDays[dayOfWeek]}</Grid>
-                        <Grid item className="week-hours-times">{todaysHours[i].text}</Grid>
+                        <Grid item xs={2}>
+                            <Typography type={'body1'}>{weekDays[dayOfWeek]}</Typography>
+                        </Grid>
+                        <Grid item>
+                            <Typography type={'body1'}>{todaysHours[i].text}</Typography>
+                        </Grid>
                     </Grid>
                 );
                 index++;
