@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {setAllFavorites} from '../actions/ui';
+import {setAllFavorites, setSelectedFacility, setSidebar} from '../actions/ui';
 import AppBar from '../components/AppBar';
+import AlertContainer from '../components/AlertContainer';
 import Sidebar from '../components/Sidebar';
-import {getFacilities, setFacilities, sortByFavorites} from '../actions/api';
-import {setSidebar, setSelectedFacility} from '../actions/ui';
+import {getAlerts, getFacilities, setAlerts, setFacilities, sortByFavorites} from '../actions/api';
 import CardContainer from '../components/CardContainer';
 
 class Layout extends React.Component {
@@ -35,23 +35,27 @@ class Layout extends React.Component {
         }
 
         this.props.getFacilities();
+        this.props.getAlerts();
     };
 
     render() {
-        const {isSidebarOpen, selectedFacility, facilities, searchTerm, campusRegion, setSidebar, setSelectedFacility} = this.props;
+        const {isSidebarOpen, selectedFacility, facilities, alerts, searchTerm, campusRegion, setSidebar, setSelectedFacility} = this.props;
 
         return (
             <div className={'layout-root'}>
-                <AppBar isOpen={false} />
+                <AppBar isOpen={false}/>
+                <AlertContainer alerts={alerts}/>
                 <div className={'layout-container'}>
                     <div className={'layout-main-content'}>
                         <div className={'layout-card-container'}>
                             <CardContainer styles={'layout-card-container'} searchTerm={searchTerm}
-                                           campusRegion={campusRegion} facilities={facilities} />
+                                           campusRegion={campusRegion} facilities={facilities}/>
                         </div>
                     </div>
 
-                    <Sidebar facilities={facilities} facility={selectedFacility} isSidebarOpen={isSidebarOpen} setSidebar={setSidebar} setSelectedFacility={setSelectedFacility} campusRegion={campusRegion}/>
+                    <Sidebar facilities={facilities} facility={selectedFacility} isSidebarOpen={isSidebarOpen}
+                             setSidebar={setSidebar} setSelectedFacility={setSelectedFacility}
+                             campusRegion={campusRegion}/>
                 </div>
             </div>
         );
@@ -61,6 +65,7 @@ class Layout extends React.Component {
 function mapStateToProps(state) {
     return {
         facilities: state.facilities.data,
+        alerts: state.alerts,
         favorites: state.ui.favorites,
         searchTerm: state.ui.search.term,
         campusRegion: state.ui.search.campusRegion,
@@ -73,6 +78,8 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
     getFacilities,
     setFacilities,
+    getAlerts,
+    setAlerts,
     setAllFavorites,
     sortByFavorites,
     setSidebar,

@@ -1,12 +1,12 @@
-import {GET_FACILITIES, SET_FACILITIES, SORT_BY_FAVORITES} from '../actions/action-types';
+import {GET_ALERTS, GET_FACILITIES, SET_ALERTS, SET_FACILITIES, SORT_BY_FAVORITES} from '../actions/action-types';
 import cloneDeep from 'lodash/cloneDeep';
 
-const defaultState = {
+const defaultFacilityState = {
     isLoading: false,
     data: []
 };
 
-export const facilities = (state = defaultState, action, ui) => {
+export const facilities = (state = defaultFacilityState, action, ui) => {
     const sortFunc = (a, b) => {
         const favoriteCheck = ui.favorites.includes(b.slug) - ui.favorites.includes(a.slug);
 
@@ -40,6 +40,17 @@ export const facilities = (state = defaultState, action, ui) => {
             return Object.assign({}, state, {
                 data: newData.sort(sortFunc)
             });
+        default:
+            return state;
+    }
+};
+
+export const alerts = (state = [], action) => {
+    switch (action.type) {
+        case GET_ALERTS:
+            return state;
+        case SET_ALERTS:
+            return [...state, ...action.alerts];
         default:
             return state;
     }
