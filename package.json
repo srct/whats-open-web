@@ -21,6 +21,7 @@
     "react-classnames": "^0.1.2",
     "react-dom": "^15.6.1",
     "react-mapbox-gl": "^2.5.2",
+    "react-notification-system": "^0.2.16",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.2",
     "react-router-redux": "^5.0.0-alpha.9",
