@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {setAllFavorites, setSelectedFacility, setSidebar} from '../actions/ui';
 import AppBar from '../components/AppBar';
-import AlertContainer from '../components/AlertContainer';
 import Sidebar from '../components/Sidebar';
 import {getAlerts, getFacilities, setAlerts, setFacilities, sortByFavorites} from '../actions/api';
 import CardContainer from '../components/CardContainer';
@@ -39,12 +38,11 @@ class Layout extends React.Component {
     };
 
     render() {
-        const {isSidebarOpen, selectedFacility, facilities, alerts, searchTerm, campusRegion, setSidebar, setSelectedFacility} = this.props;
+        const {isSidebarOpen, selectedFacility, facilities, searchTerm, campusRegion, setSidebar, setSelectedFacility} = this.props;
 
         return (
             <div className={'layout-root'}>
                 <AppBar isOpen={false}/>
-                <AlertContainer alerts={alerts}/>
                 <div className={'layout-container'}>
                     <div className={'layout-main-content'}>
                         <div className={'layout-card-container'}>

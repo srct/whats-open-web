@@ -117,6 +117,7 @@
     "template-curly-spacing": "error",
     "react/no-unescaped-entities": "off",
     "react/prop-types": "off",
+    "react/no-find-dom-node": "off",
     "react/boolean-prop-naming": "warn",
     "react/no-danger": "error",
     "react/no-typos": "warn",
