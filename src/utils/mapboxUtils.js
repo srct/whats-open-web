@@ -7,7 +7,7 @@ const campusBounds = {
         [-77.10344017, 38.88401789],
         [-77.09945977, 38.88638969]
     ],
-    'prince william county science and technology': [
+    'prince william': [
         [-77.52532482, 38.75497015],
         [-77.51772881, 38.75983938]
     ],
