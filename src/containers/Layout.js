@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {setAllFavorites} from '../actions/ui';
+// import {setAllFavorites} from '../actions/ui';
 import AppBar from '../components/AppBar';
 import Sidebar from '../components/Sidebar';
 import {getFacilities, setFacilities, sortByFavorites} from '../actions/api';
-import {setSidebar, setSelectedFacility} from '../actions/ui';
+import {setSidebar, setSelectedFacility, setAllFavorites} from '../actions/ui';
 import CardContainer from '../components/CardContainer';
 
 class Layout extends React.Component {
