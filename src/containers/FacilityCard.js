@@ -76,7 +76,7 @@ class FacilityCard extends React.Component {
 
                 <div className={'fc-logo-container'}>
                     <img className={'fc-logo'}
-                    src={facility.logo} />
+                    alt={facility.slug} src={facility.logo} />
                 </div>
 
 
