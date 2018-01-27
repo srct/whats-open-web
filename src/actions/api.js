@@ -1,4 +1,4 @@
-import {GET_ALERTS, GET_FACILITIES, SET_ALERTS, SET_FACILITIES, SORT_BY_FAVORITES} from './action-types';
+import {GET_ALERTS, GET_FACILITIES, SET_ALERTS, SET_FACILITIES, SORT_BY_FAVORITES, VIEW_ALERT} from './action-types';
 
 const API_GET_FACILITIES = 'https://api.srct.gmu.edu/whatsopen/v2/facilities/';
 const API_GET_ALERTS = 'https://api.srct.gmu.edu/whatsopen/v2/alerts/?ordering=urgency_tag';
@@ -59,13 +59,43 @@ export const getAlerts = () => (dispatch) => {
 
             return res.json();
         }).then((json) => {
-            dispatch(setAlerts(JSON.stringify(json)));
+            dispatch(setAlerts(json));
         });
 };
 
 export const setAlerts = (alerts) => {
+    const viewedAlerts = JSON.parse(localStorage.getItem('viewedAlerts'));
+
+    if (viewedAlerts) {
+        alerts.forEach((alert) => {
+            alert['viewed'] = viewedAlerts.includes(alert.id);
+        });
+    }
+
     return {
         type: SET_ALERTS,
-        alerts: JSON.parse(alerts)
+        alerts: alerts
+    };
+};
+
+export const viewAlert = (alert) => {
+    try {
+        let viewedAlerts = JSON.parse(localStorage.getItem('viewedAlerts'));
+        if (!viewedAlerts) {
+            viewedAlerts = [];
+        }
+
+        if (!viewedAlerts.includes(alert.id)) {
+            viewedAlerts.push(alert.id);
+        }
+
+        localStorage.setItem('viewedAlerts', JSON.stringify(viewedAlerts));
+    } catch (e) {
+        //Empty
+    }
+
+    return {
+        type: VIEW_ALERT,
+        alert
     };
 };

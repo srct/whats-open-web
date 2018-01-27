@@ -1,10 +1,12 @@
 import React from 'react';
 import {findDOMNode} from 'react-dom';
-import Button from 'material-ui/Button';
+import IconButton from 'material-ui/IconButton';
 import Popover from 'material-ui/Popover';
 import Alert from '../components/Alert';
 import NotificationsIcon from 'material-ui-icons/Notifications';
+import Typography from 'material-ui/Typography';
 import {connect} from 'react-redux';
+import {viewAlert} from '../actions/api';
 
 class AlertContainer extends React.Component {
 
@@ -20,6 +22,7 @@ class AlertContainer extends React.Component {
         this.setState({
             isOpen: true
         });
+        this.props.alerts.forEach((alert) => this.props.viewAlert(alert));
     };
 
     handleClose = () => {
@@ -44,12 +47,20 @@ class AlertContainer extends React.Component {
 
     render() {
         const {alerts} = this.props;
-
+        const activeAlerts = alerts.filter(this.isAlertActive);
         return (
             <div>
-                <Button fab mini color={'primary'} ref={this.handleBtnRef} onClick={this.handleOpen}>
-                    <NotificationsIcon/>
-                </Button>
+                <IconButton color={'primary'} ref={this.handleBtnRef} onClick={this.handleOpen}>
+                    {activeAlerts.filter((alert) => !alert.viewed).length !== 0 &&
+                    <span className={'alert-container-number'}>
+                        <Typography type={'caption'} className={'alert-container-number-text'}>
+                            {activeAlerts.length}
+                        </Typography>
+                    </span>}
+
+                    <NotificationsIcon>
+                    </NotificationsIcon>
+                </IconButton>
                 <Popover
                     open={this.state.isOpen}
                     anchorEl={this.state.anchorEl}
@@ -63,9 +74,9 @@ class AlertContainer extends React.Component {
                     }}
                     onClose={this.handleClose}>
                     <div className={'alert-container-popover'}>
-                        {alerts.filter(this.isAlertActive).map((alert) => {
+                        {activeAlerts.map((alert) => {
                             return (
-                                <Alert key={alert.id} alert={alert} />
+                                <Alert key={alert.id} alert={alert}/>
                             );
                         })}
                     </div>
@@ -82,4 +93,6 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(AlertContainer);
+export default connect(mapStateToProps, {
+    viewAlert
+})(AlertContainer);

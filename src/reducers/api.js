@@ -1,4 +1,11 @@
-import {GET_ALERTS, GET_FACILITIES, SET_ALERTS, SET_FACILITIES, SORT_BY_FAVORITES} from '../actions/action-types';
+import {
+    GET_ALERTS,
+    GET_FACILITIES,
+    SET_ALERTS,
+    SET_FACILITIES,
+    SORT_BY_FAVORITES,
+    VIEW_ALERT
+} from '../actions/action-types';
 import cloneDeep from 'lodash/cloneDeep';
 
 const defaultFacilityState = {
@@ -51,6 +58,16 @@ export const alerts = (state = [], action) => {
             return state;
         case SET_ALERTS:
             return [...state, ...action.alerts];
+        case VIEW_ALERT:
+            const index = state.findIndex((alert) => alert.id === action.alert.id);
+
+            const alert = cloneDeep(state[index]);
+            alert.viewed = true;
+
+            const stateClone = state.slice();
+            stateClone[index] = alert;
+
+            return stateClone;
         default:
             return state;
     }

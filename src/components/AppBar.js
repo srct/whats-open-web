@@ -39,8 +39,10 @@ class CustomAppBar extends React.Component {
                                 What's Open
                             </Typography>
                         </div>
-                        <AlertContainer/>
-                        <div className={'app-bar-search-menu'}>
+                        <div className={'app-bar-right-section'}>
+                            <div className={'app-bar-alert-container'}>
+                                <AlertContainer/>
+                            </div>
                             <SearchBar onSearchExpand={() => this.setState({
                                 isSearchExpanded: true
                             })}
