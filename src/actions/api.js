@@ -1,4 +1,4 @@
-import {GET_FACILITIES, SET_FACILITIES, SORT_BY_FAVORITES} from './action-types';
+import {GET_FACILITIES, SET_FACILITIES, SORT_FACILITY_CARDS } from './action-types';
 
 const API_GET_FACILITIES = 'https://api.srct.gmu.edu/whatsopen/v2/facilities/';
 // SHOP MASON ONLY
@@ -37,6 +37,7 @@ export const setFacilities = (facilities) => {
     };
 };
 
-export const sortByFavorites = () => ({
-    type: SORT_BY_FAVORITES
+export const sortFacilityCards = () => ({
+    type: SORT_FACILITY_CARDS
 });
+

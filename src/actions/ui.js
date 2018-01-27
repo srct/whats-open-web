@@ -37,3 +37,4 @@ export const setAllFavorites = (favorites) => ({
     type: SET_ALL_FAVORITES,
     favorites
 });
+

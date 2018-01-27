@@ -1,17 +1,22 @@
-import {GET_FACILITIES, SET_FACILITIES, SORT_BY_FAVORITES} from '../actions/action-types';
+import {GET_FACILITIES, SET_FACILITIES, SORT_FACILITY_CARDS } from '../actions/action-types';
 import cloneDeep from 'lodash/cloneDeep';
-
+import facilityUtils from '../utils/facilityUtils';
 const defaultState = {
     isLoading: false,
     data: []
 };
 
 export const facilities = (state = defaultState, action, ui) => {
-    const sortFunc = (a, b) => {
+    const facilitySort = (a,b) =>{
         const favoriteCheck = ui.favorites.includes(b.slug) - ui.favorites.includes(a.slug);
 
         if (favoriteCheck !== 0) {
-            return ui.favorites.includes(b.slug) - ui.favorites.includes(a.slug);
+            return favoriteCheck;
+        }
+        const openCheck = facilityUtils.isFacilityOpen(b) - facilityUtils.isFacilityOpen(a);
+
+        if(openCheck !== 0) {
+            return openCheck;
         }
 
         if (a.slug < b.slug) {
@@ -22,9 +27,11 @@ export const facilities = (state = defaultState, action, ui) => {
             return 1;
         }
 
+
         return 0;
     };
 
+    const newData = cloneDeep(state.data);
     switch (action.type) {
         case GET_FACILITIES:
             return Object.assign({}, state, {
@@ -32,13 +39,12 @@ export const facilities = (state = defaultState, action, ui) => {
             });
         case SET_FACILITIES:
             return Object.assign({}, state, {
-                data: action.facilities.sort(sortFunc),
+                data: action.facilities.sort(facilitySort),
                 isLoading: false
             });
-        case SORT_BY_FAVORITES:
-            const newData = cloneDeep(state.data);
+        case SORT_FACILITY_CARDS:
             return Object.assign({}, state, {
-                data: newData.sort(sortFunc)
+                data: newData.sort(facilitySort)
             });
         default:
             return state;

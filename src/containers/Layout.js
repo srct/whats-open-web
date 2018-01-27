@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 // import {setAllFavorites} from '../actions/ui';
 import AppBar from '../components/AppBar';
 import Sidebar from '../components/Sidebar';
-import {getFacilities, setFacilities, sortByFavorites} from '../actions/api';
+import {getFacilities, setFacilities, sortFacilityCards} from '../actions/api';
 import {setSidebar, setSelectedFacility, setAllFavorites} from '../actions/ui';
 import CardContainer from '../components/CardContainer';
 
@@ -28,8 +28,7 @@ class Layout extends React.Component {
                 const favorites = JSON.parse(localStorage.getItem('favorites'));
                 this.props.setAllFavorites(favorites);
             }
-
-            this.props.sortByFavorites();
+            this.props.sortFacilityCards();
         } catch (e) {
             console.warn('you should enable cookies so we can remember what places you favorite');
         }
@@ -74,7 +73,7 @@ export default connect(mapStateToProps, {
     getFacilities,
     setFacilities,
     setAllFavorites,
-    sortByFavorites,
+    sortFacilityCards,
     setSidebar,
-    setSelectedFacility
+    setSelectedFacility,
 })(Layout);
