@@ -42,7 +42,7 @@
   width: 90px;
   height: 90px;
   margin: auto;
-  background-size: contain !important;
+  object-fit: contain !important;
 }
 
 .fc-title {
