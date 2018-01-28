@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import {findLink} from '../utils/nameUtils';
+import Chip from 'material-ui/Chip';
 
 const Alert = ({alert}) => {
     const getUrgencyClass = () => {
@@ -20,11 +21,13 @@ const Alert = ({alert}) => {
     const getMessage = () => {
         const links = findLink(alert.message);
         if (!links) {
-            return alert.message;
+            return (<span className={'alert-message'}>
+                {alert.message}
+            </span>);
         }
 
         return (
-            <span>
+            <span className={'alert-message'}>
                 {alert.message.substring(0, links.index)}
                 <a href={links[0]} className={'alert-link'} target="_blank" rel="noopener">{links[0]}</a>
                 {alert.message.substring(links.index + links[0].length)}
@@ -32,9 +35,12 @@ const Alert = ({alert}) => {
         );
     };
 
+    const getChipLabel = () => alert.urgency_tag.charAt(0).toUpperCase() + alert.urgency_tag.slice(1);
+
     return (
-        <div className={classNames('alert', getUrgencyClass())}>
+        <div className={'alert'}>
             {getMessage()}
+            <Chip label={getChipLabel()} className={classNames('alert-urgency-chip', getUrgencyClass())}/>
         </div>
     );
 };

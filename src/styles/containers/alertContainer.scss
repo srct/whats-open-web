@@ -1,5 +1,33 @@
+.alert-container-btn {
+  color: rgba(0, 0, 0, 0.4) !important;
+}
+
 .alert-container-popover {
   max-width: 450px;
+  max-height: 300px;
+}
+
+.alert-container-close-btn {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.alert-container-close-icon {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.alert-container-header {
+  padding: 8px 16px;
+  background-color: rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.alert-container-title {
+  font-weight: 400 !important;
+  font-size: 20px !important;
 }
 
 .alert-container-number {
@@ -15,4 +43,6 @@
 
 .alert-container-number-text {
   color: rgba(255, 255, 255, 1) !important;
+  height: 10px !important;
+  line-height: 10px !important;
 }
