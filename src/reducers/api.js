@@ -1,13 +1,13 @@
-import {GET_FACILITIES, SET_FACILITIES, SORT_FACILITY_CARDS } from '../actions/action-types';
+import {GET_ALERTS, GET_FACILITIES, SET_ALERTS, SET_FACILITIES, SORT_FACILITY_CARDS, VIEW_ALERT } from '../actions/action-types';
 import cloneDeep from 'lodash/cloneDeep';
 import facilityUtils from '../utils/facilityUtils';
-const defaultState = {
+const defaultFacilityState = {
     isLoading: false,
     data: []
 };
 
-export const facilities = (state = defaultState, action, ui) => {
-    const facilitySort = (a,b) =>{
+export const facilities = (state = defaultFacilityState, action, ui) => {
+    const facilitySort = (a, b) => {
         const favoriteCheck = ui.favorites.includes(b.slug) - ui.favorites.includes(a.slug);
 
         if (favoriteCheck !== 0) {
@@ -15,7 +15,7 @@ export const facilities = (state = defaultState, action, ui) => {
         }
         const openCheck = facilityUtils.isFacilityOpen(b) - facilityUtils.isFacilityOpen(a);
 
-        if(openCheck !== 0) {
+        if (openCheck !== 0) {
             return openCheck;
         }
 
@@ -46,6 +46,27 @@ export const facilities = (state = defaultState, action, ui) => {
             return Object.assign({}, state, {
                 data: newData.sort(facilitySort)
             });
+        default:
+            return state;
+    }
+};
+
+export const alerts = (state = [], action) => {
+    switch (action.type) {
+        case GET_ALERTS:
+            return state;
+        case SET_ALERTS:
+            return [...state, ...action.alerts];
+        case VIEW_ALERT:
+            const index = state.findIndex((alert) => alert.id === action.alert.id);
+
+            const alert = cloneDeep(state[index]);
+            alert.viewed = true;
+
+            const stateClone = state.slice();
+            stateClone[index] = alert;
+
+            return stateClone;
         default:
             return state;
     }

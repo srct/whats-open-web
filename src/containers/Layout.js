@@ -1,9 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-// import {setAllFavorites} from '../actions/ui';
 import AppBar from '../components/AppBar';
 import Sidebar from '../components/Sidebar';
-import {getFacilities, setFacilities, sortFacilityCards} from '../actions/api';
+import {getAlerts, getFacilities, setAlerts, setFacilities, sortFacilityCards} from '../actions/api';
 import {setSidebar, setSelectedFacility, setAllFavorites} from '../actions/ui';
 import CardContainer from '../components/CardContainer';
 
@@ -34,6 +33,7 @@ class Layout extends React.Component {
         }
 
         this.props.getFacilities();
+        this.props.getAlerts();
     };
 
     render() {
@@ -41,16 +41,18 @@ class Layout extends React.Component {
 
         return (
             <div className={'layout-root'}>
-                <AppBar isOpen={false} />
+                <AppBar isOpen={false}/>
                 <div className={'layout-container'}>
                     <div className={'layout-main-content'}>
                         <div className={'layout-card-container'}>
                             <CardContainer styles={'layout-card-container'} searchTerm={searchTerm}
-                                           campusRegion={campusRegion} facilities={facilities} />
+                                           campusRegion={campusRegion} facilities={facilities}/>
                         </div>
                     </div>
 
-                    <Sidebar facilities={facilities} facility={selectedFacility} isSidebarOpen={isSidebarOpen} setSidebar={setSidebar} setSelectedFacility={setSelectedFacility} campusRegion={campusRegion}/>
+                    <Sidebar facilities={facilities} facility={selectedFacility} isSidebarOpen={isSidebarOpen}
+                             setSidebar={setSidebar} setSelectedFacility={setSelectedFacility}
+                             campusRegion={campusRegion}/>
                 </div>
             </div>
         );
@@ -60,6 +62,7 @@ class Layout extends React.Component {
 function mapStateToProps(state) {
     return {
         facilities: state.facilities.data,
+        alerts: state.alerts,
         favorites: state.ui.favorites,
         searchTerm: state.ui.search.term,
         campusRegion: state.ui.search.campusRegion,
@@ -72,8 +75,10 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
     getFacilities,
     setFacilities,
+    getAlerts,
+    setAlerts,
     setAllFavorites,
     sortFacilityCards,
     setSidebar,
-    setSelectedFacility,
+    setSelectedFacility
 })(Layout);

@@ -15,7 +15,7 @@
   color: #354052;
 }
 
-.app-bar-logo-name, .app-bar-search-menu {
+.app-bar-logo-name, .app-bar-right-section {
   display: flex;
   align-items: center;
 }
@@ -54,7 +54,7 @@
   }
 
   .app-bar-search-expanded {
-    .app-bar-logo, .app-bar-title, .app-bar-menu-button, .app-bar-link-container {
+    .app-bar-logo, .app-bar-title, .app-bar-alert-container, .app-bar-menu-button, .app-bar-link-container {
       display: none !important;
     }
   }

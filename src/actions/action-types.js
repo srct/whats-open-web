@@ -1,6 +1,9 @@
 export const SET_SIDEBAR = 'SET_SIDEBAR';
 export const SET_FACILITIES = 'SET_FACILITIES';
 export const GET_FACILITIES = 'GET_FACILITIES';
+export const SET_ALERTS = 'SET_ALERTS';
+export const GET_ALERTS = 'GET_ALERTS';
+export const VIEW_ALERT = 'VIEW_ALERT';
 export const SET_SELECTED_FACILITY = 'SET_SELECTED_FACILITY';
 export const SET_SEARCH_TERM = 'SET_SEARCH_TERM';
 export const SET_CAMPUS_REGION = 'SET_CAMPUS_REGION';
