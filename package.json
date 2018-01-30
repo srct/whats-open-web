@@ -1,6 +1,7 @@
 {
   "name": "whats-open-web",
   "version": "0.1.0",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "array-sort": "^0.1.4",
