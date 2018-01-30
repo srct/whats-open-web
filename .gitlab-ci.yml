@@ -25,7 +25,7 @@ deploy_staging:
     name: staging
     url: https://whatsopen.gmu.io
   only:
-    - master
+    - 2.1-dev
 
 deploy_production:
   stage: deploy
@@ -36,4 +36,4 @@ deploy_production:
   when: manual
   only:
     - master
-  
+

@@ -20,7 +20,7 @@ const extension = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS
 const isProduction = process.env.NODE_ENV === 'production';
 
 let enhance;
-if (isProduction) {
+if (isProduction || !extension) {
     enhance = compose(applyMiddleware(ReduxThunk, routerMiddleware(history)));
 } else {
     enhance = compose(applyMiddleware(ReduxThunk, routerMiddleware(history)), extension);
