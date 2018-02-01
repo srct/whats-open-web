@@ -19,11 +19,11 @@ export const facilities = (state = defaultFacilityState, action, ui) => {
             return openCheck;
         }
 
-        if (a.slug < b.slug) {
+        if (a.facility_name < b.facility_name) {
             return -1;
         }
 
-        if (a.slug > b.slug) {
+        if (a.facility_name > b.facility_name) {
             return 1;
         }
 
