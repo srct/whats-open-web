@@ -11,7 +11,7 @@ build:
   script:
   - npm install -g yarn
   - yarn install
-  - CI=false REACT_APP_API_GET_FACILITIES=API_GET_FACILITIES npm run build
+  - CI=false REACT_APP_API_GET_FACILITIES=$API_GET_FACILITIES npm run build
   artifacts:
     paths:
     - build
@@ -23,7 +23,7 @@ build_shopmason:
   script:
   - npm install -g yarn
   - yarn install
-  - CI=false REACT_APP_API_GET_FACILITIES=API_GET_FACILITIES npm run build
+  - CI=false REACT_APP_API_GET_FACILITIES=$API_GET_FACILITIES npm run build
   artifacts:
     paths:
     - build
