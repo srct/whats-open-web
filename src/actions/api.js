@@ -1,9 +1,8 @@
-import {GET_ALERTS, GET_FACILITIES, SET_ALERTS, SET_FACILITIES, SORT_FACILITY_CARDS, VIEW_ALERT } from './action-types';
+import {GET_ALERTS, GET_FACILITIES, SET_ALERTS, SET_FACILITIES, SORT_FACILITY_CARDS, VIEW_ALERT} from './action-types';
 
-const API_GET_FACILITIES = 'https://api.srct.gmu.edu/whatsopen/v2/facilities/';
+const API_GET_FACILITIES = process.env.REACT_APP_API_GET_FACILITIES ? process.env.REACT_APP_API_GET_FACILITIES :
+    'https://api.srct.gmu.edu/whatsopen/v2/facilities/';
 const API_GET_ALERTS = 'https://api.srct.gmu.edu/whatsopen/v2/alerts/?ordering=urgency_tag';
-// SHOP MASON ONLY
-//const API_GET_FACILITIES = 'https://api.srct.gmu.edu/whatsopen/v2/facilities/?facility_classifier=shopmason';
 export const getFacilities = () => (dispatch) => {
     dispatch({
         type: GET_FACILITIES
