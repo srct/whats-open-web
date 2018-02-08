@@ -31,4 +31,4 @@
 
 
 [2.0.1]: https://git.gmu.edu/srct/whats-open-web/compare/v2.0...v2.0.1
-[2.1.0]: https://git.gmu.edu/srct/whats-open-web/compare/v2.0.1...v2.1
+[2.1.0]: https://git.gmu.edu/srct/whats-open-web/compare/v2.0.1...v2.1-Midnight-Cherry
