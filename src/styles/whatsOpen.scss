@@ -1,6 +1,7 @@
 @import './variables.scss';
 @import './mixins.scss';
 /* Components */
+@import './components/alert';
 @import './components/appBar';
 @import './components/cardContainer';
 @import './components/facilityCategory';
@@ -12,6 +13,7 @@
 @import './components/textwTitle';
 @import './components/weekHours';
 /* Containers */
+@import './containers/alertContainer';
 @import './containers/facilityCard';
 @import './containers/layout';
 @import './containers/searchBar';

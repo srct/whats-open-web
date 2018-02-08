@@ -1,5 +1,5 @@
 import React from 'react';
-import Card, {CardContent, CardMedia} from 'material-ui/Card';
+import Card, {CardContent} from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
 import FacilityStatus from '../components/FacilityStatus';
@@ -68,16 +68,15 @@ class FacilityCard extends React.Component {
         const buildingName = facility.facility_location.friendly_building ?
             facility.facility_location.friendly_building :
             facility.facility_location.building;
-
         return (
             <Card onClick={this.handleCardClick} className={classNames('fc-root', isSelected && 'fc-selected')}
-                  onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} raised>
-                <CardMedia className={'fc-media'}
-                           image={'https://gmucampus.files.wordpress.com/2010/09/00sothside2.jpg'} />
+                  onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} elevation={3}>
+                {/*<CardMedia className={'fc-media'}
+                          image={'https://gmucampus.files.wordpress.com/2010/09/00southside2.jpg'} />*/}
 
                 <div className={'fc-logo-container'}>
-                    <CardMedia className={'fc-logo'}
-                               image={facility.logo} />
+                    <img className={'fc-logo'}
+                    alt={facility.slug} src={facility.logo} />
                 </div>
 
 

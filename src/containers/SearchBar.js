@@ -115,7 +115,7 @@ class SearchBar extends React.Component {
                         onChange={this.handleRegionChange}>
                         <MenuItem value={'fairfax'}>Fairfax</MenuItem>
                         <MenuItem value={'arlington'}>Arlington</MenuItem>
-                        <MenuItem value={'prince william county science and technology'}>Prince William</MenuItem>
+                        <MenuItem value={'prince william'}>SciTech</MenuItem>
                         <MenuItem value={'mason korea'}>Korea</MenuItem>
                     </Select>
                 </FormControl>

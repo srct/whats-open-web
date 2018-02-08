@@ -11,6 +11,7 @@ import FacilityLabels from './FacilityLabels';
 import CloseIcon from 'material-ui-icons/Close';
 import IconButton from 'material-ui/IconButton';
 import {removeBrackets} from '../utils/nameUtils';
+import phoneFormatter from 'phone-formatter';
 
 const Sidebar = ({facility, isSidebarOpen, facilities, setSidebar, setSelectedFacility, campusRegion}) => {
 
@@ -22,6 +23,7 @@ const Sidebar = ({facility, isSidebarOpen, facilities, setSidebar, setSelectedFa
     return (
         <div
             className={classNames(['card-container-offset', (isSidebarOpen && 'card-container-offset-open'), (!isSidebarOpen && 'card-container-offset-closed')])}>
+            <meta></meta>
             <Paper
                 className={classNames(['sidebar-root', (isSidebarOpen && 'sidebar-open'), (!isSidebarOpen && 'sidebar-closed')])}>
                 <IconButton className={'sidebar-close-btn'} onClick={handleSidebarClose}>
@@ -41,7 +43,7 @@ const Sidebar = ({facility, isSidebarOpen, facilities, setSidebar, setSelectedFa
                         <TextwTitle label="Address"
                                     content={facility.facility_location && facility.facility_location.address} />
                         <TextwTitle label="Phone Number"
-                                    content={facility.phone_number ? facility.phone_number : 'Unknown'} />
+                                    content={facility.phone_number ? phoneFormatter.format(facility.phone_number, "(NNN) NNN-NNNN") : 'Unknown'} />
                         <TextwTitle label="Labels" content={<FacilityLabels facility={facility} />} />
                         <TextwTitle label="Hours" content={<WeekHours facility={facility} />} />
                     </div>

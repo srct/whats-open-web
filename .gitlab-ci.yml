@@ -10,24 +10,20 @@ build:
     API_GET_FACILITIES: "https://api.srct.gmu.edu/whatsopen/v2/facilities/"
   script:
   - npm install -g yarn
-  - >
-    sed "s|^const API_GET_FACILITIES .*|const API_GET_FACILITIES = '$API_GET_FACILITIES';|" -i src/actions/api.js
   - yarn install
-  - CI=false npm run build
+  - CI=false REACT_APP_API_GET_FACILITIES=$API_GET_FACILITIES npm run build
   artifacts:
     paths:
     - build
-    
+
 build_shopmason:
   stage: build
   variables:
     API_GET_FACILITIES: "https://api.srct.gmu.edu/whatsopen/v2/facilities/?facility_classifier=shopmason"
   script:
   - npm install -g yarn
-  - >
-    sed "s|^const API_GET_FACILITIES .*|const API_GET_FACILITIES = '$API_GET_FACILITIES';|" -i src/actions/api.js
   - yarn install
-  - CI=false npm run build
+  - CI=false REACT_APP_API_GET_FACILITIES=$API_GET_FACILITIES npm run build
   artifacts:
     paths:
     - build
@@ -40,7 +36,7 @@ deploy_staging:
     name: staging
     url: https://whatsopen.gmu.io
   only:
-    - master
+    - 2.1-dev
 
 deploy_production:
   stage: deploy
@@ -51,4 +47,4 @@ deploy_production:
   when: manual
   only:
     - master
-  
+
