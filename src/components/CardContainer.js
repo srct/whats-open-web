@@ -26,7 +26,7 @@ const CardContainer = ({searchTerm, campusRegion, facilities}) => {
         const hasTag = index !== -1;
 
         return facilityName.includes(lSearchTerm) || facilityLocation.includes(lSearchTerm) ||
-            facilityCategory.includes(lSearchTerm) || hasTag || facilityLocation.includes(friendlyName);
+            facilityCategory.includes(lSearchTerm) || hasTag || friendlyName.includes(lSearchTerm);
     };
 
     return (
