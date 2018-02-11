@@ -14,8 +14,7 @@ const CardContainer = ({searchTerm, campusRegion, facilities}) => {
         const facilityLocation = facility.facility_location.building.toLowerCase();
         const facilityCategory = facility.facility_category.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         const facilityTags = facility.facility_product_tags;
-        const friendlyName = facility.friendly_building;
-
+        const friendlyName = facility.facility_location.friendly_building.toLowerCase();
         facilityTags.forEach((tag) => {
             return tag.toLowerCase();
         });
