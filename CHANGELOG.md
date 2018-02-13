@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.1.1] - 2018-02-11
+
+### Changed
+
+- Updated service worker
+
+### Fixed
+
+- Fixed searching by location friendly name
+
 ## [2.1.0] - 2018-02-08
 
 ### Added
@@ -12,7 +22,7 @@
 
 - Facility cards now sorted by open / closed
 - Facility card shadowing
-- Search now includes friendly name
+- Search now includes location friendly name
 
 
 ### Fixed
@@ -32,3 +42,4 @@
 
 [2.0.1]: https://git.gmu.edu/srct/whats-open-web/compare/v2.0...v2.0.1
 [2.1.0]: https://git.gmu.edu/srct/whats-open-web/compare/v2.0.1...v2.1-Midnight-Cherry
+[2.1.1]: https://git.gmu.edu/srct/whats-open-web/compare/v2.1-Midnight-Cherry...v2.1.1
