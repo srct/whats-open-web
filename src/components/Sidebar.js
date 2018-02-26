@@ -27,29 +27,29 @@ const Sidebar = ({facility, isSidebarOpen, facilities, setSidebar, setSelectedFa
             <Paper
                 className={classNames(['sidebar-root', (isSidebarOpen && 'sidebar-open'), (!isSidebarOpen && 'sidebar-closed')])}>
                 <IconButton className={'sidebar-close-btn'} onClick={handleSidebarClose}>
-                    <CloseIcon />
+                    <CloseIcon/>
                 </IconButton>
                 <div className={'sidebar-row1'}>
-                    <Avatar className={'sidebar-avatar'} src={facility.logo} />
+                    <Avatar className={'sidebar-avatar'} src={facility.logo}/>
                     <div className={'sidebar-title'}>
                         <Typography type="display1">{removeBrackets(facility.facility_name)}</Typography>
                     </div>
                 </div>
-                <Divider className={'sidebar-divider'} />
+                <Divider className={'sidebar-divider'}/>
                 <div className={'sidebar-scroll'}>
                     <div className={'sidebar-label-holder'}>
                         <TextwTitle label="Building"
-                                    content={facility.facility_location && facility.facility_location.building} />
+                                    content={facility.facility_location && facility.facility_location.building}/>
                         <TextwTitle label="Address"
-                                    content={facility.facility_location && facility.facility_location.address} />
+                                    content={facility.facility_location && facility.facility_location.address}/>
                         <TextwTitle label="Phone Number"
-                                    content={facility.phone_number ? phoneFormatter.format(facility.phone_number, "(NNN) NNN-NNNN") : 'Unknown'} />
-                        <TextwTitle label="Labels" content={<FacilityLabels facility={facility} />} />
-                        <TextwTitle label="Hours" content={<WeekHours facility={facility} />} />
+                                    content={facility.phone_number ? phoneFormatter.format(facility.phone_number, '(NNN) NNN-NNNN') : 'Unknown'}/>
+                        <TextwTitle label="Labels" content={<FacilityLabels facility={facility}/>}/>
+                        <TextwTitle label="Hours" content={<WeekHours facility={facility}/>}/>
                     </div>
                 </div>
                 <div className={'sidebar-row2'}>
-                    <FacilitiesMap facilities={facilities} facility={facility} campusRegion={campusRegion} />
+                    <FacilitiesMap facilities={facilities} facility={facility} campusRegion={campusRegion}/>
                 </div>
             </Paper>
         </div>

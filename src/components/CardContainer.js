@@ -1,6 +1,7 @@
 import React from 'react';
 import FacilityCard from '../containers/FacilityCard';
 import Grid from 'material-ui/Grid';
+import Link from 'react-router-dom/Link';
 
 const CardContainer = ({searchTerm, campusRegion, facilities}) => {
 
@@ -34,7 +35,9 @@ const CardContainer = ({searchTerm, campusRegion, facilities}) => {
             {facilities.filter(filterCards).map((item) => {
                 return (
                     <Grid key={item.slug} item>
-                        <FacilityCard facility={item} facilities={facilities} />
+                        <Link to={`/facility/${item.slug}`} className={'link'}>
+                            <FacilityCard facility={item} facilities={facilities} />
+                        </Link>
                     </Grid>
                 );
             })}
