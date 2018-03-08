@@ -116,7 +116,7 @@ class SearchBar extends React.Component {
                         <MenuItem value={'fairfax'}>Fairfax</MenuItem>
                         <MenuItem value={'arlington'}>Arlington</MenuItem>
                         <MenuItem value={'prince william'}>SciTech</MenuItem>
-                        <MenuItem value={'mason korea'}>Korea</MenuItem>
+                        <MenuItem value={'front royal'}>Front Royal</MenuItem>
                     </Select>
                 </FormControl>
             </Paper>

@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.2] - 2018-03-06
+
+### Changed
+
+- Mason Korea has been removed
+- Front Royal has been added
+
 ## [2.1.1] - 2018-02-11
 
 ### Changed
@@ -43,3 +50,4 @@
 [2.0.1]: https://git.gmu.edu/srct/whats-open-web/compare/v2.0...v2.0.1
 [2.1.0]: https://git.gmu.edu/srct/whats-open-web/compare/v2.0.1...v2.1-Midnight-Cherry
 [2.1.1]: https://git.gmu.edu/srct/whats-open-web/compare/v2.1-Midnight-Cherry...v2.1.1
+[2.1.2]: https://git.gmu.edu/srct/whats-open-web/compare/v2.1.1...v2.1.2
