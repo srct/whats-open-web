@@ -1,16 +1,9 @@
 import React from 'react';
 import ReactMapboxGl, {Marker} from 'react-mapbox-gl';
-import {withStyles} from 'material-ui/styles';
 import {getMaxBounds} from '../utils/mapboxUtils';
-import MapDialog from './MapDialog';
+import mapboxgl from 'mapbox-gl';
 
 const mapboxToken = 'pk.eyJ1IjoibWR1ZmZ5OCIsImEiOiJjaXk2a2lxODQwMDdyMnZzYTdyb3M4ZTloIn0.mSocl7zUnZBO6-CV9cvmnA';
-
-const Map = ReactMapboxGl({
-    accessToken: mapboxToken,
-    interactive: false,
-    attributionControl: false
-});
 
 const Mark = {
     backgroundColor: '#e74c3c',
@@ -20,39 +13,32 @@ const Mark = {
     border: '3px solid #EAA29B'
 };
 
-
 class FacilitiesMap extends React.Component {
     constructor(props) {
         super(props);
-        const maxBounds = getMaxBounds(props.campusRegion);
-        // const southWestBounds = [-77.321649, 38.823919]; //Coordinates for the south-west bound
-        // const northEastBounds = [-77.295213, 38.835720]; //Coordinates for the north-east bound
+
+        const {campusRegion, interactive = true} = this.props;
+
+        const maxBounds = getMaxBounds(campusRegion);
         const southWestBounds = maxBounds[0]; //Coordinates for the south-west bound
         const northEastBounds = maxBounds[1]; //Coordinates for the north-east bound
 
+        this.Map = ReactMapboxGl({
+            accessToken: mapboxToken,
+            interactive: interactive,
+            attributionControl: false
+        });
+
         this.state = {
-            positionReady: false,
-            position: {
-                longitude: 0,
-                latitude: 0
-            },
-            mappedRoute: false,
             fitBounds: [southWestBounds, northEastBounds],
             maxBounds: maxBounds,
-            fitBoundsOptions: {},
-            mapDialogOpen: false
+            fitBoundsOptions: {}
         };
     }
 
-    handleRequestClose = () => {
-        this.setState({
-            mapDialogOpen: false
-        });
-    };
-
     render() {
-        const {facilities, facility, classes} = this.props;
-        const {fitBounds, maxBounds, fitBoundsOptions, mapDialogOpen} = this.state;
+        const {facilities, facility, interactive = true} = this.props;
+        const {fitBounds, maxBounds, fitBoundsOptions} = this.state;
 
         let center, zoom;
         try {
@@ -64,60 +50,46 @@ class FacilitiesMap extends React.Component {
         }
 
         return (
-            <div className={classes.mapContainer}>
-                <Map
-                    animationOptions={{
-                        animate: false
-                    }}
-                    onClick={() => {
-                        this.setState({
-                            mapDialogOpen: true
-                        });
-                    }}
-                    style="mapbox://styles/mduffy8/cjbcdxi3v73hp2spiyhxbkjde"
-                    movingMethod={'easeTo'}
-                    containerStyle={{
-                        height: '200px',
-                        width: '380px',
-                        margin: '10px',
-                        borderRadius: '3px',
-                        cursor: 'pointer'
-                    }}
-                    center={center}
-                    fitBounds={fitBounds}
-                    fitBoundsOptions={fitBoundsOptions}
-                    zoom={zoom}
-                    maxBounds={maxBounds}>
-                    {(facilities.length > 0) && facilities.map((item) => {
-                        return (
-                            <Marker
-                                key={item.slug}
-                                coordinates={item.facility_location.coordinate_location.coordinates}
-                                anchor="bottom">
-                                <div style={Mark} />
-                            </Marker>
-                        );
-                    })}
-                </Map>
-                <MapDialog
-                    open={mapDialogOpen}
-                    facilities={facilities}
-                    maxBounds={maxBounds}
-                    zoom={zoom}
-                    center={center}
-                    onClose={this.handleRequestClose}
-                />
-            </div>
+            <this.Map
+                onStyleLoad={(map) => {
+                    if (interactive) {
+                        map.addControl(new mapboxgl.GeolocateControl({
+                            positionOptions: {
+                                enableHighAccuracy: true
+                            },
+                            trackUserLocation: true
+                        }));
+                    }
+                }}
+                animationOptions={{
+                    animate: false
+                }}
+                style="mapbox://styles/mduffy8/cjbcdxi3v73hp2spiyhxbkjde"
+                movingMethod={'easeTo'}
+                containerStyle={{
+                    height: '100%',
+                    width: '100%',
+                    borderRadius: '5px',
+                    cursor: 'pointer'
+                }}
+                center={center}
+                fitBounds={fitBounds}
+                fitBoundsOptions={fitBoundsOptions}
+                zoom={zoom}
+                maxBounds={maxBounds}>
+                {(facilities.length > 0) && facilities.map((item) => {
+                    return (
+                        <Marker
+                            key={item.slug}
+                            coordinates={item.facility_location.coordinate_location.coordinates}
+                            anchor="bottom">
+                            <div style={Mark}/>
+                        </Marker>
+                    );
+                })}
+            </this.Map>
         );
     }
 }
 
-const styleSheet = {
-    mapContainer: {
-        transition: '250ms ease-in-out',
-        width: '100%'
-    }
-};
-
-
-export default withStyles(styleSheet)(FacilitiesMap);
+export default FacilitiesMap;
