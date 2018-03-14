@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';
 import FacilitiesMap from './FacilitiesMap';
+import IconButton from 'material-ui/IconButton';
+import CloseIcon from 'material-ui-icons/Close';
 
 class MapDialog extends React.Component {
     handleRequestClose = () => {
@@ -9,14 +11,18 @@ class MapDialog extends React.Component {
     };
 
     render() {
-        const {facility, facilities, campusRegion, open} = this.props;
+        const {facility, facilities, campusRegion, open, width, height, fullScreen = false} = this.props;
 
         return (
-            <Dialog onClose={this.handleRequestClose} open={open}>
+            <Dialog onClose={this.handleRequestClose} open={open} fullScreen={fullScreen}>
                 <div style={{
-                    height: '500px',
-                    width: '600px'
+                    height: height || '100%',
+                    width: width || '100%'
                 }}>
+                    <IconButton className={'map-dialog-close-btn'} onClick={this.handleRequestClose}>
+                        <CloseIcon />
+                    </IconButton>
+
                     <FacilitiesMap
                         facilities={facilities}
                         facility={facility}

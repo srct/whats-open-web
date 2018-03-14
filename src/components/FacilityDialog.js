@@ -81,6 +81,7 @@ class FacilityDialog extends React.Component {
                     open={isMapOpen}
                     facilities={facilities}
                     facility={facility}
+                    fullScreen={true}
                     campusRegion={facility.facility_location.campus_region}
                     onClose={this.toggleMap}
                 />
