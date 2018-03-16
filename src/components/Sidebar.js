@@ -36,7 +36,7 @@ class Sidebar extends React.Component {
     };
 
     render() {
-        const {facility, isSidebarOpen, facilities, campusRegion} = this.props;
+        const {facility, isSidebarOpen, facilities} = this.props;
         const {mapDialogOpen} = this.state;
 
         return (
@@ -77,14 +77,12 @@ class Sidebar extends React.Component {
                                 facilities={facilities}
                                 facility={facility}
                                 interactive={false}
-                                campusRegion={campusRegion}
                             />
                         </div>
                         <MapDialog
                             open={mapDialogOpen}
                             facilities={facilities}
                             facility={facility}
-                            campusRegion={campusRegion}
                             height={'500px'}
                             width={'600px'}
                             onClose={this.handleMapDialogClose}

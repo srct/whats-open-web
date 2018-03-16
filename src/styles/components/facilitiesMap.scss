@@ -1,0 +1,11 @@
+.facilities-map-campus-select {
+  position: absolute !important;
+  z-index: 100;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 10px;
+  height: 30px !important;
+  background-color: white !important;
+  border-radius: 5px;
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+}

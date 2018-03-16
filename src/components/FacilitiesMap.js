@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactMapboxGl, {Marker} from 'react-mapbox-gl';
+import {MenuItem} from 'material-ui/Menu';
+import Select from 'material-ui/Select';
+import {FormControl} from 'material-ui/Form';
 import {getMaxBounds} from '../utils/mapboxUtils';
 import mapboxgl from 'mapbox-gl';
 
@@ -16,12 +19,8 @@ const Mark = {
 class FacilitiesMap extends React.Component {
     constructor(props) {
         super(props);
-
-        const {campusRegion, interactive = true} = this.props;
-
-        const maxBounds = getMaxBounds(campusRegion);
-        const southWestBounds = maxBounds[0]; //Coordinates for the south-west bound
-        const northEastBounds = maxBounds[1]; //Coordinates for the north-east bound
+        const {facility, interactive = true} = this.props;
+        const campusRegion = facility && facility.facility_location ? facility.facility_location.campus_region : 'fairfax';
 
         this.Map = ReactMapboxGl({
             accessToken: mapboxToken,
@@ -30,23 +29,38 @@ class FacilitiesMap extends React.Component {
         });
 
         this.state = {
-            fitBounds: [southWestBounds, northEastBounds],
-            maxBounds: maxBounds,
+            maxBounds: getMaxBounds(campusRegion),
+            campusRegion: campusRegion,
             fitBoundsOptions: {}
         };
     }
 
+    componentWillReceiveProps(nextProps) {
+        const {facility} = nextProps;
+        const campusRegion = facility && facility.facility_location ? facility.facility_location.campus_region : 'fairfax';
+
+        this.changeRegion(campusRegion);
+    }
+
+    changeRegion = (campusRegion) => {
+        this.setState({
+            maxBounds: getMaxBounds(campusRegion),
+            campusRegion: campusRegion
+        });
+    };
+
     render() {
         const {facilities, facility, interactive = true} = this.props;
-        const {fitBounds, maxBounds, fitBoundsOptions} = this.state;
+        const {maxBounds, fitBoundsOptions} = this.state;
 
         let center, zoom;
-        try {
+
+        if (facility && facility.facility_location && facility.facility_location.campus_region === this.state.campusRegion) {
             center = facility.facility_location.coordinate_location.coordinates;
             zoom = [17];
-        } catch (e) {
+        } else {
             center = [(maxBounds[0][0] + maxBounds[1][0]) / 2, (maxBounds[0][1] + maxBounds[1][1]) / 2];
-            zoom = [17];
+            zoom = [0];
         }
 
         return (
@@ -73,10 +87,26 @@ class FacilitiesMap extends React.Component {
                     cursor: 'pointer'
                 }}
                 center={center}
-                fitBounds={fitBounds}
+                fitBounds={maxBounds}
                 fitBoundsOptions={fitBoundsOptions}
                 zoom={zoom}
                 maxBounds={maxBounds}>
+
+                {interactive &&
+                (
+                    <FormControl className={'facilities-map-campus-select'}>
+                        <Select
+                            disableUnderline
+                            value={this.state.campusRegion}
+                            onChange={(e) => this.changeRegion(e.target.value)}>
+                            <MenuItem value={'fairfax'}>Fairfax</MenuItem>
+                            <MenuItem value={'arlington'}>Arlington</MenuItem>
+                            <MenuItem value={'prince william'}>SciTech</MenuItem>
+                            <MenuItem value={'front royal'}>Front Royal</MenuItem>
+                        </Select>
+                    </FormControl>
+                )}
+
                 {(facilities.length > 0) && facilities.map((item) => {
                     return (
                         <Marker
