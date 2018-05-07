@@ -1,10 +1,11 @@
 import React from 'react';
-import ReactMapboxGl, {Marker} from 'react-mapbox-gl';
+import ReactMapboxGl, {Marker, Popup} from 'react-mapbox-gl';
 import {MenuItem} from 'material-ui/Menu';
 import Select from 'material-ui/Select';
 import {FormControl} from 'material-ui/Form';
 import {getMaxBounds} from '../utils/mapboxUtils';
 import mapboxgl from 'mapbox-gl';
+import {Typography} from 'material-ui';
 
 const mapboxToken = 'pk.eyJ1IjoibWR1ZmZ5OCIsImEiOiJjaXk2a2lxODQwMDdyMnZzYTdyb3M4ZTloIn0.mSocl7zUnZBO6-CV9cvmnA';
 
@@ -31,7 +32,9 @@ class FacilitiesMap extends React.Component {
         this.state = {
             maxBounds: getMaxBounds(campusRegion),
             campusRegion: campusRegion,
-            fitBoundsOptions: {}
+            fitBoundsOptions: {},
+            facilityLocations: [],
+            selectedLocation: null
         };
     }
 
@@ -40,6 +43,7 @@ class FacilitiesMap extends React.Component {
         const campusRegion = facility && facility.facility_location ? facility.facility_location.campus_region : 'fairfax';
 
         this.changeRegion(campusRegion);
+        this.generateLocationArray(nextProps.facilities);
     }
 
     changeRegion = (campusRegion) => {
@@ -49,13 +53,42 @@ class FacilitiesMap extends React.Component {
         });
     };
 
+    generateLocationArray = (facilities) => {
+        const locations = [];
+
+        facilities.forEach((facility) => {
+            const location = locations.find((loc) => loc.location.id === facility.facility_location.id);
+            if (location) {
+                location.facilities.push(facility);
+            } else {
+                locations.push({
+                    location: facility.facility_location,
+                    facilities: [facility]
+                });
+            }
+        });
+
+        this.setState({
+            facilityLocations: locations
+        });
+    }
+
+    selectLocation = (location) => {
+        this.setState({
+            selectedLocation: location
+        });
+    }
+
     render() {
-        const {facilities, facility, interactive = true} = this.props;
-        const {maxBounds, fitBoundsOptions} = this.state;
+        const {facility, interactive = true} = this.props;
+        const {maxBounds, fitBoundsOptions, facilityLocations, selectedLocation} = this.state;
 
         let center, zoom;
 
-        if (facility && facility.facility_location && facility.facility_location.campus_region === this.state.campusRegion) {
+        if (selectedLocation) {
+            center = selectedLocation.location.coordinate_location.coordinates;
+            zoom = [17];
+        } else if (facility && facility.facility_location && facility.facility_location.campus_region === this.state.campusRegion) {
             center = facility.facility_location.coordinate_location.coordinates;
             zoom = [17];
         } else {
@@ -107,16 +140,40 @@ class FacilitiesMap extends React.Component {
                     </FormControl>
                 )}
 
-                {(facilities.length > 0) && facilities.map((item) => {
+                {(facilityLocations.length > 0) && facilityLocations.map((item) => {
+                    const location = item.location;
+
                     return (
                         <Marker
-                            key={item.slug}
-                            coordinates={item.facility_location.coordinate_location.coordinates}
-                            anchor="bottom">
-                            <div style={Mark}/>
+                            key={location.id}
+                            coordinates={location.coordinate_location.coordinates}
+                            anchor="bottom"
+                            onClick={() => this.selectLocation(item)}>
+                            <div style={Mark} />
                         </Marker>
                     );
                 })}
+
+                {selectedLocation && (
+                    <Popup coordinates={selectedLocation.location.coordinate_location.coordinates} anchor="top">
+                        <div>
+                            <Typography type="subheading" align={'center'}>
+                                {selectedLocation.location.building}
+                            </Typography>
+                        </div>
+                        <div>
+                            <ul className={'facilities-map-popup-list'}>
+                                {selectedLocation.facilities.map((facility) => {
+                                    return (
+                                        <li key={facility.slug}>
+                                            <Typography type="caption">{facility.facility_name}</Typography>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </div>
+                    </Popup>
+                )}
             </this.Map>
         );
     }

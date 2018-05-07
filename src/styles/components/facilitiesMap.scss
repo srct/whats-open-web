@@ -9,3 +9,10 @@
   border-radius: 5px;
   box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
 }
+
+.facilities-map-popup-list {
+  margin: 0;
+  padding-left: 16px;
+  max-height: 100px;
+  overflow-y: auto;
+}
