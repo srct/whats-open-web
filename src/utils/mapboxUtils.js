@@ -68,16 +68,27 @@ const getGeoLine = (mapboxClient, start, end) => {
         );
     });
 };
+
 /**
- * Calculates the number of days between dayFrom and dayTo.
- *[
-        [-77.321649, 38.823919], // Southwest coordinates
-        [-77.295213, 38.835720]  // Northeast coordinates
-    ];
- * @returns {array} the bounds of the George Mason Fairfax Campus
+ * Gets the maximum bounds of the specified campus region
+ *
+ * @param campus The specified campus region
+ * @returns {array} the bounds of the specified campus region
  */
 const getMaxBounds = (campus) => {
     return campusBounds[campus];
 };
 
-export {addRoute, getGeoLine, getMaxBounds};
+
+/**
+ * Calculates the center of the specified campus region
+ *
+ * @param campus The specified campus region
+ * @returns {array} the center of the specified campus region
+ */
+const getCenterOfCampusRegion = (campus) => {
+    const maxBounds = getMaxBounds(campus);
+    return [(maxBounds[0][0] + maxBounds[1][0]) / 2, (maxBounds[0][1] + maxBounds[1][1]) / 2];
+};
+
+export {addRoute, getGeoLine, getMaxBounds, getCenterOfCampusRegion};

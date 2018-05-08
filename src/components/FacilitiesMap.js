@@ -3,7 +3,7 @@ import ReactMapboxGl, {Marker, Popup} from 'react-mapbox-gl';
 import {MenuItem} from 'material-ui/Menu';
 import Select from 'material-ui/Select';
 import {FormControl} from 'material-ui/Form';
-import {getMaxBounds} from '../utils/mapboxUtils';
+import {getMaxBounds, getCenterOfCampusRegion} from '../utils/mapboxUtils';
 import mapboxgl from 'mapbox-gl';
 import {Typography} from 'material-ui';
 
@@ -29,9 +29,13 @@ class FacilitiesMap extends React.Component {
             attributionControl: false
         });
 
+        const facilityLocationExists = facility && facility.facility_location && facility.facility_location.campus_region === campusRegion;
+
         this.state = {
             maxBounds: getMaxBounds(campusRegion),
             campusRegion: campusRegion,
+            center: facilityLocationExists ? facility.facility_location.coordinate_location.coordinates : getCenterOfCampusRegion(campusRegion),
+            zoom: facilityLocationExists ? [17] : [0],
             fitBoundsOptions: {},
             facilityLocations: [],
             selectedLocation: null
@@ -42,14 +46,22 @@ class FacilitiesMap extends React.Component {
         const {facility} = nextProps;
         const campusRegion = facility && facility.facility_location ? facility.facility_location.campus_region : 'fairfax';
 
-        this.changeRegion(campusRegion);
+        this.changeRegion(campusRegion, facility);
         this.generateLocationArray(nextProps.facilities);
     }
 
-    changeRegion = (campusRegion) => {
+    changeRegion = (campusRegion, facility) => {
+        if (!facility) {
+            facility = this.props.facility;
+        }
+
+        const facilityLocationExists = facility && facility.facility_location && facility.facility_location.campus_region === campusRegion;
+
         this.setState({
             maxBounds: getMaxBounds(campusRegion),
-            campusRegion: campusRegion
+            campusRegion: campusRegion,
+            center: facilityLocationExists ? facility.facility_location.coordinate_location.coordinates : getCenterOfCampusRegion(campusRegion),
+            zoom: facilityLocationExists ? [17] : [0],
         });
     };
 
@@ -74,27 +86,23 @@ class FacilitiesMap extends React.Component {
     }
 
     selectLocation = (location) => {
+        const {interactive = true} = this.props;
+        const oldSelectedLocation = this.state.selectedLocation;
+
+        if (!interactive) {
+            return;
+        }
+
         this.setState({
-            selectedLocation: location
+            selectedLocation: oldSelectedLocation !== location ? location : null,
+            center: location && location.location.coordinate_location.coordinates,
+            zoom: [17]
         });
     }
 
     render() {
-        const {facility, interactive = true} = this.props;
-        const {maxBounds, fitBoundsOptions, facilityLocations, selectedLocation} = this.state;
-
-        let center, zoom;
-
-        if (selectedLocation) {
-            center = selectedLocation.location.coordinate_location.coordinates;
-            zoom = [17];
-        } else if (facility && facility.facility_location && facility.facility_location.campus_region === this.state.campusRegion) {
-            center = facility.facility_location.coordinate_location.coordinates;
-            zoom = [17];
-        } else {
-            center = [(maxBounds[0][0] + maxBounds[1][0]) / 2, (maxBounds[0][1] + maxBounds[1][1]) / 2];
-            zoom = [0];
-        }
+        const {interactive = true} = this.props;
+        const {maxBounds, fitBoundsOptions, facilityLocations, selectedLocation, center, zoom} = this.state;
 
         return (
             <this.Map
@@ -109,10 +117,11 @@ class FacilitiesMap extends React.Component {
                     }
                 }}
                 animationOptions={{
-                    animate: false
+                    animate: true,
+                    duration: 1500
                 }}
                 style="mapbox://styles/mduffy8/cjbcdxi3v73hp2spiyhxbkjde"
-                movingMethod={'easeTo'}
+                movingMethod="easeTo"
                 containerStyle={{
                     height: '100%',
                     width: '100%',
