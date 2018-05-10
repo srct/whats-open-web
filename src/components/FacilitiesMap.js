@@ -6,6 +6,7 @@ import {FormControl} from 'material-ui/Form';
 import {getMaxBounds, getCenterOfCampusRegion} from '../utils/mapboxUtils';
 import mapboxgl from 'mapbox-gl';
 import {Typography} from 'material-ui';
+import {removeBrackets} from '../utils/nameUtils';
 
 const mapboxToken = 'pk.eyJ1IjoibWR1ZmZ5OCIsImEiOiJjaXk2a2lxODQwMDdyMnZzYTdyb3M4ZTloIn0.mSocl7zUnZBO6-CV9cvmnA';
 
@@ -31,6 +32,13 @@ class FacilitiesMap extends React.Component {
 
         const facilityLocationExists = facility && facility.facility_location && facility.facility_location.campus_region === campusRegion;
 
+        /**
+         * facilityLocations is an array of the type:
+         * {
+         *  location: {}
+         *  facilities: [{}, {}, ...]
+         * }
+         */
         this.state = {
             maxBounds: getMaxBounds(campusRegion),
             campusRegion: campusRegion,
@@ -43,11 +51,14 @@ class FacilitiesMap extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        const {facility} = nextProps;
+        const {facility, facilities} = nextProps;
         const campusRegion = facility && facility.facility_location ? facility.facility_location.campus_region : 'fairfax';
 
         this.changeRegion(campusRegion, facility);
-        this.generateLocationArray(nextProps.facilities);
+
+        if (this.state.facilityLocations.length === 0) {
+            this.generateLocationArray(facilities);
+        }
     }
 
     changeRegion = (campusRegion, facility) => {
@@ -61,7 +72,7 @@ class FacilitiesMap extends React.Component {
             maxBounds: getMaxBounds(campusRegion),
             campusRegion: campusRegion,
             center: facilityLocationExists ? facility.facility_location.coordinate_location.coordinates : getCenterOfCampusRegion(campusRegion),
-            zoom: facilityLocationExists ? [17] : [0],
+            zoom: facilityLocationExists ? [17] : [0]
         });
     };
 
@@ -88,6 +99,7 @@ class FacilitiesMap extends React.Component {
     selectLocation = (location) => {
         const {interactive = true} = this.props;
         const oldSelectedLocation = this.state.selectedLocation;
+        const oldZoom = this.state.zoom;
 
         if (!interactive) {
             return;
@@ -96,7 +108,7 @@ class FacilitiesMap extends React.Component {
         this.setState({
             selectedLocation: oldSelectedLocation !== location ? location : null,
             center: location && location.location.coordinate_location.coordinates,
-            zoom: [17]
+            zoom: oldSelectedLocation !== location ? [17] : oldZoom
         });
     }
 
@@ -175,7 +187,7 @@ class FacilitiesMap extends React.Component {
                                 {selectedLocation.facilities.map((facility) => {
                                     return (
                                         <li key={facility.slug}>
-                                            <Typography type="caption">{facility.facility_name}</Typography>
+                                            <Typography type="caption">{removeBrackets(facility.facility_name)}</Typography>
                                         </li>
                                     );
                                 })}
