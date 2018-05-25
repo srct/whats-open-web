@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.3] - 2018-05-24
+
+### Fixed
+
+- Fixed bug causing facility times that started at 12:00pm to show as 12:00am.
+
 ## [2.1.2] - 2018-03-06
 
 ### Changed
@@ -51,3 +57,4 @@
 [2.1.0]: https://git.gmu.edu/srct/whats-open-web/compare/v2.0.1...v2.1-Midnight-Cherry
 [2.1.1]: https://git.gmu.edu/srct/whats-open-web/compare/v2.1-Midnight-Cherry...v2.1.1
 [2.1.2]: https://git.gmu.edu/srct/whats-open-web/compare/v2.1.1...v2.1.2
+[2.1.3]: https://git.gmu.edu/srct/whats-open-web/compare/v2.1.2...v2.1.3

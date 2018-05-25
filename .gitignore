@@ -23,5 +23,7 @@ yarn-error.log*
 
 #local dotfiles
 /.storybook
+/.vscode
+/.idea
 /src/stories
 /src/styles/build
