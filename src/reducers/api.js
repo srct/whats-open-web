@@ -1,4 +1,4 @@
-import {GET_ALERTS, GET_FACILITIES, SET_ALERTS, SET_FACILITIES, SORT_FACILITY_CARDS, VIEW_ALERT } from '../actions/action-types';
+import {GET_ALERTS, GET_FACILITIES, SET_ALERTS, SET_FACILITIES, SORT_FACILITY_CARDS, VIEW_ALERT} from '../actions/action-types';
 import cloneDeep from 'lodash/cloneDeep';
 import facilityUtils from '../utils/facilityUtils';
 const defaultFacilityState = {

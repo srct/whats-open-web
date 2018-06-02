@@ -1,7 +1,7 @@
 const campusBounds = {
     fairfax: [
         [-77.321649, 38.823919], // Southwest coordinates
-        [-77.295213, 38.835720]  // Northeast coordinates
+        [-77.295213, 38.835720] // Northeast coordinates
     ],
     arlington: [
         [-77.10365559, 38.88232150],
