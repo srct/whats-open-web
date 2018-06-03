@@ -7,7 +7,7 @@ stages:
 build:
   stage: build
   variables:
-    API_GET_FACILITIES: "https://api.srct.gmu.edu/whatsopen/v2/facilities/"
+    API_GET_FACILITIES: "'https://api.srct.gmu.edu/whatsopen/v2/facilities/'"
   script:
   - npm install
   - CI=false API_GET_FACILITIES=$API_GET_FACILITIES npm run build
@@ -18,7 +18,7 @@ build:
 build_shopmason:
   stage: build
   variables:
-    API_GET_FACILITIES: "https://api.srct.gmu.edu/whatsopen/v2/facilities/?facility_classifier=shopmason"
+    API_GET_FACILITIES: "'https://api.srct.gmu.edu/whatsopen/v2/facilities/?facility_classifier=shopmason'"
   script:
   - npm install
   - CI=false API_GET_FACILITIES=$API_GET_FACILITIES npm run build
