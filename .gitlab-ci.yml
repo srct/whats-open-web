@@ -9,9 +9,8 @@ build:
   variables:
     API_GET_FACILITIES: "https://api.srct.gmu.edu/whatsopen/v2/facilities/"
   script:
-  - npm install -g yarn
-  - yarn install
-  - CI=false REACT_APP_API_GET_FACILITIES=$API_GET_FACILITIES npm run build
+  - npm install
+  - CI=false API_GET_FACILITIES=$API_GET_FACILITIES npm run build
   artifacts:
     paths:
     - build
@@ -21,9 +20,8 @@ build_shopmason:
   variables:
     API_GET_FACILITIES: "https://api.srct.gmu.edu/whatsopen/v2/facilities/?facility_classifier=shopmason"
   script:
-  - npm install -g yarn
-  - yarn install
-  - CI=false REACT_APP_API_GET_FACILITIES=$API_GET_FACILITIES npm run build
+  - npm install
+  - CI=false API_GET_FACILITIES=$API_GET_FACILITIES npm run build
   artifacts:
     paths:
     - build
