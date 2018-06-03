@@ -19,7 +19,7 @@ const postCssLoader = {
     options: {
         plugins: () => [require('autoprefixer')]
     }
-}
+};
 
 const cssLoader = {
     test: /\.css$/,
@@ -28,7 +28,7 @@ const cssLoader = {
         'css-loader',
         postCssLoader
     ]
-}
+};
 
 const scssLoader = {
     test: /\.scss$/,
@@ -38,7 +38,7 @@ const scssLoader = {
         postCssLoader,
         'sass-loader'
     ]
-}
+};
 
 const cssExtractLoader = {
     test: /\.css$/,
@@ -47,17 +47,17 @@ const cssExtractLoader = {
         'css-loader',
         postCssLoader
     ]
-}
+};
 
 const scssExtractLoader = {
     test: /\.scss$/,
     use: [
         MiniCssExtractPlugin.loader,
-        "css-loader",
+        'css-loader',
         postCssLoader,
-        "sass-loader"
+        'sass-loader'
     ]
-}
+};
 
 const fileLoader = {
     exclude: [
@@ -75,7 +75,16 @@ const fileLoader = {
     options: {
         name: 'static/media/[name].[hash:8].[ext]'
     }
-}
+};
+
+const publicFileLoader = {
+    type: 'javascript/auto',
+    test: /\.(png|json)$/,
+    loader: 'file-loader',
+    options: {
+        name: '[name].[ext]'
+    }
+};
 
 module.exports = {
     eslintLoader: eslintLoader,
@@ -84,5 +93,6 @@ module.exports = {
     scssLoader: scssLoader,
     cssExtractLoader: cssExtractLoader,
     scssExtractLoader: scssExtractLoader,
-    fileLoader: fileLoader
-}
+    fileLoader: fileLoader,
+    publicFileLoader: publicFileLoader
+};

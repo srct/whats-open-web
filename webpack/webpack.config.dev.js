@@ -22,7 +22,8 @@ module.exports = {
             loaders.babelLoader,
             loaders.cssLoader,
             loaders.scssLoader,
-            loaders.fileLoader        
+            loaders.fileLoader,
+            loaders.publicFileLoader
         ]
     },
     plugins: [

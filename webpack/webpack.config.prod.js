@@ -4,7 +4,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const webpack = require('webpack');
 const paths = require('./paths');
 const loaders = require('./loaders');
 
@@ -27,7 +26,8 @@ module.exports = {
             loaders.babelLoader,
             loaders.cssExtractLoader,
             loaders.scssExtractLoader,
-            loaders.fileLoader
+            loaders.fileLoader,
+            loaders.publicFileLoader
         ]
     },
     optimization: {
@@ -54,7 +54,7 @@ module.exports = {
                 keepClosingSlash: true,
                 minifyJS: true,
                 minifyCSS: true,
-                minifyURLs: true,
+                minifyURLs: true
             }
         }),
         new SWPrecacheWebpackPlugin({
@@ -70,9 +70,9 @@ module.exports = {
                 console.log(message);
             },
             minify: true,
-            navigateFallback: paths.publicUrl + '/index.html',
+            navigateFallback: `${paths.publicUrl}/index.html`,
             navigateFallbackWhitelist: [/^(?!\/__).*/],
-            staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+            staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/]
         }),
         new MiniCssExtractPlugin({
             filename: '[name].css',

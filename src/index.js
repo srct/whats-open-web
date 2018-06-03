@@ -13,6 +13,8 @@ import {MuiThemeProvider} from 'material-ui/styles';
 import theme from './theme';
 import './styles/whatsOpen.scss';
 import 'typeface-roboto';
+import '../public/manifest.json';
+import '../public/favicon.png';
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory();
