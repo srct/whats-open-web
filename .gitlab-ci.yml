@@ -1,4 +1,4 @@
-image: node:6.5.0
+image: node:8.11.2
 
 stages:
   - build
@@ -9,7 +9,8 @@ build:
   variables:
     API_GET_FACILITIES: "'https://api.srct.gmu.edu/whatsopen/v2/facilities/'"
   script:
-  - npm install
+  - npm install -g yarn
+  - yarn install
   - CI=false API_GET_FACILITIES=$API_GET_FACILITIES npm run build
   artifacts:
     paths:
@@ -20,7 +21,8 @@ build_shopmason:
   variables:
     API_GET_FACILITIES: "'https://api.srct.gmu.edu/whatsopen/v2/facilities/?facility_classifier=shopmason'"
   script:
-  - npm install
+  - npm install -g yarn
+  - yarn install
   - CI=false API_GET_FACILITIES=$API_GET_FACILITIES npm run build
   artifacts:
     paths:
