@@ -77,12 +77,20 @@ const fileLoader = {
     }
 };
 
-const publicFileLoader = {
+const faviconManifestLoader = {
     type: 'javascript/auto',
-    test: /\.(png|json)$/,
+    test: /(favicon.png|manifest.json)$/,
     loader: 'file-loader',
     options: {
         name: '[name].[ext]'
+    }
+};
+
+const appleAppSiteAssociationLoader = {
+    test: /apple-app-site-association$/,
+    loader: 'file-loader',
+    options: {
+        name: '.well-known/[name]'
     }
 };
 
@@ -94,5 +102,6 @@ module.exports = {
     cssExtractLoader: cssExtractLoader,
     scssExtractLoader: scssExtractLoader,
     fileLoader: fileLoader,
-    publicFileLoader: publicFileLoader
+    faviconManifestLoader: faviconManifestLoader,
+    appleAppSiteAssociationLoader: appleAppSiteAssociationLoader
 };

@@ -23,7 +23,7 @@ module.exports = {
             loaders.cssLoader,
             loaders.scssLoader,
             loaders.fileLoader,
-            loaders.publicFileLoader
+            loaders.faviconManifestLoader
         ]
     },
     plugins: [

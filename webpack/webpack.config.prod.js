@@ -28,7 +28,8 @@ module.exports = {
             loaders.cssExtractLoader,
             loaders.scssExtractLoader,
             loaders.fileLoader,
-            loaders.publicFileLoader
+            loaders.faviconManifestLoader,
+            loaders.appleAppSiteAssociationLoader
         ]
     },
     optimization: {
