@@ -34,7 +34,7 @@ deploy_staging:
     name: staging
     url: https://whatsopen.gmu.io
   only:
-    - development
+    - webpack
 
 deploy_production:
   stage: deploy
