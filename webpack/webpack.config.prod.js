@@ -42,7 +42,9 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(['build']),
+        new CleanWebpackPlugin([paths.appBuild], {
+            root: paths.appRoot
+        }),
         new HtmlWebpackPlugin({
             inject: true,
             template: paths.appHtml,
