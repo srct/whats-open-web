@@ -10,5 +10,6 @@ module.exports = {
     appIndexJs: resolveApp('src/index.js'),
     appBuild: resolveApp('build'),
     appSrc: resolveApp('src'),
+    appOutputJs: 'static/js/bundle.js',
     publicPath: ''
 };

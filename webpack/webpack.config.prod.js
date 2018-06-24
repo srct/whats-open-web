@@ -15,7 +15,7 @@ module.exports = {
     ],
     output: {
         path: paths.appBuild,
-        filename: 'static/js/bundle.js',
+        filename: paths.appOutputJs,
         publicPath: paths.publicPath
     },
     resolve: {
@@ -36,7 +36,11 @@ module.exports = {
         minimizer: [
             new UglifyJsPlugin({
                 parallel: true,
-                sourceMap: true
+                uglifyOptions: {
+                    compress: {
+                        typeofs: false // Causes issues with mapbox.
+                    }
+                }
             }),
             new OptimizeCSSAssetsPlugin({})
         ]
