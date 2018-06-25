@@ -23,8 +23,7 @@
     "react-router-redux": "^5.0.0-alpha.9",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "typeface-roboto": "0.0.50",
-    "webpack-manifest-plugin": "1.1.0"
+    "typeface-roboto": "0.0.50"
   },
   "devDependencies": {
     "autoprefixer": "7.1.1",
@@ -58,7 +57,7 @@
   "proxy": "http://localhost:3001",
   "scripts": {
     "build": "webpack --config webpack/webpack.config.prod.js",
-    "serve": "webpack-dev-server --config webpack/webpack.config.dev.js --open"
+    "start": "webpack-dev-server --config webpack/webpack.config.dev.js --open"
   },
   "babel": {
     "presets": [
