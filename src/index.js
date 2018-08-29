@@ -26,15 +26,6 @@ if (isProduction || !extension) {
     enhance = compose(applyMiddleware(ReduxThunk, routerMiddleware(history)), extension);
 }
 
-if (isProduction) {
-    window.dataLayer = window.dataLayer || [];
-    const gtag = (args) => {
-        window.dataLayer.push(args);
-    };
-    gtag('js', new Date());
-    gtag('config', 'UA-112607180-1');
-}
-
 const store = createStore(reducers, enhance);
 
 ReactDOM.render(
