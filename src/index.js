@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {applyMiddleware, compose, createStore} from 'redux';
 import './index.css';
-import {initMatomo} from './analytics/matomo';
 import Layout from './containers/Layout';
 import registerServiceWorker from './registerServiceWorker';
 import createHistory from 'history/createBrowserHistory';
@@ -25,10 +24,6 @@ if (isProduction || !extension) {
     enhance = compose(applyMiddleware(ReduxThunk, routerMiddleware(history)));
 } else {
     enhance = compose(applyMiddleware(ReduxThunk, routerMiddleware(history)), extension);
-}
-
-if (isProduction) {
-    initMatomo();
 }
 
 const store = createStore(reducers, enhance);
