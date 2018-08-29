@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.1.4] - 2018-08-28
+
+### Added
+
+- Basic matomo analytics for tracking page views
+
+### Removed
+
+- Google analytics
+
 ## [2.1.3] - 2018-05-24
 
 ### Fixed
@@ -58,3 +68,4 @@
 [2.1.1]: https://git.gmu.edu/srct/whats-open-web/compare/v2.1-Midnight-Cherry...v2.1.1
 [2.1.2]: https://git.gmu.edu/srct/whats-open-web/compare/v2.1.1...v2.1.2
 [2.1.3]: https://git.gmu.edu/srct/whats-open-web/compare/v2.1.2...v2.1.3
+[2.1.4]: https://git.gmu.edu/srct/whats-open-web/compare/v2.1.3...v2.1.4
