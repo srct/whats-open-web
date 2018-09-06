@@ -93,3 +93,4 @@
 [2.1.2]: https://git.gmu.edu/srct/whats-open-web/compare/v2.1.1...v2.1.2
 [2.1.3]: https://git.gmu.edu/srct/whats-open-web/compare/v2.1.2...v2.1.3
 [2.1.4]: https://git.gmu.edu/srct/whats-open-web/compare/v2.1.3...v2.1.4
+[2.2.0]: https://git.gmu.edu/srct/whats-open-web/compare/v2.1.4...v2.2.0
