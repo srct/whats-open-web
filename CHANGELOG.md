@@ -1,5 +1,29 @@
 # Changelog
 
+## [2.2.0] - 2018-09-05
+
+### Added
+
+- Route for Apple app site association
+- Map location dropdown
+- Map support for all campuses
+- Close button for the map dialog
+- Custom Webpack
+
+### Removed
+
+- Create React App
+
+### Changed
+
+- README updated to not be the React default
+
+### Fixed
+
+- The clear button now works properly on mobile
+- The search bar is focused when the search button is pressed on mobile
+- The favorite icon now shows on mobile
+
 ## [2.1.4] - 2018-08-28
 
 ### Added
