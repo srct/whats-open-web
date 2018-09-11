@@ -10,7 +10,6 @@ import MapDialog from './MapDialog';
 import CloseIcon from 'material-ui-icons/Close';
 import IconButton from 'material-ui/IconButton';
 import LocationOnIcon from 'material-ui-icons/LocationOn';
-// import {getMaxBounds} from '../utils/mapboxUtils';
 import {removeBrackets} from '../utils/nameUtils';
 
 class FacilityDialog extends React.Component {
@@ -19,13 +18,11 @@ class FacilityDialog extends React.Component {
         super(props);
 
         this.state = {
-            isMapOpen: false,
-            maxBounds: props.maxBounds,
+            isMapOpen: false
         };
     }
 
-    toggleMap = (e) => {
-        e.stopPropagation();
+    toggleMap = () => {
         this.setState({
             isMapOpen: !this.state.isMapOpen
         });
@@ -33,16 +30,8 @@ class FacilityDialog extends React.Component {
 
     render() {
         const {facility, facilities, isOpen, onClose} = this.props;
-        const {isMapOpen, maxBounds} = this.state;
+        const {isMapOpen} = this.state;
 
-        let mapCenter, mapZoom;
-        try {
-            mapCenter = facility.facility_location.coordinate_location.coordinates;
-            mapZoom = [17];
-        } catch (e) {
-            mapCenter = [(maxBounds[0][0] + maxBounds[1][0]) / 2, (maxBounds[0][1] + maxBounds[1][1]) / 2];
-            mapZoom = [13];
-        }
 
         return (
             <Dialog classes={{
@@ -91,9 +80,8 @@ class FacilityDialog extends React.Component {
                 <MapDialog
                     open={isMapOpen}
                     facilities={facilities}
-                    maxBounds={maxBounds}
-                    zoom={mapZoom}
-                    center={mapCenter}
+                    facility={facility}
+                    fullScreen={true}
                     onClose={this.toggleMap}
                 />
             </Dialog>

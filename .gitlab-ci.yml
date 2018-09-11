@@ -1,4 +1,4 @@
-image: node:6.5.0
+image: node:8.11.2
 
 stages:
   - build
@@ -7,11 +7,10 @@ stages:
 build:
   stage: build
   variables:
-    API_GET_FACILITIES: "https://api.srct.gmu.edu/whatsopen/v2/facilities/"
+    API_GET_FACILITIES: "'https://api.srct.gmu.edu/whatsopen/v2/facilities/'"
   script:
-  - npm install -g yarn
-  - yarn install
-  - CI=false REACT_APP_API_GET_FACILITIES=$API_GET_FACILITIES npm run build
+  - yarn
+  - CI=false API_GET_FACILITIES=$API_GET_FACILITIES npm run build
   artifacts:
     paths:
     - build
@@ -19,11 +18,10 @@ build:
 build_shopmason:
   stage: build
   variables:
-    API_GET_FACILITIES: "https://api.srct.gmu.edu/whatsopen/v2/facilities/?facility_classifier=shopmason"
+    API_GET_FACILITIES: "'https://api.srct.gmu.edu/whatsopen/v2/facilities/?facility_classifier=shopmason'"
   script:
-  - npm install -g yarn
-  - yarn install
-  - CI=false REACT_APP_API_GET_FACILITIES=$API_GET_FACILITIES npm run build
+  - yarn
+  - CI=false API_GET_FACILITIES=$API_GET_FACILITIES npm run build
   artifacts:
     paths:
     - build
@@ -36,7 +34,7 @@ deploy_staging:
     name: staging
     url: https://whatsopen.gmu.io
   only:
-    - 2.1-dev
+    - development
 
 deploy_production:
   stage: deploy

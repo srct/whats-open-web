@@ -1,6 +1,6 @@
 import {GET_ALERTS, GET_FACILITIES, SET_ALERTS, SET_FACILITIES, SORT_FACILITY_CARDS, VIEW_ALERT} from './action-types';
 
-const API_GET_FACILITIES = process.env.REACT_APP_API_GET_FACILITIES ? process.env.REACT_APP_API_GET_FACILITIES :
+const API_GET_FACILITIES = process.env.API_GET_FACILITIES ? process.env.API_GET_FACILITIES :
     'https://api.srct.gmu.edu/whatsopen/v2/facilities/';
 const API_GET_ALERTS = 'https://api.srct.gmu.edu/whatsopen/v2/alerts/?ordering=urgency_tag';
 export const getFacilities = () => (dispatch) => {

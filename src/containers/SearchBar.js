@@ -61,7 +61,12 @@ class SearchBar extends React.Component {
 
         this.props.onSearchExpand();
 
-        this.inputElement.focus();
+        /*
+            This timeout is necessary because inputElement is not displayed when execution reaches this point.
+            By using setTimeout with no delay, inputElement.focus() is added to the end of the execution stack, therefore
+            being executed after the input is visible.,
+         */
+        setTimeout(() => this.inputElement.focus());
     };
 
     handleMobileCollapse = () => {

@@ -11,15 +11,7 @@
 }
 
 .favorite-button-heart-favorited {
-  color: #E91E63; //TODO: Somehow use materials color system
-}
-
-.favorite-button-heart-hover {
-  color: grey;
-}
-
-.favorite-button-heart-no-hover {
-  color: rgba(0, 0, 0, 0);
+  color: #E91E63 !important; //TODO: Somehow use materials color system
 }
 
 //Between lg and xl
@@ -31,9 +23,22 @@
   }
 }
 
+//Above lg
+@media screen and (min-width: map-get($breakpoints, lg)) {
+  .favorite-button-heart-hover {
+    color: grey;
+  }
+
+  .favorite-button-heart-no-hover {
+    color: rgba(0, 0, 0, 0);
+  }
+}
+
 //Under lg
-@media screen and (max-width: map-get($breakpoints, lg)) {
+@media screen and (max-width: map-get($breakpoints, lg) - 1px) {
   .favorite-button-heart {
+    color: grey;
+
     height: 24px * $favorite-button-sm-scale !important;
     width: 24px * $favorite-button-sm-scale !important;
     padding: 5px * $favorite-button-sm-scale !important;

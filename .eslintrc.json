@@ -20,6 +20,7 @@
     "plugin:react/recommended"
   ],
   "rules": {
+    "no-unused-vars": "warn",
     "no-console": "off",
     "no-case-declarations": "off",
     "no-template-curly-in-string": "warn",
@@ -43,7 +44,11 @@
       "error",
       4,
       {
-        "SwitchCase": 1
+        "SwitchCase": 1,
+        "ignoredNodes": [
+          "JSXAttribute",
+          "JSXSpreadAttribute"
+        ]
       }
     ],
     "jsx-quotes": "error",
@@ -123,6 +128,7 @@
     "react/no-typos": "warn",
     "react/jsx-indent": "error",
     "react/jsx-pascal-case": "error",
-    "react/jsx-wrap-multilines": "warn"
+    "react/jsx-wrap-multilines": "warn",
+    "react/no-deprecated": "off"
   }
 }

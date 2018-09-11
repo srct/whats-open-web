@@ -29,7 +29,7 @@ const Alert = ({alert}) => {
         return (
             <span className={'alert-message'}>
                 {alert.message.substring(0, links.index)}
-                <a href={links[0]} className={'alert-link'} target="_blank" rel="noopener">{links[0]}</a>
+                <a href={links[0]} className={'alert-link'} target="_blank" rel="noopener noreferrer">{links[0]}</a>
                 {alert.message.substring(links.index + links[0].length)}
             </span>
         );

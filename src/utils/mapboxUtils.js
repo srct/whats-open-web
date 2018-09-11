@@ -1,19 +1,19 @@
 const campusBounds = {
     fairfax: [
         [-77.321649, 38.823919], // Southwest coordinates
-        [-77.295213, 38.835720]  // Northeast coordinates
+        [-77.295213, 38.835720] // Northeast coordinates
     ],
     arlington: [
-        [-77.10344017, 38.88401789],
-        [-77.09945977, 38.88638969]
+        [-77.10365559, 38.88232150],
+        [-77.09969515, 38.88621749]
     ],
     'prince william': [
-        [-77.52532482, 38.75497015],
-        [-77.51772881, 38.75983938]
+        [-77.52645645, 38.75469300],
+        [-77.51416565, 38.76009113]
     ],
-    'mason korea': [
-        [126.65918827, 37.37121447],
-        [126.68343544, 37.38836766]
+    'front royal': [
+        [-77.02180979, 38.88559549],
+        [-77.01998030, 38.88663396]
     ]
 };
 /**
@@ -68,16 +68,27 @@ const getGeoLine = (mapboxClient, start, end) => {
         );
     });
 };
+
 /**
- * Calculates the number of days between dayFrom and dayTo.
- *[
-        [-77.321649, 38.823919], // Southwest coordinates
-        [-77.295213, 38.835720]  // Northeast coordinates
-    ];
- * @returns {array} the bounds of the George Mason Fairfax Campus
+ * Gets the maximum bounds of the specified campus region
+ *
+ * @param campus The specified campus region
+ * @returns {array} the bounds of the specified campus region
  */
 const getMaxBounds = (campus) => {
     return campusBounds[campus];
 };
 
-export {addRoute, getGeoLine, getMaxBounds};
+
+/**
+ * Calculates the center of the specified campus region
+ *
+ * @param campus The specified campus region
+ * @returns {array} the center of the specified campus region
+ */
+const getCenterOfCampusRegion = (campus) => {
+    const maxBounds = getMaxBounds(campus);
+    return [(maxBounds[0][0] + maxBounds[1][0]) / 2, (maxBounds[0][1] + maxBounds[1][1]) / 2];
+};
+
+export {addRoute, getGeoLine, getMaxBounds, getCenterOfCampusRegion};
