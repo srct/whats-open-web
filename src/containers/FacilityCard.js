@@ -12,6 +12,7 @@ import {removeBrackets} from '../utils/nameUtils';
 import classNames from 'classnames';
 import FacilityDialog from '../components/FacilityDialog';
 import FacilityUtils from '../utils/facilityUtils';
+import ReactPiwik from 'react-piwik';
 
 class FacilityCard extends React.Component {
 
@@ -23,6 +24,7 @@ class FacilityCard extends React.Component {
     }
 
     handleCardClick = () => {
+        ReactPiwik.push(['trackEvent', 'card-action', 'click']);
         const isSelected = this.props.selectedFacility.slug === this.props.facility.slug;
         this.props.setSelectedFacility(isSelected ? null : this.props.facility);
         this.props.setSidebar(!isSelected);

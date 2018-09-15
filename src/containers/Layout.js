@@ -5,7 +5,7 @@ import Sidebar from '../components/Sidebar';
 import {getAlerts, getFacilities, setAlerts, setFacilities, sortFacilityCards} from '../actions/api';
 import {setSidebar, setSelectedFacility, setAllFavorites} from '../actions/ui';
 import CardContainer from '../components/CardContainer';
-
+import ReactPiwik from 'react-piwik';
 class Layout extends React.Component {
     constructor(props) {
         super(props);

@@ -3,6 +3,7 @@ import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder';
 import FavoriteIcon from 'material-ui-icons/Favorite';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import ReactPiwik from 'react-piwik';
 
 class FavoriteButton extends React.Component {
 
@@ -17,8 +18,10 @@ class FavoriteButton extends React.Component {
         e.stopPropagation(); //Stops the card from being selected in the sidebar.
 
         if (this.props.isFavorite) {
+            ReactPiwik.push(['trackEvent', 'card-action', 'un-favorite']);
             this.props.removeFavoriteFacility(this.props.facility.slug);
         } else {
+            ReactPiwik.push(['trackEvent', 'card-action', 'favorite']);
             this.props.addFavoriteFacility(this.props.facility.slug);
         }
     };

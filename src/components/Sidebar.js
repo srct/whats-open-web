@@ -13,7 +13,7 @@ import CloseIcon from 'material-ui-icons/Close';
 import IconButton from 'material-ui/IconButton';
 import {removeBrackets} from '../utils/nameUtils';
 import phoneFormatter from 'phone-formatter';
-
+import ReactPiwik from 'react-piwik';
 class Sidebar extends React.Component {
 
     constructor(props) {
@@ -30,10 +30,18 @@ class Sidebar extends React.Component {
     };
 
     handleMapDialogClose = () => {
+        ReactPiwik.push(['trackEvent', 'map-action', 'close']);
         this.setState({
             mapDialogOpen: false
         });
     };
+
+    handleMapDialogOpen = () => {
+        ReactPiwik.push(['trackEvent', 'map-action', 'open']);
+        this.setState({
+            mapDialogOpen: true
+        });
+    }
 
     render() {
         const {facility, isSidebarOpen, facilities} = this.props;
@@ -68,11 +76,7 @@ class Sidebar extends React.Component {
                         </div>
                     </div>
                     <div className={'sidebar-row2'}>
-                        <div className={'sidebar-map-container'} onClick={() => {
-                            this.setState({
-                                mapDialogOpen: true
-                            });
-                        }}>
+                        <div className={'sidebar-map-container'} onClick={this.handleMapDialogOpen}>
                             <FacilitiesMap
                                 facilities={facilities}
                                 facility={facility}
