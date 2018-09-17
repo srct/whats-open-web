@@ -26,7 +26,7 @@ class FacilitiesMap extends React.Component {
 
         this.Map = ReactMapboxGl({
             accessToken: mapboxToken,
-            interactive: false,
+            interactive: interactive,
             attributionControl: false
         });
         const facilityLocationExists = facility && facility.facility_location && facility.facility_location.campus_region === campusRegion;
@@ -42,21 +42,21 @@ class FacilitiesMap extends React.Component {
             maxBounds: getMaxBounds(campusRegion),
             campusRegion: campusRegion,
             zoom: [17],
-            // center: facilityLocationExists ? facility.facility_location.coordinate_location.coordinates : getCenterOfCampusRegion(campusRegion),
+            center: facilityLocationExists ? facility.facility_location.coordinate_location.coordinates : getCenterOfCampusRegion(campusRegion),
             fitBoundsOptions: {},
             facilityLocations: [],
             selectedLocation: null,
             isLoaded: false
         };
-        if (interactive) {
-            this.state.center = facilityLocationExists ? facility.facility_location.coordinate_location.coordinates : getCenterOfCampusRegion(campusRegion);
-        }else{
-            setTimeout(() => {
-                this.setState({
-                    center: facilityLocationExists ? facility.facility_location.coordinate_location.coordinates : getCenterOfCampusRegion(campusRegion)
-                });
-            }, 500);
-        }
+        // if (interactive) {
+        //     this.state.center = facilityLocationExists ? facility.facility_location.coordinate_location.coordinates : getCenterOfCampusRegion(campusRegion);
+        // }else{
+        //     setTimeout(() => {
+        //         this.setState({
+        //             center: facilityLocationExists ? facility.facility_location.coordinate_location.coordinates : getCenterOfCampusRegion(campusRegion)
+        //         });
+        //     }, 500);
+        // }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -77,12 +77,15 @@ class FacilitiesMap extends React.Component {
 
         const facilityLocationExists = facility && facility.facility_location && facility.facility_location.campus_region === campusRegion;
 
-        this.setState({
+        const newState = {
             maxBounds: getMaxBounds(campusRegion),
             campusRegion: campusRegion,
             center: facilityLocationExists ? facility.facility_location.coordinate_location.coordinates : getCenterOfCampusRegion(campusRegion),
             zoom: [17]
-        });
+        };
+        setTimeout(() => {
+            this.setState(newState);
+        }, 100);
     };
 
     generateLocationArray = (facilities) => {
