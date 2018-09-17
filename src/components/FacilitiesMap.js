@@ -52,7 +52,6 @@ class FacilitiesMap extends React.Component {
             this.state.center = facilityLocationExists ? facility.facility_location.coordinate_location.coordinates : getCenterOfCampusRegion(campusRegion);
         }else{
             setTimeout(() => {
-                console.log('ran');
                 this.setState({
                     center: facilityLocationExists ? facility.facility_location.coordinate_location.coordinates : getCenterOfCampusRegion(campusRegion)
                 });
