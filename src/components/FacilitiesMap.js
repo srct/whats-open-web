@@ -42,12 +42,17 @@ class FacilitiesMap extends React.Component {
         this.state = {
             maxBounds: getMaxBounds(campusRegion),
             campusRegion: campusRegion,
-            center: facilityLocationExists ? facility.facility_location.coordinate_location.coordinates : getCenterOfCampusRegion(campusRegion),
-            zoom: facilityLocationExists ? [17] : [0],
+            zoom: [17],
             fitBoundsOptions: {},
             facilityLocations: [],
-            selectedLocation: null
+            selectedLocation: null,
+            isLoaded: false
         };
+        setTimeout(() => {
+            this.setState({
+                center: facilityLocationExists ? facility.facility_location.coordinate_location.coordinates : getCenterOfCampusRegion(campusRegion)
+            });
+        }, 500);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -72,7 +77,7 @@ class FacilitiesMap extends React.Component {
             maxBounds: getMaxBounds(campusRegion),
             campusRegion: campusRegion,
             center: facilityLocationExists ? facility.facility_location.coordinate_location.coordinates : getCenterOfCampusRegion(campusRegion),
-            zoom: facilityLocationExists ? [17] : [0]
+            zoom: [17]
         });
     };
 
@@ -108,14 +113,13 @@ class FacilitiesMap extends React.Component {
         this.setState({
             selectedLocation: oldSelectedLocation !== location ? location : null,
             center: location && location.location.coordinate_location.coordinates,
-            zoom: oldSelectedLocation !== location ? [17] : oldZoom
+            zoom:  [17]
         });
     }
 
     render() {
         const {interactive = true} = this.props;
         const {maxBounds, fitBoundsOptions, facilityLocations, selectedLocation, center, zoom} = this.state;
-
         return (
             <this.Map
                 onStyleLoad={(map) => {
@@ -130,7 +134,7 @@ class FacilitiesMap extends React.Component {
                 }}
                 animationOptions={{
                     animate: true,
-                    duration: 1500
+                    duration: 1250
                 }}
                 style="mapbox://styles/mduffy8/cjbcdxi3v73hp2spiyhxbkjde"
                 movingMethod="easeTo"
