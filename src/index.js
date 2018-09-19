@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ReactPiwik from 'react-piwik';
 import {applyMiddleware, compose, createStore} from 'redux';
 import './index.css';
 import Layout from './containers/Layout';
@@ -17,8 +18,17 @@ import '../public/manifest.json';
 import '../public/favicon.png';
 import '../public/apple-app-site-association';
 
+const piwik = new ReactPiwik({
+    url: 'matomo.srct.gmu.edu/',
+    siteId: 2,
+    trackErrors: true,
+    enableLinkTracking: true,
+    trackDocumentTitle: true
+});
+
 // Create a history of your choosing (we're using a browser history in this case)
-const history = createHistory();
+const history = piwik.connectToHistory(createHistory());
+// const history = createHistory();
 const extension = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 const isProduction = process.env.NODE_ENV === 'production';
 

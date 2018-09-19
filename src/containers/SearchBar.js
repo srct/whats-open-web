@@ -12,6 +12,7 @@ import {MenuItem} from 'material-ui/Menu';
 import Select from 'material-ui/Select';
 import {FormControl} from 'material-ui/Form';
 import classNames from 'classnames';
+import ReactPiwik from 'react-piwik';
 
 class SearchBar extends React.Component {
 
@@ -35,6 +36,7 @@ class SearchBar extends React.Component {
     };
 
     handleRegionChange = (e) => {
+        ReactPiwik.push(['trackEvent', 'change-campus', e.target.value]);
         this.setState({
             campus: e.target.value
         });
@@ -43,6 +45,7 @@ class SearchBar extends React.Component {
     };
 
     handleFocus = () => {
+        ReactPiwik.push(['trackEvent', 'search-action', 'focused']);
         this.setState({
             isFocused: true
         });
