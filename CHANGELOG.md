@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.2.1] - 2018-09-18
+
+### Added
+
+- Matomo Events API
+
+### Removed
+
+### Changed
+ 
+- FacilityMap update code for better map performance
+
+### Fixed
+
+- Mapbox updated for beter performance on macOS
+
+
 ## [2.2.0] - 2018-09-05
 
 ### Added
