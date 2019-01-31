@@ -2,6 +2,8 @@ import React from 'react';
 import classNames from 'classnames';
 import {findLink} from '../utils/nameUtils';
 import Chip from 'material-ui/Chip';
+import Button from 'material-ui/Button';
+import ArrowForwardIcon from 'material-ui-icons/ArrowForward';
 
 const Alert = ({alert}) => {
     const getUrgencyClass = () => {
@@ -18,19 +20,33 @@ const Alert = ({alert}) => {
         }
     };
 
-    const getMessage = () => {
-        const links = findLink(alert.message);
+    const getBody = () => {
+        /*
+            API V2.2 removed the message field and replaced it with
+            subject and body. In order to ensure backwards compatability,
+            use the message field if it exists, otherwise use body.
+
+            TODO: Eventually, this check will be useless when older alerts
+            are phased out and should be removed to minimize complexity.
+
+            Alternatively, move this into the mapper once TypeScript is added.
+        */
+        const body = alert.message ? alert.message : alert.body;
+        const links = findLink(body);
+
         if (!links) {
-            return (<span className={'alert-message'}>
-                {alert.message}
-            </span>);
+            return (
+                <span className={'alert-body'}>
+                    {body}
+                </span>
+            );
         }
 
         return (
-            <span className={'alert-message'}>
-                {alert.message.substring(0, links.index)}
+            <span className={'alert-body'}>
+                {body.substring(0, links.index)}
                 <a href={links[0]} className={'alert-link'} target="_blank" rel="noopener noreferrer">{links[0]}</a>
-                {alert.message.substring(links.index + links[0].length)}
+                {body.substring(links.index + links[0].length)}
             </span>
         );
     };
@@ -39,8 +55,24 @@ const Alert = ({alert}) => {
 
     return (
         <div className={'alert'}>
-            {getMessage()}
-            <Chip label={getChipLabel()} className={classNames('alert-urgency-chip', getUrgencyClass())}/>
+            <div className={'alert-subject-container'}>
+                <h3 className={'alert-subject'}>{alert.subject}</h3>
+                <Chip label={getChipLabel()} className={classNames('alert-urgency-chip', getUrgencyClass())} />
+            </div>
+
+            {getBody()}
+
+            {
+                alert.url &&
+                <span className={'alert-url-container'}>
+                    <Button size={'small'} href={alert.url} target="_blank" rel="noopener noreferrer" classes={{
+                        root: 'alert-url-button-root'
+                    }}>
+                        More Information
+                        <ArrowForwardIcon />
+                    </Button>
+                </span>
+            }
         </div>
     );
 };
