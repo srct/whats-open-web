@@ -8,7 +8,6 @@ import FacilitiesMap from '../components/FacilitiesMap';
 import MapDialog from '../components/MapDialog';
 import classNames from 'classnames';
 import WeekHours from './WeekHours';
-import FacilityLabels from './FacilityLabels';
 import CloseIcon from 'material-ui-icons/Close';
 import IconButton from 'material-ui/IconButton';
 import {removeBrackets} from '../utils/nameUtils';
@@ -71,7 +70,6 @@ class Sidebar extends React.Component {
                                         content={facility.facility_location && facility.facility_location.address} />
                             <TextwTitle label="Phone Number"
                                         content={facility.phone_number ? phoneFormatter.format(facility.phone_number, '(NNN) NNN-NNNN') : 'Unknown'} />
-                            <TextwTitle label="Labels" content={<FacilityLabels facility={facility} />} />
                             <TextwTitle label="Hours" content={<WeekHours facility={facility} />} />
                         </div>
                     </div>
