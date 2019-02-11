@@ -1,7 +1,6 @@
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import Grid from 'material-ui/Grid';
-import FacilityLabels from './FacilityLabels';
 import WeekHours from './WeekHours';
 import Button from 'material-ui/Button';
 import Avatar from 'material-ui/Avatar';
@@ -62,10 +61,6 @@ class FacilityDialog extends React.Component {
                         <Typography title={facility.facility_location.building} type={'caption'} align={'center'}>
                             {facility.facility_location.building}
                         </Typography>
-                    </Grid>
-
-                    <Grid item className={'fd-facility-labels'}>
-                        <FacilityLabels facility={facility} />
                     </Grid>
 
                     <Grid item className={'fd-week-hours'}>

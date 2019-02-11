@@ -49,6 +49,7 @@ class AlertContainer extends React.Component {
     render() {
         const {alerts} = this.props;
         const activeAlerts = alerts.filter(this.isAlertActive);
+
         return (
             <div>
                 <IconButton classes={{

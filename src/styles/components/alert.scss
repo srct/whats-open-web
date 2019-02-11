@@ -2,7 +2,7 @@
   padding: 8px 16px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   font-size: 0.875rem;
   font-weight: 400;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
@@ -16,10 +16,21 @@
   }
 }
 
-.alert-message {
+.alert-subject-container {
   display: flex;
-  flex-wrap: wrap;
-  margin-right: 10px;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.alert-subject {
+  margin: 0;
+}
+
+.alert-body {
+  display: inline;
 }
 
 .alert-urgency-chip {
@@ -29,6 +40,14 @@
   color: white !important;
 }
 
+.alert-url-container {
+  width: 100%;
+}
+
+.alert-url-button-root {
+  padding: 0 !important;
+  min-height: 24px !important;
+}
 
 .alert-link {
   color: #0645AD;
